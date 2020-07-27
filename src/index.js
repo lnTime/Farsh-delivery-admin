@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './common-styles/index.scss';
+import './common-styles/colors.scss';
+import './common-styles/variables.scss';
 import * as serviceWorker from './serviceWorker';
 import {AppContainer} from "./components/App/functional/AppContainer";
 
