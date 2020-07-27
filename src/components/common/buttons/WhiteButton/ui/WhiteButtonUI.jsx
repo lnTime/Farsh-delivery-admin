@@ -1,7 +1,8 @@
 import React from 'react';
+import '../../WhiteButton/ui/whiteButton.scss';
 
-export const WhiteButtonUi = () => {
+export const WhiteButtonUI = () => {
     return(
-        <button>Click</button>
+        <button className = 'whiteButtton'>Sign up</button>
     )
 }

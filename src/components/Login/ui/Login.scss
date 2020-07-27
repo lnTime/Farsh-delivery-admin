@@ -1,21 +1,96 @@
-.logo{
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 207px;
-    height: 46px;
-    background-image: url(../../../../src/accets/img/logo.png)
+$roboto: "Roboto", sans-serif;
+$lightGray: #bebebe;
+.Logo {
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 207px;
+  height: 46px;
+  background-image: url(../../../../src/accets/img/logo.png);
 }
-.login-h2{
+.Login {
+  margin: 4.857vw 0;
+  display: flex;
+  &-Left {
+    // width: 27.965vw;
+    // width: 50.3%;
+    width: 27.965vw;
+    margin: auto;
+  }
+  &-Right {
+    // width: 54.1vw;
+    width: 49.7%;
+    border: 1px solid red;
+  }
+  &-h2 {
     font-size: 26px;
-
-}
-.login-span{
+  }
+  &-Span {
     color: #838282;
-    font-family: 'Roboto', sans-serif;
-}
-.input{
+    font-family: $roboto;
+  }
+  &-Welcome {
+    margin: 3.832vw 0;
+  }
+  &-Placeholder {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: #838282;
+    font-family: $roboto;
+  }
+  &-Input_block {
+    position: relative;
+  }
+  &-Input {
     width: 382px;
-    height: 69px;
+    height: 3.978vw;
     font-size: 18px;
-    border-bottom: 1px solid #BEBEBE;
+    border-bottom: 1px solid $lightGray;
+    outline: 0;
+    background: transparent;
+    transition: border-color 0.2s;
+  }
+  &-Input::placeholder {
+    color: transparent;
+  }
+  &-Input:placeholder-shown ~ .Login-Placeholder {
+    cursor: text;
+    top: 25px;
+  }
+  &-Placeholder {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 18px;
+    color: gray;
+  }
+  &-Checkbox {
+    display: flex;
+    justify-content: space-between;
+    margin: 19px 0 4.319vw;
+    font-family: $roboto;
+    color: $lightGray;
+  }
+}
+
+.Login-Input:focus {
+  ~ .Login-Placeholder {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+  }
+  padding-bottom: 6px;
+  border-width: 2px;
+  border-image: linear-gradient(to right);
+  border-image-slice: 1;
+}
+.Login-Input_block {
+  position: relative;
+  padding: 1.098vw 0 0;
+  margin-top: 10px;
+  width: 50%;
 }

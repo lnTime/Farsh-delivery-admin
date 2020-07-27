@@ -1,14 +1,13 @@
-import React from 'react';
-import { Field } from 'redux-form';
+import React from "react";
+import { Field } from "redux-form";
 
 export const TextFieldUI = (props) => {
-    return (
-        <>
-            <div>
-                <input className = 'input'
-                    {...props}
-                />
-            </div>
-        </>
-    )
-}
+  return (
+    <>
+      <div className = 'Login-Input_block'>
+        <input className="Login-Input" {...props} /> 
+        <span className="Login-Placeholder">{props.type}</span>
+      </div>
+    </>
+  );
+};
