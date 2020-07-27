@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const ButtonUi = () => {
+export const WhiteButtonUi = () => {
     return(
         <button>Click</button>
     )
