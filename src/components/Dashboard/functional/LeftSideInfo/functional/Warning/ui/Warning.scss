@@ -1,0 +1,47 @@
+@font-face {
+    font-family: "Roboto Bold";
+    src: url(../../../../../../../assets/fonts/Roboto/Roboto-Bold.ttf);
+}
+
+.Warning {
+
+    padding-top: 30px;
+
+    &-Title {
+        letter-spacing: 0px;
+        color: #FFF;
+        font-size: 15px;
+        line-height: 39px;
+    }
+
+    &-Description {
+        letter-spacing: 0px;
+        color: #FFF;
+        font-size: 13px;
+        line-height: 19px;
+        opacity: 0.6;
+        padding-bottom: 15px;
+    }
+}
+
+.ButtonGroup {
+    &-Button {
+        font-size: 14px;
+        line-height: 39px;
+        letter-spacing: 0px;
+        padding: 9px 21px 10px 22px;
+        cursor: pointer;
+        &_white {
+            color: #000;
+            background: #FFFFFF 0% 0% no-repeat padding-box;
+            border-radius: 3px;
+            font-family: "Roboto Bold", Arial, Helvetica, sans-serif;
+        }
+
+        &_black {
+            color: #FFF;
+            opacity: 0.6;
+            font-family: "Roboto Bold", Arial, Helvetica, sans-serif;
+        }
+    }
+}

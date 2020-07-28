@@ -1,0 +1,51 @@
+@font-face {
+    font-family: "Roboto Light";
+    src: url(../../../../../../../assets/fonts/Roboto/Roboto-Light.ttf);
+}
+
+.OrdersInformation {
+    margin: 36px 0 26px 0;
+    
+    &-Title {
+        font-family: "Roboto Light", Arial, Helvetica, sans-serif;
+        letter-spacing: 0px;
+        font-size: 20px;
+        line-height: 39px;
+        color: #FFF;
+    }
+}
+
+.OrdersInformationList {
+    &-Item {
+        display: flex;
+        width: 85%;
+        padding: 10px 0;
+    }
+}
+
+.OrderText {
+    line-height: 18px;
+    letter-spacing: 0px;
+    padding-left: 14px;
+    display: flex;
+    flex-direction: column;
+    
+    &-OrderNumber {
+        font-size: 16px;
+        color: #FFF;
+    }
+
+    &-OrderLocation {
+        font-family: "Roboto Light", Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        color: #B1B1B1;
+        padding-top: 7px;
+    }
+
+    &-OrderDate {
+        color: #A09B9B;
+        font-size: 12px;
+        line-height: 17px;
+        padding-left: 16px;
+    }
+}
