@@ -6,7 +6,6 @@ import { WhiteButttonContainer } from "../../common/buttons/WhiteButton/function
 import { BlackButtonContainer } from "../../common/buttons/BlackButton/functional/BlackButtonContainer";
 
 const LoginUI = () => {
-  // const LoginUI = () => {
   return (
     <div className="Login">
       <div className="Login-Left">
@@ -27,9 +26,10 @@ const LoginUI = () => {
             type="password"
           />
 
-          <div className = 'Login-Checkbox'>
-            <label className = 'Login_remember'>
+          <div className="Login-Checkbox">
+            <label>
               <Field
+                className="Login_Remember"
                 name="employed"
                 id="employed"
                 component="input"
@@ -37,7 +37,7 @@ const LoginUI = () => {
               />
               Remember me
             </label>
-            <label className = 'Login_forgott'>Forgott password</label>
+            <label className="Login_forgott">Forgott password</label>
           </div>
 
           <div>
@@ -46,7 +46,9 @@ const LoginUI = () => {
           </div>
         </form>
       </div>
-      <div className="Login-Right"></div>
+      <div className="Login-Right">
+        <div className="RightPhoto"></div>
+      </div>
     </div>
   );
 };
