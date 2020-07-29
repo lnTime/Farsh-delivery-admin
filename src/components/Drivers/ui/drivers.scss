@@ -29,11 +29,10 @@ $roboto: "Roboto";
 }
 
 // MEDIA SCREEN
-// MEDIA SCREEN
 
 @media screen and (max-width: 600px) {
   .Table {
-    font-size: 10px !important;
+    font-size: 10px;
   }
 }
 @media screen and (max-width: 700px) {
@@ -44,8 +43,8 @@ $roboto: "Roboto";
     &-Th {
       min-width: 100px;
     }
-    & .lessWidth {
-      min-width: 50px;
-    }
+  }
+  .lessWidth {
+    min-width: 50px;
   }
 }

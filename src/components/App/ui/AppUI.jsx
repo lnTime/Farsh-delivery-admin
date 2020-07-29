@@ -5,7 +5,6 @@ import { DriversContainer } from "../../Drivers/functional/DriversContainer";
 export const AppUI = () => {
   return (
     <div className="AppUI">
-      {/* <LoginContainer/> */}
       <DriversContainer />
     </div>
   );

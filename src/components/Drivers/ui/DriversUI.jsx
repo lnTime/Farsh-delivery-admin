@@ -1,8 +1,8 @@
 import React from "react";
 import { driverData } from "../functional/driverData";
-import "../ui/drivers.scss";
+import "./drivers.scss";
 
-export const DriverUI = () => {
+export const DriverUI = ({dataD}) => {
   return (
     <div className="Drivers">
       <table className="Table">
@@ -16,7 +16,8 @@ export const DriverUI = () => {
           <th className="Table-Th">Vehicle number</th>
         </tr>
 
-        {driverData.map((data) => {
+    {dataD}
+        {/* {driverData.map((data) => {
           return (
             <tr className="Table-Tr">
               <td className="Table-Td">{data.id}</td>
@@ -28,7 +29,7 @@ export const DriverUI = () => {
               <td className="Table-Td">{data.VehicleNumber}</td>
             </tr>
           );
-        })}
+        })} */}
       </table>
     </div>
   );

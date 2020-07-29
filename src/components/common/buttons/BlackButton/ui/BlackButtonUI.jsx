@@ -1,8 +1,6 @@
-import React from 'react';
-import '../ui/blackButton.scss';
+import React from "react";
+import "../ui/blackButton.scss";
 
-export const BlackButtonUI = () => {
-    return(
-        <button className = 'blackButton'>Login</button>
-    )
-}
+export const BlackButtonUI = ({login}) => {
+  return <button className="BlackButton">{login}</button>;
+};

@@ -26,7 +26,7 @@ $lightGray: #bebebe;
     background: transparent linear-gradient(90deg, #f7f7f7 0%, #ffffff 100%) 0%
       0% no-repeat padding-box;
   }
-  &-h2 {
+  &-H2 {
     font-size: 26px;
     margin-bottom: 8px;
   }
@@ -46,9 +46,6 @@ $lightGray: #bebebe;
     font-size: 1rem;
     color: $lightGray;
     font-family: $roboto;
-  }
-  &-Input_block {
-    position: relative;
   }
   &-Input {
     min-width: 277px;
@@ -81,16 +78,22 @@ $lightGray: #bebebe;
     font-family: $roboto;
     color: $lightGray;
   }
-  &_Remember {
+  &-Remember {
     margin-right: 11px;
   }
+}
+.InputBlock {
+  width: 50%;
+  position: relative;
+  padding: 1.098vw 0 0;
+  margin-top: 10px;
 }
 .RightPhoto {
   margin-top: 7.321vw;
   min-width: 450px;
   width: 75%;
   height: 84%;
-  background-image: url(/static/media/loginPhoto.1b514e65.png);
+  background-image: url(../../../accets/img/loginPhoto.png);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
@@ -107,14 +110,7 @@ $lightGray: #bebebe;
   border-image: linear-gradient(to right);
   border-image-slice: 1;
 }
-.Login-Input_block {
-  position: relative;
-  padding: 1.098vw 0 0;
-  margin-top: 10px;
-  width: 50%;
-}
 
-// MEDIA SCREENS
 // MEDIA SCREENS
 
 @media screen and (max-width: 992px) {

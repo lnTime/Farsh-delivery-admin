@@ -1,7 +1,7 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
 import { TextFieldContainer } from "../../TextField/functional/TextFieldContainer";
-import "../ui/Login.scss";
+import "./Login.scss";
 import { WhiteButttonContainer } from "../../common/buttons/WhiteButton/functional/WhiteButtonContainer";
 import { BlackButtonContainer } from "../../common/buttons/BlackButton/functional/BlackButtonContainer";
 
@@ -10,9 +10,9 @@ const LoginUI = () => {
     <div className="Login">
       <div className="Login-Left">
         <form className="Login-Form">
-          <div className="Logo"></div>
+          <div className="Logo"/>
           <div className="Login-Welcome">
-            <h2 className="Login-h2">Welcome back!</h2>
+            <h2 className="Login-H2">Welcome back!</h2>
             <span className="Login-Span">Please login to your account</span>
           </div>
           <Field
@@ -29,7 +29,7 @@ const LoginUI = () => {
           <div className="Login-Checkbox">
             <label>
               <Field
-                className="Login_Remember"
+                className="Login-Remember"
                 name="employed"
                 id="employed"
                 component="input"
@@ -37,7 +37,7 @@ const LoginUI = () => {
               />
               Remember me
             </label>
-            <label className="Login_forgott">Forgott password</label>
+            <span className="Login_forgot">Forgot password</span>
           </div>
 
           <div>
@@ -47,12 +47,12 @@ const LoginUI = () => {
         </form>
       </div>
       <div className="Login-Right">
-        <div className="RightPhoto"></div>
+        <div className="RightPhoto"/>
       </div>
     </div>
   );
 };
 
 export default reduxForm({
-  form: "simple", // a unique identifier for this form
+  form: "loginForm", // a unique identifier for this form
 })(LoginUI);
