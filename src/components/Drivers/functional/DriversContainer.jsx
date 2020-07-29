@@ -21,6 +21,6 @@ export const DriversContainer = () => {
         );
       })
     );
-  });
+  }, []);
   return <DriverUI drivers={drivers} />;
 };

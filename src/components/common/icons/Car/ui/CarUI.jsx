@@ -8,8 +8,7 @@ export const CarUI = () => {
             viewBox="0 0 43.559 29.751">
             <defs>
                 <style>
-                    .a{fill: none;}
-                    .a,.b{stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px;}.b{fill:#fff;}
+
                 </style>
             </defs>
             <g
