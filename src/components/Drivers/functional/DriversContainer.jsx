@@ -4,9 +4,10 @@ import { useState, useEffect } from "react";
 import { driverData } from "./driverData";
 
 export const DriversContainer = () => {
-  const [dataD, setDriverData] = useState(null);
+  const [drivers, setDriverData] = useState(null);
   useEffect(() => {
-    setDriverData(driverData.map((data) => {
+    setDriverData(
+      driverData.map((data) => {
         return (
           <tr className="Table-Tr">
             <td className="Table-Td">{data.id}</td>
@@ -17,13 +18,9 @@ export const DriversContainer = () => {
             <td className="Table-Td">{data.userId}</td>
             <td className="Table-Td">{data.VehicleNumber}</td>
           </tr>
-        );}))
-    });
-  console.log("this is your driver Data" + dataD);
-
-  
- 
-  
-
-  return <DriverUI dataD={dataD} />;
+        );
+      })
+    );
+  });
+  return <DriverUI drivers={drivers} />;
 };

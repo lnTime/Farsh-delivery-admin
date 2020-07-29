@@ -2,7 +2,7 @@ import React from "react";
 import { driverData } from "../functional/driverData";
 import "./drivers.scss";
 
-export const DriverUI = ({dataD}) => {
+export const DriverUI = ({ drivers }) => {
   return (
     <div className="Drivers">
       <table className="Table">
@@ -15,21 +15,7 @@ export const DriverUI = ({dataD}) => {
           <th className="Table-Th">ID</th>
           <th className="Table-Th">Vehicle number</th>
         </tr>
-
-    {dataD}
-        {/* {driverData.map((data) => {
-          return (
-            <tr className="Table-Tr">
-              <td className="Table-Td">{data.id}</td>
-              <td className="Table-Td">{data.name}</td>
-              <td className="Table-Td">{data.mobile}</td>
-              <td className="Table-Td">{data.country}</td>
-              <td className="Table-Td">{data.license}</td>
-              <td className="Table-Td">{data.userId}</td>
-              <td className="Table-Td">{data.VehicleNumber}</td>
-            </tr>
-          );
-        })} */}
+        {drivers}
       </table>
     </div>
   );
