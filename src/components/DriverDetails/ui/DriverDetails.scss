@@ -1,0 +1,72 @@
+@font-face {
+    font-family: "Roboto Bold";
+    src: url(../../../assets/fonts/Roboto/Roboto-Bold.ttf);
+}
+
+.DriverDetails {
+    width: 100%;
+
+    & header {
+        width: 100%;
+        display: flex;
+    }
+
+    & .DriverDetailsLeftSide {
+        width: 50%;
+
+        & .DriverDetailsLeftSideInformation {
+            display: flex;
+            padding-left: 31px;
+            padding-top: 26px;
+
+            &-DriverName {
+                letter-spacing: 0px;
+                color: #000;
+                font-size: 18px;
+                line-height: 26px;
+                margin-left: 9px;
+            }
+        
+            &-SectionName {
+                letter-spacing: 0px;
+                color: #9D9D9D;
+                font-size: 12px;
+                line-height: 39px;
+            }
+
+            &-Div {
+                width: 50%;
+                border-right: 1px solid rgba(214,214,214, 0.72);
+            }
+        }
+
+        & .DriverDetailsLeftSideActions {
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            
+            &-Button {
+                letter-spacing: 0px;
+                color: #FFF;
+                font-size: 13px;
+                line-height: 39px;
+                padding: 0 22px;
+                border-radius: 3px;
+
+                &_black {
+                    font-family: "Roboto Bold", Arial, Helvetica, sans-serif;
+                    background: #000 0% 0% no-repeat padding-box;
+                    color: #FFF;
+                }
+
+                &_white {
+                    color: #000;
+                    background: #FFF 0% 0% no-repeat padding-box;
+                    border: 1px solid #000;
+                }
+            }
+        }
+    }
+
+}

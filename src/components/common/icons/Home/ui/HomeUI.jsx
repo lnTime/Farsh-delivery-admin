@@ -9,7 +9,7 @@ export const HomeUI = () => {
         viewBox="0 0 14.697 16.014">
         <defs />
         <path
-            class="a"
+            className="a"
             d="M2470.349,1357.25l-6.848,6.585v8.429h4.214v-4.214h5.268v4.214h4.214v-8.429Z"
             transform="translate(-2463 -1356.75)" />
     </svg>

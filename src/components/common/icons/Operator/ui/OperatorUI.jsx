@@ -11,34 +11,34 @@ export const OperatorUI = () => {
         <g
             transform="translate(-91.415 -576.577)">
             <circle
-                class="a"
+                className="a"
                 cx="4.32"
                 cy="4.32"
                 r="4.32"
                 transform="translate(95.333 579.232)" />
             <path
-                class="a"
+                className="a"
                 d="M150.808,659.939a8.426,8.426,0,0,1,7.554,3.811"
                 transform="translate(-51.341 -69.903)" />
             <path
-                class="a"
+                className="a"
                 d="M97.79,659.939a8.426,8.426,0,0,0-7.554,3.811"
                 transform="translate(1.86 -69.903)" />
             <path
-                class="a"
+                className="a"
                 d="M114.312,585.543v-2.46a6.006,6.006,0,0,1,6.006-6.006h0a6.006,6.006,0,0,1,6.006,6.006v2.46"
                 transform="translate(-20.578 0)" />
             <line
-                class="b"
+                className="b"
                 x1="6.006"
                 transform="translate(99.74 585.543)" />
             <rect
-                class="c"
+                className="c"
                 width="1.274"
                 height="2.46"
                 transform="translate(105.746 583.083)" />
             <rect
-                class="c"
+                className="c"
                 width="1.274"
                 height="2.46"
                 transform="translate(92.46 583.083)" />

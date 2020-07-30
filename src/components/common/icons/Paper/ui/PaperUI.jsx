@@ -21,11 +21,11 @@ export const PaperUI = ({isActive}) => {
                     d="M1934.464,1870.52v12.868a1.722,1.722,0,1,1-3.442,0v-1.875H1920.5V1870.52Z" 
                     transform="translate(-1918.618 -1870.52)"/>
                     <line 
-                        class="b" 
+                        className="b" 
                         x2="6.806" 
                         transform="translate(5.325 3.662)"/>
                     <line 
-                        class="b" 
+                        className="b" 
                         x2="3.781" 
                         transform="translate(5.325 6.686)"/>
             </g>

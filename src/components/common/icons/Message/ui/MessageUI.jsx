@@ -9,7 +9,7 @@ export const MessageUI = () => {
         viewBox="0 0 16.438 16.014">
             <defs/>
             <path 
-                class="a" 
+                className="a" 
                 d="M1824.99,2182.607h-10.716l-4.722,3.753v-15.014h15.438Z" 
                 transform="translate(-1809.052 -2170.846)"/>
     </svg>;

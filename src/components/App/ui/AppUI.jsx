@@ -4,6 +4,8 @@ import { OrdersContainer } from '../../Orders/functional/OrdersContainer';
 import './App.scss'
 import { Switch, Route } from 'react-router-dom';
 import { DashboardContainer } from '../../Dashboard/functional/DashboardContainer';
+import { AddDriverFormContainer } from '../../AddDriverForm/functional/AddDriverFormContainer';
+import { DriverDetailsContainer } from '../../DriverDetails/functional/DriverDetailsContainer';
 
 export const AppUI = () => {
   return (
@@ -12,6 +14,8 @@ export const AppUI = () => {
       <Switch>
         <Route exact path="/orders" component={OrdersContainer} />
         <Route exact path="/dashboard" component={DashboardContainer} />
+        <Route exact path="/add-driver" component={AddDriverFormContainer} />
+        <Route exact path="/driver-details" component={DriverDetailsContainer} />
       </Switch>
     </div>
   );

@@ -11,18 +11,18 @@ export const CartUI = () => {
         <g
             transform="translate(-150.308 -690.996)">
             <circle
-                class="a"
+                className="a"
                 cx="1.518" cy="1.518"
                 r="1.518"
                 transform="translate(166.677 704.938)" />
             <circle
-                class="a"
+                className="a"
                 cx="1.518"
                 cy="1.518"
                 r="1.518"
                 transform="translate(161.163 704.938)" />
             <path
-                class="a"
+                className="a"
                 d="M150.808,691.5h3.864l4.121,11.044h11.923l1.7-7.637H159.177l1.7,4.817"
                 transform="translate(0)" />
         </g>

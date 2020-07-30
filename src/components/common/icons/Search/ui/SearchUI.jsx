@@ -25,7 +25,7 @@ export const SearchUI = () => {
                     transform="translate(350.684 393.528)" />
             </g>
             <path
-                class="Search-B"
+                className="Search-B"
                 d="M2174.486,36.486l5.018,5.019Zm-10.991-4.553a6.438,6.438,0,1,1,6.438,6.439A6.439,6.439,0,0,1,2163.495,31.933Z" />
         </g>
     </svg>;
