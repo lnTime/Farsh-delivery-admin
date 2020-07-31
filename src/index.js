@@ -5,10 +5,15 @@ import './common-styles/colors.scss';
 import './common-styles/variables.scss';
 import * as serviceWorker from './serviceWorker';
 import {AppContainer} from "./components/App/functional/AppContainer";
+import store from './redux/store';
+import {Provider} from 'react-redux';
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <AppContainer />
+    <Provider store={store}>
+      <AppContainer />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

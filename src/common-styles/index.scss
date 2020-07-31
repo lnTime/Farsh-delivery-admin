@@ -1,6 +1,17 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    border: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: none;
+}
+body,
+html,
+#root,
+.AppUI {
+  height: 100%;
+}
+
+@font-face {
+  font-family: "Georgia";
+  src: url(../accets/fonts/Georgia.ttf) format("ttf"),
 }

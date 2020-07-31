@@ -1,0 +1,19 @@
+.Location-A {
+  fill: rgba(0, 0, 0, 0);
+}
+.Location-A,
+.Location-B,
+.Location-C {
+  stroke: #bcbcbc;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.Location-B {
+  fill: #bcbcbc;
+}
+.Location-C {
+  fill: none;
+}
+.LocIcon{
+    margin-right: 15px;
+}

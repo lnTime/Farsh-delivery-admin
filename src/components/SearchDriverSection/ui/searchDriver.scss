@@ -1,0 +1,129 @@
+$lightGray: #acacac;
+
+.SearchDriverSection {
+  margin-left: 91px;
+  margin-top: 84px;
+  width: 376px;
+  height: 100%;
+  padding: 15px;
+  &-Input {
+    &:focus {
+      background: white;
+      border: 1px solid #BABABA;
+    }
+    border-radius: 5px;
+    width: 345px;
+    height: 45px;
+    outline: none;
+    background: #f7f7f7;
+    padding: 15px 15px 15px 35px;
+    margin-bottom: 20px;
+    ::placeholder {
+      color: #c4c4c4;
+    }
+  }
+  & .WrapInput {
+    position: relative;
+  }
+}
+.Radio {
+  box-shadow: 0 0 0 1px #dddddd;
+  width: 18px;
+  height: 18px;
+  appearance: none;
+  position: relative;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 50%;
+  transition: all 0.15s ease-out 0s;
+  background: white;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 0.5rem;
+  outline: none;
+  position: relative;
+  z-index: 1000;
+}
+.Radio:hover {
+  background: #9faab7;
+}
+.Radio:checked {
+  background: black;
+}
+.Radio:checked::before {
+  height: 18px;
+  width: 18px;
+  position: absolute;
+  content: "✔";
+  display: inline-block;
+  font-size: 12px;
+  text-align: center;
+}
+.Radio:checked::after {
+  -webkit-animation: click-wave 0.65s;
+  -moz-animation: click-wave 0.65s;
+  animation: click-wave 0.65s;
+  background: black;
+  content: "";
+  display: block;
+  position: relative;
+  z-index: 100;
+}
+.Radio.radio {
+  border-radius: 50%;
+}
+.Radio.radio::after {
+  border-radius: 50%;
+}
+
+.Span {
+  color: $lightGray;
+  margin-bottom: 19px;
+}
+.WrapInput {
+  position: relative;
+}
+.InfoBlock {
+  line-height: 13px;
+  border-bottom: 1px solid $lightGray;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 19px;
+  padding-bottom: 15px;
+  & .DriverPhoto {
+    width: 35px;
+    height: 35px;
+    background-size: cover;
+    background-image: url(../../../accets/img/d1.png);
+  }
+  & .InfoWrapper {
+    width: 180px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+.Mobile {
+  font-size: 13px;
+}
+.NameCarNumber {
+  font-size: 11px;
+  color: #7c7c7c;
+}
+.Icons-Block {
+  display: flex;
+  align-items: center;
+}
+.SearchIcon {
+  width: 16px;
+  height: 16px;
+  background-image: url(../../../accets//img/searchIcon.png);
+  background-size: contain;
+  position: absolute;
+  top: 14px;
+  left: 15px;
+}
