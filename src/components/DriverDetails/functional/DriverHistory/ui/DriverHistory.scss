@@ -1,0 +1,55 @@
+@font-face {
+    font-family: "Roboto Light";
+    src: url(../../../../../assets/fonts/Roboto/Roboto-Light.ttf);
+}
+
+.DriverHistory {
+    padding: 14px 18px;
+    background: #FFF 0% 0% no-repeat padding-box;
+    width: 25%;
+    min-width: 290px;
+
+    &-Title {
+        letter-spacing: 0px;
+        color: #000;
+        font-size: 16px;
+        line-height: 39px;
+    }
+
+    & .DriverHistoryItems {
+
+        &-Item {
+            display: flex;
+            &:nth-child(even) {
+                margin: 22px 0;
+            }
+        }
+
+        & .DriverHistoryItemContent {
+            display: flex;
+            flex-direction: column;
+            margin-left: 11px;
+
+            &-Date {
+                letter-spacing: 0px;
+                color: #BEBEBE;
+                font-size: 11px;
+                line-height: 27px;
+            }
+
+            &-Title {
+                letter-spacing: 0px;
+                color: #000;
+                font-size: 12px;
+                line-height: 18px;
+                font-family: "Roboto Light", Arial, Helvetica, sans-serif;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1195px) {
+    .DriverHistory {
+        margin-left: 32px;
+    }
+}

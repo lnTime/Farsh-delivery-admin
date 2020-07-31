@@ -1,13 +1,22 @@
-import React from "react";
-import { LoginContainer } from "../../Login/functional/LoginContainer";
-import { DriversContainer } from "../../Drivers/functional/DriversContainer";
-import { SearchDriverContainer } from "../../SearchDriverSection/functional/SearchDriverSectionContainer";
+rom 'react';
+import { LeftSideMenuContainer } from '../../LeftSideMenu/functional/LeftSideMenuContainer';
+import { OrdersContainer } from '../../Orders/functional/OrdersContainer';
+import './App.scss'
+import { Switch, Route } from 'react-router-dom';
+import { DashboardContainer } from '../../Dashboard/functional/DashboardContainer';
+import { AddDriverFormContainer } from '../../AddDriverForm/functional/AddDriverFormContainer';
+import { DriverDetailsContainer } from '../../DriverDetails/functional/DriverDetailsContainer';
 
 export const AppUI = () => {
   return (
     <div className="AppUI">
-      {/* <DriversContainer /> */}
-      <SearchDriverContainer />
+      <LeftSideMenuContainer />
+      <Switch>
+        <Route exact path="/orders" component={OrdersContainer} />
+        <Route exact path="/dashboard" component={DashboardContainer} />
+        <Route exact path="/add-driver" component={AddDriverFormContainer} />
+        <Route exact path="/driver-details" component={DriverDetailsContainer} />
+      </Switch>
     </div>
   );
 };

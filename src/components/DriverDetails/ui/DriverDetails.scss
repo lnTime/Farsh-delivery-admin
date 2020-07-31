@@ -1,0 +1,33 @@
+.DriverDetails {
+    width: 100%;
+    
+    & .Forms {
+        display: flex;
+        align-items: start;
+        margin-top: 10px;
+        flex-wrap: wrap;
+    }
+
+    & .Combiner {
+        width: 35%;
+        margin-left: 19px;
+    }
+
+    & .VendorForm, & .RealNameInformationForm {
+        width: 100%;
+    }
+
+    & #margined {
+        margin-left: 32px;
+    }
+
+    & #second {
+        min-width: 360px;
+    }
+}
+
+@media only screen and (max-width: 1195px) {
+    .Combiner {
+        width: 45% !important;
+    }
+}

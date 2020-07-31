@@ -1,0 +1,57 @@
+@font-face {
+    font-family: "Roboto Light";
+    src: url(../../../../../assets/fonts/Roboto/Roboto-Light.ttf);
+}
+
+.Statuses {
+    padding: 10px;
+    padding-bottom: 0;
+    transform: translateY(5px);
+    & > ul {
+        display: flex;
+        padding: 0 30px;
+    }
+
+    &-Title {
+        text-align: left;
+        font-size: 13px;
+        line-height: 39px;
+        letter-spacing: 0px;
+        color: #363636;
+        font-family: "Roboto Light", Arial, Helvetica, sans-serif;
+        &_active {
+            color: #000;
+        }
+    }
+
+    &-Item {
+        list-style: none;
+        display: flex;
+        padding: 10px;  
+        align-items: center;
+        &_active {
+            border-bottom: 2px solid #000;
+        }
+        cursor: pointer;
+    }
+
+    &-Count {
+        text-align: center;
+        font-size: 9px;
+        line-height: 21px;
+        letter-spacing: 0px;
+        color: #767676;
+        width: 23px;
+        height: 17px;
+        background: #E6E6E6 0% 0% no-repeat padding-box;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 10px;
+        &_active {
+            background: #000000 0% 0% no-repeat padding-box;
+            color: #fff;
+        }
+    }
+}

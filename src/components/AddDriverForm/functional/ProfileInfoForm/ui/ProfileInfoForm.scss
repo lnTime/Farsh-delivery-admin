@@ -1,0 +1,13 @@
+.EvenInputs {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+
+
+@media only screen and (max-width: 500px) {
+    .EvenInputs {
+        flex-direction: column;
+        padding: 0;
+    }
+}

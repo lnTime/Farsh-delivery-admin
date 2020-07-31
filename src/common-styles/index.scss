@@ -1,17 +1,35 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  border: none;
-}
-body,
-html,
-#root,
-.AppUI {
-  height: 100%;
+@import './colors.scss';
+@import './variables.scss';
+
+@font-face {
+    font-family: "Roboto";
+    src: url(../assets/fonts/Roboto/Roboto-Regular.ttf);
 }
 
 @font-face {
   font-family: "Georgia";
   src: url(../accets/fonts/Georgia.ttf) format("ttf"),
 }
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
+    list-style: none;
+}
+
+html, body, #root {
+    width: 100%;
+    height: 100%;
+}
+
+button:focus, input:focus {
+    outline: none;
+}
+
+button {
+    cursor: pointer;
+}
+

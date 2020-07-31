@@ -1,0 +1,77 @@
+.Header {
+    padding: 10px;
+    display: flex;  
+    width: 100%;
+}
+
+.Left {
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+    padding: 0 30px;
+
+    &_bigger {
+        width: 70%;
+        justify-content: space-between;
+        padding: 0 30px;
+        display: flex;
+    }
+
+    &-Heading {
+        display: flex;
+        align-items: center;
+
+        & > span {
+            text-align: left;
+            letter-spacing: 0px;
+            font-size: 18px;
+            color: #000;
+            padding-left: 7px;
+        }
+    }
+
+    &-Input {
+        &::placeholder {
+            font-size: 13px;
+            line-height: 39px;
+            letter-spacing: 0px;
+            color: #C4C4C4;
+        }
+
+        &:focus {
+            outline: none;
+        }
+
+        min-width: 250px;
+        width: 100%;
+        padding: 10px 16px;
+        background: #FFFFFF 0% 0% no-repeat padding-box;
+        box-shadow: 0px 1px 13px #0000000A;
+        border-radius: 19px;
+    }
+
+    &-Label {
+        width: 60%;
+        display: flex;
+        position: relative;
+        align-items: center;
+    }
+
+    &-SearchIcon {
+        position: absolute;
+        right: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.Right {
+    display: flex;
+    width: 50%;
+    align-items: center;
+    justify-content: flex-end;
+    &-Profile {
+        margin: 0 10px;
+    }
+}
