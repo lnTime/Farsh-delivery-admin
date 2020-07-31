@@ -1,0 +1,22 @@
+.FormHeader {
+    width: 100%;
+
+    & .FormHeaderWrapper {
+        margin: 0 10px;
+        display: flex;
+        margin-left: 18px;
+        justify-content: space-between;
+        border-bottom: 1px solid #EDEDED;
+        padding-bottom: 14.5px;
+
+    }
+
+    & > div {
+        display: flex;
+        align-items: center;
+    }
+
+    &-Edit {
+        margin-left: 8.62px;
+    }
+}

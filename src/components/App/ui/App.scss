@@ -2,6 +2,7 @@
     display: flex;
     position: relative;
     background-color: #FAFAFA;
-    height: 100%;
+    min-height: 100%;
+    height: auto;
     align-items: self-end;
 }
