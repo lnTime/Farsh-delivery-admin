@@ -1,0 +1,50 @@
+$georgia: "Georgia";
+$roboto: "Roboto";
+
+.Table {
+  margin-top: 71px;
+  margin-left: 91px;
+  margin-right: 16px;
+  margin-bottom: 5.5px;
+  font-size: calc((100vw - 480px) / (3300 - 480) * (39 - 20) + 8px);
+  font-family: $roboto;
+  width: -webkit-fill-available;
+
+  table-layout: fixed;
+  overflow: scroll;
+
+  &-Th {
+    padding-left: 1.245vw;
+    text-align: left;
+    color: #bababa;
+  }
+  &-Tr {
+    height: 47px;
+
+    box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.08);
+  }
+  &-Td {
+    padding-left: 1.245vw;
+  }
+}
+
+// MEDIA SCREEN
+
+@media screen and (max-width: 600px) {
+  .Table {
+    font-size: 10px;
+  }
+}
+@media screen and (max-width: 700px) {
+  .Table {
+    display: list-item;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    &-Th {
+      min-width: 100px;
+    }
+  }
+  .lessWidth {
+    min-width: 50px;
+  }
+}

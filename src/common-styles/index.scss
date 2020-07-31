@@ -6,6 +6,11 @@
     src: url(../assets/fonts/Roboto/Roboto-Regular.ttf);
 }
 
+@font-face {
+  font-family: "Georgia";
+  src: url(../accets/fonts/Georgia.ttf) format("ttf"),
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -27,3 +32,4 @@ button:focus, input:focus {
 button {
     cursor: pointer;
 }
+

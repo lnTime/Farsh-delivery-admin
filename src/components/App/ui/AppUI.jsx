@@ -1,4 +1,4 @@
-import React from 'react';
+rom 'react';
 import { LeftSideMenuContainer } from '../../LeftSideMenu/functional/LeftSideMenuContainer';
 import { OrdersContainer } from '../../Orders/functional/OrdersContainer';
 import './App.scss'
@@ -19,4 +19,4 @@ export const AppUI = () => {
       </Switch>
     </div>
   );
-}
+};
