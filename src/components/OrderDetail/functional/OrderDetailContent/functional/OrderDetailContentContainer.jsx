@@ -13,7 +13,7 @@ export const OrderDetailContentContainer = () => {
     primis in faucibus. Aenean laoreet rhoncus ipsum 
     eget tempus. Praesent convallis fermentum sagittis.`;
 
-    const slicedDescription = useMemo(() => description.slice(0, 255), []);
+    const slicedDescription = useMemo(() => description.slice(0, 255), [description]);
 
     return <OrderDetailContentUI description={slicedDescription}/>;
 }

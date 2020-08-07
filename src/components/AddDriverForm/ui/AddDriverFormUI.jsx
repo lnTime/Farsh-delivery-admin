@@ -1,19 +1,20 @@
 import React from 'react';
 import './AddDriverForm.scss';
 import { NewDriverSectionsContainer } from '../functional/NewDriverSections/functional/NewDriverSectionsContainer';
-import { VendorFormContainer } from '../functional/VendorForm/functional/VendorFormContainer';
-import {ProfileInfoFormContainer} from '../functional/ProfileInfoForm/functional/ProfileInfoFormContainer';
+import {reduxForm} from 'redux-form'
 
-export const AddDriverFormUI = () => {
+export const AddDriverForm = ({handleSubmit, component, activeID}) => {
     return (
         <div className="AddDriver">
-            <NewDriverSectionsContainer />
+            <NewDriverSectionsContainer activeID={activeID}/>
             <div className="Wrapper">
-                <ProfileInfoFormContainer />
+                {component}
                 <div className="Submission">
                     <button className="Submission-button Submission-button_white">Cancel</button>
-                    <button className="Submission-button Submission-button_black">Next</button>
+                    <button className="Submission-button Submission-button_black" onClick={handleSubmit}>Next</button>
                 </div>
             </div>
         </div>);
 }
+
+export const AddDriverFormUI = reduxForm({form: 'add-driver'})(AddDriverForm)

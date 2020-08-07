@@ -3,13 +3,13 @@
     justify-content: space-between;
     padding: 10px 0;
 
-    & > div {
+    .InputWrapper {
         width: 100%;
         display: flex;
         position: relative;
     }
 
-    & > div:last-child {
+    .InputWrapper:last-child {
         justify-content: flex-end;
 
         & > input {
@@ -48,6 +48,8 @@
 
 .intl-tel-input {
     min-height: 30px;
+    width: 50%;
+    display: flex !important;
 }
 
 

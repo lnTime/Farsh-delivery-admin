@@ -1,7 +1,7 @@
 import React from 'react';
 import './OrderDetailHeader.scss';
 import { PaperContainer } from '../../../../common/icons/Paper/functional/PaperContainer';
-import {NotificationAndProfile, NotificationAndProfileContainer} from '../../../../common/icons/NotificationAndProfile/functional/NotificationAndProfileContainer';
+import {NotificationAndProfileContainer} from '../../../../common/icons/NotificationAndProfile/functional/NotificationAndProfileContainer';
 
 export const OrderDetailHeaderUI = () => {
     return (<header className="OrderDetailHeader">

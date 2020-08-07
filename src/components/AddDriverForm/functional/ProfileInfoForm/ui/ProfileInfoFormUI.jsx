@@ -9,7 +9,7 @@ import IntlTelInput from 'react-intl-tel-input';
 import 'react-intl-tel-input/dist/main.css';
 
 
-export const ProfileInfoFormUI = ({phoneNumber, onPhoneNumberBlur, handlePhoneNumberChange}) => {
+export const ProfileInfoFormUI = ({phoneNumber, onPhoneNumberBlur, handlePhoneNumberChange, handleSubmit}) => {
 
     return (<form className="AddDriver-Form">
         <FileFieldContainer />
@@ -31,7 +31,7 @@ export const ProfileInfoFormUI = ({phoneNumber, onPhoneNumberBlur, handlePhoneNu
                 value={phoneNumber.mobileNumber}
                 placeholder=""
                 onPhoneNumberBlur={onPhoneNumberBlur}
-                fieldId={`phoneNumber`}
+                fieldId="phoneNumber"
                 onPhoneNumberChange={handlePhoneNumberChange}
                 containerClassName={`intl-tel-input ${phoneNumber.isValid ? '' : 'intl-tel-input-error'}`}
                 inputClassName="form-control"

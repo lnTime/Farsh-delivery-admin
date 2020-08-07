@@ -16,7 +16,7 @@ export const ActivityNotificationsContainer = () => {
 
     useEffect(() => {
         const items = notifications.map(notification => (<li className="ActivityNotifications-Item" key={notification.id}>
-            <img src={notification.src} />
+            <img src={notification.src} alt="Notification"/>
             <div className="ActivityNotificationItemContent">
                 <span className="ActivityNotificationItemContent-Date">{notification.date}</span>
                 <span dangerouslySetInnerHTML={{ __html: notification.text }} className="ActivityNotificationItemContent-Text" />
