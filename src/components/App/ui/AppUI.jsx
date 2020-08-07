@@ -1,4 +1,4 @@
-rom 'react';
+import React from 'react';
 import { LeftSideMenuContainer } from '../../LeftSideMenu/functional/LeftSideMenuContainer';
 import { OrdersContainer } from '../../Orders/functional/OrdersContainer';
 import './App.scss'
@@ -6,6 +6,7 @@ import { Switch, Route } from 'react-router-dom';
 import { DashboardContainer } from '../../Dashboard/functional/DashboardContainer';
 import { AddDriverFormContainer } from '../../AddDriverForm/functional/AddDriverFormContainer';
 import { DriverDetailsContainer } from '../../DriverDetails/functional/DriverDetailsContainer';
+import { OrderDetailContainer } from '../../OrderDetail/functional/OrderDetailContainer';
 
 export const AppUI = () => {
   return (
@@ -16,6 +17,7 @@ export const AppUI = () => {
         <Route exact path="/dashboard" component={DashboardContainer} />
         <Route exact path="/add-driver" component={AddDriverFormContainer} />
         <Route exact path="/driver-details" component={DriverDetailsContainer} />
+        <Route exact path="/order-detail" component={OrderDetailContainer} />
       </Switch>
     </div>
   );
