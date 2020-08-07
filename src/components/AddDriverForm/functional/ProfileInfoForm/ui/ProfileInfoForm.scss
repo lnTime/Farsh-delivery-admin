@@ -2,8 +2,73 @@
     display: flex;
     justify-content: space-between;
     padding: 10px 0;
+
+    & > div {
+        width: 100%;
+        display: flex;
+        position: relative;
+    }
+
+    & > div:last-child {
+        justify-content: flex-end;
+
+        & > input {
+            margin-left: auto;
+        }
+
+        & > span {
+            margin-left: auto;
+        }
+    }
 }
 
+.intl-tel-input.allow-dropdown.separate-dial-code
+  .selected-flag
+  .selected-dial-code {
+    font-size: calc(8px + 0.366vw);
+    line-height: calc(10px + 0.512vw);
+}
+
+.intl-tel-input.allow-dropdown.separate-dial-code
+.selected-flag {
+    background-color: transparent !important;
+    width: 60px;
+}
+
+.iti-flag {
+  background-color: none;
+  margin-top: 5px;
+  margin-left: 5px;
+  margin-right: -15px;
+}
+
+.arrow.down {
+    display: none;
+}
+
+.intl-tel-input {
+    min-height: 30px;
+}
+
+
+.intl-tel-input .flag-container {
+    width: 95% !important;
+}
+
+.intl-tel-input-error {
+
+    & > #phoneNumber {
+        border-bottom: 1px solid red;
+    }
+}
+
+#phoneNumber {
+    border-bottom: 1px solid #D6D6D6;
+    font-size: calc(8px + 0.366vw);
+    line-height: calc(10px + 0.512vw);
+    width: 95%;
+    padding-left: 75px;
+}
 
 @media only screen and (max-width: 500px) {
     .EvenInputs {

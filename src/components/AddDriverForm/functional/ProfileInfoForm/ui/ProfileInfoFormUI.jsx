@@ -4,22 +4,38 @@ import {FileFieldContainer} from '../../../../common/inputs/FileField/functional
 import {TextFieldContainer} from '../../../../common/inputs/TextField/functional/TextFieldContainer';
 import {SelectFieldContainer} from '../../../../common/inputs/SelectField/functional/SelectFieldContainer';
 import {Field} from 'redux-form';
+import {validators} from '../../../../../utils/validators/validators';
+import IntlTelInput from 'react-intl-tel-input';
+import 'react-intl-tel-input/dist/main.css';
 
-export const ProfileInfoFormUI = () => {
+
+export const ProfileInfoFormUI = ({phoneNumber, onPhoneNumberBlur, handlePhoneNumberChange}) => {
+
     return (<form className="AddDriver-Form">
         <FileFieldContainer />
         <div className="EvenInputs">
             <Field name='firstName'
+                validate={[validators.onlyCharacters]}
                 component={TextFieldContainer}
                 placeholder="First Name" />
             <Field name='lastName'
                 component={TextFieldContainer}
+                validate={[validators.onlyCharacters]}
                 placeholder="Last Name" />
         </div>
         <div className="EvenInputs">
-            <Field name="phone"
-                component={TextFieldContainer}
-                defaultValue='+96' />
+            <IntlTelInput 
+                preferredCountries={["sa"]}
+                separateDialCode={true}
+                format={true}
+                value={phoneNumber.mobileNumber}
+                placeholder=""
+                onPhoneNumberBlur={onPhoneNumberBlur}
+                fieldId={`phoneNumber`}
+                onPhoneNumberChange={handlePhoneNumberChange}
+                containerClassName={`intl-tel-input ${phoneNumber.isValid ? '' : 'intl-tel-input-error'}`}
+                inputClassName="form-control"
+            />
             <Field name="county"
                 component={SelectFieldContainer}
                 options={[{ id: 1, value: 'Saudi Arabia' }, { id: 2, value: 'Armenia' }]} />
@@ -38,7 +54,7 @@ export const ProfileInfoFormUI = () => {
             <Field name="address"
                 component={TextFieldContainer}
                 placeholder="Address"
-                fullWidth
+                data-fullwidth
             />
         </div>
         <div className="EvenInputs">
