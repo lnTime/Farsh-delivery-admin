@@ -9,19 +9,25 @@ import IntlTelInput from 'react-intl-tel-input';
 import 'react-intl-tel-input/dist/main.css';
 
 
-export const ProfileInfoFormUI = ({phoneNumber, onPhoneNumberBlur, handlePhoneNumberChange, handleSubmit}) => {
+export const ProfileInfoFormUI = React.memo(({phoneNumber, onPhoneNumberBlur, handlePhoneNumberChange,
+    states, countries, cities, customCountryChange, customStateChange, handleSubmit, src, 
+    hasError, handleImageChange}) => {
 
-    return (<form className="AddDriver-Form">
-        <FileFieldContainer />
+    return (<div className="AddDriver-Form" onSubmit={handleSubmit}>
+        <FileFieldContainer src={src} onChange={handleImageChange} data-haserror={hasError}/>
         <div className="EvenInputs">
-            <Field name='firstName'
-                validate={[validators.onlyCharacters]}
+            <Field 
+                name='firstName'
+                validate={[validators.onlyCharacters, validators.required]}
                 component={TextFieldContainer}
-                placeholder="First Name" />
-            <Field name='lastName'
+                placeholder="First Name" 
+            />
+            <Field 
+                name='lastName'
                 component={TextFieldContainer}
-                validate={[validators.onlyCharacters]}
-                placeholder="Last Name" />
+                validate={[validators.onlyCharacters, validators.required]}
+                placeholder="Last Name" 
+            />
         </div>
         <div className="EvenInputs">
             <IntlTelInput 
@@ -36,36 +42,52 @@ export const ProfileInfoFormUI = ({phoneNumber, onPhoneNumberBlur, handlePhoneNu
                 containerClassName={`intl-tel-input ${phoneNumber.isValid ? '' : 'intl-tel-input-error'}`}
                 inputClassName="form-control"
             />
-            <Field name="county"
+            <Field 
+                name="country"
+                customOnChange={customCountryChange}
                 component={SelectFieldContainer}
-                options={[{ id: 1, value: 'Saudi Arabia' }, { id: 2, value: 'Armenia' }]} />
+                options={countries} 
+                validate={[validators.required]}
+            />
         </div>
         <div className="EvenInputs">
-            <Field name="state"
+            <Field 
+                name="state"
                 component={SelectFieldContainer}
-                options={[{ id: 1, value: '0801' }, { id: 2, value: '0802' }]}
-                placeholder="State" />
-            <Field name="city"
+                customOnChange={customStateChange}
+                options={states}
+                placeholder="State" 
+                validate={[validators.required]}
+            />
+            <Field 
+                name="city"
                 component={SelectFieldContainer}
-                options={[{ id: 1, value: 'Masis' }, { id: 2, value: 'Ararat' }]}
-                placeholder="City" />
+                options={cities}
+                placeholder="City" 
+                validate={[validators.required]}
+            />
         </div>
         <div className="EvenInputs">
             <Field name="address"
                 component={TextFieldContainer}
                 placeholder="Address"
                 data-fullwidth
+                validate={[validators.required]}
             />
         </div>
         <div className="EvenInputs">
             <Field name="password"
                 component={TextFieldContainer}
                 placeholder="Password"
+                validate={[validators.required]}
+                type="password"
             />
             <Field name="confirmPassword"
                 component={TextFieldContainer}
                 placeholder="Confirm Password"
+                validate={[validators.required]}
+                type="password"
             />
         </div>
-    </form>);
-}
+    </div>);
+})

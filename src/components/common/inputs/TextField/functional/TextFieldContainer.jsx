@@ -10,7 +10,7 @@ export const TextFieldContainer = (props) => {
         }
     }, [props]);
 
-    return <div className="InputWrapper"> 
+    return <div className={`InputWrapper ${props['data-halfwidth'] ? 'InputWrapper_halfWidth' : ''}`}> 
             {hasError ? <span className="Input-ErrorMessage">{error}</span> : null}
             <TextFieldUI {...props} hasError={hasError}/>
         </div>;

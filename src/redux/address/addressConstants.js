@@ -1,0 +1,6 @@
+export const addressConstants = {
+    SET_COUNTRIES: 'SET_COUNTRIES',
+    SET_STATES: 'SET_STATES',
+    SET_CITIES: 'SET_CITIES',
+    SET_AUTH_TOKEN: 'SET_AUTH_TOKEN'
+}

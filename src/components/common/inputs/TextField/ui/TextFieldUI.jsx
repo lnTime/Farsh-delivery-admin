@@ -1,8 +1,8 @@
 import React from 'react';
 import './TextField.scss';
 
-export const TextFieldUI = ({input, hasError, ...custom}) => {
-
+export const TextFieldUI = React.memo(({input, hasError, ...custom}) => {
     return <input {...input} {...custom} 
-    className={`InputBlock ${custom['data-fullwidth'] ? 'InputBlock_fullWidth' : ''} ${hasError ? 'InputBlock_error' : ''}`}/>;
-}
+    className={`InputBlock ${custom['data-fullwidth'] ? 'InputBlock_fullWidth' : ''} 
+    ${hasError ? 'InputBlock_error' : ''}`}/>;
+});

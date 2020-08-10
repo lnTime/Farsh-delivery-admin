@@ -3,32 +3,38 @@ import './DrivingLicenseForm.scss';
 import {Field} from 'redux-form';
 import {SelectFieldContainer} from '../../../../common/inputs/SelectField/functional/SelectFieldContainer';
 import {TextFieldContainer} from '../../../../common/inputs/TextField/functional/TextFieldContainer';
-import {ChooseFileFieldContainer} from '../../../../common/inputs/ChooseFileField/functional/ChooseFileFieldContainer';
+import {ChooseFrontAndBackContainer} from '../../../functional/ChooseFrontAndBack/functional/ChooseFrontAndBackContainer';
+import { validators } from '../../../../../utils/validators/validators';
 
-export const DrivingLicenseFormUI = () => {
+export const DrivingLicenseFormUI = React.memo(({licenseTypeOptions, image, setImage}) => {
     return (<form className="AddDriver-Form">
         <div className="EvenInputs">
             <Field name="licenseType" 
                 component={SelectFieldContainer}
-                options={[{id: 1, value: 'AM'}]}
-                placeholder="License type"    
+                options={licenseTypeOptions}
+                placeholder="License type"  
+                validate={[validators.required]}  
             />
             <Field 
-                name="licenseNumber"
+                name="licenseNo"
                 component={TextFieldContainer}
                 placeholder="License number"
+                data-halfwidth
+                validate={[validators.required]}  
             />
         </div>
         <div className="EvenInputs">
             <Field 
-                name="issueDate"
+                name="licenseIssueDate"
                 component={TextFieldContainer}
                 placeholder="Issue date"
+                validate={[validators.required]}  
             />
             <Field 
-                name="expiryDate"
+                name="licenseExpiryDate"
                 component={TextFieldContainer}
                 placeholder="Expiry date"
+                validate={[validators.required]}  
             />
         </div>
         <div className="EvenInputs">
@@ -37,29 +43,17 @@ export const DrivingLicenseFormUI = () => {
                 placeholder="Issuing country"
                 component={SelectFieldContainer}
                 options={[{id: 1, value: 'Armenia'}]}
+                validate={[validators.required]}  
             />
             <Field 
-                name="issuingAuthority"
+                name="licenseIssuingAuthority"
                 placeholder="Issuing Authority"
                 component={SelectFieldContainer}
                 options={[{id: 1, value: 'Auth'}]}
+                validate={[validators.required]}  
             />
         </div>
         <span className="AddDriverForm-FileUpload">Upload your Driving License</span>
-        <div className="FileUploadWrapper">
-            <div className="AddDriverFormButtonGroup">
-                <button 
-                    type="button"
-                    className="AddDriverFormButtonGroup-Button AddDriverFormButtonGroup-Button_blackBorder">
-                    Front
-                </button>
-                <button
-                    type="button" 
-                    className="AddDriverFormButtonGroup-Button AddDriverFormButtonGroup-Button_noBorder">
-                    Back
-                </button>
-            </div>
-            <ChooseFileFieldContainer />
-        </div>
+        <ChooseFrontAndBackContainer image={image} setImage={setImage} />
     </form>);
-}
+});

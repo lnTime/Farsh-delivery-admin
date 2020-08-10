@@ -27,8 +27,30 @@
     }
 }
 
+.InputWrapper {
+    width: 100%;
+    display: flex;
+    position: relative;
+
+    &_halfWidth {
+        width: 50%;
+    }
+}
+
+.InputWrapper:last-child {
+    justify-content: flex-end;
+
+    & > input {
+        margin-left: auto;
+    }
+
+    & > span {
+        margin-left: auto;
+    }
+}
+
 .Input-ErrorMessage {
-    font-size: calc(8px + 0.521vw);
+    font-size: calc(8px + 0.321vw);
     color: red;
     line-height: 20px;
     position: absolute;

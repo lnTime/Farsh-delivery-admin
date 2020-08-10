@@ -3,32 +3,38 @@ import './RealNameInformation.scss';
 import { Field } from 'redux-form';
 import {SelectFieldContainer} from '../../../../common/inputs/SelectField/functional/SelectFieldContainer';
 import {TextFieldContainer} from '../../../../common/inputs/TextField/functional/TextFieldContainer';
-import {ChooseFileFieldContainer} from '../../../../common/inputs/ChooseFileField/functional/ChooseFileFieldContainer';
+import { ChooseFrontAndBackContainer } from '../../ChooseFrontAndBack/functional/ChooseFrontAndBackContainer';
+import { validators } from '../../../../../utils/validators/validators';
 
-export const RealNameInformationFormUI = () => {
+export const RealNameInformationFormUI = React.memo(({idTypeOptions, image, setImage}) => {
     return (<form className="AddDriver-Form">
         <div className="EvenInputs">
-            <Field name="idType" 
+            <Field name="realNameIdType" 
                 component={SelectFieldContainer}
-                options={[{id: 1, value: 'AM'}]}
+                options={idTypeOptions}
                 placeholder="ID type"    
+                validate={[validators.required]}
             />
             <Field 
-                name="idNumber"
+                name="realNameIdNo"
+                data-halfwidth
                 component={TextFieldContainer}
                 placeholder="ID No."
+                validate={[validators.required]}
             />
         </div>
         <div className="EvenInputs">
             <Field 
-                name="issueDate"
+                name="realNameIssueDate"
                 component={TextFieldContainer}
                 placeholder="Issue date"
+                validate={[validators.required]}
             />
             <Field 
-                name="expiryDate"
+                name="realNameExpiryDate"
                 component={TextFieldContainer}
                 placeholder="Expiry date"
+                validate={[validators.required]}
             />
         </div>
         <div className="EvenInputs">
@@ -37,29 +43,20 @@ export const RealNameInformationFormUI = () => {
                 placeholder="Issuing country"
                 component={SelectFieldContainer}
                 options={[{id: 1, value: 'Armenia'}]}
+                validate={[validators.required]}
             />
             <Field 
                 name="issuingAuthority"
                 placeholder="Issuing Authority"
                 component={SelectFieldContainer}
                 options={[{id: 1, value: 'Auth'}]}
+                validate={[validators.required]}
             />
         </div>
         <span className="AddDriverForm-FileUpload">Upload your National ID Card</span>
-        <div className="FileUploadWrapper">
-            <div className="AddDriverFormButtonGroup">
-                <button 
-                    type="button"
-                    className="AddDriverFormButtonGroup-Button AddDriverFormButtonGroup-Button_blackBorder">
-                    Front
-                </button>
-                <button
-                    type="button" 
-                    className="AddDriverFormButtonGroup-Button AddDriverFormButtonGroup-Button_noBorder">
-                    Back
-                </button>
-            </div>
-            <ChooseFileFieldContainer />
-        </div>
+        <ChooseFrontAndBackContainer 
+            image={image}
+            setImage={setImage}
+            />
     </form>);
-}
+});

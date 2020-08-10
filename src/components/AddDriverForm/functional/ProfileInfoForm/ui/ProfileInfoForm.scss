@@ -2,24 +2,6 @@
     display: flex;
     justify-content: space-between;
     padding: 10px 0;
-
-    .InputWrapper {
-        width: 100%;
-        display: flex;
-        position: relative;
-    }
-
-    .InputWrapper:last-child {
-        justify-content: flex-end;
-
-        & > input {
-            margin-left: auto;
-        }
-
-        & > span {
-            margin-left: auto;
-        }
-    }
 }
 
 .intl-tel-input.allow-dropdown.separate-dial-code
@@ -33,6 +15,15 @@
 .selected-flag {
     background-color: transparent !important;
     width: 60px;
+}
+
+.intl-tel-input.allow-dropdown.separate-dial-code
+.selected-flag:focus {
+    outline: none;
+}
+
+.arrow.up {
+    display: none;   
 }
 
 .iti-flag {
