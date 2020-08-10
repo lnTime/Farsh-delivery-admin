@@ -21,6 +21,42 @@
     }
 }
 
+.AddDriverForm-FileUpload {
+    letter-spacing: 0px;
+    font-size: 13px;
+    line-height: 39px;
+    color: #BABABA;
+}
+
+.AddDriverFormButtonGroup {
+    width: 100%;
+
+    &-Button {
+        letter-spacing: 0px;
+        color: #000;
+        font-size: 12px;
+        line-height: 39px;
+        width: 50%;
+        background: #fff;
+
+        &_blackBorder {
+            border-bottom: 2px solid #000000;
+        }
+
+        &_noBorder {
+            color: #363636;
+            font-family: "Roboto Light", Arial, Helvetica, sans-serif;
+        }
+
+        &:focus {
+            outline: none;
+        }
+
+        &_error {
+            border: 3px solid red;
+        }
+    }
+}
 
 .Submission {
     display: flex;
@@ -44,13 +80,12 @@
             color: #fff;
             font-family: "Roboto Bold", Arial, Helvetica, sans-serif;
         }
-    }
-}
 
-.EvenInputs {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
+        &:disabled {
+            opacity: 0.1;
+            cursor: default;
+        }
+    }
 }
 
 @media only screen and (max-width: 1000px) {

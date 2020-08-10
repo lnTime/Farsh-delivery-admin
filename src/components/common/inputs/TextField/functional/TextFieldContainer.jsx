@@ -2,12 +2,16 @@ import React, { useEffect } from 'react';
 import {TextFieldUI} from '../ui/TextFieldUI';
 
 export const TextFieldContainer = (props) => {
-    const {onChange} = props.input;
+    const {touched, invalid, error} = props.meta;
+    const hasError = touched && invalid;
     useEffect(() => {
-        if(props.defaultValue) {
-            onChange(props.defaultValue);
+        if(props['data-defaultvalue']) {
+            props.input.onChange(props['data-defaultvalue']);
         }
-    }, [props.defaultValuem]);
+    }, [props]);
 
-    return <TextFieldUI {...props}/>;
+    return <div className={`InputWrapper ${props['data-halfwidth'] ? 'InputWrapper_halfWidth' : ''}`}> 
+            {hasError ? <span className="Input-ErrorMessage">{error}</span> : null}
+            <TextFieldUI {...props} hasError={hasError}/>
+        </div>;
 } 

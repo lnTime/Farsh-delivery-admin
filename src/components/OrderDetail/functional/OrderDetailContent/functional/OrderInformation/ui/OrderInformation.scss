@@ -1,0 +1,29 @@
+.OrderInformation {
+    width: 100%;
+    .OrderTechnical {
+        display: flex;
+    
+        & > div {
+            display: flex;
+            flex-direction: column;
+        }
+
+        & > div:first-child {
+            width: 50%;
+        }
+
+        &-OrderNumberAlphabetical, &-OrderDateAlphabetical {
+            letter-spacing: 0px;
+            color: #BABABA;
+            font-size: 12px;
+            line-height: 39px;
+        }
+
+        &-OrderNumber, &-OrderDate {
+            letter-spacing: 0px;
+            color: #000;
+            font-size: 13px;
+            line-height: 17px;
+        }
+    }
+}

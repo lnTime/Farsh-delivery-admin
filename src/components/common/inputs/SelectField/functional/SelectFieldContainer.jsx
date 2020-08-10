@@ -1,6 +1,7 @@
-import React from 'react';
-import { SelectFieldUI } from '../ui/SelectFieldUI';
+import React from "react";
+import { SelectFieldUI } from "../ui/SelectFieldUI";
 
 export const SelectFieldContainer = (props) => {
-    return <SelectFieldUI {...props}/>;
-}
+
+  return <SelectFieldUI {...props} />;
+};

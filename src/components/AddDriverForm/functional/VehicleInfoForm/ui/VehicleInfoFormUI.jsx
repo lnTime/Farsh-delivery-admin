@@ -3,33 +3,39 @@ import './VehicleInfoForm.scss';
 import {Field} from 'redux-form';
 import {SelectFieldContainer} from '../../../../common/inputs/SelectField/functional/SelectFieldContainer';
 import {TextFieldContainer} from '../../../../common/inputs/TextField/functional/TextFieldContainer';
+import { validators } from '../../../../../utils/validators/validators';
 
-export const VehicleInfoFormUI = () => {
+export const VehicleInfoFormUI = ({vehicleMakeOptions, address, customCountryChange, customStateChange}) => {
     return (<form className="AddDriver-Form">
         <div className="EvenInputs">
             <Field 
-                name="plateNumber" 
+                name="vehiclePlateNumber" 
                 placeholder="Plate number"
                 component={TextFieldContainer}
+                validate={[validators.required]}
             />
             <Field 
-                name="modelYear"
+                name="vehicleModel"
                 placeholder="Model year"
                 component={TextFieldContainer}
+                validate={[validators.required]}
             />
         </div>
         <div className="EvenInputs">
             <Field 
-                name="make"
+                name="vehicleMake"
                 placeholder="Make"
                 component={SelectFieldContainer}
-                options={[{id: 1, value: 'Make'}]}
+                options={vehicleMakeOptions}
+                validate={[validators.required]}
             />
             <Field 
                 name="registeredCountry"
                 placeholder="Registered Country"
                 component={SelectFieldContainer}
-                options={[{id: 1, value: 'Armenia'}]}
+                options={address.countries}
+                customOnChange={customCountryChange}
+                validate={[validators.required]}
             />
         </div>
         <div className="EvenInputs">
@@ -37,25 +43,30 @@ export const VehicleInfoFormUI = () => {
                 name="state"
                 placeholder="State"
                 component={SelectFieldContainer}
-                options={[{id: 1, value: '0801'}]}
+                options={address.states}
+                customOnChange={customStateChange}
+                validate={[validators.required]}
             />
             <Field 
                 name="city"
                 placeholder="City"
                 component={SelectFieldContainer}
-                options={[{id: 1, value: 'Masis'}]}
+                options={address.cities}
+                validate={[validators.required]}
             />
         </div>
         <div className="EvenInputs">
             <Field 
-                name="registrationNumber"
+                name="vehicleRegistrationNumber"
                 placeholder="Registration No."
                 component={TextFieldContainer}
+                validate={[validators.required]}
             />
             <Field 
-                name="mvpi"
+                name="mvpiNumber"
                 placeholder="MVPI No."
                 component={TextFieldContainer}
+                validate={[validators.required]}
             />
         </div>
     </form>);

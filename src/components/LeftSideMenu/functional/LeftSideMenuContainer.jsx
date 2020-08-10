@@ -23,7 +23,6 @@ export const LeftSideMenuContainer = () => {
     const [activeID, setActiveID] = useState(1);
 
     const handleMenuStateChange = useCallback(() => {
-        console.log('Called');
         setIsFullOpened(!isFullOpened);
     }, [isFullOpened]);
 

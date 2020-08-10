@@ -9,10 +9,9 @@ const sections = [
     {id: 5, title: 'Vendor'},
 ];
 
-export const NewDriverSectionsContainer = () => {
+export const NewDriverSectionsContainer = ({activeID}) => {
 
     const [driverSections, setDriverSections] = useState(null);
-    const activeID = 1;
 
     useEffect(() => {
         const items = sections.map(section => (<li 
@@ -22,7 +21,7 @@ export const NewDriverSectionsContainer = () => {
             <span className="DriverSections-Item_title">{section.title}</span>
         </li>));
         setDriverSections(items);
-    }, []);
+    }, [activeID]);
 
     return <NewDriverSectionsUI driverSections={driverSections} />;
 }
