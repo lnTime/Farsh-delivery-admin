@@ -8,9 +8,9 @@
         justify-content: space-between;
         border-bottom: 1px solid #EDEDED;
         padding-bottom: 14.5px;
-
+        position: relative;
     }
-
+    
     & > div {
         display: flex;
         align-items: center;
@@ -19,4 +19,7 @@
     &-Edit {
         margin-left: 8.62px;
     }
+}
+.icon-Span-Wrapper{
+    cursor: pointer;
 }

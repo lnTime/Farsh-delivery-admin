@@ -1,7 +1,11 @@
 import React from 'react';
-import { ProfileFormUI } from '../ui/ProfileFormUI';
+import  ProfileFormUI  from '../ui/ProfileFormUI';
+import {useState} from 'react';
+import { useEditMode } from '../../../../common/custom-hooks/useEditMode';
 
 export const ProfileFormContainer = () => {
+  const [isEdit, handleClick] = useEditMode();
+
     const name = 'James Anderson',
         mobile = '(497)202-4478',
         country = 'Saudi Arabia',
@@ -18,5 +22,7 @@ export const ProfileFormContainer = () => {
                 address={address}
                 password={password}
                 city={city}
+                handleClick = {handleClick}
+                isEdit={isEdit}
             />;
 }
