@@ -16,9 +16,10 @@ const RealNameInformationFormUI = ({
   issuingAuthority,
   isEdit,
   handleClick,
+  handleSubmit
 }) => {
   return (
-    <form>
+    <form onSubmit = {handleSubmit}>
       <div className="RealNameInformationForm ProfileForm">
         <FormHeaderContainer
           isEdit={isEdit}

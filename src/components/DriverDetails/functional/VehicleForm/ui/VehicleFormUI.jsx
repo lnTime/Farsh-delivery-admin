@@ -16,9 +16,10 @@ export const VehicleFormUI = ({
   mvpi,
   isEdit,
   handleClick,
+  handleSubmit
 }) => {
   return (
-    <form>
+    <form onSubmit = {handleSubmit}>
       <div className="ProfileForm VehicleForm">
         <FormHeaderContainer
           isEdit={isEdit}

@@ -18,9 +18,8 @@ export const ProfileFormUI = ({
   isEdit,
   handleSubmit
 }) => {
-    console.log('ProfileFormUI')
   return (
-    <form onSubmit = {handleSubmit} >
+    <form onSubmit={handleSubmit} >
       <div className="ProfileForm">
         <FormHeaderContainer isEdit={isEdit} handleClick={handleClick} formName="Profile" />
         <div className="ProfileFormAvatar">
@@ -31,8 +30,7 @@ export const ProfileFormUI = ({
               <Field
                 name="name"
                 component={TextFieldContainer}
-                type="text"
-                placeholder={name}
+                type="text"              
                 className="InputBlock_withoutMargin"
               />
             ) : (
@@ -48,7 +46,7 @@ export const ProfileFormUI = ({
                 name="moblile"
                 component={TextFieldContainer}
                 type="text"
-                placeholder={mobile}
+                value={mobile}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">{mobile}</span>
@@ -61,7 +59,7 @@ export const ProfileFormUI = ({
                 name="country"
                 component={TextFieldContainer}
                 type="text"
-                placeholder={country}
+                value={country}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">{country}</span>
@@ -76,7 +74,7 @@ export const ProfileFormUI = ({
                 name="state"
                 type="text"
                 component={TextFieldContainer}
-                placeholder={state}
+                value={state}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">{state}</span>
@@ -89,7 +87,7 @@ export const ProfileFormUI = ({
                 name="city"
                 type="text"
                 component = {TextFieldContainer}
-                placeholder = {city}
+                value = {city}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">{city}</span>
@@ -103,7 +101,7 @@ export const ProfileFormUI = ({
                 name="address"
                 type="text"
                 component = {TextFieldContainer}
-                placeholder = {address}
+                value = {address}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">{address}</span>
@@ -116,7 +114,7 @@ export const ProfileFormUI = ({
                 name="password"
                 type="password"
                 component = {TextFieldContainer}
-                placeholder = {address}
+                value = {address}
               />
             ) : (
                 <div className="Password">

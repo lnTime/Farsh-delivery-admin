@@ -17,9 +17,10 @@ const DrivingLicenseFormUI = ({
   issuingAuthority,
   isEdit,
   handleClick,
+  handleSubmit
 }) => {
   return (
-    <form>
+    <form onSubmit = {handleSubmit}>
       <div className="ProfileForm DrivingLicenseForm">
         <FormHeaderContainer
           isEdit={isEdit}
