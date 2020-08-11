@@ -14,7 +14,7 @@ export const DriverDetailsHeaderUI = () => {
                             <span className="DriverDetailsLeftSideInformation-DriverName">James Anderson</span>
                         </div>
                         <div>   
-                            <span className="DriverDetailsLeftSideInformation-SectionName">Home > Drivers</span>
+                            <span className="DriverDetailsLeftSideInformation-SectionName">Home Drivers</span>
                         </div>  
                     </div>    
                     <div className="DriverDetailsLeftSideActions">

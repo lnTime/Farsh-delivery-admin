@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import {TextFieldUI} from '../ui/TextFieldUI';
 
 export const TextFieldContainer = (props) => {
+    console.log('TextFieldContainre')
     const {touched, invalid, error} = props.meta;
     const hasError = touched && invalid;
     useEffect(() => {

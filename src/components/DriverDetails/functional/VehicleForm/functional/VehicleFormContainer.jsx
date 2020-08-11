@@ -1,8 +1,9 @@
 import React from 'react';
-import { VehicleFormUI } from '../ui/VehicleFormUI';
+import  VehicleFormUI  from '../ui/VehicleFormUI';
+import { useEditMode } from '../../../../common/custom-hooks/useEditMode';
 
 export const VehicleFormContainer = () => {
-
+    const [isEdit, handleClick] = useEditMode();
     const plateNumber = 'YUK-7812', 
         model = 1988, 
         make = 'GM', 
@@ -21,5 +22,7 @@ export const VehicleFormContainer = () => {
             city={city}
             registrationNumber={registrationNumber}
             mvpi={mvpi}
+            isEdit = {isEdit}
+            handleClick = {handleClick}
     />;
 }
