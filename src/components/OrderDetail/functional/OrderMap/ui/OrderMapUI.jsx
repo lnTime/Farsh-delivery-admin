@@ -5,7 +5,7 @@ import CarIcon from '../../../../../assets/images/car.png';
 
 export const OrderMapUI = () => {
     return (<YMaps>
-        <Map defaultState={{ center: [24.713592, 46.676639], zoom: 17 }}>
+        <Map width="43.192vw" defaultState={{ center: [24.713592, 46.676639], zoom: 17 }}>
             <GeoObject
                 geometry={{
                     type: 'LineString',

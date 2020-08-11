@@ -8,14 +8,14 @@ export const DrivingLicenseContainer = ({setData, setCurrentStep, setCurrentOnSu
     const [image, setImage] = useState({})
 
     const onSubmit = formData => {
-        // if (!image.isFrontChoosed) {
-        //     setImage({ ...image, hasFrontError: true })
-        //     return false;
-        // } else if (!image.isBackChoosed) {
-        //     setImage({ ...image, hasBackError: true })
-        //     return false;
-        // }
-
+        if (!image.isFrontChoosed) {
+            setImage({ ...image, hasFrontError: true })
+            return false;
+        } else if (!image.isBackChoosed) {
+            setImage({ ...image, hasBackError: true })
+            return false;
+        }
+        
         const transformedData = {
             ...formData,
             licenseIssuingCountry: {

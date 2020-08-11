@@ -1,6 +1,6 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
-import { TextFieldContainer } from "../../TextField/functional/TextFieldContainer";
+import {TextFieldContainer} from '../../common/inputs/TextField/functional/TextFieldContainer';
 import "./Login.scss";
 import { WhiteButttonContainer } from "../../common/buttons/WhiteButton/functional/WhiteButtonContainer";
 import { BlackButtonContainer } from "../../common/buttons/BlackButton/functional/BlackButtonContainer";

@@ -7,7 +7,7 @@ $lightGray: #bebebe;
   background-size: cover;
   width: 207px;
   height: 46px;
-  background-image: url(../../../../src/assets/img/logo.png);
+  background-image: url(../../../../src/assets/images/logo.svg);
 }
 .Login {
   margin: auto;
@@ -15,6 +15,7 @@ $lightGray: #bebebe;
   display: flex;
   justify-content: space-between;
   width: 88.3%;
+  margin-top: 0;
   &-Left {
     padding-top: 5.857vw;
   }
@@ -93,7 +94,7 @@ $lightGray: #bebebe;
   min-width: 450px;
   width: 75%;
   height: 84%;
-  background-image: url(../../../assets/img/loginPhoto.png);
+  background-image: url(../../../assets/images/loginPhoto.png);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
