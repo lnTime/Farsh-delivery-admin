@@ -5,7 +5,6 @@ import { useEditMode } from '../../../../common/custom-hooks/useEditMode';
 
 export const ProfileFormContainer = () => {
   const [isEdit, handleClick] = useEditMode();
-
     const name = 'James Anderson',
         mobile = '(497)202-4478',
         country = 'Saudi Arabia',

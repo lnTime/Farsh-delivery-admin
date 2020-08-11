@@ -5,6 +5,8 @@ import front from "../../../../../assets/images/driving-license-front.png";
 import back from "../../../../../assets/images/driving-license-back.png";
 import { reduxForm, Field } from "redux-form";
 import { TextFieldContainer } from "../../../../common/inputs/TextField/functional/TextFieldContainer";
+import { ChooseFileFieldContainer } from "../../../../common/inputs/ChooseFileField/functional/ChooseFileFieldContainer";
+import { BlackButtonContainer } from "../../../../common/buttons/BlackButton/functional/BlackButtonContainer";
 
 const DrivingLicenseFormUI = ({
   licenseType,
@@ -119,9 +121,28 @@ const DrivingLicenseFormUI = ({
         <div className="ProfileInfoBlock ProfileInfoBlock_oneItem">
           <span className="ProfileInfoBlock-InputName">Driving License</span>
           <div className="ProfileInfoBlock-InputValue" id="idCard">
-            <img alt="Driving License Front" src={front} />
-            <img alt="Driving License Back" src={back} />
+            {isEdit ? (
+              <Field
+                component={ChooseFileFieldContainer}
+                type="file"
+                name="drivingLicenseFront"
+              />
+            ) : (
+              <img alt="Driving License Front" src={front} />
+            )}
+            {isEdit ? (
+              <Field
+                component={ChooseFileFieldContainer}
+                type="file"
+                name="drivingLicenseBack"
+              />
+            ) : (
+              <img alt="Driving License Back" src={back} />
+            )}
           </div>
+          {
+            isEdit ? <BlackButtonContainer text = 'Save'/> : null
+          }
         </div>
       </div>
     </form>

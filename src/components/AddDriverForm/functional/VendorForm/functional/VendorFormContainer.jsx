@@ -1,7 +1,6 @@
 import React from 'react';
 import { VendorFormUI } from '../ui/VendorFormUI';
-import { useEffect, useState } from 'react';
-import { useEditMode } from '../../../../common/custom-hooks/useEditMode';
+import { useEffect } from 'react';
 
 export const VendorFormContainer = ({ setData, setCurrentOnSubmit, data }) => {
     const onSubmit = formData => {

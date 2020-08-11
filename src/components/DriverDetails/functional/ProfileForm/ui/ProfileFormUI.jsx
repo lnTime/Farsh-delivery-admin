@@ -4,6 +4,7 @@ import { FormHeaderContainer } from "../../FormHeader/functional/FormHeaderConta
 import Avatar from "../../../../../assets/avatars/avatar-80.png";
 import { Field, reduxForm } from "redux-form";
 import { TextFieldContainer } from "../../../../common/inputs/TextField/functional/TextFieldContainer";
+import { BlackButtonContainer } from "../../../../common/buttons/BlackButton/functional/BlackButtonContainer";
 
 export const ProfileFormUI = ({
   name,
@@ -15,10 +16,11 @@ export const ProfileFormUI = ({
   password,
   handleClick,
   isEdit,
+  handleSubmit
 }) => {
     console.log('ProfileFormUI')
   return (
-    <form >
+    <form onSubmit = {handleSubmit} >
       <div className="ProfileForm">
         <FormHeaderContainer isEdit={isEdit} handleClick={handleClick} formName="Profile" />
         <div className="ProfileFormAvatar">
@@ -126,7 +128,9 @@ export const ProfileFormUI = ({
                 ))}
               </div>
             )}
-
+            {isEdit ?
+              <BlackButtonContainer  text="Save"/> : null
+            }
         </div>
       </div>
     </form>
