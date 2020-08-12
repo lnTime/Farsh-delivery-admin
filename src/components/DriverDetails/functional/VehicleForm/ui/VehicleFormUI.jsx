@@ -34,7 +34,7 @@ export const VehicleFormUI = ({
                 component={TextFieldContainer}
                 name="plateNumber"
                 type="text"
-                placeholder={plateNumber}
+                data-defaultvalue = {plateNumber}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">{plateNumber}</span>
@@ -47,7 +47,7 @@ export const VehicleFormUI = ({
                 component={TextFieldContainer}
                 name="model"
                 type="text"
-                placeholder={model}
+                data-defaultvalue = {model}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">{model}</span>
@@ -62,7 +62,7 @@ export const VehicleFormUI = ({
                 component={TextFieldContainer}
                 name="make"
                 type="text"
-                placeholder={make}
+                data-defaultvalue = {make}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">{make}</span>
@@ -77,7 +77,7 @@ export const VehicleFormUI = ({
                 component={TextFieldContainer}
                 name="registeredCountry"
                 type="text"
-                placeholder={registeredCountry}
+                data-defaultvalue = {registeredCountry}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">
@@ -94,7 +94,7 @@ export const VehicleFormUI = ({
                 component={TextFieldContainer}
                 name="state"
                 type="text"
-                placeholder={state}
+                data-defaultvalue = {state}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">{state}</span>
@@ -107,7 +107,7 @@ export const VehicleFormUI = ({
                 component={TextFieldContainer}
                 name="city"
                 type="text"
-                placeholder={city}
+                data-defaultvalue = {city}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">{city}</span>
@@ -122,7 +122,7 @@ export const VehicleFormUI = ({
                 component={TextFieldContainer}
                 name="registrationNumber"
                 type="text"
-                placeholder={registrationNumber}
+                data-defaultvalue = {registrationNumber}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">
@@ -138,7 +138,7 @@ export const VehicleFormUI = ({
                 component={TextFieldContainer}
                 name="mvpi"
                 type="text"
-                placeholder={mvpi}
+                data-defaultvalue = {mvpi}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">{mvpi}</span>

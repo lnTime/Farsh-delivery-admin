@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "./ProfileForm.scss";
 import { FormHeaderContainer } from "../../FormHeader/functional/FormHeaderContainer";
 import Avatar from "../../../../../assets/avatars/avatar-80.png";
@@ -16,8 +16,22 @@ export const ProfileFormUI = ({
   password,
   handleClick,
   isEdit,
-  handleSubmit
+  handleSubmit,
+  initialize,
 }) => {
+
+  useEffect(() => {
+    initialize({
+      name: name,
+      mobile:mobile,
+      country:country,
+      state:state,
+      city:city,
+      address:address,
+      password:password
+    })
+  }, []);
+
   return (
     <form onSubmit={handleSubmit} >
       <div className="ProfileForm">
@@ -43,10 +57,9 @@ export const ProfileFormUI = ({
             <span className="ProfileInfoBlock-InputName">Mobile</span>
             {isEdit ? (
               <Field
-                name="moblile"
+                name="mobile"
                 component={TextFieldContainer}
                 type="text"
-                value={mobile}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">{mobile}</span>
@@ -59,7 +72,6 @@ export const ProfileFormUI = ({
                 name="country"
                 component={TextFieldContainer}
                 type="text"
-                value={country}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">{country}</span>
@@ -74,7 +86,6 @@ export const ProfileFormUI = ({
                 name="state"
                 type="text"
                 component={TextFieldContainer}
-                value={state}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">{state}</span>
@@ -87,7 +98,6 @@ export const ProfileFormUI = ({
                 name="city"
                 type="text"
                 component = {TextFieldContainer}
-                value = {city}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">{city}</span>
@@ -101,7 +111,6 @@ export const ProfileFormUI = ({
                 name="address"
                 type="text"
                 component = {TextFieldContainer}
-                value = {address}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">{address}</span>
@@ -114,7 +123,6 @@ export const ProfileFormUI = ({
                 name="password"
                 type="password"
                 component = {TextFieldContainer}
-                value = {address}
               />
             ) : (
                 <div className="Password">
