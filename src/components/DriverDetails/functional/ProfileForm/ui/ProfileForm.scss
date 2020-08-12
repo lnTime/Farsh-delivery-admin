@@ -1,88 +1,87 @@
 .ProfileForm {
-    background: #FFF 0% 0% no-repeat padding-box;
-    padding: 18px 18px 58px 18px;
+  background: #fff 0% 0% no-repeat padding-box;
+  padding: 18px 18px 58px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 300px;
+  width: 100%;
+
+  &_withMargin {
+    margin-left: 32px;
+  }
+  & .ProfileFormAvatar {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-width: 300px;
+    padding-left: 18px;
+    margin-top: 17px;
     width: 100%;
 
-    &_withMargin {
-        margin-left: 32px;
+    &-Name {
+      letter-spacing: 0px;
+      color: #000;
+      font-size: 13px;
+      line-height: 17px;
+
+      &_name {
+        letter-spacing: 0px;
+        color: #bababa;
+        font-size: 12px;
+        line-height: 39px;
+      }
     }
 
-    & .ProfileFormAvatar {
-        display: flex;
-        padding-left: 18px;
-        margin-top: 17px;
-        width: 100%;
+    & .ProfileFormInfo {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-left: 28px;
+    }
+  }
 
-        &-name {
-            letter-spacing: 0px;
-            color: #000;
-            font-size: 13px;
-            line-height: 17px;
+  & .ProfileInfoBlock {
+    display: flex;
+    width: 100%;
+    padding-left: 18px;
 
-            &_name {
-                letter-spacing: 0px;
-                color: #BABABA;
-                font-size: 12px;
-                line-height: 39px;
-            }
-        }
-
-        & .ProfileFormInfo {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            margin-left: 28px;
-        }
+    & .Password {
+      flex-direction: row;
     }
 
-    & .ProfileInfoBlock {
-        display: flex;
-        width: 100%;
-        padding-left: 18px;
-
-        & .Password {
-            flex-direction: row;
-        }
-
-        &-InputName {
-            letter-spacing: 0px;
-            font-size: 12px;
-            line-height: 39px;
-            color: #BABABA;
-        }
-
-        &-InputValue {
-            letter-spacing: 0px;
-            color: #000;
-            font-size: 13px;
-            line-height: 17px;
-
-            &_cycle {
-                width: 5px !important;
-                height: 5px;
-                background-color: #000;
-                margin: 0 2px;
-                border-radius: 50%;
-            }
-        }
-
-        & > div {
-            display: flex;
-            flex-direction: column;
-            width: 50%;
-        }
-
-        &_oneItem {
-            flex-direction: column;
-        }
+    &-InputName {
+      letter-spacing: 0px;
+      font-size: 12px;
+      line-height: 39px;
+      color: #bababa;
     }
+
+    &-InputValue {
+      letter-spacing: 0px;
+      color: #000;
+      font-size: 13px;
+      line-height: 17px;
+
+      &_cycle {
+        width: 5px !important;
+        height: 5px;
+        background-color: #000;
+        margin: 0 2px;
+        border-radius: 50%;
+      }
+    }
+
+    & > div {
+      display: flex;
+      flex-direction: column;
+      width: 50%;
+    }
+
+    &_oneItem {
+      flex-direction: column;
+    }
+  }
 }
-.BlackButton_right{
-    margin-left:  auto;
-    margin-top:1.042vw;
-    margin-right: 15px;
+.BlackButton_right {
+  margin-left: auto;
+  margin-top: 1.042vw;
+  margin-right: 15px;
 }

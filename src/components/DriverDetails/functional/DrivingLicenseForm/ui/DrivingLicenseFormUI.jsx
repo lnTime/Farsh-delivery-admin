@@ -7,6 +7,8 @@ import { reduxForm, Field, initialize } from "redux-form";
 import { TextFieldContainer } from "../../../../common/inputs/TextField/functional/TextFieldContainer";
 import { ChooseFileFieldContainer } from "../../../../common/inputs/ChooseFileField/functional/ChooseFileFieldContainer";
 import { BlackButtonContainer } from "../../../../common/buttons/BlackButton/functional/BlackButtonContainer";
+import { useDispatch, useSelector } from "react-redux";
+import { driverLicenseSelector } from "../../../../../redux/drivers/driverSelectors";
 
 const DrivingLicenseFormUI = ({
   licenseType,
@@ -18,7 +20,7 @@ const DrivingLicenseFormUI = ({
   isEdit,
   handleClick,
   handleSubmit,
-  initialize
+  initialize,
 }) => {
   useEffect(() => {
     initialize({
@@ -29,7 +31,7 @@ const DrivingLicenseFormUI = ({
       issuingCountry: issuingCountry,
       issuingAuthority: issuingAuthority,
     });
-  });
+  }, []);
   return (
     <form onSubmit={handleSubmit}>
       <div className="ProfileForm DrivingLicenseForm">
@@ -153,5 +155,5 @@ const DrivingLicenseFormUI = ({
   );
 };
 export default reduxForm({
-  form: "edit",
+  form: "editDrivingLicense",
 })(DrivingLicenseFormUI);

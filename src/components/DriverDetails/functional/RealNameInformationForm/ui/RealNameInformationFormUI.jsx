@@ -17,7 +17,7 @@ const RealNameInformationFormUI = ({
   isEdit,
   handleClick,
   handleSubmit,
-  initialize
+  initialize,
 }) => {
   useEffect(() => {
     initialize({
@@ -42,7 +42,11 @@ const RealNameInformationFormUI = ({
           <div>
             <span className="ProfileInfoBlock-InputName">ID type</span>
             {isEdit ? (
-              <Field component={TextFieldContainer} type="text" name="passport" />
+              <Field
+                component={TextFieldContainer}
+                type="text"
+                name="passport"
+              />
             ) : (
               <span className="ProfileInfoBlock-InputValue">{passport}</span>
             )}
@@ -113,7 +117,7 @@ const RealNameInformationFormUI = ({
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">
-                {issuingAuthority}{" "}
+                {issuingAuthority}
               </span>
             )}
           </div>
@@ -139,5 +143,5 @@ const RealNameInformationFormUI = ({
   );
 };
 export default reduxForm({
-  form: "editForm",
+  form: "editRealName",
 })(RealNameInformationFormUI);

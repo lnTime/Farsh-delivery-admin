@@ -2,17 +2,12 @@ import React, { useState, useMemo } from 'react';
 import { AddDriverFormUI } from '../ui/AddDriverFormUI';
 import {getComponent} from './helper';
 
-
-
 export const AddDriverFormContainer = () => {
     const [currentStep, setCurrentStep] = useState(1);
     const [currentOnSubmit, setCurrentOnSubmit] = useState(null);
     const [data, setData] = useState({});
-
-    console.log('Data is: ', data);
-
     const component = useMemo(() => getComponent(currentStep), [currentStep]);    
-
+    
     return <AddDriverFormUI
         onSubmit={currentOnSubmit}
         setCurrentOnSubmit={setCurrentOnSubmit}
