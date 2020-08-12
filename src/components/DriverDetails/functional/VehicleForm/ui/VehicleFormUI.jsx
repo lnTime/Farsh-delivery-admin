@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./VehicleForm.scss";
 import { FormHeaderContainer } from "../../FormHeader/functional/FormHeaderContainer";
-import { Field, reduxForm } from "redux-form";
+import { Field, reduxForm, initialize } from "redux-form";
 import { TextFieldContainer } from "../../../../common/inputs/TextField/functional/TextFieldContainer";
 import { BlackButtonContainer } from "../../../../common/buttons/BlackButton/functional/BlackButtonContainer";
 
@@ -16,10 +16,23 @@ export const VehicleFormUI = ({
   mvpi,
   isEdit,
   handleClick,
-  handleSubmit
+  handleSubmit,
+  initialize
 }) => {
+  useEffect(() =>
+    initialize({
+      plateNumber: plateNumber,
+      model: model,
+      make: make,
+      registeredCountry: registeredCountry,
+      state: state,
+      city: city,
+      registrationNumber: registrationNumber,
+      mvpi: mvpi,
+    }),[]
+  );
   return (
-    <form onSubmit = {handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <div className="ProfileForm VehicleForm">
         <FormHeaderContainer
           isEdit={isEdit}
@@ -34,7 +47,6 @@ export const VehicleFormUI = ({
                 component={TextFieldContainer}
                 name="plateNumber"
                 type="text"
-                data-defaultvalue = {plateNumber}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">{plateNumber}</span>
@@ -47,7 +59,6 @@ export const VehicleFormUI = ({
                 component={TextFieldContainer}
                 name="model"
                 type="text"
-                data-defaultvalue = {model}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">{model}</span>
@@ -62,7 +73,6 @@ export const VehicleFormUI = ({
                 component={TextFieldContainer}
                 name="make"
                 type="text"
-                data-defaultvalue = {make}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">{make}</span>
@@ -77,7 +87,6 @@ export const VehicleFormUI = ({
                 component={TextFieldContainer}
                 name="registeredCountry"
                 type="text"
-                data-defaultvalue = {registeredCountry}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">
@@ -94,7 +103,6 @@ export const VehicleFormUI = ({
                 component={TextFieldContainer}
                 name="state"
                 type="text"
-                data-defaultvalue = {state}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">{state}</span>
@@ -107,7 +115,6 @@ export const VehicleFormUI = ({
                 component={TextFieldContainer}
                 name="city"
                 type="text"
-                data-defaultvalue = {city}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">{city}</span>
@@ -122,14 +129,12 @@ export const VehicleFormUI = ({
                 component={TextFieldContainer}
                 name="registrationNumber"
                 type="text"
-                data-defaultvalue = {registrationNumber}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">
                 {registrationNumber}
               </span>
             )}
-
           </div>
           <div>
             <span className="ProfileInfoBlock-InputName">MVPI No.</span>
@@ -138,14 +143,13 @@ export const VehicleFormUI = ({
                 component={TextFieldContainer}
                 name="mvpi"
                 type="text"
-                data-defaultvalue = {mvpi}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">{mvpi}</span>
             )}
           </div>
         </div>
-          {isEdit ? <BlackButtonContainer text = 'Save'/> : null}
+        {isEdit ? <BlackButtonContainer text="Save" /> : null}
       </div>
     </form>
   );
