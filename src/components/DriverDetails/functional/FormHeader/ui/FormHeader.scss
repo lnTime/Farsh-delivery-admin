@@ -1,22 +1,25 @@
 .FormHeader {
-    width: 100%;
+  width: 100%;
 
-    & .FormHeaderWrapper {
-        margin: 0 10px;
-        display: flex;
-        margin-left: 18px;
-        justify-content: space-between;
-        border-bottom: 1px solid #EDEDED;
-        padding-bottom: 14.5px;
+  & .FormHeaderWrapper {
+    margin: 0 10px;
+    display: flex;
+    margin-left: 18px;
+    justify-content: space-between;
+    border-bottom: 1px solid #ededed;
+    padding-bottom: 14.5px;
+    position: relative;
+  }
 
-    }
+  & > div {
+    display: flex;
+    align-items: center;
+  }
 
-    & > div {
-        display: flex;
-        align-items: center;
-    }
-
-    &-Edit {
-        margin-left: 8.62px;
-    }
+  &-Edit {
+    margin-left: 8.62px;
+  }
+}
+.Icon-Span-Wrapper {
+  cursor: pointer;
 }

@@ -12,6 +12,7 @@ export const VendorFormUI = () => {
                 options={[{id: 1, value: 'Vendor 1'}]}
                 placeholder="Select Vendor"
             />
+
         </div>
     </form>);
 }

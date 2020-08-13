@@ -13,7 +13,8 @@ export const DriverDetailsUI = () => {
         <DriverDetailsHeaderContainer />
         <div className="Forms">
             <div className="Combiner" id="margined">
-                <ProfileFormContainer />
+                <ProfileFormContainer
+                 />
                 <DrivingLicenseFormContainer />
             </div>
             <div className="Combiner" id="second">
