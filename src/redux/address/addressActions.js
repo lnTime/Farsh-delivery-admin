@@ -38,7 +38,6 @@ export const getCountries = () => async (dispatch, getState) => {
 export const getStates = (countryName) => async (dispatch, getState) => {
     const {authToken, countries} = getState().address;
     const country = countries.find(country => country.id === countryName);
-    console.log('Country name is: ', countryName);
     fetch(`https://www.universal-tutorial.com/api/states/${country.value}`, {
         headers: {
             Authorization: `Bearer ${authToken}`

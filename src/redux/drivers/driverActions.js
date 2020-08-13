@@ -26,12 +26,11 @@ export const putDriverLicense = (formData) => (dispatch) => {
     axios.put(
       `https://virtserver.swaggerhub.com/aliadnank/Farsh-Drivers/1.0.0/api/v1/drivers/driving-license/{2}`,
       { ...data }
-    ).then(console.log).catch(console.log);
+    );
   };
 
   export const putVendor = (formData) => (dispatch) => {
-    axios.put(`https://virtserver.swaggerhub.com/aliadnank/Farsh-Drivers/1.0.0/api/v1/drivers/vendor/2/`,{ vendorId: formData.vendor})
-    .then(console.log).catch(console.log);
+    axios.put(`https://virtserver.swaggerhub.com/aliadnank/Farsh-Drivers/1.0.0/api/v1/drivers/vendor/2/`,{ vendorId: formData.vendor});
   }
 
   export const putRealName = (formData) => (dispatch) => {
