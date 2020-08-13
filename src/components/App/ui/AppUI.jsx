@@ -7,6 +7,7 @@ import { DashboardContainer } from '../../Dashboard/functional/DashboardContaine
 import { AddDriverFormContainer } from '../../AddDriverForm/functional/AddDriverFormContainer';
 import { DriverDetailsContainer } from '../../DriverDetails/functional/DriverDetailsContainer';
 import { OrderDetailContainer } from '../../OrderDetail/functional/OrderDetailContainer';
+import { SearchDriverContainer } from '../../SearchDriverSection/functional/SearchDriverSectionContainer';
 
 export const AppUI = () => {
   return (
@@ -18,6 +19,7 @@ export const AppUI = () => {
         <Route exact path="/add-driver" component={AddDriverFormContainer} />
         <Route exact path="/driver-details" component={DriverDetailsContainer} />
         <Route exact path="/order-detail" component={OrderDetailContainer} />
+        <Route exact path = "/search-driver" component = {SearchDriverContainer} />
       </Switch>
     </div>
   );

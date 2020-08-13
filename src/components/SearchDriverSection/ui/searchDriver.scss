@@ -9,7 +9,7 @@ $lightGray: #acacac;
   &-Input {
     &:focus {
       background: white;
-      border: 1px solid #BABABA;
+      border: 1px solid #bababa;
     }
     border-radius: 5px;
     width: 345px;
@@ -98,7 +98,7 @@ $lightGray: #acacac;
     width: 35px;
     height: 35px;
     background-size: cover;
-    background-image: url(../../../assets/img/d1.png);
+    // background-image: url(../../../assets/img/d1.png);
   }
   & .InfoWrapper {
     width: 180px;
@@ -121,7 +121,7 @@ $lightGray: #acacac;
 .SearchIcon {
   width: 16px;
   height: 16px;
-  background-image: url(../../../assets//img/searchIcon.png);
+  // background-image: url(../../../assets//img/searchIcon.png);
   background-size: contain;
   position: absolute;
   top: 14px;

@@ -7,6 +7,16 @@ import { MessageIconContainer } from "../../common/icons/MessageIcon/functional/
 
 export const SearchDriverContainer = () => {
   const [driverInfo, setDriverInfo] = useState(null);
+  const [driverSearch, setDriverSearch] = useState(true);
+  const [term,setTerm] = useState(' ');
+  const handleFocus = () => {
+    setDriverSearch(!driverSearch);
+  };
+  const handleChange = (e) => {
+    setTerm(e.target.value)
+  };
+
+
   useEffect(() => {
     setDriverInfo(
       driverInfoData.map((data) => {
@@ -14,7 +24,7 @@ export const SearchDriverContainer = () => {
           <div key={data.id} className="InfoBlock">
             <div className="InfoWrapper">
               <input className="Radio" type="radio" name="gender"></input>
-              <div className="DriverPhoto"></div>
+              <div className="DriverPhoto">{data.img}</div>
               <div>
                 <p className="Mobile">{data.mobile}</p>
                 <span className="NameCarNumber">{data.name}</span>
@@ -28,6 +38,14 @@ export const SearchDriverContainer = () => {
         );
       })
     );
-  }, []);
-  return <SearchDriverSectionUI driverInfo={driverInfo} />;
+  }, [driverInfoData]);
+  return (
+    <SearchDriverSectionUI
+      driverSearch={driverSearch}
+      handleFocus={handleFocus}
+      driverInfo={driverInfo}
+      handleChange = {handleChange}
+      term = {term}
+    />
+  );
 };
