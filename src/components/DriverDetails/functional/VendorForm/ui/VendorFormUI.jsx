@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./VendorForm.scss";
 import { FormHeaderContainer } from "../../FormHeader/functional/FormHeaderContainer";
-import { Field, reduxForm, initialize } from "redux-form";
+import { Field, reduxForm } from "redux-form";
 import { TextFieldContainer } from "../../../../common/inputs/TextField/functional/TextFieldContainer";
 import { BlackButtonContainer } from "../../../../common/buttons/BlackButton/functional/BlackButtonContainer";
 
@@ -13,10 +13,8 @@ export const VendorFormUI = ({
   initialize,
 }) => {
   useEffect(() => {
-    initialize({
-      vendor,
-    });
-  }, []);
+    initialize({ vendor });
+  }, [initialize, vendor]);
   return (
     <form onSubmit={handleSubmit}>
       <div className="VendorForm ProfileForm">

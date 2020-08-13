@@ -11,7 +11,7 @@ export const WarningUI = ({text}) => {
         </div>
         <div className="ButtonGroup">
             <button className="ButtonGroup-Button ButtonGroup-Button_white">Review</button>
-            <span href="#" className="ButtonGroup-Button ButtonGroup-Button_black">Dismiss</span>
+            <button className="ButtonGroup-Button ButtonGroup-Button_black">Dismiss</button>
         </div>
     </div>);
 }

@@ -3,6 +3,7 @@ import { VehicleInfoFormUI } from '../ui/VehicleInfoFormUI.jsx';
 import { getAddressSelector } from '../../../../../redux/address/addressSelectors.js';
 import {getStates, getCities, getCountries} from '../../../../../redux/address/addressActions';
 import { useSelector, useDispatch } from 'react-redux';
+import { useCallback } from 'react';
 
 export const VehicleInfoFormContainer = ({ setData, setCurrentStep, setCurrentOnSubmit }) => {
     const address = useSelector(getAddressSelector);
@@ -21,16 +22,16 @@ export const VehicleInfoFormContainer = ({ setData, setCurrentStep, setCurrentOn
         if (!address.countries.length) {
             dispatch(getCountries())
         }
-    }, [address]);
+    }, [address, dispatch]);
 
-    const onSubmit = (formData) => {
+    const onSubmit = useCallback((formData) => {
         setData(data => ({ ...data, vehicle: {...formData} }));
         setCurrentStep(currentStep => currentStep + 1);
-    }
+    }, [setData, setCurrentStep]);
 
     useEffect(() => {
         setCurrentOnSubmit(() => onSubmit);
-    }, []);
+    }, [setCurrentOnSubmit, onSubmit]);
 
     return <VehicleInfoFormUI
         vehicleMakeOptions={vehicleMakeOptions}

@@ -6,7 +6,7 @@ export const FileFieldUI = React.memo(({input, ...custom}) => {
     return (<div className={`FileUpload ${custom['data-haserror'] ? 'FileUpload-Error' : ''}`}>
         <input type="file" {...input} {...custom} className="FileUpload-Input" accept="image/*"/>
         <div className="Upload">
-            {custom.src ? <img src={custom.src} className="Uploaded-Image" /> :
+            {custom.src ? <img src={custom.src} alt="Uploaded icon" className="Uploaded-Image" /> :
             <BigAvatarContainer className="Upload-SVG"/> }
             <div className="UploadContent">
                 <span className="UploadContent-Text">Drag and drop your image here or</span>

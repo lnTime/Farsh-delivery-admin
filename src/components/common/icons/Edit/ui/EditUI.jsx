@@ -5,7 +5,7 @@ export const EditUI = ({isEdit}) => {
     return (
         <>
         {
-            isEdit ? (<a className = "closeIcon"/>) : (<svg
+            isEdit ? (<span className = "closeIcon"/>) : (<svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="14.377"
                 height="17.183"

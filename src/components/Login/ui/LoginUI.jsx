@@ -1,6 +1,4 @@
 import React from "react";
-import { Field, reduxForm } from "redux-form";
-import { TextFieldContainer } from "../../TextField/functional/TextFieldContainer";
 import "./Login.scss";
 import { WhiteButttonContainer } from "../../common/buttons/WhiteButton/functional/WhiteButtonContainer";
 import { BlackButtonContainer } from "../../common/buttons/BlackButton/functional/BlackButtonContainer";
@@ -15,34 +13,35 @@ const LoginUI = () => {
             <h2 className="Login-H2">Welcome back!</h2>
             <span className="Login-Span">Please login to your account</span>
           </div>
-          <Field
-            component={TextFieldContainer}
-            placeholder="email"
-            type="email"
-          />
-          <Field
-            component={TextFieldContainer}
-            placeholder="password"
-            type="password"
-          />
-
+          <label className="Label LoginForm-Label">
+            Email Address
+            <input 
+              value="adil@gmail.com"
+              type="text" 
+              className="LoginForm-Input Label-Input"
+              />
+          </label>
+          <label className="Label LoginForm-Label">
+            Password
+            <input type="password" className="LoginForm-Input Label-Input"/>
+          </label>
           <div className="Login-Checkbox">
             <label>
-              <Field
+              {/* <Field
                 className="Login-Remember"
                 name="employed"
                 id="employed"
                 component="input"
                 type="checkbox"
-              />
+              /> */}
               Remember me
             </label>
             <span className="Login_forgot">Forgot password</span>
           </div>
 
           <div>
-            <BlackButtonContainer />
-            <WhiteButttonContainer />
+            <BlackButtonContainer text="Login"/>
+            <WhiteButttonContainer text="Sign up"/>
           </div>
         </form>
       </div>
@@ -53,6 +52,4 @@ const LoginUI = () => {
   );
 };
 
-export default reduxForm({
-  form: "loginForm", // a unique identifier for this form
-})(LoginUI);
+export default LoginUI;

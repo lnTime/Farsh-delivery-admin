@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCountries, getStates, getCities } from "../../../../../redux/address/addressActions";
 import { getAddressSelector } from '../../../../../redux/address/addressSelectors';
 import { SubmissionError, reset } from 'redux-form';
+import { useCallback } from "react";
 
 const transformData = (formData, image, phoneNumber) => {
     return ({
@@ -42,7 +43,7 @@ export const ProfileInfoFormContainer = ({handleSubmit, error, setCurrentOnSubmi
     }
 
     
-    const onSubmit = (formData) => {
+    const onSubmit = useCallback((formData) => {
         if (formData.password !== formData.confirmPassword) {
             throw new SubmissionError({ confirmPassword: 'Please confirm the password.' })
         }     
@@ -62,16 +63,16 @@ export const ProfileInfoFormContainer = ({handleSubmit, error, setCurrentOnSubmi
         setData(data => ({...data, profile: {...transformedData} }));
         setCurrentStep(currentStep => currentStep + 1);
         dispatch(reset('add-driver'))
-    }
+    }, [image, setData, setCurrentStep, dispatch, setPhoneNumber, phoneNumber]);
 
     useEffect(() => {
         setCurrentOnSubmit(() => onSubmit);
-    }, [image, phoneNumber]);
+    }, [setCurrentOnSubmit, onSubmit]);
 
 
     useEffect(() => {
         dispatch(getCountries())
-    }, []);
+    }, [dispatch]);
 
     const onPhoneNumberBlur = (isValid) => {
         setPhoneNumber({ ...phoneNumber, isValid });

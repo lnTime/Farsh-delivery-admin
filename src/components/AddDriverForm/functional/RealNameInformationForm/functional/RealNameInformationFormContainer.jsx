@@ -1,13 +1,14 @@
 import React, { useMemo, useState } from 'react';
 import { RealNameInformationFormUI } from '../ui/RealNameInformationFormUI';
 import { useEffect } from 'react';
+import { useCallback } from 'react';
+
 
 export const RealNameInformationFormContainer = ({ setCurrentOnSubmit, setData, setCurrentStep }) => {
-
-    const idTypeOptions = useMemo(() => [{ value: 'PASSPORT', id: 'PASSPORT' }, { value: 'NATIONAL_ID', id: 'NATIONAL_ID' }]);
+    const idTypeOptions = useMemo(() => [{ value: 'PASSPORT', id: 'PASSPORT' }, { value: 'NATIONAL_ID', id: 'NATIONAL_ID' }], []);
     const [image, setImage] = useState({});
 
-    const onSubmit = formData => {
+    const onSubmit = useCallback(formData => {
         if (!image.isFrontChoosed) {
             setImage({ ...image, hasFrontError: true })
             return false;
@@ -34,11 +35,11 @@ export const RealNameInformationFormContainer = ({ setCurrentOnSubmit, setData, 
         }));
 
         setCurrentStep(currentStep => currentStep + 1);
-    }
+    }, [setData, image, setCurrentStep]);
 
     useEffect(() => {
         setCurrentOnSubmit(() => onSubmit);
-    }, [image]);
+    }, [setCurrentOnSubmit, onSubmit]);
 
     return <RealNameInformationFormUI
         idTypeOptions={idTypeOptions}
