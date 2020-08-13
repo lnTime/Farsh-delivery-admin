@@ -30,7 +30,7 @@ export const getCountries = () => async (dispatch, getState) => {
         }
     }).then(response => response.json())
     .then(res => {
-        dispatch(setCountries(res.map(item => ({value: item['country_name'], id: item['country_name']}))));
+        dispatch(setCountries(res.map(item => ({value: item['country_name'], id: item['country_short_name']}))));
         dispatch(getStates(res[0]['country_name']));
     });
 }

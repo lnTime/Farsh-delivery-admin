@@ -12,7 +12,7 @@ import { LoginContainer } from '../../Login/functional/LoginContainer';
 export const AppUI = () => {
   return (
     <div className="AppUI">
-      {/* <LeftSideMenuContainer /> */}
+      <LeftSideMenuContainer />
       <Switch>
         <Route exact path="/orders" component={OrdersContainer} />
         <Route exact path="/dashboard" component={DashboardContainer} />

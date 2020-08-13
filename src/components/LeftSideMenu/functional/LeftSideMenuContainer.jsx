@@ -6,6 +6,7 @@ import { MessageContainer } from '../../common/icons/Message/functional/MessageC
 import { DriverContainer } from '../../common/icons/Driver/functional/DriverContainer';
 import { OperatorContainer } from '../../common/icons/Operator/functional/OperatorContainer';
 import { CartContainer } from '../../common/icons/Cart/functional/CartContainer';
+import { useLocation } from 'react-router-dom';
 
 const menuOptions = [
     { id: 0, component: HomeContainer, title: 'Home' },
@@ -16,12 +17,34 @@ const menuOptions = [
     { id: 5, component: CartContainer, title: 'Vendors' },
 ];
 
-export const LeftSideMenuContainer = () => {
+const getActiveID = (pathname) => {
+    switch(pathname) {
+        case '/':
+        case '/dashboard':
+            return 0;
+        case '/orders':
+        case '/order-detail':
+            return 1;
+        case '/messages':
+            return 2;
+        case '/drivers':
+        case '/driver-details':
+        case '/add-driver':
+            return 3;
+        case '/operators':
+            return 4;
+        case '/vendors': 
+            return 5;
+        default:
+            return 0;
+    }
+}
 
+export const LeftSideMenuContainer = () => {
+    const {pathname} = useLocation();
     const [menuItems, setMenuItems] = useState(null);
     const [isFullOpened, setIsFullOpened] = useState(null);
     const [activeID, setActiveID] = useState(1);
-
     const handleMenuStateChange = useCallback(() => {
         setIsFullOpened(!isFullOpened);
     }, [isFullOpened]);
@@ -36,6 +59,11 @@ export const LeftSideMenuContainer = () => {
         });
         setMenuItems(items);
     }, [activeID, isFullOpened]);
+
+    useEffect(() => {
+        const activeID = getActiveID(pathname);
+        setActiveID(activeID);
+    }, [pathname]);
 
     return <LeftSideMenuUI 
             menuItems={menuItems}

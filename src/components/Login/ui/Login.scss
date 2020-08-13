@@ -89,6 +89,33 @@ $lightGray: #bebebe;
   padding: 1.098vw 0 0;
   margin-top: 10px;
 }
+
+.Label {
+  font-size: 1.098vw;
+  line-height: 1.977vw;
+  letter-spacing: 0px;
+}
+
+.LoginForm-Label {
+  color: #BEBEBE;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #E0E0E0;
+  width: 27.965vw;
+  height: 5.015vw;
+}
+
+.LoginForm-Input {
+  padding: 5px 0;
+  background-color: transparent;
+}
+
+.Label-Input {
+  color: #000000;
+  font-size: 1.318vw;
+  line-height: 1.903vw;
+}
+
 .RightPhoto {
   margin-top: 7.321vw;
   min-width: 450px;

@@ -6,7 +6,6 @@ export const LogoUI = () => {
         xmlns="http://www.w3.org/2000/svg"
         width="207.852"
         height="47.483"
-        className="Logo"
         viewBox="0 0 207.852 47.483">
         <defs />
         <g
