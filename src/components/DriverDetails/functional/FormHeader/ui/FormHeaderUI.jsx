@@ -7,9 +7,9 @@ export const FormHeaderUI = ({ formName, handleClick, isEdit }) => {
     <div className="FormHeader">
       <div className="FormHeaderWrapper">
         <span className="FormHeader-FormName">{formName}</span>
-        <div className = "icon-Span-Wrapper" onClick={handleClick}>
-          <EditContainer isEdit = {isEdit} />
-            <span className="FormHeader-Edit">Edit</span>
+        <div className="Icon-Span-Wrapper" onClick={handleClick}>
+          <EditContainer isEdit={isEdit} />
+          <span className="FormHeader-Edit">Edit</span>
         </div>
       </div>
     </div>

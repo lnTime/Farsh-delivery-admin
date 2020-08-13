@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./ProfileForm.scss";
 import { FormHeaderContainer } from "../../FormHeader/functional/FormHeaderContainer";
 import Avatar from "../../../../../assets/avatars/avatar-80.png";
@@ -16,13 +16,29 @@ export const ProfileFormUI = ({
   password,
   handleClick,
   isEdit,
-  handleSubmit
+  handleSubmit,
+  initialize,
 }) => {
-    console.log('ProfileFormUI')
+  useEffect(() => {
+    initialize({
+      name: name,
+      mobile: mobile,
+      country: country,
+      state: state,
+      city: city,
+      address: address,
+      password: password,
+    });
+  }, []);
+
   return (
-    <form onSubmit = {handleSubmit} >
+    <form onSubmit={handleSubmit}>
       <div className="ProfileForm">
-        <FormHeaderContainer isEdit={isEdit} handleClick={handleClick} formName="Profile" />
+        <FormHeaderContainer
+          isEdit={isEdit}
+          handleClick={handleClick}
+          formName="Profile"
+        />
         <div className="ProfileFormAvatar">
           <img alt="Avatar" src={Avatar} />
           <div className="ProfileFormInfo">
@@ -32,11 +48,10 @@ export const ProfileFormUI = ({
                 name="name"
                 component={TextFieldContainer}
                 type="text"
-                placeholder={name}
                 className="InputBlock_withoutMargin"
               />
             ) : (
-              <span className="ProfileFormAvatar-name">{name}</span>
+              <span className="ProfileFormAvatar-Name">{name}</span>
             )}
           </div>
         </div>
@@ -44,12 +59,7 @@ export const ProfileFormUI = ({
           <div>
             <span className="ProfileInfoBlock-InputName">Mobile</span>
             {isEdit ? (
-              <Field
-                name="moblile"
-                component={TextFieldContainer}
-                type="text"
-                placeholder={mobile}
-              />
+              <Field name="mobile" component={TextFieldContainer} type="text" />
             ) : (
               <span className="ProfileInfoBlock-InputValue">{mobile}</span>
             )}
@@ -61,7 +71,6 @@ export const ProfileFormUI = ({
                 name="country"
                 component={TextFieldContainer}
                 type="text"
-                placeholder={country}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">{country}</span>
@@ -72,12 +81,7 @@ export const ProfileFormUI = ({
           <div>
             <span className="ProfileInfoBlock-InputName">State</span>
             {isEdit ? (
-              <Field
-                name="state"
-                type="text"
-                component={TextFieldContainer}
-                placeholder={state}
-              />
+              <Field name="state" type="text" component={TextFieldContainer} />
             ) : (
               <span className="ProfileInfoBlock-InputValue">{state}</span>
             )}
@@ -85,12 +89,7 @@ export const ProfileFormUI = ({
           <div>
             <span className="ProfileInfoBlock-InputName">City</span>
             {isEdit ? (
-              <Field
-                name="city"
-                type="text"
-                component = {TextFieldContainer}
-                placeholder = {city}
-              />
+              <Field name="city" type="text" component={TextFieldContainer} />
             ) : (
               <span className="ProfileInfoBlock-InputValue">{city}</span>
             )}
@@ -99,38 +98,30 @@ export const ProfileFormUI = ({
         <div className="ProfileInfoBlock ProfileInfoBlock_oneItem">
           <span className="ProfileInfoBlock-InputName">Address</span>
           {isEdit ? (
-              <Field
-                name="address"
-                type="text"
-                component = {TextFieldContainer}
-                placeholder = {address}
-              />
-            ) : (
-              <span className="ProfileInfoBlock-InputValue">{address}</span>
-            )}
+            <Field name="address" type="text" component={TextFieldContainer} />
+          ) : (
+            <span className="ProfileInfoBlock-InputValue">{address}</span>
+          )}
         </div>
         <div className="ProfileInfoBlock ProfileInfoBlock_oneItem">
           <span className="ProfileInfoBlock-InputName">Password</span>
           {isEdit ? (
-              <Field
-                name="password"
-                type="password"
-                component = {TextFieldContainer}
-                placeholder = {address}
-              />
-            ) : (
-                <div className="Password">
-                {password.split("").map((v, index) => (
-                  <div
-                    className="ProfileInfoBlock-InputValue_cycle"
-                    key={index}
-                  ></div>
-                ))}
-              </div>
-            )}
-            {isEdit ?
-              <BlackButtonContainer  text="Save"/> : null
-            }
+            <Field
+              name="password"
+              type="password"
+              component={TextFieldContainer}
+            />
+          ) : (
+            <div className="Password">
+              {password.split("").map((v, index) => (
+                <div
+                  className="ProfileInfoBlock-InputValue_cycle"
+                  key={index}
+                ></div>
+              ))}
+            </div>
+          )}
+          {isEdit ? <BlackButtonContainer text="Save" /> : null}
         </div>
       </div>
     </form>
@@ -138,5 +129,5 @@ export const ProfileFormUI = ({
 };
 
 export default reduxForm({
-  form: "editForm",
+  form: "editProfileForm",
 })(ProfileFormUI);

@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./RealNameInformationForm.scss";
 import { FormHeaderContainer } from "../../FormHeader/functional/FormHeaderContainer";
 import { IdCardContainer } from "../../../../common/icons/IdCard/functional/IdCardContainer";
-import { Field, reduxForm } from "redux-form";
+import { Field, reduxForm, initialize } from "redux-form";
 import { TextFieldContainer } from "../../../../common/inputs/TextField/functional/TextFieldContainer";
 import { FileFieldContainer } from "../../../../common/inputs/FileField/functional/FileFieldContainer";
 import { BlackButtonContainer } from "../../../../common/buttons/BlackButton/functional/BlackButtonContainer";
@@ -16,9 +16,22 @@ const RealNameInformationFormUI = ({
   issuingAuthority,
   isEdit,
   handleClick,
+  handleSubmit,
+  initialize,
 }) => {
+  useEffect(() => {
+    initialize({
+      passport: passport,
+      idNumber: idNumber,
+      issueDate: issueDate,
+      expiryDate: expiryDate,
+      issuingCountry: issuingCountry,
+      issuingAuthority: issuingAuthority,
+    });
+  }, []);
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div className="RealNameInformationForm ProfileForm">
         <FormHeaderContainer
           isEdit={isEdit}
@@ -32,8 +45,7 @@ const RealNameInformationFormUI = ({
               <Field
                 component={TextFieldContainer}
                 type="text"
-                name="idType"
-                placeholder={passport}
+                name="passport"
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">{passport}</span>
@@ -46,7 +58,6 @@ const RealNameInformationFormUI = ({
                 component={TextFieldContainer}
                 type="text"
                 name="idNumber"
-                placeholder={idNumber}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">{idNumber}</span>
@@ -61,7 +72,6 @@ const RealNameInformationFormUI = ({
                 component={TextFieldContainer}
                 type="text"
                 name="issueDate"
-                placeholder={issueDate}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">{issueDate}</span>
@@ -74,7 +84,6 @@ const RealNameInformationFormUI = ({
                 component={TextFieldContainer}
                 type="text"
                 name="expiryDate"
-                placeholder={expiryDate}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">{expiryDate}</span>
@@ -89,7 +98,6 @@ const RealNameInformationFormUI = ({
                 component={TextFieldContainer}
                 type="text"
                 name="issuingCountry"
-                placeholder={issuingCountry}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">
@@ -106,11 +114,10 @@ const RealNameInformationFormUI = ({
                 component={TextFieldContainer}
                 type="text"
                 name="issuingAuthority"
-                placeholder={issuingAuthority}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">
-                {issuingAuthority}{" "}
+                {issuingAuthority}
               </span>
             )}
           </div>
@@ -128,18 +135,13 @@ const RealNameInformationFormUI = ({
             ) : (
               <IdCardContainer />
             )}
-
           </div>
-            {isEdit ? (
-              <BlackButtonContainer text = 'Save' />
-            ) : (
-              null
-            )}
+          {isEdit ? <BlackButtonContainer text="Save" /> : null}
         </div>
       </div>
     </form>
   );
 };
 export default reduxForm({
-  form: "editForm",
+  form: "editRealName",
 })(RealNameInformationFormUI);

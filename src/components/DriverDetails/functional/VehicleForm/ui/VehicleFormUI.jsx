@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./VehicleForm.scss";
 import { FormHeaderContainer } from "../../FormHeader/functional/FormHeaderContainer";
-import { Field, reduxForm } from "redux-form";
+import { Field, reduxForm, initialize } from "redux-form";
 import { TextFieldContainer } from "../../../../common/inputs/TextField/functional/TextFieldContainer";
 import { BlackButtonContainer } from "../../../../common/buttons/BlackButton/functional/BlackButtonContainer";
 
@@ -16,9 +16,23 @@ export const VehicleFormUI = ({
   mvpi,
   isEdit,
   handleClick,
+  handleSubmit,
+  initialize
 }) => {
+  useEffect(() =>
+    initialize({
+      plateNumber: plateNumber,
+      model: model,
+      make: make,
+      registeredCountry: registeredCountry,
+      state: state,
+      city: city,
+      registrationNumber: registrationNumber,
+      mvpi: mvpi,
+    }),[]
+  );
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div className="ProfileForm VehicleForm">
         <FormHeaderContainer
           isEdit={isEdit}
@@ -33,7 +47,6 @@ export const VehicleFormUI = ({
                 component={TextFieldContainer}
                 name="plateNumber"
                 type="text"
-                placeholder={plateNumber}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">{plateNumber}</span>
@@ -46,7 +59,6 @@ export const VehicleFormUI = ({
                 component={TextFieldContainer}
                 name="model"
                 type="text"
-                placeholder={model}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">{model}</span>
@@ -61,7 +73,6 @@ export const VehicleFormUI = ({
                 component={TextFieldContainer}
                 name="make"
                 type="text"
-                placeholder={make}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">{make}</span>
@@ -76,7 +87,6 @@ export const VehicleFormUI = ({
                 component={TextFieldContainer}
                 name="registeredCountry"
                 type="text"
-                placeholder={registeredCountry}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">
@@ -93,7 +103,6 @@ export const VehicleFormUI = ({
                 component={TextFieldContainer}
                 name="state"
                 type="text"
-                placeholder={state}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">{state}</span>
@@ -106,7 +115,6 @@ export const VehicleFormUI = ({
                 component={TextFieldContainer}
                 name="city"
                 type="text"
-                placeholder={city}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">{city}</span>
@@ -121,14 +129,12 @@ export const VehicleFormUI = ({
                 component={TextFieldContainer}
                 name="registrationNumber"
                 type="text"
-                placeholder={registrationNumber}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">
                 {registrationNumber}
               </span>
             )}
-
           </div>
           <div>
             <span className="ProfileInfoBlock-InputName">MVPI No.</span>
@@ -137,14 +143,13 @@ export const VehicleFormUI = ({
                 component={TextFieldContainer}
                 name="mvpi"
                 type="text"
-                placeholder={mvpi}
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">{mvpi}</span>
             )}
           </div>
         </div>
-          {isEdit ? <BlackButtonContainer text = 'Save'/> : null}
+        {isEdit ? <BlackButtonContainer text="Save" /> : null}
       </div>
     </form>
   );
