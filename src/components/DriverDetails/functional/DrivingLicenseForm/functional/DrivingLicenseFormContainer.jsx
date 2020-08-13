@@ -16,6 +16,7 @@ export const DrivingLicenseFormContainer = () => {
     expiryDate = "04/29/1976",
     issuingCountry = "Riyadh",
     issuingAuthority = "Makkah";
+    
   return (
     <DrivingLicenseFormUI
       onSubmit={onSubmit}

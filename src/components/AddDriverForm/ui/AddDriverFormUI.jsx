@@ -12,7 +12,6 @@ export const AddDriverForm = React.memo(({handleSubmit, onSubmit, Component, act
                 <div className="Submission">
                     <button className="Submission-button Submission-button_white">Cancel</button>
                     <button 
-                        type="button"
                         className="Submission-button Submission-button_black" 
                         disabled={invalid || submitting || pristine}
                         type="submit">Next</button>

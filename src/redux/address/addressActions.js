@@ -31,13 +31,15 @@ export const getCountries = () => async (dispatch, getState) => {
     }).then(response => response.json())
     .then(res => {
         dispatch(setCountries(res.map(item => ({value: item['country_name'], id: item['country_short_name']}))));
-        dispatch(getStates(res[0]['country_name']));
+        dispatch(getStates(res[0]['country_short_name']));
     });
 }
 
 export const getStates = (countryName) => async (dispatch, getState) => {
-    const {authToken} = getState().address;
-    fetch(`https://www.universal-tutorial.com/api/states/${countryName}`, {
+    const {authToken, countries} = getState().address;
+    const country = countries.find(country => country.id === countryName);
+    console.log('Country name is: ', countryName);
+    fetch(`https://www.universal-tutorial.com/api/states/${country.value}`, {
         headers: {
             Authorization: `Bearer ${authToken}`
         }

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "./RealNameInformationForm.scss";
 import { FormHeaderContainer } from "../../FormHeader/functional/FormHeaderContainer";
 import { IdCardContainer } from "../../../../common/icons/IdCard/functional/IdCardContainer";
-import { Field, reduxForm, initialize } from "redux-form";
+import { Field, reduxForm } from "redux-form";
 import { TextFieldContainer } from "../../../../common/inputs/TextField/functional/TextFieldContainer";
 import { FileFieldContainer } from "../../../../common/inputs/FileField/functional/FileFieldContainer";
 import { BlackButtonContainer } from "../../../../common/buttons/BlackButton/functional/BlackButtonContainer";
@@ -20,15 +20,8 @@ const RealNameInformationFormUI = ({
   initialize,
 }) => {
   useEffect(() => {
-    initialize({
-      passport: passport,
-      idNumber: idNumber,
-      issueDate: issueDate,
-      expiryDate: expiryDate,
-      issuingCountry: issuingCountry,
-      issuingAuthority: issuingAuthority,
-    });
-  }, []);
+    initialize({ passport, idNumber, issueDate, expiryDate, issuingCountry, issuingAuthority });
+  }, [initialize, passport, idNumber, issueDate, expiryDate, issuingCountry, issuingAuthority]);
 
   return (
     <form onSubmit={handleSubmit}>

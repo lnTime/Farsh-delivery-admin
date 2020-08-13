@@ -2,12 +2,13 @@ import React from 'react';
 import { DrivingLicenseFormUI } from '../ui/DrivingLicenseFormUI';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { useCallback } from 'react';
 
 export const DrivingLicenseContainer = ({setData, setCurrentStep, setCurrentOnSubmit}) => {
     const licenseTypeOptions = [{id: 'LTE', value: 'LTE'}];
     const [image, setImage] = useState({})
 
-    const onSubmit = formData => {
+    const onSubmit = useCallback(formData => {
         if (!image.isFrontChoosed) {
             setImage({ ...image, hasFrontError: true })
             return false;
@@ -27,11 +28,11 @@ export const DrivingLicenseContainer = ({setData, setCurrentStep, setCurrentOnSu
         };
         setData(data => ({ ...data, drivingLicense: {...transformedData} }));
         setCurrentStep(currentStep => currentStep + 1);
-    }
+    }, [setData, setCurrentStep, image]);
 
     useEffect(() => {
         setCurrentOnSubmit(() => onSubmit);
-    }, []);
+    }, [setCurrentOnSubmit, onSubmit]);
 
     return <DrivingLicenseFormUI 
             licenseTypeOptions={licenseTypeOptions}

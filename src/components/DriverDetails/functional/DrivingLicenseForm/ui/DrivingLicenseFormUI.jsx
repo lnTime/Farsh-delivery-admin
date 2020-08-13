@@ -3,12 +3,10 @@ import "./DrivingLicenseForm.scss";
 import { FormHeaderContainer } from "../../FormHeader/functional/FormHeaderContainer";
 import front from "../../../../../assets/images/driving-license-front.png";
 import back from "../../../../../assets/images/driving-license-back.png";
-import { reduxForm, Field, initialize } from "redux-form";
+import { reduxForm, Field } from "redux-form";
 import { TextFieldContainer } from "../../../../common/inputs/TextField/functional/TextFieldContainer";
 import { ChooseFileFieldContainer } from "../../../../common/inputs/ChooseFileField/functional/ChooseFileFieldContainer";
 import { BlackButtonContainer } from "../../../../common/buttons/BlackButton/functional/BlackButtonContainer";
-import { useDispatch, useSelector } from "react-redux";
-import { driverLicenseSelector } from "../../../../../redux/drivers/driverSelectors";
 
 const DrivingLicenseFormUI = ({
   licenseType,
@@ -23,15 +21,8 @@ const DrivingLicenseFormUI = ({
   initialize,
 }) => {
   useEffect(() => {
-    initialize({
-      licenseType: licenseType,
-      licenseNumber: licenseNumber,
-      issueDate: issueDate,
-      expiryDate: expiryDate,
-      issuingCountry: issuingCountry,
-      issuingAuthority: issuingAuthority,
-    });
-  }, []);
+    initialize({ licenseType, licenseNumber, issueDate, expiryDate, issuingCountry, issuingAuthority });
+  }, [initialize, licenseType, licenseNumber, issueDate, expiryDate, issuingCountry, issuingAuthority]);
   return (
     <form onSubmit={handleSubmit}>
       <div className="ProfileForm DrivingLicenseForm">

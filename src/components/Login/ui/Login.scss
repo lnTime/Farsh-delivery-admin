@@ -82,12 +82,13 @@ $lightGray: #bebebe;
   &-Remember {
     margin-right: 11px;
   }
-}
-.InputBlock {
-  width: 50%;
-  position: relative;
-  padding: 1.098vw 0 0;
-  margin-top: 10px;
+
+  & .InputBlock {
+    width: 50%;
+    position: relative;
+    padding: 1.098vw 0 0;
+    margin-top: 10px;
+  }
 }
 
 .Label {

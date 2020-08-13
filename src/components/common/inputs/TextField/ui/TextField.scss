@@ -6,7 +6,12 @@
     transition: border-color 0s ease-out 0.5s;
     font-size: calc(6px + 0.439vw);
     line-height: calc(10px + 0.512vw);
-    &_withoutMargin{width: 100%;margin:0 15px}
+    
+    &_withoutMargin {
+        width: 100%;
+        margin: 0;
+    }
+
     &::placeholder {
         font-size: calc(6px + 0.439vw);
         line-height: calc(19px + 1.464vw);
@@ -19,7 +24,7 @@
     }
 
     &_fullWidth {
-        width: 100%;
+        width: 100% !important;
     }
 
     &_error {

@@ -36,20 +36,3 @@ export const getComponent = (step) => {
             return null;
     }
 }
-
-// export const getFormName = (step) => {
-//     switch (step) {
-//         case 1:
-//             return 'profileInfo';
-//         case 2:
-//             return 'realNameInformation';
-//         case 3:
-//             return 'drivingLicense';
-//         case 4:
-//             return 'vehicleInfo';
-//         case 5:
-//             return 'vendor';
-//         default:
-//             return '';
-//     }
-// }

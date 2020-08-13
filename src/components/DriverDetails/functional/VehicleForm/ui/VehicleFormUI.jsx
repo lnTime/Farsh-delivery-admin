@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./VehicleForm.scss";
 import { FormHeaderContainer } from "../../FormHeader/functional/FormHeaderContainer";
-import { Field, reduxForm, initialize } from "redux-form";
+import { Field, reduxForm } from "redux-form";
 import { TextFieldContainer } from "../../../../common/inputs/TextField/functional/TextFieldContainer";
 import { BlackButtonContainer } from "../../../../common/buttons/BlackButton/functional/BlackButtonContainer";
 
@@ -19,18 +19,9 @@ export const VehicleFormUI = ({
   handleSubmit,
   initialize
 }) => {
-  useEffect(() =>
-    initialize({
-      plateNumber: plateNumber,
-      model: model,
-      make: make,
-      registeredCountry: registeredCountry,
-      state: state,
-      city: city,
-      registrationNumber: registrationNumber,
-      mvpi: mvpi,
-    }),[]
-  );
+  useEffect(() => {
+    initialize({ plateNumber, model, make, registeredCountry, state, city, registrationNumber, mvpi })
+  }, [initialize, plateNumber, model, make, registeredCountry, state, city, registrationNumber, mvpi]);
   return (
     <form onSubmit={handleSubmit}>
       <div className="ProfileForm VehicleForm">

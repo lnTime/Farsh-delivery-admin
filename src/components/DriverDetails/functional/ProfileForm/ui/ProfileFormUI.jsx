@@ -20,16 +20,8 @@ export const ProfileFormUI = ({
   initialize,
 }) => {
   useEffect(() => {
-    initialize({
-      name: name,
-      mobile: mobile,
-      country: country,
-      state: state,
-      city: city,
-      address: address,
-      password: password,
-    });
-  }, []);
+    initialize({ name, mobile, country, state, city, address, password });
+  }, [name, mobile, country, state, city, address, password, initialize]);
 
   return (
     <form onSubmit={handleSubmit}>
