@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { SelectDriverUI } from "../ui/SelectDriverUi";
 import { driverInfoData } from "../../SearchDriverSection/functional/driverInfoData";
 
-export const SelectDriverContainer = ({ term }) => {
-  
+export const SelectDriverContainer = ({ term , node,searchByNumber }) => {
   const lowercasedFilter = term.toLowerCase();
   const filteredData = driverInfoData.filter(item => {
     return Object.keys(item)
@@ -12,5 +11,5 @@ export const SelectDriverContainer = ({ term }) => {
       console.log(item)
     );
   });
-  return <SelectDriverUI filteredData = {filteredData}/>;
+  return <SelectDriverUI searchByNumber = {searchByNumber} node = {node} filteredData = {filteredData}/>;
 };
