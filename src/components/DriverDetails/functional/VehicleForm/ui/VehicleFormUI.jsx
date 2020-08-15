@@ -5,23 +5,16 @@ import { Field, reduxForm } from "redux-form";
 import { TextFieldContainer } from "../../../../common/inputs/TextField/functional/TextFieldContainer";
 import { BlackButtonContainer } from "../../../../common/buttons/BlackButton/functional/BlackButtonContainer";
 
-export const VehicleFormUI = ({
-  plateNumber,
-  model,
-  make,
-  registeredCountry,
-  state,
-  city,
-  registrationNumber,
-  mvpi,
-  isEdit,
+export const VehicleFormUI = ({ isEdit,
   handleClick,
   handleSubmit,
-  initialize
+  initialize,
+  vehicle
 }) => {
   useEffect(() => {
-    initialize({ plateNumber, model, make, registeredCountry, state, city, registrationNumber, mvpi })
-  }, [initialize, plateNumber, model, make, registeredCountry, state, city, registrationNumber, mvpi]);
+    initialize({ ...vehicle })
+  }, [initialize, vehicle]);
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="ProfileForm VehicleForm">
@@ -36,24 +29,24 @@ export const VehicleFormUI = ({
             {isEdit ? (
               <Field
                 component={TextFieldContainer}
-                name="plateNumber"
+                name="vehiclePlateNumber"
                 type="text"
               />
             ) : (
-              <span className="ProfileInfoBlock-InputValue">{plateNumber}</span>
-            )}
+                <span className="ProfileInfoBlock-InputValue">{vehicle.vehiclePlateNumber}</span>
+              )}
           </div>
           <div>
             <span className="ProfileInfoBlock-InputName">Model</span>
             {isEdit ? (
               <Field
                 component={TextFieldContainer}
-                name="model"
+                name="vehicleModel"
                 type="text"
               />
             ) : (
-              <span className="ProfileInfoBlock-InputValue">{model}</span>
-            )}
+                <span className="ProfileInfoBlock-InputValue">{vehicle.vehicleModel}</span>
+              )}
           </div>
         </div>
         <div className="ProfileInfoBlock">
@@ -62,12 +55,12 @@ export const VehicleFormUI = ({
             {isEdit ? (
               <Field
                 component={TextFieldContainer}
-                name="make"
+                name="vehicleMake"
                 type="text"
               />
             ) : (
-              <span className="ProfileInfoBlock-InputValue">{make}</span>
-            )}
+                <span className="ProfileInfoBlock-InputValue">{vehicle.vehicleMake}</span>
+              )}
           </div>
           <div>
             <span className="ProfileInfoBlock-InputName">
@@ -80,10 +73,10 @@ export const VehicleFormUI = ({
                 type="text"
               />
             ) : (
-              <span className="ProfileInfoBlock-InputValue">
-                {registeredCountry}
-              </span>
-            )}
+                <span className="ProfileInfoBlock-InputValue">
+                  SA
+                </span>
+              )}
           </div>
         </div>
         <div className="ProfileInfoBlock">
@@ -96,8 +89,8 @@ export const VehicleFormUI = ({
                 type="text"
               />
             ) : (
-              <span className="ProfileInfoBlock-InputValue">{state}</span>
-            )}
+                <span className="ProfileInfoBlock-InputValue">State</span>
+              )}
           </div>
           <div>
             <span className="ProfileInfoBlock-InputName">City</span>
@@ -108,8 +101,8 @@ export const VehicleFormUI = ({
                 type="text"
               />
             ) : (
-              <span className="ProfileInfoBlock-InputValue">{city}</span>
-            )}
+                <span className="ProfileInfoBlock-InputValue">City</span>
+              )}
           </div>
         </div>
         <div className="ProfileInfoBlock">
@@ -118,26 +111,26 @@ export const VehicleFormUI = ({
             {isEdit ? (
               <Field
                 component={TextFieldContainer}
-                name="registrationNumber"
+                name="vehicleRegistrationNumber"
                 type="text"
               />
             ) : (
-              <span className="ProfileInfoBlock-InputValue">
-                {registrationNumber}
-              </span>
-            )}
+                <span className="ProfileInfoBlock-InputValue">
+                  {vehicle.vehicleRegistrationNumber}
+                </span>
+              )}
           </div>
           <div>
             <span className="ProfileInfoBlock-InputName">MVPI No.</span>
             {isEdit ? (
               <Field
                 component={TextFieldContainer}
-                name="mvpi"
+                name="mvpiNumber"
                 type="text"
               />
             ) : (
-              <span className="ProfileInfoBlock-InputValue">{mvpi}</span>
-            )}
+                <span className="ProfileInfoBlock-InputValue">{vehicle.mvpiNumber}</span>
+              )}
           </div>
         </div>
         {isEdit ? <BlackButtonContainer text="Save" /> : null}

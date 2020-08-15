@@ -3,7 +3,8 @@ import "./DriverDetailsHeader.scss";
 import { DriverBlackContainer } from "../../../../common/icons/DriverBlack/functional/DriverBlackContainer";
 import { NotificationAndProfileContainer } from "../../../../common/icons/NotificationAndProfile/functional/NotificationAndProfileContainer";
 
-export const DriverDetailsHeaderUI = () => {
+export const DriverDetailsHeaderUI = ({name}) => {
+
   return (
     <header>
       <div className="DriverDetailsLeftSide">
@@ -12,7 +13,7 @@ export const DriverDetailsHeaderUI = () => {
             <div>
               <DriverBlackContainer />
               <span className="DriverDetailsLeftSideInformation-DriverName">
-                James Anderson
+                {name}
               </span>
             </div>
             <div>

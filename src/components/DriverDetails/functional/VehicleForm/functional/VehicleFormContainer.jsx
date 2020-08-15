@@ -2,9 +2,12 @@ import React from "react";
 import VehicleFormUI from "../ui/VehicleFormUI";
 import { useEditMode } from "../../../../common/custom-hooks/useEditMode";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import { getVehicleSelector } from "../../../../../redux/driver/driverSelectors";
 
 export const VehicleFormContainer = () => {
   const [isEdit, handleClick] = useEditMode();
+  const vehicle = useSelector(getVehicleSelector);
   const onSubmit = (formData) => {
     const data = {
       mvpiNumber: formData.mvpi,
@@ -18,26 +21,11 @@ export const VehicleFormContainer = () => {
       { data }
     );
   };
-  const plateNumber = "YUK-7812",
-    model = 1988,
-    make = "GM",
-    registeredCountry = "Saudi Arabia",
-    state = "Riyadh",
-    city = "Makkah",
-    registrationNumber = 87123,
-    mvpi = 836232;
 
   return (
     <VehicleFormUI
       onSubmit={onSubmit}
-      plateNumber={plateNumber}
-      model={model}
-      make={make}
-      registeredCountry={registeredCountry}
-      state={state}
-      city={city}
-      registrationNumber={registrationNumber}
-      mvpi={mvpi}
+      vehicle={vehicle}
       isEdit={isEdit}
       handleClick={handleClick}
     />

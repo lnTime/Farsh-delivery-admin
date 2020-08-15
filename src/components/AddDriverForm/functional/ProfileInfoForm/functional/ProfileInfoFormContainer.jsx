@@ -1,27 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { ProfileInfoFormUI } from "../ui/ProfileInfoFormUI";
 import { useDispatch, useSelector } from "react-redux";
-import { getCountries, getStates, getCities } from "../../../../../redux/address/addressActions";
+import { getCountries, getStates, getCities, getCountryNameByISOCode } from "../../../../../redux/address/addressActions";
 import { getAddressSelector } from '../../../../../redux/address/addressSelectors';
 import { SubmissionError, reset } from 'redux-form';
 import { useCallback } from "react";
 
-const transformData = (formData, image, phoneNumber) => {
-    return ({
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        profilePicture: image.file,
-        mobileNumber: phoneNumber.mobileNumber,
-        address: {
-            state: formData.state,
-            city: formData.city,
-            address: formData.address,
-            country: {
-                countryName: formData.country,
-                isoCode: 'sa'
-            }
-        },
-        password: formData.password,
+const addData = (setData, formData, image, phoneNumber, countries) => {
+    setData(data => {
+        data.append('firstName', formData.firstName);
+        data.append('lastName', formData.lastName);
+        data.append('profilePicture', image.file);
+        data.append('mobileNumber', phoneNumber.mobileNumber);
+        data.append('address.state', formData.state);
+        data.append('address.city', formData.city);
+        data.append('address.address', formData.address);
+        data.append('address.country.countryName', getCountryNameByISOCode(countries, formData.country));
+        data.append('address.country.isoCode', formData.country);
+        data.append('password', formData.password);
+        return data;
     });
 }
 
@@ -58,9 +55,7 @@ export const ProfileInfoFormContainer = ({handleSubmit, error, setCurrentOnSubmi
             return false;
         }
 
-        const transformedData = transformData(formData, image, phoneNumber);
-
-        setData(data => ({...data, profile: {...transformedData} }));
+        addData(setData, formData, image, phoneNumber, address.countries);
         setCurrentStep(currentStep => currentStep + 1);
         dispatch(reset('add-driver'))
     }, [image, setData, setCurrentStep, dispatch, setPhoneNumber, phoneNumber]);

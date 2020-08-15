@@ -6,7 +6,7 @@ import {TextFieldContainer} from '../../../../common/inputs/TextField/functional
 import { ChooseFrontAndBackContainer } from '../../ChooseFrontAndBack/functional/ChooseFrontAndBackContainer';
 import { validators } from '../../../../../utils/validators/validators';
 
-export const RealNameInformationFormUI = React.memo(({idTypeOptions, image, setImage}) => {
+export const RealNameInformationFormUI = React.memo(({idTypeOptions, image, setImage, countries}) => {
     return (<form className="AddDriver-Form">
         <div className="EvenInputs">
             <Field name="realNameIdType" 
@@ -42,14 +42,14 @@ export const RealNameInformationFormUI = React.memo(({idTypeOptions, image, setI
                 name="issuingCountry"
                 placeholder="Issuing country"
                 component={SelectFieldContainer}
-                options={[{id: 1, value: 'Armenia'}]}
+                options={countries}
                 validate={[validators.required]}
             />
             <Field 
                 name="issuingAuthority"
                 placeholder="Issuing Authority"
                 component={SelectFieldContainer}
-                options={[{id: 1, value: 'Auth'}]}
+                options={countries}
                 validate={[validators.required]}
             />
         </div>

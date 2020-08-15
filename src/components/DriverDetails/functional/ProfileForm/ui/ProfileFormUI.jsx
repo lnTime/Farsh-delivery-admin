@@ -7,21 +7,15 @@ import { TextFieldContainer } from "../../../../common/inputs/TextField/function
 import { BlackButtonContainer } from "../../../../common/buttons/BlackButton/functional/BlackButtonContainer";
 
 export const ProfileFormUI = ({
-  name,
-  mobile,
-  country,
-  state,
-  city,
-  address,
-  password,
+  profile,
   handleClick,
   isEdit,
   handleSubmit,
   initialize,
 }) => {
   useEffect(() => {
-    initialize({ name, mobile, country, state, city, address, password });
-  }, [name, mobile, country, state, city, address, password, initialize]);
+    initialize({ ...profile, name: `${profile.firstName} ${profile.lastName}` });
+  }, [profile, initialize]);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -43,7 +37,7 @@ export const ProfileFormUI = ({
                 className="InputBlock_withoutMargin"
               />
             ) : (
-              <span className="ProfileFormAvatar-Name">{name}</span>
+            <span className="ProfileFormAvatar-Name">{profile.firstName} {profile.lastName}</span>
             )}
           </div>
         </div>
@@ -51,21 +45,21 @@ export const ProfileFormUI = ({
           <div>
             <span className="ProfileInfoBlock-InputName">Mobile</span>
             {isEdit ? (
-              <Field name="mobile" component={TextFieldContainer} type="text" />
+              <Field name="mobileNumber" component={TextFieldContainer} type="text" />
             ) : (
-              <span className="ProfileInfoBlock-InputValue">{mobile}</span>
+              <span className="ProfileInfoBlock-InputValue">{profile.mobileNumber}</span>
             )}
           </div>
           <div>
             <span className="ProfileInfoBlock-InputName">Country</span>
             {isEdit ? (
               <Field
-                name="country"
+                name="address.country.countryName"
                 component={TextFieldContainer}
                 type="text"
               />
             ) : (
-              <span className="ProfileInfoBlock-InputValue">{country}</span>
+              <span className="ProfileInfoBlock-InputValue">{profile.address?.country?.countryName}</span>
             )}
           </div>
         </div>
@@ -73,26 +67,26 @@ export const ProfileFormUI = ({
           <div>
             <span className="ProfileInfoBlock-InputName">State</span>
             {isEdit ? (
-              <Field name="state" type="text" component={TextFieldContainer} />
+              <Field name="address.state" type="text" component={TextFieldContainer} />
             ) : (
-              <span className="ProfileInfoBlock-InputValue">{state}</span>
+              <span className="ProfileInfoBlock-InputValue">{profile.address?.state}</span>
             )}
           </div>
           <div>
             <span className="ProfileInfoBlock-InputName">City</span>
             {isEdit ? (
-              <Field name="city" type="text" component={TextFieldContainer} />
+              <Field name="address.city" type="text" component={TextFieldContainer} />
             ) : (
-              <span className="ProfileInfoBlock-InputValue">{city}</span>
+              <span className="ProfileInfoBlock-InputValue">{profile.address?.city}</span>
             )}
           </div>
         </div>
         <div className="ProfileInfoBlock ProfileInfoBlock_oneItem">
           <span className="ProfileInfoBlock-InputName">Address</span>
           {isEdit ? (
-            <Field name="address" type="text" component={TextFieldContainer} />
+            <Field name="address.address" type="text" component={TextFieldContainer} />
           ) : (
-            <span className="ProfileInfoBlock-InputValue">{address}</span>
+            <span className="ProfileInfoBlock-InputValue">{profile.address}</span>
           )}
         </div>
         <div className="ProfileInfoBlock ProfileInfoBlock_oneItem">
@@ -105,7 +99,7 @@ export const ProfileFormUI = ({
             />
           ) : (
             <div className="Password">
-              {password.split("").map((v, index) => (
+              {"aaaaaaaaa".split("").map((v, index) => (
                 <div
                   className="ProfileInfoBlock-InputValue_cycle"
                   key={index}

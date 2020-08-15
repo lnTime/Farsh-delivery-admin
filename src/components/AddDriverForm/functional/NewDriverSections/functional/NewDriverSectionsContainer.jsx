@@ -23,5 +23,6 @@ export const NewDriverSectionsContainer = ({activeID}) => {
         setDriverSections(items);
     }, [activeID]);
 
-    return <NewDriverSectionsUI driverSections={driverSections} />;
+    return <NewDriverSectionsUI
+        driverSections={driverSections} />;
 }

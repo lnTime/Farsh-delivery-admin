@@ -9,7 +9,7 @@ export const VendorFormUI = () => {
             <Field 
                 name="vendorId"
                 component={SelectFieldContainer}
-                options={[{id: 1, value: 'Vendor 1'}]}
+                options={[{id: 10, value: 'Vendor 1'}]}
                 placeholder="Select Vendor"
             />
 

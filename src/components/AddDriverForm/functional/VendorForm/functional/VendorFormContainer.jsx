@@ -5,14 +5,22 @@ import { useCallback } from 'react';
 
 export const VendorFormContainer = ({ setData, setCurrentOnSubmit, data }) => {
     const onSubmit = useCallback(formData => {
+        setData(data => {
+            data.append('vendorId', formData.vendorId);
+            return data;
+        })        
 
-        fetch(`https://virtserver.swaggerhub.com/aliadnank/Farsh-Drivers/1.0.0/api/v1/drivers`, {
-            method: 'POST',
-            body: JSON.stringify(data)
-        });
+        sendToServer();
 
-        setData(data => ({ ...data, vendor: { ...formData } }))
     }, [setData, data]);
+
+    const sendToServer = () => {
+        fetch(`http://54.156.46.17:8080/api/v1/drivers`, {
+            method: 'POST',
+            body: data,
+        });
+    }
+
 
     useEffect(() => {
         setCurrentOnSubmit(() => onSubmit);

@@ -8,20 +8,15 @@ import { FileFieldContainer } from "../../../../common/inputs/FileField/function
 import { BlackButtonContainer } from "../../../../common/buttons/BlackButton/functional/BlackButtonContainer";
 
 const RealNameInformationFormUI = ({
-  passport,
-  idNumber,
-  issueDate,
-  expiryDate,
-  issuingCountry,
-  issuingAuthority,
+  realNameInformation,
   isEdit,
   handleClick,
   handleSubmit,
   initialize,
 }) => {
   useEffect(() => {
-    initialize({ passport, idNumber, issueDate, expiryDate, issuingCountry, issuingAuthority });
-  }, [initialize, passport, idNumber, issueDate, expiryDate, issuingCountry, issuingAuthority]);
+    initialize({ ...realNameInformation });
+  }, [initialize, realNameInformation]);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -38,10 +33,10 @@ const RealNameInformationFormUI = ({
               <Field
                 component={TextFieldContainer}
                 type="text"
-                name="passport"
+                name="realNameIdType"
               />
             ) : (
-              <span className="ProfileInfoBlock-InputValue">{passport}</span>
+              <span className="ProfileInfoBlock-InputValue">{realNameInformation.realNameIdType}</span>
             )}
           </div>
           <div>
@@ -50,10 +45,10 @@ const RealNameInformationFormUI = ({
               <Field
                 component={TextFieldContainer}
                 type="text"
-                name="idNumber"
+                name="realNameIdNo"
               />
             ) : (
-              <span className="ProfileInfoBlock-InputValue">{idNumber}</span>
+              <span className="ProfileInfoBlock-InputValue">{realNameInformation.realNameIdNo}</span>
             )}
           </div>
         </div>
@@ -64,10 +59,10 @@ const RealNameInformationFormUI = ({
               <Field
                 component={TextFieldContainer}
                 type="text"
-                name="issueDate"
+                name="realNameIssueDate"
               />
             ) : (
-              <span className="ProfileInfoBlock-InputValue">{issueDate}</span>
+              <span className="ProfileInfoBlock-InputValue">{realNameInformation.realNameIssueDate}</span>
             )}
           </div>
           <div>
@@ -76,10 +71,10 @@ const RealNameInformationFormUI = ({
               <Field
                 component={TextFieldContainer}
                 type="text"
-                name="expiryDate"
+                name="realNameExpiryDate"
               />
             ) : (
-              <span className="ProfileInfoBlock-InputValue">{expiryDate}</span>
+              <span className="ProfileInfoBlock-InputValue">{realNameInformation.realNameExpiryDate}</span>
             )}
           </div>
         </div>
@@ -90,11 +85,11 @@ const RealNameInformationFormUI = ({
               <Field
                 component={TextFieldContainer}
                 type="text"
-                name="issuingCountry"
+                name="realNameIssueCountry.countryName"
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">
-                {issuingCountry}
+                {realNameInformation.realNameIssueCountry.isoCode}
               </span>
             )}
           </div>
@@ -106,11 +101,11 @@ const RealNameInformationFormUI = ({
               <Field
                 component={TextFieldContainer}
                 type="text"
-                name="issuingAuthority"
+                name="realNameIssueAuthority"
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">
-                {issuingAuthority}
+                {realNameInformation.realNameIssueAuthority}
               </span>
             )}
           </div>
