@@ -51,30 +51,24 @@ export const putRealName = (formData) => (dispatch) => {
   );
 }
 
-export const putProfile = (formData) => (dispatch) => {
-  const zip = formData.address?.split(' ');
-  const zipCodeSplited = zip?.length - 1;
-  const nameData = formData?.name.split(' ');
+export const updateProfile = (data, id) => (dispatch) => {
+  const nameData = data.name.split(' ');
   const firstNameSplited = nameData[0];
   const lastNameSplited = nameData[1];
-  const data = {
-    address: {
-      address: formData.address,
-      city: formData.city,
-      country: {
-        countryName: formData.country,
-        isoCode: 'sa'
-      },
-      state: formData.state,
-      zipCode: zipCodeSplited
-    },
-    firstName: firstNameSplited,
-    lastName: lastNameSplited
-  }
-  axios.put(
-    `https://virtserver.swaggerhub.com/aliadnank/Farsh-Drivers/1.0.0/api/v1/drivers/profile/2}`,
-    { ...data }
-  );
+  console.log('Data is: ', data); 
+  const formData = new FormData();
+  formData.append('address.address', data.address.address);
+  formData.append('address.state', data.address.state);
+  formData.append('address.city', data.address.city);
+  formData.append('address.country.countryName', 'Saudi Arabia');
+  formData.append('address.country.isoCode', 'SA');
+  formData.append('firstName', firstNameSplited);
+  formData.append('lastName', lastNameSplited);
+  formData.append('mobileNumber', data.mobileNumber);
+  formData.append('password', data.password);
+  const formDataQuery = new URLSearchParams(formData).toString();
+
+  API.put(`drivers/profile/${id}?${formDataQuery}`);
 }
 
 export const setDriverData = (driver) => ({ type: driverConstants.SET_DRIVER, payload: driver })

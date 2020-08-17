@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { DriverDetailsUI } from '../ui/DriverDetailsUI';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDriverData } from '../../../redux/driver/driverActions';
@@ -7,10 +7,11 @@ import { getDriverSelector } from '../../../redux/driver/driverSelectors';
 export const DriverDetailsContainer = ({match}) => {
     const profile = useSelector(getDriverSelector);
     const dispatch = useDispatch();
+    const { id } = match.params;
     window.profile = profile;
     useEffect(() => {
-        dispatch(getDriverData(match.params.id));
-    }, []);
+        dispatch(getDriverData(id));
+    }, [id, dispatch]);
 
     if (!profile) {
         return null;
@@ -18,5 +19,5 @@ export const DriverDetailsContainer = ({match}) => {
 
 
 
-    return <DriverDetailsUI />;
+    return <DriverDetailsUI id={id} />;
 }

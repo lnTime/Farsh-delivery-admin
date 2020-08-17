@@ -34,7 +34,7 @@ export const DrivingLicenseContainer = ({setData, setCurrentStep, setCurrentOnSu
             return data;
         });
         setCurrentStep(currentStep => currentStep + 1);
-    }, [setData, setCurrentStep, image]);
+    }, [setData, setCurrentStep, image, countries]);
 
     useEffect(() => {
         setCurrentOnSubmit(() => onSubmit);

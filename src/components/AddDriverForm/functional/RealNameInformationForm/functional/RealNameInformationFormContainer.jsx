@@ -35,7 +35,7 @@ export const RealNameInformationFormContainer = ({ setCurrentOnSubmit, setData, 
         });
 
         setCurrentStep(currentStep => currentStep + 1);
-    }, [setData, image, setCurrentStep]);
+    }, [setData, image, setCurrentStep, countries]);
 
     useEffect(() => {
         setCurrentOnSubmit(() => onSubmit);

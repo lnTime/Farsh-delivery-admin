@@ -58,7 +58,7 @@ export const ProfileInfoFormContainer = ({handleSubmit, error, setCurrentOnSubmi
         addData(setData, formData, image, phoneNumber, address.countries);
         setCurrentStep(currentStep => currentStep + 1);
         dispatch(reset('add-driver'))
-    }, [image, setData, setCurrentStep, dispatch, setPhoneNumber, phoneNumber]);
+    }, [image, setData, setCurrentStep, dispatch, setPhoneNumber, phoneNumber, address.countries]);
 
     useEffect(() => {
         setCurrentOnSubmit(() => onSubmit);

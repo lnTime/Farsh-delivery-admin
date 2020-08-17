@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { DriverUI } from "../ui/DriversUI";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,9 +13,9 @@ export const DriversContainer = () => {
   const driversData = useSelector(getDriversSelector);
   const history = useHistory();
 
-  const handleDriverPageOpen = id => {
+  const handleDriverPageOpen = useCallback(id => {
     history.push(`/drivers/${id}`);
-  }
+  }, [history]);
 
   useEffect(() => {    
     setDriverData(
@@ -33,11 +33,11 @@ export const DriversContainer = () => {
         );
       })
     );
-  }, [driversData]);
+  }, [driversData, handleDriverPageOpen]);
 
   useEffect(() => {
     dispatch(getDrivers());
-  }, []);
+  }, [dispatch]);
 
   return <DriverUI drivers={drivers} />;
 };
