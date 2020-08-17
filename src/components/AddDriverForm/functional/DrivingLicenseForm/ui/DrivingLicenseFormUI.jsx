@@ -1,14 +1,14 @@
 import React from 'react';
-import './DrivingLicenseForm.scss';
 import {Field} from 'redux-form';
 import {SelectFieldContainer} from '../../../../common/inputs/SelectField/functional/SelectFieldContainer';
 import {TextFieldContainer} from '../../../../common/inputs/TextField/functional/TextFieldContainer';
 import {ChooseFrontAndBackContainer} from '../../../functional/ChooseFrontAndBack/functional/ChooseFrontAndBackContainer';
 import { validators } from '../../../../../utils/validators/validators';
+import styles from './DrivingLicenseFormModule.scss'
 
 export const DrivingLicenseFormUI = React.memo(({licenseTypeOptions, image, setImage}) => {
-    return (<form className="AddDriver-Form">
-        <div className="EvenInputs">
+    return (<form className= {styles['AddDriver-Form']}>
+        <div className={styles.EvenInputs}>
             <Field name="licenseType" 
                 component={SelectFieldContainer}
                 options={licenseTypeOptions}
@@ -23,7 +23,7 @@ export const DrivingLicenseFormUI = React.memo(({licenseTypeOptions, image, setI
                 validate={[validators.required]}  
             />
         </div>
-        <div className="EvenInputs">
+        <div className={styles.EvenInputs}>
             <Field 
                 name="licenseIssueDate"
                 component={TextFieldContainer}
@@ -37,7 +37,7 @@ export const DrivingLicenseFormUI = React.memo(({licenseTypeOptions, image, setI
                 validate={[validators.required]}  
             />
         </div>
-        <div className="EvenInputs">
+        <div className={styles.EvenInputs}>
             <Field 
                 name="issuingCountry"
                 placeholder="Issuing country"
@@ -53,7 +53,7 @@ export const DrivingLicenseFormUI = React.memo(({licenseTypeOptions, image, setI
                 validate={[validators.required]}  
             />
         </div>
-        <span className="AddDriverForm-FileUpload">Upload your Driving License</span>
+        <span className={styles['AddDriverForm-FileUpload']}>Upload your Driving License</span>
         <ChooseFrontAndBackContainer image={image} setImage={setImage} />
     </form>);
 });

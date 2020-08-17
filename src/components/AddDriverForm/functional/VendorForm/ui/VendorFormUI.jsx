@@ -1,11 +1,11 @@
 import React from 'react';
-import './VendorForm.scss';
+import styles from './VendorFormModule.scss';
 import {Field} from 'redux-form';
 import {SelectFieldContainer} from '../../../../common/inputs/SelectField/functional/SelectFieldContainer';
 
 export const VendorFormUI = () => {
-    return (<form className="AddDriver-Form">
-        <div className="EvenInputs">
+    return (<form className={styles["AddDriver-Form"]}>
+        <div className={styles.EvenInputs}>
             <Field 
                 name="vendorId"
                 component={SelectFieldContainer}

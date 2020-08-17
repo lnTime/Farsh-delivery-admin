@@ -11,7 +11,7 @@ export const OrderDetailHeaderUI = () => {
                     <PaperContainer isActive/>
                     <span className="OrderDetailHeaderLeft-OrderNumber">1101101</span>
                 </div>
-                <span className="OrderDetailHeaderLeft-SectionName">Home > Orders</span>
+                <span className="OrderDetailHeaderLeft-SectionName">Home &#62; Orders</span>
             </div>
             <div className="OrderDetailLeftSideActions">
                 <button className="OrderDetailLeftSideActions-Button OrderDetailLeftSideActions-Button_black">Assign</button>
@@ -20,7 +20,7 @@ export const OrderDetailHeaderUI = () => {
             </div>
         </div>
         <div className="OrderDetailHeaderRight">
-            <NotificationAndProfileContainer />
+            <NotificationAndProfileContainer clas = 'Right' />
         </div>
     </header>);
 }

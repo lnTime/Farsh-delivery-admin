@@ -1,35 +1,36 @@
 import React from 'react';
-import './VehicleInfoForm.scss';
-import {Field} from 'redux-form';
-import {SelectFieldContainer} from '../../../../common/inputs/SelectField/functional/SelectFieldContainer';
-import {TextFieldContainer} from '../../../../common/inputs/TextField/functional/TextFieldContainer';
+import styles from './VehicleInfoFormModule.scss';
+import { Field } from 'redux-form';
+import { SelectFieldContainer } from '../../../../common/inputs/SelectField/functional/SelectFieldContainer';
+import { TextFieldContainer } from '../../../../common/inputs/TextField/functional/TextFieldContainer';
 import { validators } from '../../../../../utils/validators/validators';
+import { FileFieldContainer } from '../../../../common/inputs/FileField/functional/FileFieldContainer';
 
-export const VehicleInfoFormUI = ({vehicleMakeOptions, address, customCountryChange, customStateChange}) => {
-    return (<form className="AddDriver-Form">
-        <div className="EvenInputs">
-            <Field 
-                name="vehiclePlateNumber" 
+export const VehicleInfoFormUI = ({ vehicleMakeOptions, address, customCountryChange, customStateChange }) => {
+    return (<form className={styles["AddDriver-Form"]}>
+        <div className={styles["AddDriver-Form"]}>
+            <Field
+                name="vehiclePlateNumber"
                 placeholder="Plate number"
                 component={TextFieldContainer}
                 validate={[validators.required]}
             />
-            <Field 
+            <Field
                 name="vehicleModel"
                 placeholder="Model year"
                 component={TextFieldContainer}
                 validate={[validators.required]}
             />
         </div>
-        <div className="EvenInputs">
-            <Field 
+        <div className={styles["AddDriver-Form"]}>
+            <Field
                 name="vehicleMake"
                 placeholder="Make"
                 component={SelectFieldContainer}
                 options={vehicleMakeOptions}
                 validate={[validators.required]}
             />
-            <Field 
+            <Field
                 name="registeredCountry"
                 placeholder="Registered Country"
                 component={SelectFieldContainer}
@@ -38,8 +39,8 @@ export const VehicleInfoFormUI = ({vehicleMakeOptions, address, customCountryCha
                 validate={[validators.required]}
             />
         </div>
-        <div className="EvenInputs">
-            <Field 
+        <div className={styles["AddDriver-Form"]}>
+            <Field
                 name="state"
                 placeholder="State"
                 component={SelectFieldContainer}
@@ -47,7 +48,7 @@ export const VehicleInfoFormUI = ({vehicleMakeOptions, address, customCountryCha
                 customOnChange={customStateChange}
                 validate={[validators.required]}
             />
-            <Field 
+            <Field
                 name="city"
                 placeholder="City"
                 component={SelectFieldContainer}
@@ -55,19 +56,25 @@ export const VehicleInfoFormUI = ({vehicleMakeOptions, address, customCountryCha
                 validate={[validators.required]}
             />
         </div>
-        <div className="EvenInputs">
-            <Field 
+        <div className={styles["AddDriver-Form"]}>
+            <Field
                 name="vehicleRegistrationNumber"
                 placeholder="Registration No."
                 component={TextFieldContainer}
                 validate={[validators.required]}
             />
-            <Field 
+            <Field
                 name="mvpiNumber"
                 placeholder="MVPI No."
                 component={TextFieldContainer}
                 validate={[validators.required]}
             />
+            {/* <Field
+                name="newDoc"
+                placeholder="Upload new document"
+                component={TextFieldContainer}
+                validate={[validators.required]}
+            /> */}
         </div>
     </form>);
 }

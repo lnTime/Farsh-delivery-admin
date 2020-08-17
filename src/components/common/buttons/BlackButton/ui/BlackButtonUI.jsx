@@ -1,6 +1,6 @@
 import React from "react";
-import "../ui/blackButton.scss";
+import styles from "../ui/blackButtonModule.scss";
 
 export const BlackButtonUI = ({text}) => {
-  return <button className="BlackButton BlackButton_right">{text}</button>;
+  return <button className={styles["BlackButton BlackButton_right"]}>{text}</button>;
 };
