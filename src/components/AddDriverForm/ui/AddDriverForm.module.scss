@@ -3,9 +3,9 @@
     src: url(../../../assets/fonts/Roboto/Roboto-Bold.ttf);
 }
 
-.Wrapper {
-    width: 50%;
-}
+// .Wrapper {
+//     // width: 50%;
+// }
 
 .AddDriver {
     width: 100%;
@@ -61,7 +61,7 @@
 .Submission {
     display: flex;
     justify-content: space-between;
-    padding: 24px 0;
+    padding: 24px 0.938vw;
 
     &-button {
         padding: 0px 22px;
