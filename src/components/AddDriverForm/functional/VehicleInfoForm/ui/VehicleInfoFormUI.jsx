@@ -7,7 +7,7 @@ import { validators } from '../../../../../utils/validators/validators';
 import { AddAttachmentContainer } from '../../VehicleInfoForm/functional/AddAttachment/functional/AddAttachmentContainer'
 export const VehicleInfoFormUI = ({ setOpenAtt, handleClick, openAtt, vehicleMakeOptions, address, customCountryChange, customStateChange }) => {
     return (<form className={styles["AddDriver-Form"]}>
-        <div className={styles["AddDriver-Form_flex"]}>
+        <div className='EvenInputs'>
             <Field
                 data-halfwidth
                 name="vehiclePlateNumber"
@@ -23,7 +23,7 @@ export const VehicleInfoFormUI = ({ setOpenAtt, handleClick, openAtt, vehicleMak
                 validate={[validators.required]}
             />
         </div>
-        <div className={styles["AddDriver-Form_flex"]}>
+        <div className='EvenInputs'>
             <Field
                 name="vehicleMake"
                 placeholder="Make"
@@ -40,7 +40,7 @@ export const VehicleInfoFormUI = ({ setOpenAtt, handleClick, openAtt, vehicleMak
                 validate={[validators.required]}
             />
         </div>
-        <div className={styles["AddDriver-Form_flex"]}>
+        <div className='EvenInputs'>
             <Field
                 name="state"
                 placeholder="State"
@@ -57,7 +57,7 @@ export const VehicleInfoFormUI = ({ setOpenAtt, handleClick, openAtt, vehicleMak
                 validate={[validators.required]}
             />
         </div>
-        <div className={styles["AddDriver-Form_flex"]}>
+        <div className='EvenInputs'>
             <Field
                 data-halfwidth
                 name="vehicleRegistrationNumber"
@@ -74,7 +74,7 @@ export const VehicleInfoFormUI = ({ setOpenAtt, handleClick, openAtt, vehicleMak
             />
         </div>
 
-        <div className={styles["AddDriver-Form_flex"]}>
+        <div className='EvenInputs'>
             <Field
                 data-halfwidth
                 name="insuranceNo."
@@ -90,7 +90,7 @@ export const VehicleInfoFormUI = ({ setOpenAtt, handleClick, openAtt, vehicleMak
                 validate={[validators.required]}
             />
         </div>
-        <div className={styles["AddDriver-Form_flex"]}>
+        <div className='EvenInputs'>
             <Field
                 data-halfwidth
                 name="insuranceEndDate"
@@ -99,7 +99,7 @@ export const VehicleInfoFormUI = ({ setOpenAtt, handleClick, openAtt, vehicleMak
                 validate={[validators.required]}
             />
         </div>
-        <div className={[`${styles["AddDriver-Form_flex"]} ${styles["AddDriver-Form_flex_less_width"]}`]}>
+        <div className="EvenInputs AddDriver-Form_flex_less_width">
             <span className={styles.AddSpan}>Upload new document</span>
             <div onClick={handleClick} className={styles.AddDoc}>+Add</div>
         </div>

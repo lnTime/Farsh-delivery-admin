@@ -1,9 +1,13 @@
+.AddDriver-Form{
+    min-width: 159px;
+    width:34.583vw;
+    padding: 1.615vw 0.938vw;
+}
 .EvenInputs {
     display: flex;
     justify-content: space-between;
-    padding: 10px 0;
+    padding: 0.938vw 0;
 }
-
 .intl-tel-input.allow-dropdown.separate-dial-code
   .selected-flag
   .selected-dial-code {
@@ -68,4 +72,5 @@
         flex-direction: column;
         padding: 0;
     }
+
 }

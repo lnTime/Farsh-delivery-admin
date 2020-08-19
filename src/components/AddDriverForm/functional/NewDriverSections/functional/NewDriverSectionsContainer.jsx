@@ -3,8 +3,8 @@ import { NewDriverSectionsUI } from '../ui/NewDriverSectionsUI';
 import { CheckMarkContainer } from '../../../../common/icons/CheckMark/functional/CheckMarkContainer';
 
 const sections = [
-    { id: 0, title: 'Profile Info' },
-    { id: 0, title: 'Real name information' },
+    { id: 1, title: 'Profile Info' },
+    { id: 2, title: 'Real name information' },
     { id: 3, title: 'Driving License' },
     { id: 4, title: 'Vehicle info' },
     { id: 5, title: 'Vendor' },

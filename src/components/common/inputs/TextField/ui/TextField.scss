@@ -37,7 +37,7 @@
 }
 
 .InputWrapper:last-child {
-    justify-content: flex-end;
+    // justify-content: flex-end;
 
     & > input {
         margin-left: auto;
@@ -45,7 +45,6 @@
 
     & > span {
         margin-left: auto;
-        left: 0.781vw;
     }
 }
 
@@ -58,8 +57,14 @@
 }
 
 @media only screen and (max-width: 500px) {
+    .InputWrapper{
+        width: 100%;
+    }
     .InputBlock {
         width: 100%;
         margin: 7px 0;
+    }
+    .Input-ErrorMessage{
+        top:2px;
     }
 }
