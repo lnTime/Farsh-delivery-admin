@@ -18,6 +18,10 @@ const menuOptions = [
 ];
 
 const getActiveID = (pathname) => {
+    if (pathname?.startsWith('/drivers/')) {
+        return 3;
+    }
+        
     switch(pathname) {
         case '/':
         case '/dashboard':
@@ -28,7 +32,6 @@ const getActiveID = (pathname) => {
         case '/messages':
             return 2;
         case '/drivers':
-        case '/driver-details':
         case '/add-driver':
             return 3;
         case '/operators':

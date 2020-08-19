@@ -9,20 +9,15 @@ import { ChooseFileFieldContainer } from "../../../../common/inputs/ChooseFileFi
 import { BlackButtonContainer } from "../../../../common/buttons/BlackButton/functional/BlackButtonContainer";
 
 const DrivingLicenseFormUI = ({
-  licenseType,
-  licenseNumber,
-  issueDate,
-  expiryDate,
-  issuingCountry,
-  issuingAuthority,
+  drivingLicense,
   isEdit,
   handleClick,
   handleSubmit,
   initialize,
 }) => {
   useEffect(() => {
-    initialize({ licenseType, licenseNumber, issueDate, expiryDate, issuingCountry, issuingAuthority });
-  }, [initialize, licenseType, licenseNumber, issueDate, expiryDate, issuingCountry, issuingAuthority]);
+    initialize({ ...drivingLicense });
+  }, [initialize, drivingLicense]);
   return (
     <form onSubmit={handleSubmit}>
       <div className="ProfileForm DrivingLicenseForm">
@@ -41,7 +36,7 @@ const DrivingLicenseFormUI = ({
                 name="licenseType"
               />
             ) : (
-              <span className="ProfileInfoBlock-InputValue">{licenseType}</span>
+              <span className="ProfileInfoBlock-InputValue">{drivingLicense.licenseType}</span>
             )}
           </div>
           <div>
@@ -50,11 +45,11 @@ const DrivingLicenseFormUI = ({
               <Field
                 component={TextFieldContainer}
                 type="text"
-                name="licenseNumber"
+                name="licenseNo"
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">
-                {licenseNumber}
+                {drivingLicense.licenseNo}
               </span>
             )}
           </div>
@@ -66,10 +61,10 @@ const DrivingLicenseFormUI = ({
               <Field
                 component={TextFieldContainer}
                 type="text"
-                name="issueDate"
+                name="licenseIssueDate"
               />
             ) : (
-              <span className="ProfileInfoBlock-InputValue">{issueDate}</span>
+              <span className="ProfileInfoBlock-InputValue">{drivingLicense.licenseIssueDate}</span>
             )}
           </div>
           <div>
@@ -78,10 +73,10 @@ const DrivingLicenseFormUI = ({
               <Field
                 component={TextFieldContainer}
                 type="text"
-                name="expiryDate"
+                name="licenseExpiryDate"
               />
             ) : (
-              <span className="ProfileInfoBlock-InputValue">{expiryDate}</span>
+              <span className="ProfileInfoBlock-InputValue">{drivingLicense.licenseExpiryDate}</span>
             )}
           </div>
         </div>
@@ -92,11 +87,11 @@ const DrivingLicenseFormUI = ({
               <Field
                 component={TextFieldContainer}
                 type="text"
-                name="issuingCountry"
+                name="licenseIssuingCountry.isoCode"
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">
-                {issuingCountry}
+                {drivingLicense.licenseIssuingCountry.countryName || 'SA'}
               </span>
             )}
           </div>
@@ -108,11 +103,11 @@ const DrivingLicenseFormUI = ({
               <Field
                 component={TextFieldContainer}
                 type="text"
-                name="issuingAuthority"
+                name="licenseIssuingAuthority"
               />
             ) : (
               <span className="ProfileInfoBlock-InputValue">
-                {issuingAuthority}
+                {drivingLicense.licenseIssuingAuthority}
               </span>
             )}
           </div>

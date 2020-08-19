@@ -7,6 +7,7 @@ const sections = [
     {id: 3, title: 'Driving License'},
     {id: 4, title: 'Vehicle info'},
     {id: 5, title: 'Vendor'},
+    {id: 6, title: 'Activation'}
 ];
 
 export const NewDriverSectionsContainer = ({activeID}) => {
@@ -23,5 +24,6 @@ export const NewDriverSectionsContainer = ({activeID}) => {
         setDriverSections(items);
     }, [activeID]);
 
-    return <NewDriverSectionsUI driverSections={driverSections} />;
+    return <NewDriverSectionsUI
+        driverSections={driverSections} />;
 }

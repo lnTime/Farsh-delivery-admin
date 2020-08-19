@@ -5,12 +5,13 @@ import { NotificationContainer } from '../../common/icons/Notification/functiona
 import { ProfileContainer } from '../../common/icons/Profile/functional/ProfileContainer';
 
 
-export const HeaderUI = ({ component = null, sectionName, isBigger }) => {
+export const HeaderUI = ({ component = null, sectionName, isBigger, additionalComponent }) => {
     return (<header className="Header">
         <section className={`Left${isBigger ? '_bigger' : ''}`}>
             <div className="Left-Heading">
                 {component}
                 <span>{sectionName}</span>
+                {additionalComponent}
             </div>
             <label className="Left-Label">
                 <input type="text" placeholder="Search" className="Left-Input" />

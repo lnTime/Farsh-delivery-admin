@@ -8,13 +8,12 @@ import { VehicleFormContainer } from '../functional/VehicleForm/functional/Vehic
 import {DrivingLicenseFormContainer} from '../functional/DrivingLicenseForm/functional/DrivingLicenseFormContainer'
 import { DriverHistoryContainer } from '../functional/DriverHistory/functional/DriverHistoryContainer';
 
-export const DriverDetailsUI = () => {
+export const DriverDetailsUI = ({id}) => {
     return (<div className="DriverDetails">
         <DriverDetailsHeaderContainer />
         <div className="Forms">
             <div className="Combiner" id="margined">
-                <ProfileFormContainer
-                 />
+                <ProfileFormContainer id={id} />
                 <DrivingLicenseFormContainer />
             </div>
             <div className="Combiner" id="second">

@@ -1,0 +1,21 @@
+.ActivationForm {
+    background-color: #fff;
+    padding: 2.489vw 1.464vw;
+}
+
+.EvenInputs {
+    display: flex;
+}
+
+.SwitchWrapper {
+    display: flex;
+    align-items: center;
+    padding-top: 2.123vw;
+
+    &-Text {
+        font: normal normal normal calc(6px + 0.512vw)/calc(19px + 1.464vw) Roboto;
+        letter-spacing: 0px;
+        color: #BABABA;
+        margin-right: 1.574vw;
+    }
+}

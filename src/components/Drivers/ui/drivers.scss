@@ -1,34 +1,137 @@
 $georgia: "Georgia";
 $roboto: "Roboto";
 
-.Table {
-  margin-top: 71px;
-  margin-left: 91px;
-  margin-right: 16px;
-  margin-bottom: 5.5px;
-  font-size: calc((100vw - 480px) / (3300 - 480) * (39 - 20) + 8px);
-  font-family: $roboto;
-  width: -webkit-fill-available;
+.Drivers {
+  // width: 95%;
+  width: calc(100% - 60px);
+  display: flex;
+  flex-direction: column;
 
-  table-layout: fixed;
-  overflow: scroll;
-
-  &-Th {
-    padding-left: 1.245vw;
-    text-align: left;
-    color: #bababa;
+  .Left-Heading {
+    & > span {
+      padding-right: 2.416vw;
+      border-right: 1px solid rgba(214, 214, 214, 0.72);
+      height: 39px;
+      align-items: center;
+      display: flex;
+    }
   }
-  &-Tr {
-    height: 47px;
 
-    box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.08);
+  & .Left-Label {
+    width: 33.675vw;
+    & .Left-Input {
+      width: 100%;
+    }
   }
-  &-Td {
-    padding-left: 1.245vw;
+
+  .Table {
+    margin-top: 5.198vw;
+    margin-left: 2.196vw;
+    margin-right: 1.171vw;
+    margin-bottom: 5.5px;
+    font-size: calc((100vw - 480px) / (3300 - 480) * (39 - 20) + 8px);
+    font-family: $roboto;
+    display: block;
+    width: calc(259px + 73.206vw);
+    table-layout: fixed;
+    max-width: 98%;
+    overflow: auto;
+
+    &-Th {
+      padding-left: 1.245vw;
+      text-align: left;
+      color: #bababa;
+      font-size: calc(4px + 0.586vw);
+      line-height: 2.855vw;
+    }
+
+    &-Th {
+      font-size: calc(6px + 0.439vw);
+    }
+
+    &-Tr {
+      min-width: 1000px;
+      height: 47px;
+      box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.08);
+      align-items: center;
+      display: flex;
+      cursor: pointer;
+
+      &:first-child {
+        cursor: initial;
+      }
+    }
+
+    &-Td {
+      padding-left: 1.245vw;
+      font-size: calc(6px + 0.439vw);
+      line-height: 1.245vw;
+    }
+  
+    &-Td, &-Th {
+      &:first-child {
+        width: calc(15px + 5.857vw);
+      }
+  
+      &:nth-child(2) {
+        width: calc(100px + 9.517vw);
+      }
+  
+      &:nth-child(3) {
+        width: calc(10.249vw + 79px);
+      }
+  
+      &:nth-child(4) {
+        width: calc(69px + 9.517vw);
+      }
+  
+      &:nth-child(5) {
+        width: calc(30px + 12.738vw);
+      }
+  
+      &:nth-child(6) {
+        width: calc(74px + 9.078vw);
+      }
+  
+      &:nth-child(7) {
+        width: calc(67px + 8.785vw);
+      }
+    }
+  }  
+
+  &-AddNewButton {
+    font: normal normal bold 13px/39px Roboto;
+    letter-spacing: 0px;
+    color: #FFF;
+    font-weight: bold;
+    font-size: calc(6px + 0.512vw);
+    line-height: calc(19px + 1.464vw);
+    width: calc(50px + 3.221vw);
+    height: 37px;
+    background: #000000 0% 0% no-repeat padding-box;
+    border-radius: 3px;
+    margin: 0 2.416vw;
   }
 }
 
+
 // MEDIA SCREEN
+
+@media screen and (max-width: 725px) {
+  .Drivers {
+    .Left {
+      width: 85%;
+
+      &-Input {
+        min-width: 0;
+      }
+    }
+
+    .Table {
+      max-width: 90%;
+    }
+  }
+}
 
 @media screen and (max-width: 600px) {
   .Table {
@@ -46,5 +149,13 @@ $roboto: "Roboto";
   }
   .lessWidth {
     min-width: 50px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .Drivers {
+    .Left {
+      padding: 0 1px;
+    }
   }
 }

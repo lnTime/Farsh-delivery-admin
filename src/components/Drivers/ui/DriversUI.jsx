@@ -1,22 +1,35 @@
 import React from "react";
-import { driverData } from "../functional/driverData";
-import "./drivers.scss";
+import "./Drivers.scss";
+import { HeaderContainer } from '../../Header/functional/HeaderContainer';
+import { DriverContainer } from '../../common/icons/Driver/functional/DriverContainer';
+import { useHistory } from "react-router-dom";
 
 export const DriverUI = ({ drivers }) => {
+
+  const history = useHistory();
+
   return (
     <div className="Drivers">
-      <table className="Table">
-        <tr className="Table-Tr">
-          <th className="Table-Th lessWidth">#</th>
-          <th className="Table-Th">Name</th>
-          <th className="Table-Th">Mobile</th>
-          <th className="Table-Th">Country</th>
-          <th className="Table-Th">License</th>
-          <th className="Table-Th">ID</th>
-          <th className="Table-Th">Vehicle number</th>
-        </tr>
+      <HeaderContainer 
+        component={<DriverContainer />}
+        sectionName="Drivers"
+        additionalComponent={
+        <button 
+          onClick={() => history.push('/add-driver')}
+          className="Drivers-AddNewButton">Add New</button>}
+      />
+      <div className="Table">
+        <div className="Table-Tr">
+          <div className="Table-Th lessWiddiv">#</div>
+          <div className="Table-Th">Name</div>
+          <div className="Table-Th">Mobile</div>
+          <div className="Table-Th">Country</div>
+          <div className="Table-Th">License</div>
+          <div className="Table-Th">ID</div>
+          <div className="Table-Th">Vehicle number</div>
+        </div>
         {drivers}
-      </table>
+      </div>
     </div>
   );
 };

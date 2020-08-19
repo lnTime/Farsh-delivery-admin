@@ -6,7 +6,7 @@ import {TextFieldContainer} from '../../../../common/inputs/TextField/functional
 import {ChooseFrontAndBackContainer} from '../../../functional/ChooseFrontAndBack/functional/ChooseFrontAndBackContainer';
 import { validators } from '../../../../../utils/validators/validators';
 
-export const DrivingLicenseFormUI = React.memo(({licenseTypeOptions, image, setImage}) => {
+export const DrivingLicenseFormUI = React.memo(({licenseTypeOptions, image, setImage, countries}) => {
     return (<form className="AddDriver-Form">
         <div className="EvenInputs">
             <Field name="licenseType" 
@@ -42,14 +42,14 @@ export const DrivingLicenseFormUI = React.memo(({licenseTypeOptions, image, setI
                 name="issuingCountry"
                 placeholder="Issuing country"
                 component={SelectFieldContainer}
-                options={[{id: 1, value: 'Armenia'}]}
+                options={countries}
                 validate={[validators.required]}  
             />
             <Field 
                 name="licenseIssuingAuthority"
                 placeholder="Issuing Authority"
                 component={SelectFieldContainer}
-                options={[{id: 1, value: 'Auth'}]}
+                options={countries}
                 validate={[validators.required]}  
             />
         </div>

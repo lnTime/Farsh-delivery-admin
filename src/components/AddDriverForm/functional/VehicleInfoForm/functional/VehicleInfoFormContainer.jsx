@@ -25,7 +25,16 @@ export const VehicleInfoFormContainer = ({ setData, setCurrentStep, setCurrentOn
     }, [address, dispatch]);
 
     const onSubmit = useCallback((formData) => {
-        setData(data => ({ ...data, vehicle: {...formData} }));
+        setData(data => {
+            data.append('vehiclePlateNumber', formData.vehiclePlateNumber);
+            data.append('vehicleModel', formData.vehicleModel);
+            data.append('vehicleMake', formData.vehicleMake);
+            // TODO
+            // data.append('vehicleRegisteredCountry.countryName', formData.registeredCountry);
+            data.append('vehicleRegistrationNumber', formData.vehicleRegistrationNumber);
+            data.append('mvpiNumber', formData.mvpiNumber);
+            return data;
+        });
         setCurrentStep(currentStep => currentStep + 1);
     }, [setData, setCurrentStep]);
 

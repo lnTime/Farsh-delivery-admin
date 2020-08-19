@@ -1,10 +1,10 @@
 .Profile {
-    width: 39px;
-    height: 39px;
+    width: calc(29px + 0.732vw);
+    height: calc(29px + 0.732vw);
     background: #000000 0% 0% no-repeat padding-box;
     letter-spacing: 0px;
     color: #FFFFFF;
-    font-size: 18px;
+    font-size: calc(10px + 0.586vw);
     display: flex;
     justify-content: center;
     align-items: center;

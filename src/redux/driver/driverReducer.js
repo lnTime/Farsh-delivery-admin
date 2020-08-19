@@ -1,8 +1,10 @@
 import {driverConstants} from './driverConstants';
 
-const initialState = []
+const initialState = null;
  export const driverReducer = (state = initialState, action) => {
     switch(action.type){
+        case driverConstants.SET_DRIVER:
+            return action.payload;
         case  driverConstants.EDIT_PROFILE :
             return {
                 ...state ,

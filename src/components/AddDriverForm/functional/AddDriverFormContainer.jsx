@@ -3,9 +3,9 @@ import { AddDriverFormUI } from '../ui/AddDriverFormUI';
 import {getComponent} from './helper';
 
 export const AddDriverFormContainer = () => {
-    const [currentStep, setCurrentStep] = useState(1);
+    const [currentStep, setCurrentStep] = useState(6);
     const [currentOnSubmit, setCurrentOnSubmit] = useState(null);
-    const [data, setData] = useState({});
+    const [data, setData] = useState(new FormData());
     const component = useMemo(() => getComponent(currentStep), [currentStep]);    
     
     return <AddDriverFormUI

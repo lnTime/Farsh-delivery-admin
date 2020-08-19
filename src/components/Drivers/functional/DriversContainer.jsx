@@ -1,26 +1,43 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { DriverUI } from "../ui/DriversUI";
 import { useState, useEffect } from "react";
-import { driverData } from "./driverData";
+import { useDispatch, useSelector } from "react-redux";
+import { getDrivers } from "../../../redux/drivers/driversActions";
+import { getDriversSelector } from '../../../redux/drivers/driversSelector';
+import { useHistory } from "react-router-dom";
+
 
 export const DriversContainer = () => {
   const [drivers, setDriverData] = useState(null);
-  useEffect(() => {
+  const dispatch = useDispatch();
+  const driversData = useSelector(getDriversSelector);
+  const history = useHistory();
+
+  const handleDriverPageOpen = useCallback(id => {
+    history.push(`/drivers/${id}`);
+  }, [history]);
+
+  useEffect(() => {    
     setDriverData(
-      driverData.map((data) => {
+      driversData.map((data, index) => {
         return (
-          <tr className="Table-Tr">
-            <td className="Table-Td">{data.id}</td>
-            <td className="Table-Td">{data.name}</td>
-            <td className="Table-Td">{data.mobile}</td>
-            <td className="Table-Td">{data.country}</td>
-            <td className="Table-Td">{data.license}</td>
-            <td className="Table-Td">{data.userId}</td>
-            <td className="Table-Td">{data.VehicleNumber}</td>
-          </tr>
+          <div className="Table-Tr" key={data.id} onClick = {() => handleDriverPageOpen(data.id)}>
+            <div className="Table-Td">{index}</div>
+            <div className="Table-Td">{data.profile.firstName} {data.profile.lastName}</div>
+            <div className="Table-Td">{data.profile.mobileNumber}</div>
+            <div className="Table-Td">Armenia</div>
+            <div className="Table-Td">{data.drivingLicense.licenseType}</div>
+            <div className="Table-Td">{data.id}</div>
+            <div className="Table-Td">{data.vehicle.vehiclePlateNumber}</div>
+          </div>
         );
       })
     );
-  }, []);
+  }, [driversData, handleDriverPageOpen]);
+
+  useEffect(() => {
+    dispatch(getDrivers());
+  }, [dispatch]);
+
   return <DriverUI drivers={drivers} />;
 };

@@ -1,3 +1,4 @@
+import { batch } from 'react-redux';
 import { addressConstants } from "./addressConstants";
 
 export const setAuthToken = (authToken) => ({ type: addressConstants.SET_AUTH_TOKEN, payload: authToken });
@@ -24,27 +25,37 @@ export const getCountries = () => async (dispatch, getState) => {
     await dispatch(getAccessToken());
     const {authToken} = getState().address;
 
+    batch(() => {
+        dispatch(setStates([]));
+        dispatch(setCities([]));
+    })
     fetch(`https://www.universal-tutorial.com/api/countries/`, {
         headers: {
             Authorization: `Bearer ${authToken}`
         }
     }).then(response => response.json())
     .then(res => {
-        dispatch(setCountries(res.map(item => ({value: item['country_name'], id: item['country_short_name']}))));
-        dispatch(getStates(res[0]['country_short_name']));
+        batch(() => {
+            dispatch(setCountries(res.map(item => ({value: item['country_name'], id: item['country_short_name']}))));
+            dispatch(getStates(res[0]['country_short_name']));
+        })
     });
 }
 
 export const getStates = (countryName) => async (dispatch, getState) => {
     const {authToken, countries} = getState().address;
     const country = countries.find(country => country.id === countryName);
+    
+    dispatch(setCities([]));
     fetch(`https://www.universal-tutorial.com/api/states/${country.value}`, {
         headers: {
             Authorization: `Bearer ${authToken}`
         }
     }).then(res => res.json()).then(res => {
-        dispatch(setStates(res.map(item => ({ value: item['state_name'], id: item['state_name'] }))));
-        dispatch(getCities(res[0]['state_name']));
+        batch(() => {
+            dispatch(setStates(res.map(item => ({ value: item['state_name'], id: item['state_name'] }))));
+            dispatch(getCities(res[0]['state_name']));    
+        })
     });
 }
 
@@ -58,4 +69,8 @@ export const getCities = (stateName) => (dispatch, getState) => {
     }).then(res => res.json()).then(res => {
         dispatch(setCities(res.map(item => ({ value: item['city_name'], id: item['city_name']}))))
     });
+}
+
+export const getCountryNameByISOCode = (countries, isoCode) => {
+    return countries.find(country => country.id === isoCode).value;
 }

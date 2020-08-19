@@ -4,4 +4,10 @@
   border-radius: 3px;
   background: black;
   color: white;
+  font-size: calc(10px + 0.721vw);
+
+  &:disabled {
+    opacity: 0.1;
+    cursor: initial;
+  }
 }

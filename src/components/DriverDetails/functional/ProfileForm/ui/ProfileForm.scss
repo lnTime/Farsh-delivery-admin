@@ -58,6 +58,7 @@
       letter-spacing: 0px;
       color: #000;
       font-size: 13px;
+      flex-wrap: wrap;
       line-height: 17px;
 
       &_cycle {
@@ -78,6 +79,14 @@
     &_oneItem {
       flex-direction: column;
     }
+  }
+
+  .intl-tel-input {
+    width: 95%;
+  }
+
+  .Select-Div {
+    width: 95%;
   }
 }
 .BlackButton_right {

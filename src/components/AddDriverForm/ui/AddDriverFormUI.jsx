@@ -1,23 +1,25 @@
 import React from 'react';
 import './AddDriverForm.scss';
 import { NewDriverSectionsContainer } from '../functional/NewDriverSections/functional/NewDriverSectionsContainer';
-import {reduxForm} from 'redux-form'
+import { reduxForm } from 'redux-form'
 
-export const AddDriverForm = React.memo(({handleSubmit, onSubmit, Component, activeID, invalid, pristine, submitting, ...all}) => {
+export const AddDriverForm = React.memo(({ handleSubmit, onSubmit, Component, activeID, invalid, pristine, submitting, ...all }) => {
     return (
         <div className="AddDriver">
-            <NewDriverSectionsContainer activeID={activeID}/>
+            <NewDriverSectionsContainer activeID={activeID} />
             <form className="Wrapper" onSubmit={handleSubmit}>
-                <Component {...all}/>
+                <Component {...all} />
                 <div className="Submission">
-                    <button className="Submission-button Submission-button_white">Cancel</button>
-                    <button 
-                        className="Submission-button Submission-button_black" 
+                    <button className="Submission-button Submission-button_white">
+                        Back
+                    </button>
+                    <button
+                        className="Submission-button Submission-button_black"
                         disabled={invalid || submitting || pristine}
-                        type="submit">Next</button>
+                        type="submit">{activeID === 6 ? 'Finish' : 'Next'}</button>
                 </div>
             </form>
         </div>);
 });
 
-export const AddDriverFormUI = reduxForm({form: 'add-driver'})(React.memo(AddDriverForm))
+export const AddDriverFormUI = reduxForm({ form: 'add-driver' })(React.memo(AddDriverForm))

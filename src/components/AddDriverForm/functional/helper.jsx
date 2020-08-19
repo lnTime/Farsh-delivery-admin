@@ -18,7 +18,9 @@ const VendorFormContainer = React.lazy(() =>
     import('./VendorForm/functional/VendorFormContainer')
     .then(module => ({ default: module.VendorFormContainer })));
 
-
+const ActivationFormContainer = React.lazy(() => 
+    import('./ActivationForm/functional/ActivationFormContainer')
+    .then(module => ({ default: module.ActivationFormContainer})))
 
 export const getComponent = (step) => {
     switch (step) {
@@ -32,6 +34,8 @@ export const getComponent = (step) => {
             return withSuspense(VehicleInfoFormContainer);
         case 5:
             return withSuspense(VendorFormContainer);
+        case 6:
+            return withSuspense(ActivationFormContainer)
         default:
             return null;
     }
