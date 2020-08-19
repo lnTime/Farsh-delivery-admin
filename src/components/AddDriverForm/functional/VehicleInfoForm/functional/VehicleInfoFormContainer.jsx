@@ -39,6 +39,7 @@ export const VehicleInfoFormContainer = ({ setData, setCurrentStep, setCurrentOn
     return <VehicleInfoFormUI
         handleClick={handleClick}
         openAtt = {openAtt}
+        setOpenAtt = {setOpenAtt}
         vehicleMakeOptions={vehicleMakeOptions}
         address={address}
         customStateChange={customStateChange}

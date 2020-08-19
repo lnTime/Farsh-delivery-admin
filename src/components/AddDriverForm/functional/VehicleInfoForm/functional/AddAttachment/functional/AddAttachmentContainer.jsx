@@ -3,14 +3,12 @@ import { AddAttachmentUI } from '../ui/AddAttachmentUI';
 import { useState } from 'react';
 
 
-export const AddAttachmentContainer = ({openAtt}) => {
-    const [cancel,setCancel] = useState(false)
+export const AddAttachmentContainer = ({setOpenAtt}) => {
+    console.log('SetOpenAtt is: ', setOpenAtt);
     const handleCancel = () => {
-        setCancel(true)
+        setOpenAtt(false);
     } 
     return (
-        <>
-       {cancel ? <AddAttachmentUI handleCancel = {handleCancel}/> : null}
-       </>
+        <AddAttachmentUI handleCancel = {handleCancel}/> 
     )
 }

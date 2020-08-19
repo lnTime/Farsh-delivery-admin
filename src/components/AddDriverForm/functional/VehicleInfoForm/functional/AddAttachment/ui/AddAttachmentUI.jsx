@@ -9,19 +9,16 @@ export const AddAttachmentUI = ({handleCancel}) => {
         <div className={styles.AddAttachment}>
             <h2 className={styles.AddAttachment__H2}>Add attachment</h2>
             <Field
-            placeholder = 'Title of attachment'
-            component = {TextFieldContainer} 
-            type = 'text'
+                placeholder = 'Title of attachment'
+                component = {TextFieldContainer} 
+                type = 'text'
+                name="title"
             />
             <div className = {styles.Buttons}>
-                <div onClick = {handleCancel} className = {styles.Buttons__Cancel}>Cancel</div>
-                <Field
-
-                name="newDoc"
-                placeholder="Upload new document"
-                component={FileFieldMiniContainer}
-                // validate={[validators.required]}
-            />
+                <button onClick = {handleCancel} 
+                type="button"
+                className = {styles.Buttons__Cancel}>Cancel</button>
+                <FileFieldMiniContainer/>
             </div>
         </div>
     )
