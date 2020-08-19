@@ -1,5 +1,5 @@
 import React from 'react';
-import './phone.scss'
+import './Phone.scss'
 
 
 export const PhoneUI = () => {

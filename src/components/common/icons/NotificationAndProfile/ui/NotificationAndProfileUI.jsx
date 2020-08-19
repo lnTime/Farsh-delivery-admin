@@ -3,8 +3,8 @@ import './NotificationAndProfile.scss';
 import {NotificationContainer} from '../../Notification/functional/NotificationContainer';
 import {ProfileContainer} from '../../Profile/functional/ProfileContainer';
 
-export const NotificationAndProfileUI = ({clas}) => {
-    return (<section className={clas}>
+export const NotificationAndProfileUI = ({costumClass}) => {
+    return (<section className={costumClass}>
         <NotificationContainer />
         <ProfileContainer name="J" className="Right-Profile" />
     </section>);

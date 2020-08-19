@@ -20,7 +20,7 @@ export const OrderDetailHeaderUI = () => {
             </div>
         </div>
         <div className="OrderDetailHeaderRight">
-            <NotificationAndProfileContainer clas = 'Right' />
+            <NotificationAndProfileContainer costumClass = 'Right' />
         </div>
     </header>);
 }

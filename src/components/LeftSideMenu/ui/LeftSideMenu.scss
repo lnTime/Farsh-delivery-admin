@@ -1,5 +1,20 @@
 .NavBar {
-    background: #FFFFFF 0% 0% no-repeat padding-box;
+    background: #FFFFFF;
+    &_animated {
+        animation: 1s scaleMenu forwards;
+        background: white;
+    }
+    &-Logo {
+        background:white;
+        padding: 12px 0;
+        display: flex;
+        justify-content: center;
+    }
+    
+    &_closeAnimated {
+        animation: 1s closeMenu forwards;
+        background: white;
+    }
     .Menu {
       background: #fff 0% 0% no-repeat padding-box;
       box-shadow: 0px 0px 42px #00000014;
@@ -8,18 +23,6 @@
       display: inline-table;
       cursor: pointer;
       height: 90vh;
-      &-Logo {
-          padding: 12px 0;
-          display: flex;
-          justify-content: center;
-      }
-      &_animated {
-          animation: 1s scaleMenu forwards;
-      }
-
-      &_closeAnimated {
-          animation: 1s closeMenu forwards;
-      }
   }
 }
 
@@ -54,7 +57,6 @@
                 letter-spacing: 0px;
             }
         }
-
         &_active {
             border-left: 2px solid #000;
             & > div {

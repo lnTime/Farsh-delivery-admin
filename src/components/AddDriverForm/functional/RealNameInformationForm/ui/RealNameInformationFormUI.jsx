@@ -6,6 +6,7 @@ import { TextFieldContainer } from '../../../../common/inputs/TextField/function
 import { ChooseFrontAndBackContainer } from '../../ChooseFrontAndBack/functional/ChooseFrontAndBackContainer';
 import { validators } from '../../../../../utils/validators/validators';
 
+
 export const RealNameInformationFormUI = React.memo(({ idTypeOptions, image, setImage }) => {
     return (<form className={styles["AddDriver-Form"]}>
         <div className='EvenInputs'>

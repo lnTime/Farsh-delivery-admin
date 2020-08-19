@@ -6,19 +6,17 @@ import { DriverContainer } from '../../common/icons/Driver/functional/DriverCont
 
 export const HeaderTopUI = () => {
     return (
-        <>
-            <div className={styles.HeaderTop}>
-                <div className={styles.LeftSection}>
-                    <div className = {styles.IconHeadingWrap}>
-                        <DriverContainer/>
-                        <h1 className = {styles.HeaderTop__H1}>Add New Driver</h1>
-                    </div>
-                    <span className = {styles.HeaderTop__span}> Home  &#62;  Drivers</span>
+        <div className={styles.HeaderTop}>
+            <div className={styles.LeftSection}>
+                <div className={styles.IconHeadingWrap}>
+                    <DriverContainer />
+                    <h1 className={styles.HeaderTop__H1}>Add New Driver</h1>
                 </div>
-                <div className={styles.RightSection}>
-                    <NotificationAndProfileContainer clas = 'Right100'/>
-                </div>
+                <span className={styles.HeaderTop__span}> Home  &#62;  Drivers</span>
             </div>
-        </>
+            <div className={styles.RightSection}>
+                <NotificationAndProfileContainer costumClass='Right100' />
+            </div>
+        </div>
     )
 }

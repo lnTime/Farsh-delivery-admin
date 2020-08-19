@@ -1,7 +1,7 @@
 import React from 'react';
 import { LeftSideMenuContainer } from '../../LeftSideMenu/functional/LeftSideMenuContainer';
 import { OrdersContainer } from '../../Orders/functional/OrdersContainer';
-import styles from './AppModule.scss';
+import styles from './App.module.scss';
 import { Switch, Route } from 'react-router-dom';
 import { DashboardContainer } from '../../Dashboard/functional/DashboardContainer';
 import { AddDriverFormContainer } from '../../AddDriverForm/functional/AddDriverFormContainer';

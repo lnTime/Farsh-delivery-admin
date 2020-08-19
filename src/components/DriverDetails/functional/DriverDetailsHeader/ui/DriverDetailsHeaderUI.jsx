@@ -31,7 +31,7 @@ export const DriverDetailsHeaderUI = () => {
           </div>
         </div>
       </div>
-      <NotificationAndProfileContainer clas = 'Right' />
+      <NotificationAndProfileContainer costumClass = 'Right' />
     </header>
   );
 };

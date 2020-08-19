@@ -1,6 +1,6 @@
 import React from 'react';
 import { driverInfoData } from '../../SearchDriverSection/functional/driverInfoData';
-import './searchPhone.scss';
+import './SearchPhone.scss';
 
 
 export const SearchPhonUI = () => {

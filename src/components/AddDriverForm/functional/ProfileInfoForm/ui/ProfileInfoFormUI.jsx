@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './ProfileInfoFormModule.scss';
+import './ProfileInfoForm.scss';
 import { FileFieldContainer } from '../../../../common/inputs/FileField/functional/FileFieldContainer';
 import { TextFieldContainer } from '../../../../common/inputs/TextField/functional/TextFieldContainer';
 import { SelectFieldContainer } from '../../../../common/inputs/SelectField/functional/SelectFieldContainer';
@@ -15,7 +15,7 @@ export const ProfileInfoFormUI = React.memo(({ phoneNumber, onPhoneNumberBlur, h
 
     return (<div className='AddDriver-Form' onSubmit={handleSubmit}>
         <FileFieldContainer src={src} onChange={handleImageChange} data-haserror={hasError} />
-        <div className="EvenInputs">
+        <div className = 'EvenInputs'>
             <Field
                 data-halfwidth
                 name='firstName'
@@ -31,7 +31,7 @@ export const ProfileInfoFormUI = React.memo(({ phoneNumber, onPhoneNumberBlur, h
                 placeholder="Last Name"
             />
         </div>
-        <div className="EvenInputs">
+        <div className='EvenInputs'>
             <IntlTelInput
                 data-halfwidth
                 preferredCountries={["sa"]}
@@ -42,7 +42,7 @@ export const ProfileInfoFormUI = React.memo(({ phoneNumber, onPhoneNumberBlur, h
                 onPhoneNumberBlur={onPhoneNumberBlur}
                 fieldId="phoneNumber"
                 onPhoneNumberChange={handlePhoneNumberChange}
-                containerClassName={`intl-tel-input  'intl-tel-input'} ${phoneNumber.isValid ? '' : 'intl-tel-input-error'} intl-tel-input-error`}
+                containerClassName={`intl-tel-input intl-tel-input ${phoneNumber.isValid ? '' : 'intl-tel-input-error'} intl-tel-input-error`}
                 inputClassName="form-control"
             />
             <Field
@@ -54,7 +54,7 @@ export const ProfileInfoFormUI = React.memo(({ phoneNumber, onPhoneNumberBlur, h
                 data-halfwidth
             />
         </div>
-        <div className="EvenInputs">
+        <div className='EvenInputs'>
             <Field
                 data-halfwidth
                 name="state"
@@ -73,7 +73,7 @@ export const ProfileInfoFormUI = React.memo(({ phoneNumber, onPhoneNumberBlur, h
                 validate={[validators.required]}
             />
         </div>
-        <div className="EvenInputs">
+        <div className='EvenInputs'>
             <Field name="address"
                 component={TextFieldContainer}
                 placeholder="Address"
@@ -81,7 +81,7 @@ export const ProfileInfoFormUI = React.memo(({ phoneNumber, onPhoneNumberBlur, h
                 validate={[validators.required]}
             />
         </div>
-        <div className="EvenInputs">
+        <div className='EvenInputs'>
             <Field name="password"
                 data-halfwidth
                 component={TextFieldContainer}

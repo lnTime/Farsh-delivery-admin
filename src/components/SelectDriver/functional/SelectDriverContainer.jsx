@@ -8,7 +8,6 @@ export const SelectDriverContainer = ({ term , node,searchByNumber }) => {
     return Object.keys(item)
     .some(key =>
       item[key].toString().toLowerCase().includes(lowercasedFilter),
-      console.log(item)
     );
   });
   return <SelectDriverUI searchByNumber = {searchByNumber} node = {node} filteredData = {filteredData}/>;

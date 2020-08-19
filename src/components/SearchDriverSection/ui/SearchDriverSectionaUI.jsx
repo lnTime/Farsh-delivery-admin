@@ -1,12 +1,10 @@
 import React from "react";
-import "./searchDriver.scss";
+import "./SearchDriver.scss";
 import { SearchContainer } from "../../common/icons/Search/functional/SearchContainer";
 import { SelectDriverContainer } from "../../SelectDriver/functional/SelectDriverContainer";
 import { SearchPhoneContainer } from '../../SearchPhone/functional/SearchPhoneContainer'
-import { driverInfoData } from '../../SearchDriverSection/functional/driverInfoData';
 import { LocationContainer } from "../../common/icons/Location/functional/LocationContainer";
 import { MessageIconContainer } from "../../common/icons/MessageIcon/functional/MessageIconContainer";
-
 
 export const SearchDriverSectionUI = ({ searchByNumber, isSelected, inputRef, driverSearch, driverInfo, handleChange, term, node, setDriverSearch, searchPhone }) => {
 
@@ -29,7 +27,7 @@ export const SearchDriverSectionUI = ({ searchByNumber, isSelected, inputRef, dr
 
         isSelected ? <>
           <div className='AssigneDriver'>
-            <div className = 'alignCentr' >
+            <div className='alignCentr' >
               <input className="Radio" type="radio" name="gender"></input>
               <label className='Span Span_withoutMargin'>Sellect All</label>
             </div>
@@ -53,17 +51,8 @@ export const SearchDriverSectionUI = ({ searchByNumber, isSelected, inputRef, dr
             </div>
           </div>
           <span className="Span">Drivers near Pickup location</span>
-
-
-
-
-
-
-
           {driverInfo}</> : driverInfo}
       {searchPhone ? <SearchPhoneContainer /> : null}
-
-
     </div>
   );
 };
