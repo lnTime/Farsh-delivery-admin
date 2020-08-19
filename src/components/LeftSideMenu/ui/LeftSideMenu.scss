@@ -24,7 +24,7 @@
 }
 
 .Menu {
-    position: absolute;
+    width: max-content;
     &-Item {
         display: flex;
         justify-content: center;
