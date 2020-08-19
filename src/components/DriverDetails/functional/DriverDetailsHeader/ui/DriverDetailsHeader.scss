@@ -8,11 +8,15 @@
     & header {
         width: 100%;
         display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        & .Right {
+            width: auto;
+        }
     }
     
     & .DriverDetailsLeftSide {
-        width: 50%;
-    
         & .DriverDetailsLeftSideInformation {
             display: flex;
             padding-left: 31px;
@@ -21,38 +25,38 @@
             &-DriverName {
                 letter-spacing: 0px;
                 color: #000;
-                font-size: 18px;
-                line-height: 26px;
+                font-size: calc(6px + 0.878vw);
+                line-height: calc(6px + 1.464vw);
                 margin-left: 9px;
             }
         
             &-SectionName {
                 letter-spacing: 0px;
                 color: #9D9D9D;
-                font-size: 12px;
-                line-height: 39px;
+                font-size: calc(4px + 0.586vw);
+                line-height: calc(19px + 1.464vw);
             }
     
             &-Div {
-                width: 50%;
+                padding-right: 2.452vw;
                 border-right: 1px solid rgba(214,214,214, 0.72);
             }
         }
     
         & .DriverDetailsLeftSideActions {
-            width: 50%;
             display: flex;
             align-items: center;
-            justify-content: space-around;
-    
+            margin-left: 2.452vw;
+
             &-Button {
                 letter-spacing: 0px;
                 color: #FFF;
-                font-size: 13px;
-                line-height: 39px;
-                padding: 0 22px;
+                font-size: calc(6px + 0.512vw);
+                line-height: calc(19px + 1.464vw);
                 border-radius: 3px;
-    
+                width: calc(50px + 4.539vw);
+                height: 37px;
+                
                 &_black {
                     font-family: "Roboto Bold", Arial, Helvetica, sans-serif;
                     background: #000 0% 0% no-repeat padding-box;
@@ -64,6 +68,10 @@
                     background: #FFF 0% 0% no-repeat padding-box;
                     border: 1px solid #000;
                 }
+                
+                &:last-child {
+                    margin-left: 2.050vw;
+                }
             }
         }
     }    
@@ -71,12 +79,12 @@
 
 @media only screen and (max-width: 1000px) {
     .DriverDetails {
-        & .DriverDetailsLeftSide {
-            width: auto;
-        }
+        // & .DriverDetailsLeftSide {
+        //     width: auto;
+        // }
 
-        & .Right {
-            width: auto;
-        }
+        // & .Right {
+        //     width: auto;
+        // }
     }
 }

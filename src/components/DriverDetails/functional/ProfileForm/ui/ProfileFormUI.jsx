@@ -28,7 +28,7 @@ export const ProfileFormUI = ({
 }) => {
   useEffect(() => {
     initialize({ ...profile, name: `${profile.firstName} ${profile.lastName}` });
-  }, []);
+  }, [initialize, profile]);
 
   return (
     <form onSubmit={handleSubmit}>

@@ -46,7 +46,7 @@ export const ProfileFormContainer = ({ id }) => {
     if (!address.countries.length) {
       dispatch(getCountries());
     }
-  }, [address.countries]);
+  }, [address.countries, dispatch]);
 
 
   return (

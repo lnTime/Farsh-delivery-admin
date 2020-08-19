@@ -18,7 +18,10 @@ const menuOptions = [
 ];
 
 const getActiveID = (pathname) => {
-    
+    if (pathname?.startsWith('/drivers/')) {
+        return 3;
+    }
+        
     switch(pathname) {
         case '/':
         case '/dashboard':
@@ -35,11 +38,9 @@ const getActiveID = (pathname) => {
             return 4;
         case '/vendors': 
             return 5;
+        default:
+            return 0;
     }
-    if (pathname?.startsWith('/drivers/')) {
-        return 3;
-    }
-    return 0;
 }
 
 export const LeftSideMenuContainer = () => {
