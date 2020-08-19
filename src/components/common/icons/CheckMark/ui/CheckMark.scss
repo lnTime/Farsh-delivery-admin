@@ -1,0 +1,14 @@
+.DisplayBlock {
+  display: block;
+  position: absolute;
+  transform: translate(8px, 0px);
+}
+.DisplayNone {
+  display: none;
+}
+.CheckMark-A {
+  fill: none;
+  stroke: white;
+  stroke-miterlimit: 10;
+  stroke-width: 2px;
+}

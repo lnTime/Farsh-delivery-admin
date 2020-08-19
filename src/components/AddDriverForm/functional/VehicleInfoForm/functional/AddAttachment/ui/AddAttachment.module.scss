@@ -1,0 +1,39 @@
+.AddAttachment {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  padding: 1.146vw;
+  width: 375px;
+  height: 177px;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 36px #00000029;
+  border-radius: 5px;
+  &__H2 {
+    font-size: 15px;
+    margin-bottom: 1.406vw;
+  }
+}
+.Buttons {
+  margin-top: 1.354vw;
+  display: flex;
+  justify-content: flex-end;
+  &__Cancel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 67px;
+    height: 37px;
+    background: white;
+    border-radius: 3px;
+    font-size:13px;
+    cursor: pointer;
+  }
+  &__Add {
+    width: 67px;
+    height: 37px;
+    background: black;
+    border-radius: 3px;
+    color: white;
+  }
+}

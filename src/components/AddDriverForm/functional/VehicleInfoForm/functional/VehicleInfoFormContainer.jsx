@@ -1,7 +1,7 @@
-import React, {useEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 import { VehicleInfoFormUI } from '../ui/VehicleInfoFormUI.jsx';
 import { getAddressSelector } from '../../../../../redux/address/addressSelectors.js';
-import {getStates, getCities, getCountries} from '../../../../../redux/address/addressActions';
+import { getStates, getCities, getCountries } from '../../../../../redux/address/addressActions';
 import { useSelector, useDispatch } from 'react-redux';
 import { useCallback } from 'react';
 
@@ -9,6 +9,10 @@ export const VehicleInfoFormContainer = ({ setData, setCurrentStep, setCurrentOn
     const address = useSelector(getAddressSelector);
     const vehicleMakeOptions = [{ id: 'V1', value: 'V1' }];
     const dispatch = useDispatch();
+    const [openAtt, setOpenAtt] = useState(false);
+    const handleClick = () => {
+        setOpenAtt(true)
+    }
 
     const customCountryChange = (value) => {
         dispatch(getStates(value));
@@ -43,6 +47,9 @@ export const VehicleInfoFormContainer = ({ setData, setCurrentStep, setCurrentOn
     }, [setCurrentOnSubmit, onSubmit]);
 
     return <VehicleInfoFormUI
+        handleClick={handleClick}
+        openAtt = {openAtt}
+        setOpenAtt = {setOpenAtt}
         vehicleMakeOptions={vehicleMakeOptions}
         address={address}
         customStateChange={customStateChange}

@@ -1,20 +1,21 @@
 import React from 'react';
-import './AddDriverForm.scss';
 import { NewDriverSectionsContainer } from '../functional/NewDriverSections/functional/NewDriverSectionsContainer';
-import { reduxForm } from 'redux-form'
+import {reduxForm} from 'redux-form'
+import styles from './AddDriverForm.module.scss';
+import { HeaderTopContainer } from '../../HeaderTop/functional/HeaderTopContainer';
 
 export const AddDriverForm = React.memo(({ handleSubmit, onSubmit, Component, activeID, invalid, pristine, submitting, ...all }) => {
     return (
-        <div className="AddDriver">
-            <NewDriverSectionsContainer activeID={activeID} />
-            <form className="Wrapper" onSubmit={handleSubmit}>
-                <Component {...all} />
-                <div className="Submission">
-                    <button className="Submission-button Submission-button_white">
-                        Back
-                    </button>
+        <div className={styles.AddDriver}>
+            <HeaderTopContainer />
+            <NewDriverSectionsContainer activeID={activeID}/>
+            <form className={styles.Wrapper} onSubmit={handleSubmit}>
+                <Component {...all}/>
+                <div className={styles.Submission}>
+                    <button className={`${styles['Submission-button']} ${styles['Submission-button_white']}`}>Cancel</button>
                     <button
-                        className="Submission-button Submission-button_black"
+                        type="button"
+                        className={`${styles['Submission-button']} ${styles['Submission-button_black']}`}
                         disabled={invalid || submitting || pristine}
                         type="submit">{activeID === 6 ? 'Finish' : 'Next'}</button>
                 </div>

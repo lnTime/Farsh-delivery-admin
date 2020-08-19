@@ -14,7 +14,6 @@
         }
 
         &::after {
-            content: '>';
             font-size: 17px;
             color: #BABABA;
             -webkit-transform: rotate(90deg);
@@ -25,8 +24,10 @@
             padding: 0 0 2px;
             position: absolute;
             pointer-events: none;
+            content: '>'
         }
     }
+
 
     &-Block {
         width: 100%;
@@ -54,6 +55,9 @@
             color: red !important;
         }       
     }
+}
+.Select-Div_fullWidth{
+    width: 100%;
 }
 
 @media only screen and (max-width: 500px) {
