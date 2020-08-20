@@ -4,7 +4,7 @@ import { Field } from 'redux-form';
 import { TextFieldContainer } from '../../../../../../common/inputs/TextField/functional/TextFieldContainer';
 import { FileFieldMiniContainer } from '../../../../../../common/inputs/FileField/functional/FileFieldContainer';
 
-export const AddAttachmentUI = ({handleCancel}) => {
+export const AddAttachmentUI = ({handleCancel,handleFileChange,handleChange}) => {
     return (
         <div className={styles.AddAttachment}>
             <h2 className={styles.AddAttachment__H2}>Add attachment</h2>
@@ -13,12 +13,13 @@ export const AddAttachmentUI = ({handleCancel}) => {
                 component = {TextFieldContainer} 
                 type = 'text'
                 name="title"
+                onChange = {handleChange}
             />
             <div className = {styles.Buttons}>
                 <button onClick = {handleCancel} 
                 type="button"
                 className = {styles.Buttons__Cancel}>Cancel</button>
-                <FileFieldMiniContainer/>
+                <FileFieldMiniContainer onChange = {handleFileChange}/>
             </div>
         </div>
     )

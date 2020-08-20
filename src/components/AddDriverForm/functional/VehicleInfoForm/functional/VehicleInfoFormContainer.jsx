@@ -5,10 +5,15 @@ import { getStates, getCities, getCountries } from '../../../../../redux/address
 import { useSelector, useDispatch } from 'react-redux';
 
 export const VehicleInfoFormContainer = ({ setData, setCurrentStep, setCurrentOnSubmit }) => {
+    const [fileInfo, setFileInfo] = useState([]);
+    const [inpValue, setInpValue] = useState(null);
+    const [openAtt, setOpenAtt] = useState(false);
     const address = useSelector(getAddressSelector);
     const vehicleMakeOptions = [{ id: 'V1', value: 'V1' }];
     const dispatch = useDispatch();
-    const [openAtt, setOpenAtt] = useState(false);
+    const handleDelete = () =>{
+        
+    }
     const handleClick = () => {
         setOpenAtt(true)
     }
@@ -44,5 +49,9 @@ export const VehicleInfoFormContainer = ({ setData, setCurrentStep, setCurrentOn
         address={address}
         customStateChange={customStateChange}
         customCountryChange={customCountryChange}
+        setInpValue = {setInpValue}
+        inpValue = {inpValue}
+        fileInfo = {fileInfo}
+        setFileInfo = {setFileInfo}
     />;
 }

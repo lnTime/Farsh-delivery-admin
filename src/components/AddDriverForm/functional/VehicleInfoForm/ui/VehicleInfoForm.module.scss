@@ -25,3 +25,24 @@
   display: flex;
   justify-content: space-between;
 }
+.UploadFile {
+  padding:12px 0;
+  border-top:1px solid #EDEDED;
+  &__Title {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__H3 {
+    font-size: calc(8px + 0.469vw);
+  }
+  &__Remove {
+    font-size: calc(7px + 0.417vw);
+    margin-left: 0.365vw;
+  }
+}
+.Flex{
+  width: calc(max-contnet+5px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
