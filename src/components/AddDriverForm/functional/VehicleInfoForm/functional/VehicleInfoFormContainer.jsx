@@ -11,9 +11,7 @@ export const VehicleInfoFormContainer = ({ setData, setCurrentStep, setCurrentOn
     const address = useSelector(getAddressSelector);
     const vehicleMakeOptions = [{ id: 'V1', value: 'V1' }];
     const dispatch = useDispatch();
-    const handleDelete = () =>{
-        
-    }
+ 
     const handleClick = () => {
         setOpenAtt(true)
     }
