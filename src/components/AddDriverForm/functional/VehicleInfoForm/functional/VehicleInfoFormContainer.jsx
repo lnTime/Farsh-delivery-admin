@@ -11,9 +11,21 @@ export const VehicleInfoFormContainer = ({ setData, setCurrentStep, setCurrentOn
     const address = useSelector(getAddressSelector);
     const vehicleMakeOptions = [{ id: 'V1', value: 'V1' }];
     const dispatch = useDispatch();
- 
+
     const handleClick = () => {
         setOpenAtt(true)
+    }
+    const handleDelete = (index,e) => {
+        setFileInfo((oldData) => {
+            e.target
+            const idx = oldData.indexOf((el) => el.id === index);
+            const beforeIdx = oldData.slice(0, idx)
+            const afterIdx = oldData.slice(idx + 1)
+            const newData = [...beforeIdx, ...afterIdx];
+            console.log('Item index is', index);
+            console.log('New Data is', newData);
+            return (newData);
+        })
     }
 
     const customCountryChange = (value) => {
@@ -40,16 +52,18 @@ export const VehicleInfoFormContainer = ({ setData, setCurrentStep, setCurrentOn
     }, []);
 
     return <VehicleInfoFormUI
+        handleDelete={handleDelete}
         handleClick={handleClick}
-        openAtt = {openAtt}
-        setOpenAtt = {setOpenAtt}
+        openAtt={openAtt}
+        setOpenAtt={setOpenAtt}
         vehicleMakeOptions={vehicleMakeOptions}
         address={address}
         customStateChange={customStateChange}
         customCountryChange={customCountryChange}
-        setInpValue = {setInpValue}
-        inpValue = {inpValue}
-        fileInfo = {fileInfo}
-        setFileInfo = {setFileInfo}
+        setInpValue={setInpValue}
+        inpValue={inpValue}
+        fileInfo={fileInfo}
+        setFileInfo={setFileInfo}
+
     />;
 }

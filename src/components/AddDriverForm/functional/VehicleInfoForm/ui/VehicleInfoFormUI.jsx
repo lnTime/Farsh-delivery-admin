@@ -5,7 +5,7 @@ import { SelectFieldContainer } from '../../../../common/inputs/SelectField/func
 import { TextFieldContainer } from '../../../../common/inputs/TextField/functional/TextFieldContainer';
 import { validators } from '../../../../../utils/validators/validators';
 import { AddAttachmentContainer } from '../../VehicleInfoForm/functional/AddAttachment/functional/AddAttachmentContainer'
-export const VehicleInfoFormUI = ({ setFileInfo, fileInfo, setOpenAtt, handleClick, openAtt, vehicleMakeOptions, address, customCountryChange, customStateChange, setInpValue, inpValue }) => {
+export const VehicleInfoFormUI = ({ setFileInfo, fileInfo, setOpenAtt, handleClick, openAtt, vehicleMakeOptions, address, customCountryChange, customStateChange, setInpValue, inpValue, handleDelete }) => {
     return (<form className={styles["AddDriver-Form"]}>
         <div className='EvenInputs'>
             <Field
@@ -105,17 +105,17 @@ export const VehicleInfoFormUI = ({ setFileInfo, fileInfo, setOpenAtt, handleCli
 
         </div>
 
-        {fileInfo.map((data,index) => {
+        {fileInfo.map((data, index) => {
             return (
                 <div className={styles.UploadFile}>
                     <div className={styles.UploadFile__Title}>
-                        <h3 className={styles.UploadFile__H3}>{`${index+1+'.'} ${data.inpValue} `}</h3>
-                        <div className={styles.Flex}>
+                        <h3 className={styles.UploadFile__H3}>{`${index + 1 + '.'} ${data.inpValue} `}</h3>
+                        <div onClick={handleDelete} className={styles.Flex}>
                             <span>&#10006;</span>
                             <span className={styles.UploadFile__Remove}>Remove</span>
                         </div>
                     </div>
-                    {/* <img src='../' alt="" /> */}
+
                     <div>
                         <p className={styles.UploadFile__P}>{data.name}</p>
                         <span className={styles.UploadFile__Span}>{data.size + 'px'}</span>
