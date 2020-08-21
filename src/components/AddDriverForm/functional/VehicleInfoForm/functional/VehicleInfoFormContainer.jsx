@@ -16,16 +16,16 @@ export const VehicleInfoFormContainer = ({ setData, setCurrentStep, setCurrentOn
         setOpenAtt(true)
     }
     const handleDelete = (index,e) => {
-        setFileInfo((oldData) => {
-            e.target
-            const idx = oldData.indexOf((el) => el.id === index);
-            const beforeIdx = oldData.slice(0, idx)
-            const afterIdx = oldData.slice(idx + 1)
-            const newData = [...beforeIdx, ...afterIdx];
-            console.log('Item index is', index);
-            console.log('New Data is', newData);
-            return (newData);
-        })
+        // setFileInfo((oldData) => {
+        //     e.target
+        //     const idx = oldData.indexOf((el) => el.id === index);
+        //     const beforeIdx = oldData.slice(0, idx)
+        //     const afterIdx = oldData.slice(idx + 1)
+        //     const newData = [...beforeIdx, ...afterIdx];
+        //     console.log('Item index is', index);
+        //     console.log('New Data is', newData);
+        //     return (newData);
+        // })
     }
 
     const customCountryChange = (value) => {
