@@ -15,18 +15,18 @@ export const VehicleInfoFormContainer = ({ setData, setCurrentStep, setCurrentOn
     const handleClick = () => {
         setOpenAtt(true)
     }
-    const handleDelete = (index,e) => {
-        // setFileInfo((oldData) => {
-        //     e.target
-        //     const idx = oldData.indexOf((el) => el.id === index);
-        //     const beforeIdx = oldData.slice(0, idx)
-        //     const afterIdx = oldData.slice(idx + 1)
-        //     const newData = [...beforeIdx, ...afterIdx];
-        //     console.log('Item index is', index);
-        //     console.log('New Data is', newData);
-        //     return (newData);
-        // })
+    const handleDelete = (id) => {
+        console.log('ID is: ', id);
+        setFileInfo((data) => {
+            const idx = data.findIndex((item) => item.id === id);
+            const upDateData = [
+                ...data.slice(0,idx),
+                ...data.slice(idx +1 )
+            ]
+            return (upDateData);
+        })
     }
+
 
     const customCountryChange = (value) => {
         dispatch(getStates(value));

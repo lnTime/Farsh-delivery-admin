@@ -8,13 +8,6 @@ export const AddAttachmentUI = ({ handleCancel, handleFileChange, handleChange }
     return (
         <div className={styles.AddAttachment}>
             <h2 className={styles.AddAttachment__H2}>Add attachment</h2>
-            {/* <Field
-                placeholder='Title of attachment'
-                component={TextFieldContainer}
-                type='text'
-                name="title"
-                onChange={handleChange}
-            /> */}
             <div className = {styles.InputWrapper}>
             <input className = {styles.InputBlock}
                 placeholder='Title of attachment'

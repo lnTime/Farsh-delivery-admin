@@ -6,7 +6,7 @@ import {BigAvatarContainer} from '../../../icons/BigAvatar/functional/BigAvatarC
 
 export const FileFieldUIMini = React.memo(({input, ...custom}) => {
     return (<div className={`FileUploada ${custom['data-haserror'] ? 'FileUpload-Error' : ''}`}>
-        <input type="file" {...input} {...custom} className="FileUpload-Input FileUpload-Input_mini" accept="image/*"/>
+        <input type="file" {...input} {...custom} className="FileUpload-Input FileUpload-Input_mini"/>
             <div className="UploadContent UploadContent_flex">
                 <span className="UploadContent-Text"></span>
                 <button className="Buttons__Add" type="button">Browse</button>

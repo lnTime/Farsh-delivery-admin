@@ -105,12 +105,12 @@ export const VehicleInfoFormUI = ({ setFileInfo, fileInfo, setOpenAtt, handleCli
 
         </div>
 
-        {fileInfo.map((data, index) => {
+        {fileInfo.map((data) => {
             return (
-                <div className={styles.UploadFile}>
+                <div className={styles.UploadFile} key={data.id}>
                     <div className={styles.UploadFile__Title}>
-                        <h3 className={styles.UploadFile__H3}>{`${index + 1 + '.'} ${data.inpValue} `}</h3>
-                        <div onClick={handleDelete} className={styles.Flex}>
+                        <h3 className={styles.UploadFile__H3}>{data.id}. {data.inpValue}</h3>
+                        <div onClick={() => handleDelete(data.id)} className={styles.Flex}>
                             <span>&#10006;</span>
                             <span className={styles.UploadFile__Remove}>Remove</span>
                         </div>
