@@ -1,8 +1,9 @@
 import React from 'react';
-import './NewDriverSections.scss';
+import styles from './NewDriverSections.module.scss';
+import './NewDriverSections.module.scss';
 
 export const NewDriverSectionsUI = ({driverSections}) => {
-    return (<ul className="DriverSections">
+    return (<ul className= {styles.DriverSections}>
         {driverSections}
     </ul>)
 }

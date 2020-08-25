@@ -1,59 +1,64 @@
 import React from 'react';
-import './DrivingLicenseForm.scss';
-import {Field} from 'redux-form';
-import {SelectFieldContainer} from '../../../../common/inputs/SelectField/functional/SelectFieldContainer';
-import {TextFieldContainer} from '../../../../common/inputs/TextField/functional/TextFieldContainer';
-import {ChooseFrontAndBackContainer} from '../../../functional/ChooseFrontAndBack/functional/ChooseFrontAndBackContainer';
+import { Field } from 'redux-form';
+import { SelectFieldContainer } from '../../../../common/inputs/SelectField/functional/SelectFieldContainer';
+import { TextFieldContainer } from '../../../../common/inputs/TextField/functional/TextFieldContainer';
+import { ChooseFrontAndBackContainer } from '../../../functional/ChooseFrontAndBack/functional/ChooseFrontAndBackContainer';
 import { validators } from '../../../../../utils/validators/validators';
+import styles from './DrivingLicenseForm.module.scss';
 
-export const DrivingLicenseFormUI = React.memo(({licenseTypeOptions, image, setImage, countries}) => {
-    return (<form className="AddDriver-Form">
+export const DrivingLicenseFormUI = React.memo(({ licenseTypeOptions, image, countries, setImage }) => {
+    return (<div className={styles['AddDriver-Form']}>
         <div className="EvenInputs">
-            <Field name="licenseType" 
+            <Field name="licenseType"
+                data-halfwidth
                 component={SelectFieldContainer}
                 options={licenseTypeOptions}
-                placeholder="License type"  
-                validate={[validators.required]}  
+                placeholder="License type"
+                validate={[validators.required]}
             />
-            <Field 
+            <Field
                 name="licenseNo"
                 component={TextFieldContainer}
                 placeholder="License number"
                 data-halfwidth
-                validate={[validators.required]}  
+                validate={[validators.required]}
             />
         </div>
         <div className="EvenInputs">
-            <Field 
+            <Field
+                data-halfwidth
                 name="licenseIssueDate"
                 component={TextFieldContainer}
                 placeholder="Issue date"
-                validate={[validators.required]}  
+                validate={[validators.required]}
             />
-            <Field 
+            <Field
+                data-halfwidth
                 name="licenseExpiryDate"
                 component={TextFieldContainer}
                 placeholder="Expiry date"
-                validate={[validators.required]}  
+                validate={[validators.required]}
             />
         </div>
         <div className="EvenInputs">
-            <Field 
+            <Field
+                data-halfwidth
                 name="issuingCountry"
                 placeholder="Issuing country"
                 component={SelectFieldContainer}
                 options={countries}
-                validate={[validators.required]}  
+                validate={[validators.required]}
             />
-            <Field 
+            <Field
+                data-halfwidth
                 name="licenseIssuingAuthority"
                 placeholder="Issuing Authority"
                 component={SelectFieldContainer}
                 options={countries}
-                validate={[validators.required]}  
+                validate={[validators.required]}
             />
         </div>
-        <span className="AddDriverForm-FileUpload">Upload your Driving License</span>
+        <span className={styles['AddDriverForm-FileUpload']}>Upload your Driving License</span>
         <ChooseFrontAndBackContainer image={image} setImage={setImage} />
-    </form>);
+    </div>);
 });

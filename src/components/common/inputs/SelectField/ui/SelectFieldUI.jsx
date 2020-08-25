@@ -3,7 +3,7 @@ import "./SelectField.scss";
 
 export const SelectFieldUI = React.memo(({ input, ...custom }) => {
   return (
-    <div className="Select-Div">
+   
       <label>
         <select {...input} onChange={e => {
           if (custom.customOnChange) {
@@ -17,12 +17,12 @@ export const SelectFieldUI = React.memo(({ input, ...custom }) => {
             </option>
           ) : null}
           {custom.options.map((option) => (
-            <option key={option.id} value={option.id}>
+            <option key={option.id} disabled={option.id === 0} value={option.id}>
               {option.value}
             </option>
           ))}
         </select>
       </label>
-    </div>
-  );
-});
+
+  )
+})

@@ -25,10 +25,6 @@ export const getCountries = () => async (dispatch, getState) => {
     await dispatch(getAccessToken());
     const {authToken} = getState().address;
 
-    batch(() => {
-        dispatch(setStates([]));
-        dispatch(setCities([]));
-    })
     fetch(`https://www.universal-tutorial.com/api/countries/`, {
         headers: {
             Authorization: `Bearer ${authToken}`
@@ -37,7 +33,6 @@ export const getCountries = () => async (dispatch, getState) => {
     .then(res => {
         batch(() => {
             dispatch(setCountries(res.map(item => ({value: item['country_name'], id: item['country_short_name']}))));
-            dispatch(getStates(res[0]['country_short_name']));
         })
     });
 }

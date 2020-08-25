@@ -2,22 +2,22 @@ import React from "react";
 import VendorFormUI from "../ui/VendorFormUI";
 import { useEditMode } from "../../../../common/custom-hooks/useEditMode";
 import { useDispatch, useSelector } from "react-redux";
-import { putVendor } from "../../../../../redux/driver/driverActions";
+import { updateVendor } from "../../../../../redux/driver/driverActions";
 import { getVendorSelector } from "../../../../../redux/driver/driverSelectors";
 
-export const VendorFormContainer = () => {
-  const [isEdit, handleClick] = useEditMode();
+export const VendorFormContainer = ({id}) => {
+  const [isEdit, setIsEditMode] = useEditMode();
   const vendor = useSelector(getVendorSelector);
   const dispatch = useDispatch();
   const onSubmit = (formData) => {
-    dispatch(putVendor(formData));
+    dispatch(updateVendor(formData, id, setIsEditMode));
   };
 
   return (
     <VendorFormUI
       isEdit={isEdit}
-      handleClick={handleClick}
-      vendor={vendor.vendorId}
+      handleClick={setIsEditMode}
+      vendorId={vendor.vendorId}
       onSubmit={onSubmit}
     />
   );

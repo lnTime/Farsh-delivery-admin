@@ -88,6 +88,29 @@
   .Select-Div {
     width: 95%;
   }
+
+  
+
+  .UploadImage {
+    position: relative;
+    cursor: pointer;
+    
+    &-SVG {
+      padding-left: 0.781vw;
+      padding-right: 1.302vw;
+      & > svg {
+        border-radius: 50%;
+      }
+    }
+  
+    &-UploadInput {
+      position: absolute;
+      opacity: 0;
+      width: 88px;
+      height: 92px;
+      top: 0;
+    }
+  }
 }
 .BlackButton_right {
   margin-left: auto;

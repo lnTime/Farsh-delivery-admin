@@ -10,10 +10,10 @@ const initialState = null;
                 ...state ,
                 profile:action.payload
             }
-        case driverConstants.EDIT_VENDOR :
+        case driverConstants.SET_VENDOR :
             return{
                 ...state,
-                vendor:action.payload
+                vendor: action.payload
             }    
         case driverConstants.EDIT_REAL_NAME :
             return{
@@ -30,7 +30,7 @@ const initialState = null;
                 ...state,
                 vehicle:action.payload
             }
-            default : 
+        default : 
             return state
     }
 }

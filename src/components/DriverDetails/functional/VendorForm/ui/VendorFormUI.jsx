@@ -6,15 +6,15 @@ import { TextFieldContainer } from "../../../../common/inputs/TextField/function
 import { BlackButtonContainer } from "../../../../common/buttons/BlackButton/functional/BlackButtonContainer";
 
 export const VendorFormUI = ({
-  vendor,
+  vendorId,
   isEdit,
   handleClick,
   handleSubmit,
   initialize,
 }) => {
   useEffect(() => {
-    initialize({ vendor });
-  }, [initialize, vendor]);
+    initialize({ vendorId });
+  }, [initialize, vendorId]);
   return (
     <form onSubmit={handleSubmit}>
       <div className="VendorForm ProfileForm">
@@ -26,9 +26,9 @@ export const VendorFormUI = ({
         <div className="ProfileInfoBlock ProfileInfoBlock_oneItem">
           <span className="ProfileInfoBlock-InputName">Vendor</span>
           {isEdit ? (
-            <Field component={TextFieldContainer} type="text" name="vendor" />
+            <Field component={TextFieldContainer} type="text" name="vendorId" />
           ) : (
-            <span className="ProfileInfoBlock-InputValue">{vendor}</span>
+            <span className="ProfileInfoBlock-InputValue">{vendorId}</span>
           )}
           {isEdit ? <BlackButtonContainer text="Save" /> : null}
         </div>

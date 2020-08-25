@@ -1,0 +1,27 @@
+.AddDriver-Form {
+  min-width: 159px;
+  width: 100%;
+  padding: 1.615vw 0.938vw;
+}
+.AddSpan {
+  font-size: calc(6px + 0.439vw);
+  line-height: calc(10px + 0.512vw);
+  color: #bababa;
+}
+.AddDoc {
+  min-width: 50px;
+  width: 78px;
+  height: 31px;
+  background: #ededed 0% 0% no-repeat padding-box;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px;
+  cursor: pointer;
+}
+.AddDriver-Form_flex_less_width {
+  width: 47.5%;
+  display: flex;
+  justify-content: space-between;
+}

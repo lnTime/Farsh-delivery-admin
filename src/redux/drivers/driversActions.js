@@ -6,7 +6,7 @@ export const setDrivers = (drivers) => ({ type: driversConstants.SET_DRIVERS, pa
 let currentPage = 0;
 
 export const getDrivers = () => (dispatch) => {
-    API.get(`drivers?pageNo=${currentPage}&pageSize=10`)
+    API.get(`drivers/?pageNo=${currentPage}&pageSize=10`)
     .then(({data}) => {
         dispatch(setDrivers(data.responseList));
     });

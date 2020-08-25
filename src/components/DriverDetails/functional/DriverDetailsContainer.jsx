@@ -18,6 +18,5 @@ export const DriverDetailsContainer = ({match}) => {
     }
 
 
-
     return <DriverDetailsUI id={id} />;
 }

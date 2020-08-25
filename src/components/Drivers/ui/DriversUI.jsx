@@ -2,12 +2,8 @@ import React from "react";
 import "./Drivers.scss";
 import { HeaderContainer } from '../../Header/functional/HeaderContainer';
 import { DriverContainer } from '../../common/icons/Driver/functional/DriverContainer';
-import { useHistory } from "react-router-dom";
 
-export const DriverUI = ({ drivers }) => {
-
-  const history = useHistory();
-
+export const DriverUI = ({ drivers, goToAddDriver }) => {
   return (
     <div className="Drivers">
       <HeaderContainer 
@@ -15,7 +11,7 @@ export const DriverUI = ({ drivers }) => {
         sectionName="Drivers"
         additionalComponent={
         <button 
-          onClick={() => history.push('/add-driver')}
+          onClick={goToAddDriver}
           className="Drivers-AddNewButton">Add New</button>}
       />
       <div className="Table">

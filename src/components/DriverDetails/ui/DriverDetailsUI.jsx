@@ -14,10 +14,10 @@ export const DriverDetailsUI = ({id}) => {
         <div className="Forms">
             <div className="Combiner" id="margined">
                 <ProfileFormContainer id={id} />
-                <DrivingLicenseFormContainer />
+                <DrivingLicenseFormContainer id={id}/>
             </div>
             <div className="Combiner" id="second">
-                <VendorFormContainer />
+                <VendorFormContainer id={id} />
                 <RealNameInformationFormContainer />
                 <VehicleFormContainer />
             </div>            

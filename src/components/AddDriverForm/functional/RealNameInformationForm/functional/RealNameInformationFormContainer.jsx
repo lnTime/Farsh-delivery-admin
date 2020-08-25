@@ -4,38 +4,19 @@ import { useEffect } from 'react';
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { getCountriesSelector } from '../../../../../redux/address/addressSelectors';
-import { getCountryNameByISOCode } from '../../../../../redux/address/addressActions';
+import { updateRealNameInformation } from '../../../../../redux/driver/driverActions';
+import { useDispatch } from 'react-redux';
 
 
-export const RealNameInformationFormContainer = ({ setCurrentOnSubmit, setData, setCurrentStep }) => {
+export const RealNameInformationFormContainer = ({ setCurrentOnSubmit, setCurrentStep }) => {
     const idTypeOptions = useMemo(() => [{ value: 'PASSPORT', id: 'PASSPORT' }, { value: 'NATIONAL_ID', id: 'NATIONAL_ID' }], []);
     const [image, setImage] = useState({});
     const countries = useSelector(getCountriesSelector);
+    const dispatch = useDispatch();
 
     const onSubmit = useCallback(formData => {
-        if (!image.isFrontChoosed) {
-            setImage({ ...image, hasFrontError: true })
-            return false;
-        } else if (!image.isBackChoosed) {
-            setImage({ ...image, hasBackError: true })
-            return false;
-        }
-        
-        setData(data => {
-            data.append('realNameIdType', formData.realNameIdType);
-            data.append('realNameIdNo', formData.realNameIdNo);
-            data.append('realNameIssueDate', formData.realNameIssueDate);
-            data.append('realNameExpiryDate', formData.realNameExpiryDate);
-            data.append('realNameIssueCountry.countryName', getCountryNameByISOCode(countries, formData.issuingCountry));
-            data.append('realNameIssueCountry.isoCode', formData.issuingCountry);
-            data.append('realNameIssueAuthority', formData.issuingAuthority);
-            data.append('idImgFront', image.front);
-            data.append('idImgBack', image.back);
-            return data;
-        });
-
-        setCurrentStep(currentStep => currentStep + 1);
-    }, [setData, image, setCurrentStep, countries]);
+        dispatch(updateRealNameInformation(formData, image, setImage, setCurrentStep, countries));
+    }, [image, setImage, setCurrentStep, countries, dispatch]);
 
     useEffect(() => {
         setCurrentOnSubmit(() => onSubmit);
