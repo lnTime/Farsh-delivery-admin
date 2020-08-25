@@ -6,13 +6,28 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useCallback } from 'react';
 
 export const VehicleInfoFormContainer = ({ setData, setCurrentStep, setCurrentOnSubmit }) => {
+    const [fileInfo, setFileInfo] = useState([]);
+    const [inpValue, setInpValue] = useState(null);
+    const [openAtt, setOpenAtt] = useState(false);
     const address = useSelector(getAddressSelector);
     const vehicleMakeOptions = [{ id: 'V1', value: 'V1' }];
     const dispatch = useDispatch();
-    const [openAtt, setOpenAtt] = useState(false);
+
     const handleClick = () => {
         setOpenAtt(true)
     }
+    const handleDelete = (id) => {
+        console.log('ID is: ', id);
+        setFileInfo((data) => {
+            const idx = data.findIndex((item) => item.id === id);
+            const upDateData = [
+                ...data.slice(0,idx),
+                ...data.slice(idx +1 )
+            ]
+            return (upDateData);
+        })
+    }
+
 
     const customCountryChange = (value) => {
         dispatch(getStates(value));
@@ -47,12 +62,18 @@ export const VehicleInfoFormContainer = ({ setData, setCurrentStep, setCurrentOn
     }, [setCurrentOnSubmit, onSubmit]);
 
     return <VehicleInfoFormUI
+        handleDelete={handleDelete}
         handleClick={handleClick}
-        openAtt = {openAtt}
-        setOpenAtt = {setOpenAtt}
+        openAtt={openAtt}
+        setOpenAtt={setOpenAtt}
         vehicleMakeOptions={vehicleMakeOptions}
         address={address}
         customStateChange={customStateChange}
         customCountryChange={customCountryChange}
+        setInpValue={setInpValue}
+        inpValue={inpValue}
+        fileInfo={fileInfo}
+        setFileInfo={setFileInfo}
+
     />;
 }
