@@ -10,12 +10,11 @@ import 'react-intl-tel-input/dist/main.css';
 
 
 export const ProfileInfoFormUI = React.memo(({ phoneNumber, onPhoneNumberBlur, handlePhoneNumberChange,
-    states, countries, cities, customCountryChange, customStateChange, handleSubmit, src,
+    states, countries, cities, customCountryChange, customStateChange, src,
     hasError, handleImageChange }) => {
-
-    return (<div className='AddDriver-Form' onSubmit={handleSubmit}>
+    return (<div className='AddDriver-Form'>
         <FileFieldContainer src={src} onChange={handleImageChange} data-haserror={hasError} />
-        <div className = 'EvenInputs'>
+        <div className='EvenInputs'>
             <Field
                 data-halfwidth
                 name='firstName'
@@ -42,7 +41,7 @@ export const ProfileInfoFormUI = React.memo(({ phoneNumber, onPhoneNumberBlur, h
                 onPhoneNumberBlur={onPhoneNumberBlur}
                 fieldId="phoneNumber"
                 onPhoneNumberChange={handlePhoneNumberChange}
-                containerClassName={`intl-tel-input intl-tel-input ${phoneNumber.isValid ? '' : 'intl-tel-input-error'} intl-tel-input-error`}
+                containerClassName={`intl-tel-input intl-tel-input ${phoneNumber.isValid ? '' : 'intl-tel-input-error'}`}
                 inputClassName="form-control"
             />
             <Field

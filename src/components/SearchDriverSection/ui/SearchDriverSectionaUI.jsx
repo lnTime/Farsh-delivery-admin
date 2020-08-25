@@ -1,5 +1,5 @@
 import React from "react";
-import "./SearchDriver.scss";
+import "./SearchDriverSection.scss";
 import { SearchContainer } from "../../common/icons/Search/functional/SearchContainer";
 import { SelectDriverContainer } from "../../SelectDriver/functional/SelectDriverContainer";
 import { SearchPhoneContainer } from '../../SearchPhone/functional/SearchPhoneContainer'

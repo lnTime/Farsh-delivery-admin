@@ -1,7 +1,6 @@
 import React, { useEffect, memo } from "react";
 import "./ProfileForm.scss";
 import { FormHeaderContainer } from "../../FormHeader/functional/FormHeaderContainer";
-import Avatar from "../../../../../assets/avatars/avatar-80.png";
 import { Field, reduxForm } from "redux-form";
 import { TextFieldContainer } from "../../../../common/inputs/TextField/functional/TextFieldContainer";
 import { BlackButtonContainer } from "../../../../common/buttons/BlackButton/functional/BlackButtonContainer";
@@ -9,6 +8,7 @@ import IntlTelInput from 'react-intl-tel-input';
 import 'react-intl-tel-input/dist/main.css';
 import { validators } from "../../../../../utils/validators/validators";
 import { SelectFieldContainer } from '../../../../common/inputs/SelectField/functional/SelectFieldContainer';
+
 
 export const ProfileFormUI = ({
   profile,
@@ -24,11 +24,15 @@ export const ProfileFormUI = ({
   pristine,
   address,
   customStateChange,
-  customCountryChange
+  customCountryChange,
+  ImageComponent,
+  handleImageChange
 }) => {
   useEffect(() => {
-    initialize({ ...profile, name: `${profile.firstName} ${profile.lastName}` });
-  }, [initialize, profile]);
+    initialize({ name: `${profile.firstName} ${profile.lastName}`, 
+    address: profile.address.address, country: profile.address.country.isoCode,
+    city: profile.address.city, state: profile.address.state  });
+  }, [initialize]);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -39,7 +43,13 @@ export const ProfileFormUI = ({
           formName="Profile"
         />
         <div className="ProfileFormAvatar">
-          <img alt="Avatar" src={Avatar} />
+          {
+            isEdit ? <div className="UploadImage ProfileFormAvatar-UploadImage">
+              <ImageComponent />
+              <input type="file" onChange={handleImageChange}  accept="image/*" className="UploadImage-UploadInput"/>
+            </div>
+            : <ImageComponent />
+          }
           <div className="ProfileFormInfo">
             <span className="ProfileFormAvatar-name_name">Name</span>
             {isEdit ? (
@@ -79,7 +89,7 @@ export const ProfileFormUI = ({
             <span className="ProfileInfoBlock-InputName">Country</span>
             {isEdit ? (
               <Field 
-                name="address.country"
+                name="country"
                 customOnChange={customCountryChange}
                 component={SelectFieldContainer}
                 options={address.countries} 
@@ -95,7 +105,7 @@ export const ProfileFormUI = ({
             <span className="ProfileInfoBlock-InputName">State</span>
             {isEdit ? (
               <Field 
-                name="address.state"
+                name="state"
                 customOnChange={customStateChange}
                 component={SelectFieldContainer}
                 options={address.states}
@@ -108,7 +118,7 @@ export const ProfileFormUI = ({
           <div>
             <span className="ProfileInfoBlock-InputName">City</span>
             {isEdit ? (
-              <Field name="address.city"
+              <Field name="city"
                 component={SelectFieldContainer}
                 options={address.cities}
                 validate={[validators.required]}
@@ -123,11 +133,11 @@ export const ProfileFormUI = ({
           {isEdit ? (
             <Field 
               validate={[validators.required]}
-              name="address.address" 
+              name="address" 
               type="text" 
               component={TextFieldContainer} />
           ) : (
-            <span className="ProfileInfoBlock-InputValue">{profile.address}</span>
+            <span className="ProfileInfoBlock-InputValue">{profile.address?.address}</span>
           )}
         </div>
         <div className="ProfileInfoBlock ProfileInfoBlock_oneItem">

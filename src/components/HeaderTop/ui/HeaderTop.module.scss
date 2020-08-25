@@ -1,36 +1,23 @@
 .HeaderTop {
-  width: 91.5%;
-  position: absolute;
-  transform: translate(42px, 0px);
-  top:5px;
+  display: flex;
   justify-content: space-between;
-  display: flex;
-  align-items: center;
-}
-.IconHeadingWrap {
-  display: flex;
-  align-items: center;
-  margin-bottom: 3px;
-}
-.Right_width100 {
-  width: 100%;
-}
-.RightSection {
-  width: 100%;
-}
-.LeftSection {
-  width: inherit;
-  position: absolute;
-  top: 1.120vw;
-}
-.HeaderTop__H1 {
-  text-align: left;
-  font-size: 18px;
-  letter-spacing: 0px;
-  color: #000000;
-  margin-left: 9px;
-}
-.HeaderTop__span {
-  color: #9d9d9d;
-  font-size: 12px;
+  padding: 6px 1.171vw 6px 2.269vw;
+
+  .IconHeadingWrap {
+    display: flex;
+    align-items: center;
+  }
+
+  .HeaderTop-H1 {
+    font: normal normal normal calc(8px + 0.732vw)/calc(10px + 1.171vw) Roboto;
+    letter-spacing: 0;
+    color: #000;
+    margin-left: 0.732vw;
+  }
+
+  .HeaderTop-Span {
+    font: normal normal normal calc(0.439vw + 6px)/calc(20px + 1.391vw) Roboto;
+    letter-spacing: 0;
+    color: #9D9D9D;
+  }
 }

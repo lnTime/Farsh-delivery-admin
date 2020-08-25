@@ -20,6 +20,9 @@ export const DriversContainer = () => {
   useEffect(() => {    
     setDriverData(
       driversData.map((data, index) => {
+        if(!data.vendor) {
+          return null;
+        }
         return (
           <div className="Table-Tr" key={data.id} onClick = {() => handleDriverPageOpen(data.id)}>
             <div className="Table-Td">{index}</div>
@@ -39,5 +42,7 @@ export const DriversContainer = () => {
     dispatch(getDrivers());
   }, [dispatch]);
 
-  return <DriverUI drivers={drivers} />;
+  const goToAddDriver = () => history.push('/add-driver');
+
+  return <DriverUI drivers={drivers} goToAddDriver={goToAddDriver}/>;
 };

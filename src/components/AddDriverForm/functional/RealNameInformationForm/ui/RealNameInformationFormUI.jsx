@@ -7,8 +7,8 @@ import { ChooseFrontAndBackContainer } from '../../ChooseFrontAndBack/functional
 import { validators } from '../../../../../utils/validators/validators';
 
 
-export const RealNameInformationFormUI = React.memo(({ idTypeOptions, image, setImage }) => {
-    return (<form className={styles["AddDriver-Form"]}>
+export const RealNameInformationFormUI = React.memo(({ idTypeOptions, image, countries, setImage }) => {
+    return (<div className={styles["AddDriver-Form"]}>
         <div className='EvenInputs'>
             <Field name="realNameIdType"
                 data-halfwidth
@@ -65,5 +65,5 @@ export const RealNameInformationFormUI = React.memo(({ idTypeOptions, image, set
             image={image}
             setImage={setImage}
         />
-    </form>);
+    </div>);
 });

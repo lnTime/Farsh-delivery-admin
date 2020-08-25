@@ -9,14 +9,14 @@ import { validators } from '../../../../../utils/validators/validators';
 export const ActivationFormUI = ({ setActivated, activated }) => {
     return (<div className={styles.ActivationForm}>
         <div className={styles.EvenInputs}>
-            <Field 
-                name="startDate"
+            <Field
+                name="activationStartDate"
                 validate={[validators.required]}
                 component={TextFieldContainer}
                 placeholder="Start date"
             />
-            <Field 
-                name="endDate"
+            <Field
+                name="activationEndDate"
                 validate={[validators.required]}
                 component={TextFieldContainer}
                 placeholder="End date"
@@ -24,7 +24,7 @@ export const ActivationFormUI = ({ setActivated, activated }) => {
         </div>
         <div className={styles.SwitchWrapper}>
             <p className={styles['SwitchWrapper-Text']}>Activated</p>
-            <SwitchFieldContainer 
+            <SwitchFieldContainer
                 checked={activated}
                 setActivated={setActivated}
                 />

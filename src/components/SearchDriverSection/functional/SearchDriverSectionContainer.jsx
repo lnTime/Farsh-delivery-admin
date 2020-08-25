@@ -10,12 +10,12 @@ export const SearchDriverContainer = () => {
   const [driverInfo, setDriverInfo] = useState(null);
   const [driverSearch, setDriverSearch] = useState(false);
   const [searchPhone, setSearchPhone] = useState(false);
-  const [isSelected, setIsSelected] = useState(false)
+  // const [isSelected, setIsSelected] = useState(false)
   const node = useRef();
   const inputRef = useRef();
 
   const handleSearchClose = e => {
-    if (e.target != inputRef.current) {
+    if (e.target !== inputRef.current) {
       setDriverSearch(false);
     }
     // outside click
@@ -38,8 +38,9 @@ export const SearchDriverContainer = () => {
   const searchByNumber = () => {
     setSearchPhone(true);
   }
+
   const handleSelect = () => {
-    setIsSelected(true)
+    // setIsSelected(true)
   }
 
 
@@ -64,7 +65,7 @@ export const SearchDriverContainer = () => {
         );
       })
     );
-  }, [driverInfoData]);
+  }, []);
   return (
     <SearchDriverSectionUI
       searchByNumber={searchByNumber}

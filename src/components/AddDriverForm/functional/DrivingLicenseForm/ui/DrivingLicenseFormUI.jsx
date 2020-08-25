@@ -6,8 +6,8 @@ import { ChooseFrontAndBackContainer } from '../../../functional/ChooseFrontAndB
 import { validators } from '../../../../../utils/validators/validators';
 import styles from './DrivingLicenseForm.module.scss';
 
-export const DrivingLicenseFormUI = React.memo(({ licenseTypeOptions, image, setImage }) => {
-    return (<form className={styles['AddDriver-Form']}>
+export const DrivingLicenseFormUI = React.memo(({ licenseTypeOptions, image, countries, setImage }) => {
+    return (<div className={styles['AddDriver-Form']}>
         <div className="EvenInputs">
             <Field name="licenseType"
                 data-halfwidth
@@ -60,5 +60,5 @@ export const DrivingLicenseFormUI = React.memo(({ licenseTypeOptions, image, set
         </div>
         <span className={styles['AddDriverForm-FileUpload']}>Upload your Driving License</span>
         <ChooseFrontAndBackContainer image={image} setImage={setImage} />
-    </form>);
+    </div>);
 });

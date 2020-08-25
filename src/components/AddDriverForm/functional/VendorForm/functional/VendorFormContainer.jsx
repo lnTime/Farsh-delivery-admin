@@ -3,24 +3,14 @@ import { VendorFormUI } from '../ui/VendorFormUI';
 import { useEffect } from 'react';
 import { useCallback } from 'react';
 
-export const VendorFormContainer = ({ setData, setCurrentOnSubmit, data }) => {
+export const VendorFormContainer = ({ setData, setCurrentOnSubmit, setCurrentStep }) => {
     const onSubmit = useCallback(formData => {
         setData(data => {
             data.append('vendorId', formData.vendorId);
             return data;
-        })        
-
-        sendToServer();
-
-    }, [setData, data]);
-
-    const sendToServer = () => {
-        fetch(`http://54.156.46.17:8080/api/v1/drivers`, {
-            method: 'POST',
-            body: data,
-        });
-    }
-
+        })
+        setCurrentStep(currentStep => currentStep + 1);
+    }, [setData, setCurrentStep]);
 
     useEffect(() => {
         setCurrentOnSubmit(() => onSubmit);

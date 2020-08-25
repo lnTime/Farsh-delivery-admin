@@ -10,6 +10,8 @@ export const vehicleSelector = state => state.vehicle;
 
 export const getDriverSelector = state => state.driver;
 
+export const getDriverIDSelector = state => state.driver?.id;
+
 export const getProfileSelector = createSelector(
     getDriverSelector,
     driver => driver.profile

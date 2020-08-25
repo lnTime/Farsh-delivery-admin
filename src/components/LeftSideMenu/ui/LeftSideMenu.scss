@@ -1,8 +1,7 @@
 .NavBar {
-    background: #FFFFFF 0% 0% no-repeat padding-box;
-    box-shadow: 0px 0px 42px #00000014;
+    box-shadow: 0 0 42px #00000014;
+    background: #FFF;
 
-    background: #FFFFFF;
     &_animated {
         animation: 1s scaleMenu forwards;
         background: white;
@@ -19,9 +18,8 @@
         background: white;
     }
     .Menu {
-      background: #fff 0% 0% no-repeat padding-box;
+      background: #fff 0 0 no-repeat padding-box;
       width: 59px;
-      height: 100vh;
       display: inline-table;
       cursor: pointer;
       height: 90vh;
@@ -41,7 +39,7 @@
         justify-content: center;
     }
   }
-}
+
 
 .Menu {
     width: max-content;
@@ -63,7 +61,7 @@
             margin-left: 10px;
             text-align: left;
             font-size: 18px;
-            letter-spacing: 0px;
+            letter-spacing: 0;
             color: #757474;
             &-black {
                 color: #000;
@@ -71,14 +69,14 @@
                 margin-left: 10px;
                 text-align: left;
                 font-size: 18px;
-                letter-spacing: 0px;
+                letter-spacing: 0;
             }
         }
         &_active {
             border-left: 2px solid #000;
             & > div {
                 border-radius: 15px;
-                background: #F0F0F0 0% 0% no-repeat padding-box;
+                background: #F0F0F0;
             }
         }
     }
@@ -98,8 +96,8 @@
         z-index: 9;
         width: 250px;
         height: 90vh;
-        background: #FFFFFF 0% 0% no-repeat padding-box;
-        box-shadow: 0px 0px 42px #00000014;
+        background: #FFFFFF;
+        box-shadow: 0 0 42px #00000014;
         cursor: pointer;
         display: inline-table;
     }
@@ -126,8 +124,8 @@
         display: inline-table;
         z-index: 0;
         height: 90vh;
-        background: #FFFFFF 0% 0% no-repeat padding-box;
-        box-shadow: 0px 0px 42px #00000014;
+        background: #FFFFFF 0 0 no-repeat padding-box;
+        box-shadow: 0 0 42px #00000014;
         cursor: pointer;
     }
 }

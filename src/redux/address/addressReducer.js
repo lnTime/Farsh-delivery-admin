@@ -2,8 +2,8 @@ import { addressConstants } from "./addressConstants";
 
 const initialState = {
     countries: [],
-    cities: [],
-    states: [],
+    cities: [ {value: 'Please select the state', id: 0} ],
+    states: [ {value: 'Please select the country', id: 0} ],
 };
 
 export const addressReducer = (state = initialState, action) => {

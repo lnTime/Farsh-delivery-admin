@@ -1,9 +1,9 @@
 import React from "react";
 import "../ui/selectDriver.scss";
-import { driverInfoData } from "../../SearchDriverSection/functional/driverInfoData";
 import { PhoneContainer } from "../../common/icons/Phone/functional/PhoneContainer";
 import { NameContainer } from "../../common/icons/Name/functional/NameContainer";
 import { TruckNumberContainer } from "../../common/icons/TruckNumber/functional/TruckNumberContainer"
+
 export const SelectDriverUI = ({searchByNumber, filteredData,node }) => {
   return (
     <div className="SelectDriver" ref = {node}> 

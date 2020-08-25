@@ -4,7 +4,7 @@ import {Field} from 'redux-form';
 import {SelectFieldContainer} from '../../../../common/inputs/SelectField/functional/SelectFieldContainer';
 
 export const VendorFormUI = () => {
-    return (<form className={styles["AddDriver-Form"]}>
+    return (<div className={styles["AddDriver-Form"]}>
         <div className='EvenInputs'>
             <Field 
                 data-fullWidth
@@ -15,5 +15,5 @@ export const VendorFormUI = () => {
             />
 
         </div>
-    </form>);
+    </div>);
 }

@@ -4,9 +4,9 @@ import { Field } from 'redux-form';
 import { SelectFieldContainer } from '../../../../common/inputs/SelectField/functional/SelectFieldContainer';
 import { TextFieldContainer } from '../../../../common/inputs/TextField/functional/TextFieldContainer';
 import { validators } from '../../../../../utils/validators/validators';
-import { AddAttachmentContainer } from '../../VehicleInfoForm/functional/AddAttachment/functional/AddAttachmentContainer'
+import { AddAttachmentContainer } from '../functional/AddAttachment/functional/AddAttachmentContainer'
 export const VehicleInfoFormUI = ({ setOpenAtt, handleClick, openAtt, vehicleMakeOptions, address, customCountryChange, customStateChange }) => {
-    return (<form className={styles["AddDriver-Form"]}>
+    return (<div className={styles["AddDriver-Form"]}>
         <div className='EvenInputs'>
             <Field
                 data-halfwidth
@@ -77,7 +77,7 @@ export const VehicleInfoFormUI = ({ setOpenAtt, handleClick, openAtt, vehicleMak
         <div className='EvenInputs'>
             <Field
                 data-halfwidth
-                name="insuranceNo."
+                name="insuranceNo"
                 placeholder="Insurance No."
                 component={TextFieldContainer}
                 validate={[validators.required]}
@@ -104,5 +104,5 @@ export const VehicleInfoFormUI = ({ setOpenAtt, handleClick, openAtt, vehicleMak
             <div onClick={handleClick} className={styles.AddDoc}>+Add</div>
         </div>
         {openAtt ? <AddAttachmentContainer setOpenAtt = {setOpenAtt} /> : null }
-    </form>);
+    </div>);
 }
