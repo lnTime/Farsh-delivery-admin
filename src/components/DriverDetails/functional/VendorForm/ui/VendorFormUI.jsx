@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./VendorForm.scss";
 import { FormHeaderContainer } from "../../FormHeader/functional/FormHeaderContainer";
 import { Field, reduxForm } from "redux-form";
@@ -6,15 +6,11 @@ import { TextFieldContainer } from "../../../../common/inputs/TextField/function
 import { BlackButtonContainer } from "../../../../common/buttons/BlackButton/functional/BlackButtonContainer";
 
 export const VendorFormUI = ({
-  vendorId,
   isEdit,
   handleClick,
   handleSubmit,
-  initialize,
+  vendorId
 }) => {
-  useEffect(() => {
-    initialize({ vendorId });
-  }, [initialize, vendorId]);
   return (
     <form onSubmit={handleSubmit}>
       <div className="VendorForm ProfileForm">

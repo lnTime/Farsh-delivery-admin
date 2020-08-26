@@ -4,9 +4,11 @@ import { Field } from 'redux-form';
 import { SelectFieldContainer } from '../../../../common/inputs/SelectField/functional/SelectFieldContainer';
 import { TextFieldContainer } from '../../../../common/inputs/TextField/functional/TextFieldContainer';
 import { validators } from '../../../../../utils/validators/validators';
-import { AddAttachmentContainer } from '../../VehicleInfoForm/functional/AddAttachment/functional/AddAttachmentContainer'
-export const VehicleInfoFormUI = ({ setFileInfo, fileInfo, setOpenAtt, handleClick, openAtt, vehicleMakeOptions, address, customCountryChange, customStateChange, setInpValue, inpValue, handleDelete }) => {
-    return (<form className={styles["AddDriver-Form"]}>
+import { AddAttachmentContainer } from '../../VehicleInfoForm/functional/AddAttachment/functional/AddAttachmentContainer';
+import { TypeIconContainer } from '../../../../common/icons/TypeIcon/functional/TypeIconContainer';
+
+export const VehicleInfoFormUI = ({ setFileInfo, setDocuments, fileInfo, setOpenAtt, handleClick, openAtt, vehicleMakeOptions, address, customCountryChange, customStateChange, setInpValue, inpValue, handleDelete }) => {
+    return (<div className={styles["AddDriver-Form"]}>
         <div className='EvenInputs'>
             <Field
                 data-halfwidth
@@ -105,33 +107,33 @@ export const VehicleInfoFormUI = ({ setFileInfo, fileInfo, setOpenAtt, handleCli
 
         </div>
 
-        {fileInfo.map((data) => {
-            return (
-                <div className={styles.UploadFile} key={data.id}>
-                    <div className={styles.UploadFile__Title}>
-                        <h3 className={styles.UploadFile__H3}>{data.id}. {data.inpValue}</h3>
-                        <div onClick={() => handleDelete(data.id)} className={styles.Flex}>
-                            <span>&#10006;</span>
-                            <span className={styles.UploadFile__Remove}>Remove</span>
+        <div className={styles.Files}>
+            {fileInfo.map((data) => {
+                return (
+                    <div className={styles.UploadFile} key={data.id}>
+                        <div className={styles["UploadFile-Title"]}>
+                            <h3 className={styles["UploadFile-H3"]}>{data.id}. {data.inpValue}</h3>
+                            <div onClick={() => handleDelete(data.id)} className={styles.Flex}>
+                                <span>&#10006;</span>
+                                <span className={styles["UploadFile-Remove"]}>Remove</span>
+                            </div>
+                        </div>
+                        <div className={styles.FileData}>
+                            <TypeIconContainer className={styles['FileData-Icon']} type={data.type}/>
+                            <p className={styles["UploadFile-P"]}>{data.name}</p>
+                            <span className={styles["UploadFile-Span"]}>{data.size + 'KB'}</span>
                         </div>
                     </div>
-
-                    <div>
-                        <p className={styles.UploadFile__P}>{data.name}</p>
-                        <span className={styles.UploadFile__Span}>{data.size + 'px'}</span>
-                    </div>
-                </div>
-            )
-        })
-        }
-
-
-
+                )
+            })
+            }
+        </div>
         {openAtt ? <AddAttachmentContainer
             setInpValue={setInpValue}
             inpValue={inpValue}
+            setDocuments={setDocuments}
             setFileInfo={setFileInfo}
             fileInfo={fileInfo}
             setOpenAtt={setOpenAtt} /> : null}
-    </form>);
+    </div>);
 }

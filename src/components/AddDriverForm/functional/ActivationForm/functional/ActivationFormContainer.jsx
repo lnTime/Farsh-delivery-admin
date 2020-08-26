@@ -1,24 +1,16 @@
-import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import { ActivationFormUI } from '../ui/ActivationFormUI';
+import { useDispatch } from 'react-redux';
+import { activateDriver} from '../../../../../redux/driver/driverActions'
 
-export const ActivationFormContainer = ({ setData, setCurrentOnSubmit, data }) => {
+
+export const ActivationFormContainer = ({ setCurrentOnSubmit }) => {
     const [activated, setActivated] = useState(true);
+    const dispatch = useDispatch();
 
     const onSubmit = useCallback((formData) => {
-        setData(data => {
-            data.append('activation.activeFrom', formData.activationStartDate);
-            data.append('activation.activeTo', formData.activationEndDate);
-            data.append('activation.active', activated);
-        })
-        sendToServer();
-    }, [activated, setData]);
-
-    const sendToServer = useMemo(() => {
-        fetch(`http://54.156.46.17:8080/api/v1/drivers`, {
-            method: 'POST',
-            body: data,
-        });
-    }, [data]);
+        dispatch(activateDriver(formData, activated));
+    }, [activated, dispatch]);
 
     useEffect(() => {
         setCurrentOnSubmit(() => onSubmit);

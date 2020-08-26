@@ -5,7 +5,7 @@ const initialState = null;
     switch(action.type){
         case driverConstants.SET_DRIVER:
             return action.payload;
-        case  driverConstants.EDIT_PROFILE :
+        case  driverConstants.SET_PROFILE :
             return {
                 ...state ,
                 profile:action.payload
@@ -14,14 +14,14 @@ const initialState = null;
             return{
                 ...state,
                 vendor: action.payload
-            }    
+            }
         case driverConstants.EDIT_REAL_NAME :
             return{
                 ...state,
                 realName:action.payload
-            }   
-        case driverConstants.EDIT_DRIVER_LICENSE :
-            return{
+            }
+        case driverConstants.SET_DRIVING_LICENSE :
+            return {
                 ...state,
                 driverLicense:action.payload
             }
@@ -30,7 +30,7 @@ const initialState = null;
                 ...state,
                 vehicle:action.payload
             }
-        default : 
+        default :
             return state
     }
 }

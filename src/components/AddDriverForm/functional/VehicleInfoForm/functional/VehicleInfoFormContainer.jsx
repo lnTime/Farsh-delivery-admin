@@ -4,11 +4,13 @@ import { getAddressSelector } from '../../../../../redux/address/addressSelector
 import { getStates, getCities, getCountries } from '../../../../../redux/address/addressActions';
 import { useSelector, useDispatch } from 'react-redux';
 import { useCallback } from 'react';
+import { updateVehicleInfo } from '../../../../../redux/driver/driverActions';
 
-export const VehicleInfoFormContainer = ({ setData, setCurrentStep, setCurrentOnSubmit }) => {
+export const VehicleInfoFormContainer = ({ setCurrentStep, setCurrentOnSubmit }) => {
     const [fileInfo, setFileInfo] = useState([]);
-    const [inpValue, setInpValue] = useState(null);
+    const [inpValue, setInpValue] = useState('');
     const [openAtt, setOpenAtt] = useState(false);
+    const [documents, setDocuments] = useState([]);
     const address = useSelector(getAddressSelector);
     const vehicleMakeOptions = [{ id: 'V1', value: 'V1' }];
     const dispatch = useDispatch();
@@ -17,12 +19,11 @@ export const VehicleInfoFormContainer = ({ setData, setCurrentStep, setCurrentOn
         setOpenAtt(true)
     }
     const handleDelete = (id) => {
-        console.log('ID is: ', id);
         setFileInfo((data) => {
             const idx = data.findIndex((item) => item.id === id);
             const upDateData = [
-                ...data.slice(0,idx),
-                ...data.slice(idx +1 )
+                ...data.slice(0, idx),
+                ...data.slice(idx + 1)
             ]
             return (upDateData);
         })
@@ -44,18 +45,9 @@ export const VehicleInfoFormContainer = ({ setData, setCurrentStep, setCurrentOn
     }, [address, dispatch]);
 
     const onSubmit = useCallback((formData) => {
-        setData(data => {
-            data.append('vehiclePlateNumber', formData.vehiclePlateNumber);
-            data.append('vehicleModel', formData.vehicleModel);
-            data.append('vehicleMake', formData.vehicleMake);
-            // TODO
-            // data.append('vehicleRegisteredCountry.countryName', formData.registeredCountry);
-            data.append('vehicleRegistrationNumber', formData.vehicleRegistrationNumber);
-            data.append('mvpiNumber', formData.mvpiNumber);
-            return data;
-        });
+        dispatch(updateVehicleInfo(formData, documents));
         setCurrentStep(currentStep => currentStep + 1);
-    }, [setData, setCurrentStep]);
+    }, [setCurrentStep, documents, dispatch]);
 
     useEffect(() => {
         setCurrentOnSubmit(() => onSubmit);
@@ -74,6 +66,6 @@ export const VehicleInfoFormContainer = ({ setData, setCurrentStep, setCurrentOn
         inpValue={inpValue}
         fileInfo={fileInfo}
         setFileInfo={setFileInfo}
-
+        setDocuments={setDocuments}
     />;
 }

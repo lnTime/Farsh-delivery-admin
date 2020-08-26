@@ -1,4 +1,4 @@
-import React, { useEffect, memo } from "react";
+import React, { memo } from "react";
 import "./ProfileForm.scss";
 import { FormHeaderContainer } from "../../FormHeader/functional/FormHeaderContainer";
 import { Field, reduxForm } from "redux-form";
@@ -12,10 +12,10 @@ import { SelectFieldContainer } from '../../../../common/inputs/SelectField/func
 
 export const ProfileFormUI = ({
   profile,
+  hasError,
   handleClick,
   isEdit,
   handleSubmit,
-  initialize,
   phoneNumber,
   handlePhoneNumberChange,
   onPhoneNumberBlur,
@@ -28,11 +28,6 @@ export const ProfileFormUI = ({
   ImageComponent,
   handleImageChange
 }) => {
-  useEffect(() => {
-    initialize({ name: `${profile.firstName} ${profile.lastName}`, 
-    address: profile.address.address, country: profile.address.country.isoCode,
-    city: profile.address.city, state: profile.address.state  });
-  }, [initialize]);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -44,7 +39,7 @@ export const ProfileFormUI = ({
         />
         <div className="ProfileFormAvatar">
           {
-            isEdit ? <div className="UploadImage ProfileFormAvatar-UploadImage">
+            isEdit ? <div className={`UploadImage ProfileFormAvatar-UploadImage ${hasError ? 'ProfileFormAvatar-UploadImage_error' : ''}`}>
               <ImageComponent />
               <input type="file" onChange={handleImageChange}  accept="image/*" className="UploadImage-UploadInput"/>
             </div>
@@ -69,7 +64,7 @@ export const ProfileFormUI = ({
           <div>
             <span className="ProfileInfoBlock-InputName">Mobile</span>
             {isEdit ? (
-                <IntlTelInput 
+                <IntlTelInput
                   preferredCountries={["am"]}
                   separateDialCode={true}
                   format={true}
@@ -88,11 +83,11 @@ export const ProfileFormUI = ({
           <div>
             <span className="ProfileInfoBlock-InputName">Country</span>
             {isEdit ? (
-              <Field 
+              <Field
                 name="country"
                 customOnChange={customCountryChange}
                 component={SelectFieldContainer}
-                options={address.countries} 
+                options={address.countries}
                 validate={[validators.required]}
             />
             ) : (
@@ -104,7 +99,7 @@ export const ProfileFormUI = ({
           <div>
             <span className="ProfileInfoBlock-InputName">State</span>
             {isEdit ? (
-              <Field 
+              <Field
                 name="state"
                 customOnChange={customStateChange}
                 component={SelectFieldContainer}
@@ -131,10 +126,10 @@ export const ProfileFormUI = ({
         <div className="ProfileInfoBlock ProfileInfoBlock_oneItem">
           <span className="ProfileInfoBlock-InputName">Address</span>
           {isEdit ? (
-            <Field 
+            <Field
               validate={[validators.required]}
-              name="address" 
-              type="text" 
+              name="address"
+              type="text"
               component={TextFieldContainer} />
           ) : (
             <span className="ProfileInfoBlock-InputValue">{profile.address?.address}</span>
@@ -153,17 +148,17 @@ export const ProfileFormUI = ({
             <div className="Password">
               {"aaaaaaaaa".split("").map((v, index) => (
                 <div
-                  className="ProfileInfoBlock-InputValue_cycle"
-                  key={index}
-                ></div>
+  className="ProfileInfoBlock-InputValue_cycle"
+  key={index}
+  />
               ))}
             </div>
           )}
-          {isEdit ? 
-          <BlackButtonContainer 
-            disabled={invalid || submitting || pristine} 
-            text="Save" /> : null}
         </div>
+        {isEdit ?
+          <BlackButtonContainer
+            disabled={invalid || submitting || pristine}
+            text="Save" /> : null}
       </div>
     </form>
   );

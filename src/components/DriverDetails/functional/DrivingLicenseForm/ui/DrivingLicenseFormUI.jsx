@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React  from "react";
 import "./DrivingLicenseForm.scss";
 import { FormHeaderContainer } from "../../FormHeader/functional/FormHeaderContainer";
 import front from "../../../../../assets/images/driving-license-front.png";
@@ -15,14 +15,10 @@ const DrivingLicenseFormUI = ({
   isEdit,
   handleClick,
   handleSubmit,
-  initialize,
   imageHasError,
-  countries
+  countries,
+  setImageHasError
 }) => {
-  useEffect(() => {
-    initialize({ ...drivingLicense });
-  }, [initialize]);
-
   return (
     <form onSubmit={handleSubmit}>
       <div className="ProfileForm DrivingLicenseForm">
@@ -138,6 +134,7 @@ const DrivingLicenseFormUI = ({
                 actionText={null}
                 buttonText="Choose Front image"
                 hasError={imageHasError.front}
+                setHasError={value => setImageHasError(prev => ({...prev, front: value}))}
                 validate={validators.required}
               />
             ) : (
@@ -153,6 +150,7 @@ const DrivingLicenseFormUI = ({
                 buttonText="Choose Back image"
                 validate={validators.required}
                 hasError={imageHasError.back}
+                setHasError={value => setImageHasError(prev => ({...prev, back: value}))}
               />
             ) : (
                 <img alt="Driving License Back" src={back} />
@@ -167,3 +165,15 @@ const DrivingLicenseFormUI = ({
 export default reduxForm({
   form: "editDrivingLicense",
 })(DrivingLicenseFormUI);
+
+
+
+
+
+
+
+
+
+
+
+

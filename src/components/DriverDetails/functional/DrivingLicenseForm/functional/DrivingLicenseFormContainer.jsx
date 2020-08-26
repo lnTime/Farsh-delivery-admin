@@ -7,23 +7,25 @@ import { getCountriesSelector } from '../../../../../redux/address/addressSelect
 import { updateDrivingLicenseByID } from '../../../../../redux/driver/driverActions';
 
 export const DrivingLicenseFormContainer = ({id}) => {
-  const [isEdit, handleClick] = useEditMode();
+  const [isEdit, handleEditModeChange] = useEditMode();
   const dispatch = useDispatch();
   const drivingLicense = useSelector(getDrivingLicenseSelector);
   const countries = useSelector(getCountriesSelector)
   const [imageHasError, setImageHasError] = useState({front: false, back: false});
   const onSubmit = (formData) => {
-    dispatch(updateDrivingLicenseByID(formData, id, countries, setImageHasError));
+    dispatch(updateDrivingLicenseByID(formData, id, countries, setImageHasError, handleEditModeChange));
   };
 
   return (
     <DrivingLicenseFormUI
       onSubmit={onSubmit}
       isEdit={isEdit}
-      handleClick={handleClick}
+      handleClick={handleEditModeChange}
       drivingLicense={drivingLicense}
       countries={countries}
       imageHasError={imageHasError}
+      setImageHasError={setImageHasError}
+      initialValues={{...drivingLicense}}
     />
   );
 };

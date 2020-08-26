@@ -41,13 +41,13 @@ export const updateDrivingLicense = (formData, image, setImage, countries, setCu
 
   API.post(`drivers/driving-license/${id}`, data)
   .then(result => {
-    setCurrentStep(currentStep => currentStep + 1);    
+    setCurrentStep(currentStep => currentStep + 1);
   });
 };
 
-export const updateDrivingLicenseByID = (formData, id, countries, setImageHasError) => (dispatch) => {
-  // const data = getDrivingLicenseData(data, countries);
+export const setDrivingLicense = (drivingLicense) => ({ type: driverConstants.SET_DRIVING_LICENSE, payload: drivingLicense});
 
+export const updateDrivingLicenseByID = (formData, id, countries, setImageHasError, handleEditModeChange) => (dispatch) => {
   if(!formData.driverLicenceFrontImgFile) {
     setImageHasError(prev => ({...prev, front: true}));
     return false;
@@ -70,8 +70,11 @@ export const updateDrivingLicenseByID = (formData, id, countries, setImageHasErr
   data.append('licenseNo', formData.licenseNo);
   data.append('licenseType', formData.licenseType);
   API.post(`drivers/driving-license/${id}`, data)
-  .then(console.log);
-} 
+  .then((result) => {
+    dispatch(setDrivingLicense(result.data));
+    handleEditModeChange();
+  });
+}
 
 export const setVendor = (vendorId) => ({ type: driverConstants.SET_VENDOR, payload: vendorId});
 
@@ -85,8 +88,17 @@ export const updateVendor = (formData, id, setIsEditMode) => (dispatch) => {
   });
 }
 
-export const updateRealNameInformation = (formData, image, setImage, setCurrentStep, countries) => (dispatch, getState) => {
+export const updateVendorCreate = (formData, setCurrentStep) => (dispatch, getState) => {
   const id = getState().driver.id;
+  const data = new FormData();
+  data.append('vendorId', formData.vendorId);
+  API.post(`drivers/vendor/${id}`, data)
+  .then(() => {
+    setCurrentStep(currentStep => currentStep + 1);
+  });
+}
+
+export const updateRealNameInformation = (formData, image, setImage, setCurrentStep, countries) => (dispatch, getState) => {
   if (!image.isFrontChoosed) {
     setImage({ ...image, hasFrontError: true })
     return false;
@@ -94,6 +106,7 @@ export const updateRealNameInformation = (formData, image, setImage, setCurrentS
     setImage({ ...image, hasBackError: true })
     return false;
   }
+  const id = getState().driver.id;
   const data = new FormData();
   data.append('realNameIdType', formData.realNameIdType);
   data.append('realNameIdNo', formData.realNameIdNo);
@@ -160,15 +173,71 @@ export const createDriver = (formData, setPhoneNumber, phoneNumber, image, setIm
 }
 
 export const updateVehicleInfo = (formData) => (dispatch, getState) => {
-  
+  // const id = getState().driver.id;
+  const data = new FormData();
+  data.append('mvpiNumber', formData.mvpiNumber);
+  data.append('vehicleInsurance.insuranceEndDate', formData.insuranceEndDate);
+  data.append('vehicleInsurance.insuranceNumber	', formData.insuranceNo);
+  data.append('vehicleInsurance.insuranceStartDate', formData.insuranceStartDate);
+  data.append('vehicleMake', formData.vehicleMake);
+  data.append('vehicleModel	', formData.vehicleModel);
+  data.append('vehiclePlateNumber', formData.vehiclePlateNumber);
+  data.append('vehicleRegistrationNumber',formData.vehicleRegistrationNumber )
 }
 
-export const updateProfile = (formData, id, image, phoneNumber, countries) => (dispatch, getState) => {
+const setProfile = (profile) => ({ type: driverConstants.SET_PROFILE, payload: profile});
+
+export const updateProfile = (formData, id, image, phoneNumber, countries, setImage, isPhoneNumberValid, setIsEditMode) => (dispatch, getState) => {
+  if(!isPhoneNumberValid) {
+    return false;
+  }
+  if(!image || !image.file) {
+    setImage({hasError: true});
+    return false;
+  }
   const data = getDriver(formData, image, phoneNumber, countries);
   data.delete('firstName');
   data.delete('lastName');
   const name = formData.name.split(' ');
   data.append('firstName', name[0]);
   data.append('lastName', name[1]);
-  API.post(`drivers/profile/${id}`, data);
+  API.post(`drivers/profile/${id}`, data)
+    .then(result => {
+      dispatch(setProfile(result.data));
+      setIsEditMode(false);
+    });
+}
+
+export const activateDriver = (formData, activated) => (dispatch, getState) => {
+  const id = getState().driver.id;
+  const data = new FormData();
+  data.append('activation.activeFrom', formData.activationStartDate);
+  data.append('activation.activeTo', formData.activationEndDate);
+  data.append('activation.active', activated);
+  API.post(`drivers/activation/${id}`, data)
+  .then(console.log);
+}
+
+export const updateRealNameInformationByID = (formData, id, countries, imageHasError, setImageHasError) => (dispatch) => {
+  if (!(formData.idImgBack[0] instanceof File)) {
+    setImageHasError(prev => ({...prev, back: true}));
+    return false;
+  } else if(!(formData.idImgFront[0] instanceof File)) {
+    setImageHasError(prev => ({...prev, front: true}));
+    return false;
+  } else {
+    setImageHasError({back: false, front: false});
+  }
+
+  const data = new FormData();
+  data.append('realNameExpiryDate', formData.realNameExpiryDate);
+  data.append('realNameIdNo', formData.realNameIdNo);
+  data.append('realNameIdType', formData.realNameIdType);
+  data.append('realNameIssueAuthority', formData.realNameIssueAuthority);
+  data.append('realNameIssueCountry.countryName', getCountryNameByISOCode(countries, formData.realNameIssueCountry));
+  data.append('realNameIssueCountry.isoCode', formData.realNameIssueCountry);
+  data.append('realNameIssueDate', formData.realNameIssueDate);
+  data.append('idImgBack', formData.idImgBack[0]);
+  data.append('idImgFront', formData.idImgFront[0]);
+  API.post(`drivers/real-name/${id}`, data);
 }

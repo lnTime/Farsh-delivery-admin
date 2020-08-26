@@ -1,16 +1,14 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { VendorFormUI } from '../ui/VendorFormUI';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+import { updateVendorCreate } from '../../../../../redux/driver/driverActions'
 
-export const VendorFormContainer = ({ setData, setCurrentOnSubmit, setCurrentStep }) => {
+export const VendorFormContainer = ({ setCurrentOnSubmit, setCurrentStep }) => {
+    const dispatch = useDispatch();
+
     const onSubmit = useCallback(formData => {
-        setData(data => {
-            data.append('vendorId', formData.vendorId);
-            return data;
-        })
-        setCurrentStep(currentStep => currentStep + 1);
-    }, [setData, setCurrentStep]);
+        dispatch(updateVendorCreate(formData, setCurrentStep));
+    }, [dispatch, setCurrentStep]);
 
     useEffect(() => {
         setCurrentOnSubmit(() => onSubmit);

@@ -27,7 +27,7 @@
 }
 
 .arrow.up {
-    display: none;   
+    display: none;
 }
 
 .iti-flag {
@@ -64,6 +64,10 @@
     line-height: calc(10px + 0.512vw);
     width: 95%;
     padding-left: 75px;
+}
+
+.ProfileFormAvatar-UploadImage_error {
+    border: 2px solid red;
 }
 
 @media only screen and (max-width: 500px) {

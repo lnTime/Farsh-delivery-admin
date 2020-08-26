@@ -4,13 +4,14 @@ import {UploadContainer} from '../../../../common/icons/Upload/functional/Upload
 
 export const ChooseFileFieldUI = React.memo(({title = 'JPG , PNG or PDF smaller than 10MB', 
                                             actionText = 'Drag and drop your image here or',
-                                            buttonText = 'Choose file', hasError, ...props}) => {
+                                            buttonText = 'Choose file', hasError, setHasError, ...props}) => {
     return (<div className={`ChooseFileField ${hasError ? 'ChooseFileField_error' : ''}`}>
         <input {...props} onChange={e => {
               e.preventDefault();
               // convert files to an array
               const files = [ ...e.target.files ];
               props.input.onChange(files[0])
+              setHasError(false);
         }} type="file" className="ChooseFileField-Input" />
         <div className="ChooseFileFieldUploadSection">
             <UploadContainer />

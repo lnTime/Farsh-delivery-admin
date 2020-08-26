@@ -23,7 +23,7 @@ export const ProfileInfoFormContainer = ({handleSubmit, error, setCurrentOnSubmi
         };
     }
 
-    
+
     const onSubmit = useCallback((formData) => {
         dispatch(createDriver(formData, setPhoneNumber, phoneNumber, image, setImage, address.countries, setCurrentStep))
     }, [setPhoneNumber, phoneNumber, image, setImage, setCurrentStep, address.countries, dispatch]);

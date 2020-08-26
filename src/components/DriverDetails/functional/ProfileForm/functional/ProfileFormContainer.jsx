@@ -9,14 +9,14 @@ import { getAddressSelector } from "../../../../../redux/address/addressSelector
 import { BigAvatarContainer } from '../../../../common/icons/BigAvatar/functional/BigAvatarContainer'
 
 export const ProfileFormContainer = ({ id }) => {
-  const [isEdit, handleClick] = useEditMode();
+  const [isEdit, setIsEditMode] = useEditMode();
   const dispatch = useDispatch();
   const profile = useSelector(getProfileSelector);
   const address = useSelector(getAddressSelector);
   const [phoneNumber, setPhoneNumber] = useState({ mobileNumber: profile.mobileNumber, isValid: true, });
   const [image, setImage] = useState(null);
   const onSubmit = (formData) => {
-    dispatch(updateProfile(formData, id, image, phoneNumber, address.countries));
+    dispatch(updateProfile(formData, id, image, phoneNumber, address.countries, setImage, phoneNumber.isValid, setIsEditMode));
   };
 
   const onPhoneNumberBlur = (isValid) => {
@@ -42,7 +42,7 @@ export const ProfileFormContainer = ({ id }) => {
 
   useEffect(() => {
     if (profile && address.countries.length) {
-      customCountryChange(profile.address.country.isoCode);
+      customCountryChange(profile.address?.country.isoCode || 'SA');
     }
   }, [profile, address.countries, customCountryChange]);
 
@@ -52,8 +52,8 @@ export const ProfileFormContainer = ({ id }) => {
     }
   }, [address.countries, dispatch]);
 
-  
-  const ImageComponent = useMemo(() => image ? () => <img alt="Avatar" width="120" height="92" src={image.src} /> : 
+
+  const ImageComponent = useMemo(() => image && image.file ? () => <img alt="Avatar" width="120" height="92" src={image.src} /> :
     () => <BigAvatarContainer className="Upload-SVG" />, [image]);
 
   const handleImageChange = (e) => {
@@ -66,11 +66,19 @@ export const ProfileFormContainer = ({ id }) => {
     };
   }
 
+  const initialValues = useMemo(() => ({ name: `${profile.firstName} ${profile.lastName}`,
+    address: profile?.address?.address, country: profile.address?.country.isoCode,
+    city: profile.address?.city, state: profile.address?.state  }), [profile]);
+
+  if(!profile) {
+    return null;
+  }
+
   return (
     <ProfileFormUI
       profile={profile}
       isEdit={isEdit}
-      handleClick={handleClick}
+      handleClick={setIsEditMode}
       onSubmit={onSubmit}
       phoneNumber={phoneNumber}
       onPhoneNumberBlur={onPhoneNumberBlur}
@@ -81,6 +89,8 @@ export const ProfileFormContainer = ({ id }) => {
       setImage={setImage}
       ImageComponent={ImageComponent}
       handleImageChange={handleImageChange}
+      hasError={image && image.hasError}
+      initialValues = {initialValues}
     />
   );
 };

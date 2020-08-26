@@ -7,7 +7,7 @@ import { getVendorSelector } from "../../../../../redux/driver/driverSelectors";
 
 export const VendorFormContainer = ({id}) => {
   const [isEdit, setIsEditMode] = useEditMode();
-  const vendor = useSelector(getVendorSelector);
+  const {vendorId} = useSelector(getVendorSelector);
   const dispatch = useDispatch();
   const onSubmit = (formData) => {
     dispatch(updateVendor(formData, id, setIsEditMode));
@@ -17,8 +17,9 @@ export const VendorFormContainer = ({id}) => {
     <VendorFormUI
       isEdit={isEdit}
       handleClick={setIsEditMode}
-      vendorId={vendor.vendorId}
       onSubmit={onSubmit}
+      initialValues={{ vendorId }}
+      vendorId={vendorId}
     />
   );
 };
