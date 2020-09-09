@@ -5,6 +5,27 @@ import styles from './AddDriverForm.module.scss';
 import { HeaderTopContainer } from '../../HeaderTop/functional/HeaderTopContainer';
 import './AddDriverForm.module.scss';
 
+const validateAllForms = (values) => {
+  const errors = {};
+  let [issueDate, issueDateKey, expiryDate] = [null, null, null, null];
+  for (let key in values) {
+    if (key.toLowerCase().includes('issuedate')) {
+      issueDate = new Date(values[key]);
+      issueDateKey = key;
+    } else if (key.toLowerCase().includes('expirydate')) {
+      expiryDate = new Date(values[key]);
+    }
+  }
+
+  if (issueDate && expiryDate) {
+    if (issueDate > expiryDate) {
+      errors[issueDateKey] = `The issue date can't be after the expiry date.`
+    }
+  }
+  
+  return errors;
+}
+
 export const AddDriverForm = React.memo(({ handleSubmit, onSubmit, Component, activeID, invalid, pristine, submitting, ...all }) => {
   return (
         <div className={styles.AddDriver}>
@@ -28,4 +49,7 @@ export const AddDriverForm = React.memo(({ handleSubmit, onSubmit, Component, ac
         </div>);
 });
 
-export const AddDriverFormUI = reduxForm({ form: 'add-driver' })(React.memo(AddDriverForm))
+export const AddDriverFormUI = reduxForm({ 
+  form: 'add-driver',
+  validate: validateAllForms
+})(React.memo(AddDriverForm))

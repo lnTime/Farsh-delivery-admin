@@ -5,8 +5,9 @@ import { TextFieldContainer } from '../../../../common/inputs/TextField/function
 import { ChooseFrontAndBackContainer } from '../../../functional/ChooseFrontAndBack/functional/ChooseFrontAndBackContainer';
 import { validators } from '../../../../../utils/validators/validators';
 import styles from './DrivingLicenseForm.module.scss';
+import { DateFieldContainer } from '../../../../common/inputs/DateField/functional/DateFieldContainer';
 
-export const DrivingLicenseFormUI = React.memo(({ licenseTypeOptions, image, countries, setImage }) => {
+export const DrivingLicenseFormUI = React.memo(({ licenseTypeOptions, customStateChange, image, countries, setImage }) => {
     return (<div className={styles['AddDriver-Form']}>
         <div className="EvenInputs">
             <Field name="licenseType"
@@ -28,14 +29,14 @@ export const DrivingLicenseFormUI = React.memo(({ licenseTypeOptions, image, cou
             <Field
                 data-halfwidth
                 name="licenseIssueDate"
-                component={TextFieldContainer}
+                component={DateFieldContainer}
                 placeholder="Issue date"
                 validate={[validators.required]}
             />
             <Field
                 data-halfwidth
                 name="licenseExpiryDate"
-                component={TextFieldContainer}
+                component={DateFieldContainer}
                 placeholder="Expiry date"
                 validate={[validators.required]}
             />
@@ -47,6 +48,7 @@ export const DrivingLicenseFormUI = React.memo(({ licenseTypeOptions, image, cou
                 placeholder="Issuing country"
                 component={SelectFieldContainer}
                 options={countries}
+                customOnChange={customStateChange}
                 validate={[validators.required]}
             />
             <Field
@@ -55,6 +57,7 @@ export const DrivingLicenseFormUI = React.memo(({ licenseTypeOptions, image, cou
                 placeholder="Issuing Authority"
                 component={SelectFieldContainer}
                 options={countries}
+                customOnChange={customStateChange}
                 validate={[validators.required]}
             />
         </div>

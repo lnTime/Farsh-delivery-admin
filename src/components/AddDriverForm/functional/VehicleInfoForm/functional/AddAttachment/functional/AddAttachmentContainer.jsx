@@ -34,7 +34,7 @@ export const AddAttachmentContainer = ({ setOpenAtt, setFileInfo, inpValue, setI
             })
             setOpenAtt(false);
             setInpValue('');
-            setDocuments(documents => [...documents, file]);
+            setDocuments(documents => [...documents, {file, name: inpValue}]);
         };
     }
     const handleChange = (e) => {
@@ -45,12 +45,10 @@ export const AddAttachmentContainer = ({ setOpenAtt, setFileInfo, inpValue, setI
     }
 
     useEffect(() => {
-        if (!(inpValue && disabled)) {
+        if(!inpValue) {
             setDisabled(true);
         } else {
-            if (disabled === true) {
-                setDisabled(false);
-            }
+            setDisabled(false);
         }
     }, [inpValue]);
 

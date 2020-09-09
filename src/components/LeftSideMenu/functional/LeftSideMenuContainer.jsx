@@ -6,15 +6,15 @@ import { MessageContainer } from '../../common/icons/Message/functional/MessageC
 import { DriverContainer } from '../../common/icons/Driver/functional/DriverContainer';
 import { OperatorContainer } from '../../common/icons/Operator/functional/OperatorContainer';
 import { CartContainer } from '../../common/icons/Cart/functional/CartContainer';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 
 const menuOptions = [
-    { id: 0, component: HomeContainer, title: 'Home' },
-    { id: 1, component: PaperContainer, title: 'Orders' },
-    { id: 2, component: MessageContainer, title: 'Messages' },
-    { id: 3, component: DriverContainer, title: 'Drivers' },
-    { id: 4, component: OperatorContainer, title: 'Operators' },
-    { id: 5, component: CartContainer, title: 'Vendors' },
+    { id: 0, component: HomeContainer, title: 'Home', href: '/' },
+    { id: 1, component: PaperContainer, title: 'Orders', href: '/orders' },
+    { id: 2, component: MessageContainer, title: 'Messages', href: '/messages' },
+    { id: 3, component: DriverContainer, title: 'Drivers', href: '/drivers' },
+    { id: 4, component: OperatorContainer, title: 'Operators', href: '/operators' },
+    { id: 5, component: CartContainer, title: 'Vendors', href: 'vendors' },
 ];
 
 const getActiveID = (pathname) => {
@@ -56,8 +56,10 @@ export const LeftSideMenuContainer = () => {
         const items = menuOptions.map(option => {
             const isActiveItem = activeID === option.id;
             return <li key={option.id} className={`Menu-Item ${isActiveItem ? 'Menu-Item_active' : ''}`}>
-                <div className="Menu-Item_wrapper">{<option.component isActive={isActiveItem} />}</div>
-                {isFullOpened ? <span className={`Menu-Item_text${isActiveItem ? '-black' : ''}`}>{option.title}</span> : null}
+                <Link to={option.href} className="Menu-Item_link">
+                    <div className="Menu-Item_wrapper">{<option.component isActive={isActiveItem} />}</div>
+                    {isFullOpened ? <span className={`Menu-Item_text${isActiveItem ? '-black' : ''}`}>{option.title}</span> : null}
+                </Link>
             </li>;
         });
         setMenuItems(items);

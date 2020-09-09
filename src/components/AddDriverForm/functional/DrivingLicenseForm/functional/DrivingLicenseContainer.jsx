@@ -6,6 +6,7 @@ import { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getCountriesSelector } from '../../../../../redux/address/addressSelectors';
 import { updateDrivingLicense } from '../../../../../redux/driver/driverActions';
+import {getCities} from "../../../../../redux/address/addressActions";
 
 export const DrivingLicenseContainer = ({setCurrentStep, setCurrentOnSubmit}) => {
     const licenseTypeOptions = [{id: 'LTE', value: 'LTE'}];
@@ -21,10 +22,15 @@ export const DrivingLicenseContainer = ({setCurrentStep, setCurrentOnSubmit}) =>
         setCurrentOnSubmit(() => onSubmit);
     }, [setCurrentOnSubmit, onSubmit]);
 
-    return <DrivingLicenseFormUI 
+    const customStateChange = useCallback((value) => {
+        dispatch(getCities(value));
+    }, [dispatch]);
+
+    return <DrivingLicenseFormUI
             countries={countries}
             licenseTypeOptions={licenseTypeOptions}
             image={image}
             setImage={setImage}
+            customStateChange={customStateChange}
         />;
 }

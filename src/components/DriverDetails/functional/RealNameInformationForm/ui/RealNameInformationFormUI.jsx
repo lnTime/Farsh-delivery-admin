@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React  from "react";
 import "./RealNameInformationForm.scss";
 import { FormHeaderContainer } from "../../FormHeader/functional/FormHeaderContainer";
 import { IdCardContainer } from "../../../../common/icons/IdCard/functional/IdCardContainer";
@@ -8,22 +8,19 @@ import { BlackButtonContainer } from "../../../../common/buttons/BlackButton/fun
 import { SelectFieldContainer } from '../../../../common/inputs/SelectField/functional/SelectFieldContainer'
 import { validators } from '../../../../../utils/validators/validators';
 import { ChooseFileFieldContainer } from '../../../../common/inputs/ChooseFileField/functional/ChooseFileFieldContainer';
+import { DateFieldContainer } from "../../../../common/inputs/DateField/functional/DateFieldContainer";
 
 const RealNameInformationFormUI = ({
-  realNameInformation,
+  realNameInformation = {},
   isEdit,
   handleClick,
+  customCountryChange,
   handleSubmit,
-  initialize,
   countries,
   idTypeOptions,
   imageHasError,
   setImageHasError
 }) => {
-  useEffect(() => {
-    initialize({ ...realNameInformation, realNameIssueCountry: realNameInformation.realNameIssueCountry.isoCode });
-  }, [initialize, realNameInformation]);
-
   return (
     <form onSubmit={handleSubmit}>
       <div className="RealNameInformationForm ProfileForm">
@@ -64,7 +61,8 @@ const RealNameInformationFormUI = ({
             <span className="ProfileInfoBlock-InputName">Issue date</span>
             {isEdit ? (
               <Field
-                component={TextFieldContainer}
+                component={DateFieldContainer}
+                data-fullWidth
                 type="text"
                 name="realNameIssueDate"
               />
@@ -76,8 +74,9 @@ const RealNameInformationFormUI = ({
             <span className="ProfileInfoBlock-InputName">Expiry date</span>
             {isEdit ? (
               <Field
-                component={TextFieldContainer}
+                component={DateFieldContainer}
                 type="text"
+                data-fullWidth
                 name="realNameExpiryDate"
               />
             ) : (
@@ -95,11 +94,12 @@ const RealNameInformationFormUI = ({
                 placeholder="Issue country"
                 component={SelectFieldContainer}
                 options={countries}
+                customOnChange={customCountryChange}
                 validate={[validators.required]}
               />
             ) : (
                 <span className="ProfileInfoBlock-InputValue">
-                  {realNameInformation.realNameIssueCountry.isoCode}
+                  {realNameInformation.realNameIssueCountry?.isoCode}
                 </span>
               )}
           </div>

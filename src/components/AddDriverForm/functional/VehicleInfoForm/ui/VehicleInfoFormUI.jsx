@@ -6,6 +6,7 @@ import { TextFieldContainer } from '../../../../common/inputs/TextField/function
 import { validators } from '../../../../../utils/validators/validators';
 import { AddAttachmentContainer } from '../../VehicleInfoForm/functional/AddAttachment/functional/AddAttachmentContainer';
 import { TypeIconContainer } from '../../../../common/icons/TypeIcon/functional/TypeIconContainer';
+import { DateFieldContainer } from '../../../../common/inputs/DateField/functional/DateFieldContainer';
 
 export const VehicleInfoFormUI = ({ setFileInfo, setDocuments, fileInfo, setOpenAtt, handleClick, openAtt, vehicleMakeOptions, address, customCountryChange, customStateChange, setInpValue, inpValue, handleDelete }) => {
     return (<div className={styles["AddDriver-Form"]}>
@@ -88,7 +89,7 @@ export const VehicleInfoFormUI = ({ setFileInfo, setDocuments, fileInfo, setOpen
                 data-halfwidth
                 name="insuranceStartDate"
                 placeholder="Insurance start date"
-                component={TextFieldContainer}
+                component={DateFieldContainer}
                 validate={[validators.required]}
             />
         </div>
@@ -97,7 +98,7 @@ export const VehicleInfoFormUI = ({ setFileInfo, setDocuments, fileInfo, setOpen
                 data-halfwidth
                 name="insuranceEndDate"
                 placeholder="Insurance end date"
-                component={TextFieldContainer}
+                component={DateFieldContainer}
                 validate={[validators.required]}
             />
         </div>

@@ -1,0 +1,16 @@
+.DateField {
+    opacity: 0;
+    position: absolute;
+    &::-webkit-calendar-picker-indicator {
+        width: 100%;
+        margin-left: 0;
+    }
+}
+
+.DateFieldWrapper {
+    position: relative;
+    width: 47%;
+    &_fullWidth {
+        width: 95%;
+    }
+}

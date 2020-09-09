@@ -5,7 +5,8 @@ import { NotificationContainer } from '../../common/icons/Notification/functiona
 import { ProfileContainer } from '../../common/icons/Profile/functional/ProfileContainer';
 
 
-export const HeaderUI = ({ component = null, sectionName, isBigger, additionalComponent }) => {
+export const HeaderUI = ({ component = null, inputValue, setInputValue,
+    handleSearchDrivers, sectionName, isBigger, additionalComponent }) => {
     return (<header className="Header">
         <section className={`Left${isBigger ? '_bigger' : ''}`}>
             <div className="Left-Heading">
@@ -13,10 +14,18 @@ export const HeaderUI = ({ component = null, sectionName, isBigger, additionalCo
                 <span>{sectionName}</span>
                 {additionalComponent}
             </div>
-            <label className="Left-Label">
-                <input type="text" placeholder="Search" className="Left-Input" />
-                <SearchContainer className="Left-SearchIcon" />
-            </label>
+            <form onSubmit={(e) => handleSearchDrivers(e, inputValue)}>
+                <label className="Left-Label">
+                    <input value={inputValue}
+                        onChange={(e) => setInputValue(e.target.value)}
+                        type="text"
+                        placeholder="Search"
+                        className="Left-Input" />
+                    <SearchContainer 
+                    onClick={(e) => handleSearchDrivers(e, inputValue)}
+                    className="Left-SearchIcon" />
+                </label>
+            </form>
         </section>
         <section className="Right">
             <NotificationContainer />

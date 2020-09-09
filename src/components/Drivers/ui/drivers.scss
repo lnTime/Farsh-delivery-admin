@@ -106,11 +106,14 @@ $roboto: "Roboto";
     font-weight: bold;
     font-size: calc(6px + 0.512vw);
     line-height: calc(19px + 1.464vw);
-    width: calc(50px + 3.221vw);
+    width: calc(20px + 5.417vw);
     height: 37px;
     background: #000000 0% 0% no-repeat padding-box;
     border-radius: 3px;
     margin: 0 2.416vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 

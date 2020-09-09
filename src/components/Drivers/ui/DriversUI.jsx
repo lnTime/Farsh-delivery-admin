@@ -3,12 +3,13 @@ import "./Drivers.scss";
 import { HeaderContainer } from '../../Header/functional/HeaderContainer';
 import { DriverContainer } from '../../common/icons/Driver/functional/DriverContainer';
 
-export const DriverUI = ({ drivers, goToAddDriver }) => {
+export const DriverUI = ({ drivers, goToAddDriver, handleSearchDrivers }) => {
   return (
     <div className="Drivers">
       <HeaderContainer 
         component={<DriverContainer />}
         sectionName="Drivers"
+        handleSearchDrivers={handleSearchDrivers}
         additionalComponent={
         <button 
           onClick={goToAddDriver}

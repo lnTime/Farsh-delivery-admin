@@ -1,18 +1,14 @@
 import React from 'react';
 import './ChooseFileField.scss';
-import {UploadContainer} from '../../../../common/icons/Upload/functional/UploadContainer';
+import { UploadContainer } from '../../../../common/icons/Upload/functional/UploadContainer';
 
-export const ChooseFileFieldUI = React.memo(({title = 'JPG , PNG or PDF smaller than 10MB', 
-                                            actionText = 'Drag and drop your image here or',
-                                            buttonText = 'Choose file', hasError, setHasError, ...props}) => {
-    return (<div className={`ChooseFileField ${hasError ? 'ChooseFileField_error' : ''}`}>
-        <input {...props} onChange={e => {
-              e.preventDefault();
-              // convert files to an array
-              const files = [ ...e.target.files ];
-              props.input.onChange(files[0])
-              setHasError(false);
-        }} type="file" className="ChooseFileField-Input" />
+export const ChooseFileFieldUI = React.memo(({ title = 'JPG , PNG or PDF smaller than 10MB',
+    actionText = 'Drag and drop your image here or', handleFileChange,
+    buttonText = 'Choose file', isNull, hasError, setHasError, setPreview, ...props }) => {
+    return (<div className={`ChooseFileField 
+    ${isNull ? 'ChooseFileField_none' : ''}
+    ${hasError ? 'ChooseFileField_error' : ''}`}>
+        <input {...props} onChange={handleFileChange} type="file" className="ChooseFileField-Input" />
         <div className="ChooseFileFieldUploadSection">
             <UploadContainer />
             {title && <span className="ChooseFileFieldUploadSection-Title">{title}</span>}

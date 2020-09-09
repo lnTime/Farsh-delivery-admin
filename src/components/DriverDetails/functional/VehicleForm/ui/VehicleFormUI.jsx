@@ -1,20 +1,20 @@
-import React, { useEffect } from "react";
+import React  from "react";
 import "./VehicleForm.scss";
 import { FormHeaderContainer } from "../../FormHeader/functional/FormHeaderContainer";
 import { Field, reduxForm } from "redux-form";
 import { TextFieldContainer } from "../../../../common/inputs/TextField/functional/TextFieldContainer";
 import { BlackButtonContainer } from "../../../../common/buttons/BlackButton/functional/BlackButtonContainer";
+import {SelectFieldContainer} from "../../../../common/inputs/SelectField/functional/SelectFieldContainer";
+import {validators} from "../../../../../utils/validators/validators";
 
-export const VehicleFormUI = ({ isEdit,
+export const VehicleFormUI = ({isEdit,
   handleClick,
   handleSubmit,
-  initialize,
-  vehicle
+  vehicle = {},
+  address,
+  customStateChange,
+  customCountryChange
 }) => {
-  useEffect(() => {
-    initialize({ ...vehicle })
-  }, [initialize, vehicle]);
-
   return (
     <form onSubmit={handleSubmit}>
       <div className="ProfileForm VehicleForm">
@@ -33,7 +33,7 @@ export const VehicleFormUI = ({ isEdit,
                 type="text"
               />
             ) : (
-                <span className="ProfileInfoBlock-InputValue">{vehicle.vehiclePlateNumber}</span>
+                <span className="ProfileInfoBlock-InputValue">{vehicle?.vehiclePlateNumber}</span>
               )}
           </div>
           <div>
@@ -45,7 +45,7 @@ export const VehicleFormUI = ({ isEdit,
                 type="text"
               />
             ) : (
-                <span className="ProfileInfoBlock-InputValue">{vehicle.vehicleModel}</span>
+                <span className="ProfileInfoBlock-InputValue">{vehicle?.vehicleModel}</span>
               )}
           </div>
         </div>
@@ -59,7 +59,7 @@ export const VehicleFormUI = ({ isEdit,
                 type="text"
               />
             ) : (
-                <span className="ProfileInfoBlock-InputValue">{vehicle.vehicleMake}</span>
+                <span className="ProfileInfoBlock-InputValue">{vehicle?.vehicleMake}</span>
               )}
           </div>
           <div>
@@ -68,9 +68,13 @@ export const VehicleFormUI = ({ isEdit,
             </span>
             {isEdit ? (
               <Field
-                component={TextFieldContainer}
+                data-halfwidth
                 name="registeredCountry"
-                type="text"
+                placeholder="Registered country"
+                component={SelectFieldContainer}
+                customOnChange={customCountryChange}
+                options={address.countries}
+                validate={[validators.required]}
               />
             ) : (
                 <span className="ProfileInfoBlock-InputValue">
@@ -84,9 +88,13 @@ export const VehicleFormUI = ({ isEdit,
             <span className="ProfileInfoBlock-InputName">State</span>
             {isEdit ? (
               <Field
-                component={TextFieldContainer}
+                data-halfwidth
                 name="state"
-                type="text"
+                component={SelectFieldContainer}
+                customOnChange={customStateChange}
+                options={address.states}
+                placeholder="State"
+                validate={[validators.required]}
               />
             ) : (
                 <span className="ProfileInfoBlock-InputValue">State</span>
@@ -96,9 +104,12 @@ export const VehicleFormUI = ({ isEdit,
             <span className="ProfileInfoBlock-InputName">City</span>
             {isEdit ? (
               <Field
-                component={TextFieldContainer}
+                data-halfwidth
                 name="city"
-                type="text"
+                component={SelectFieldContainer}
+                options={address.cities}
+                placeholder="City"
+                validate={[validators.required]}
               />
             ) : (
                 <span className="ProfileInfoBlock-InputValue">City</span>
@@ -116,7 +127,7 @@ export const VehicleFormUI = ({ isEdit,
               />
             ) : (
                 <span className="ProfileInfoBlock-InputValue">
-                  {vehicle.vehicleRegistrationNumber}
+                  {vehicle?.vehicleRegistrationNumber}
                 </span>
               )}
           </div>
@@ -129,7 +140,7 @@ export const VehicleFormUI = ({ isEdit,
                 type="text"
               />
             ) : (
-                <span className="ProfileInfoBlock-InputValue">{vehicle.mvpiNumber}</span>
+                <span className="ProfileInfoBlock-InputValue">{vehicle?.mvpiNumber}</span>
               )}
           </div>
         </div>
@@ -139,5 +150,5 @@ export const VehicleFormUI = ({ isEdit,
   );
 };
 export default reduxForm({
-  form: "editForm",
+  form: "vehicleEditForm",
 })(VehicleFormUI);

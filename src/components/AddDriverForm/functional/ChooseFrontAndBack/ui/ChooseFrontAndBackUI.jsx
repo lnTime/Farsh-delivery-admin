@@ -27,6 +27,7 @@ export const ChooseFrontAndBackUI = React.memo(({isFront, handleBackOpen,
             Back {isBackChoosed ? '(choosed)' : ''}
         </button>
     </div>
-    <ChooseFileFieldContainer  onChange={handleImageChange} />
+    <ChooseFileFieldContainer  onChange={handleImageChange} isNull={isFront}/>
+    <ChooseFileFieldContainer  onChange={handleImageChange} isNull={!isFront}/>
 </div>);
 });

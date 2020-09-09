@@ -53,8 +53,14 @@ export const ProfileFormContainer = ({ id }) => {
   }, [address.countries, dispatch]);
 
 
-  const ImageComponent = useMemo(() => image && image.file ? () => <img alt="Avatar" width="120" height="92" src={image.src} /> :
-    () => <BigAvatarContainer className="Upload-SVG" />, [image]);
+  const ImageComponent = useMemo(() => {
+    if (profile.profileAvatar) {
+      return () => <img src={profile.profileAvatar} alt="Avatar" width="120" height="92" />;
+    }
+    
+    return image && image.file ? () => <img alt="Avatar" width="120" height="92" src={image.src} /> :
+    () => <BigAvatarContainer className="Upload-SVG" />
+  }, [image, profile.profileAvatar]);
 
   const handleImageChange = (e) => {
     e.preventDefault();

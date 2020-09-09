@@ -9,9 +9,10 @@ import { ChooseFileFieldContainer } from "../../../../common/inputs/ChooseFileFi
 import { BlackButtonContainer } from "../../../../common/buttons/BlackButton/functional/BlackButtonContainer";
 import { SelectFieldContainer } from '../../../../common/inputs/SelectField/functional/SelectFieldContainer';
 import { validators } from '../../../../../utils/validators/validators';
+import { DateFieldContainer } from "../../../../common/inputs/DateField/functional/DateFieldContainer";
 
 const DrivingLicenseFormUI = ({
-  drivingLicense,
+  drivingLicense = {},
   isEdit,
   handleClick,
   handleSubmit,
@@ -63,9 +64,10 @@ const DrivingLicenseFormUI = ({
             <span className="ProfileInfoBlock-InputName">Issue date</span>
             {isEdit ? (
               <Field
-                component={TextFieldContainer}
+                component={DateFieldContainer}
                 type="text"
                 name="licenseIssueDate"
+                data-fullWidth
               />
             ) : (
                 <span className="ProfileInfoBlock-InputValue">{drivingLicense.licenseIssueDate}</span>
@@ -75,7 +77,8 @@ const DrivingLicenseFormUI = ({
             <span className="ProfileInfoBlock-InputName">Expiry date</span>
             {isEdit ? (
               <Field
-                component={TextFieldContainer}
+                component={DateFieldContainer}
+                data-fullWidth
                 type="text"
                 name="licenseExpiryDate"
               />
@@ -98,7 +101,7 @@ const DrivingLicenseFormUI = ({
               />
             ) : (
                 <span className="ProfileInfoBlock-InputValue">
-                  {drivingLicense.licenseIssuingCountry.countryName || 'SA'}
+                  {drivingLicense.licenseIssuingCountry?.countryName || 'SA'}
                 </span>
               )}
           </div>

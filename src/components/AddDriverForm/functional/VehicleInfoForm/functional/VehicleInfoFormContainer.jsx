@@ -4,7 +4,7 @@ import { getAddressSelector } from '../../../../../redux/address/addressSelector
 import { getStates, getCities, getCountries } from '../../../../../redux/address/addressActions';
 import { useSelector, useDispatch } from 'react-redux';
 import { useCallback } from 'react';
-import { updateVehicleInfo } from '../../../../../redux/driver/driverActions';
+import { createVehicleInfo } from '../../../../../redux/driver/driverActions';
 
 export const VehicleInfoFormContainer = ({ setCurrentStep, setCurrentOnSubmit }) => {
     const [fileInfo, setFileInfo] = useState([]);
@@ -45,7 +45,7 @@ export const VehicleInfoFormContainer = ({ setCurrentStep, setCurrentOnSubmit })
     }, [address, dispatch]);
 
     const onSubmit = useCallback((formData) => {
-        dispatch(updateVehicleInfo(formData, documents));
+        dispatch(createVehicleInfo(formData, documents));
         setCurrentStep(currentStep => currentStep + 1);
     }, [setCurrentStep, documents, dispatch]);
 

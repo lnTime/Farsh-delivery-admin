@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './ActivationForm.module.scss';
 import { Field } from 'redux-form';
-import { TextFieldContainer } from '../../../../common/inputs/TextField/functional/TextFieldContainer';
 import { SwitchFieldContainer } from '../../../../common/inputs/SwitchField/functional/SwitchFieldContainer';
 import { validators } from '../../../../../utils/validators/validators';
+import { DateFieldContainer } from '../../../../common/inputs/DateField/functional/DateFieldContainer';
 
 
 export const ActivationFormUI = ({ setActivated, activated }) => {
@@ -12,13 +12,13 @@ export const ActivationFormUI = ({ setActivated, activated }) => {
             <Field
                 name="activationStartDate"
                 validate={[validators.required]}
-                component={TextFieldContainer}
+                component={DateFieldContainer}
                 placeholder="Start date"
             />
             <Field
                 name="activationEndDate"
                 validate={[validators.required]}
-                component={TextFieldContainer}
+                component={DateFieldContainer}
                 placeholder="End date"
             />
         </div>

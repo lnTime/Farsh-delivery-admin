@@ -5,9 +5,11 @@ import { SelectFieldContainer } from '../../../../common/inputs/SelectField/func
 import { TextFieldContainer } from '../../../../common/inputs/TextField/functional/TextFieldContainer';
 import { ChooseFrontAndBackContainer } from '../../ChooseFrontAndBack/functional/ChooseFrontAndBackContainer';
 import { validators } from '../../../../../utils/validators/validators';
+import { DateFieldContainer } from '../../../../common/inputs/DateField/functional/DateFieldContainer';
 
 
-export const RealNameInformationFormUI = React.memo(({ idTypeOptions, image, countries, setImage }) => {
+export const RealNameInformationFormUI = React.memo(({
+    customStateChange, idTypeOptions, image, countries, issuingAuthorities, setImage }) => {
     return (<div className={styles["AddDriver-Form"]}>
         <div className='EvenInputs'>
             <Field name="realNameIdType"
@@ -30,14 +32,14 @@ export const RealNameInformationFormUI = React.memo(({ idTypeOptions, image, cou
             <Field
                 data-halfwidth
                 name="realNameIssueDate"
-                component={TextFieldContainer}
+                component={DateFieldContainer}
                 placeholder="Issue date"
                 validate={[validators.required]}
             />
             <Field
                 data-halfwidth
                 name="realNameExpiryDate"
-                component={TextFieldContainer}
+                component={DateFieldContainer}
                 placeholder="Expiry date"
                 validate={[validators.required]}
             />
@@ -48,6 +50,7 @@ export const RealNameInformationFormUI = React.memo(({ idTypeOptions, image, cou
                 name="issuingCountry"
                 placeholder="Issuing country"
                 component={SelectFieldContainer}
+                customOnChange={customStateChange}
                 options={countries}
                 validate={[validators.required]}
             />
@@ -56,7 +59,7 @@ export const RealNameInformationFormUI = React.memo(({ idTypeOptions, image, cou
                 name="issuingAuthority"
                 placeholder="Issuing Authority"
                 component={SelectFieldContainer}
-                options={countries}
+                options={issuingAuthorities}
                 validate={[validators.required]}
             />
         </div>

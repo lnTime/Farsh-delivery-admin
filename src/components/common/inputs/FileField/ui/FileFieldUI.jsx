@@ -17,10 +17,14 @@ export const FileFieldUIMini = React.memo(({input, ...custom}) => {
 
 export const FileFieldUI = React.memo(({input, ...custom}) => {
     return (<div className={`FileUpload ${custom['data-haserror'] ? 'FileUpload-Error' : ''}`}>
-        <input type="file" {...input} {...custom} value={null} onChange={e => {
+        <input type="file" {...input} {...custom} value='' onChange={e => {
               e.preventDefault();
               const {files} = e.target;
-              input.onChange(files[0])
+              if (input?.onChange) {
+                input.onChange(files[0])
+              } else {
+                  custom.onChange(e);
+              }
         }} className="FileUpload-Input" accept="image/*"/>
         <div className="Upload">
             {custom.src ? <img src={custom.src} alt="Uploaded icon" className="Uploaded-Image" /> :

@@ -21,7 +21,7 @@ export const DrivingLicenseFormContainer = ({id}) => {
       onSubmit={onSubmit}
       isEdit={isEdit}
       handleClick={handleEditModeChange}
-      drivingLicense={drivingLicense}
+      drivingLicense={drivingLicense || {}}
       countries={countries}
       imageHasError={imageHasError}
       setImageHasError={setImageHasError}
