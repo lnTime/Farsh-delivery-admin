@@ -4,17 +4,18 @@ import { getAddressSelector } from '../../../../../redux/address/addressSelector
 import { getStates, getCities, getCountries } from '../../../../../redux/address/addressActions';
 import { useSelector, useDispatch } from 'react-redux';
 import { useCallback } from 'react';
-import { createVehicleInfo } from '../../../../../redux/driver/driverActions';
+import { createVehicleInfo, getVehicleMakes } from '../../../../../redux/driver/driverActions';
 
 export const VehicleInfoFormContainer = ({ setCurrentStep, setCurrentOnSubmit }) => {
     const [fileInfo, setFileInfo] = useState([]);
     const [inpValue, setInpValue] = useState('');
     const [openAtt, setOpenAtt] = useState(false);
     const [documents, setDocuments] = useState([]);
-    const address = useSelector(getAddressSelector);
-    const vehicleMakeOptions = [{ id: 'V1', value: 'V1' }];
-    const dispatch = useDispatch();
+    const [vehicleMakes, setVehicleMakes] = useState(null);
 
+    const address = useSelector(getAddressSelector);
+    const dispatch = useDispatch();
+    
     const handleClick = () => {
         setOpenAtt(true)
     }
@@ -28,37 +29,37 @@ export const VehicleInfoFormContainer = ({ setCurrentStep, setCurrentOnSubmit })
             return (upDateData);
         })
     }
-
-
     const customCountryChange = (value) => {
         dispatch(getStates(value));
     }
-
     const customStateChange = (value) => {
         dispatch(getCities(value));
     }
-
-    useEffect(() => {
-        if (!address.countries.length) {
-            dispatch(getCountries())
-        }
-    }, [address, dispatch]);
 
     const onSubmit = useCallback((formData) => {
         dispatch(createVehicleInfo(formData, documents));
         setCurrentStep(currentStep => currentStep + 1);
     }, [setCurrentStep, documents, dispatch]);
 
+
+    useEffect(() => {
+        if (!address.countries.length) {
+            dispatch(getCountries())
+        }
+    }, [address, dispatch]);
     useEffect(() => {
         setCurrentOnSubmit(() => onSubmit);
     }, [setCurrentOnSubmit, onSubmit]);
+    useEffect(() => {
+        getVehicleMakes(setVehicleMakes);
+    }, []);
 
     return <VehicleInfoFormUI
         handleDelete={handleDelete}
         handleClick={handleClick}
         openAtt={openAtt}
         setOpenAtt={setOpenAtt}
-        vehicleMakeOptions={vehicleMakeOptions}
+        vehicleMakeOptions={vehicleMakes}
         address={address}
         customStateChange={customStateChange}
         customCountryChange={customCountryChange}

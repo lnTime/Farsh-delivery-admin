@@ -2,8 +2,7 @@ import React from "react";
 import "./SelectField.scss";
 
 export const SelectFieldUI = React.memo(({ input, ...custom }) => {
-  return (
-   
+  return custom.options && (
       <label>
         <select {...input} onChange={e => {
           if (custom.customOnChange) {

@@ -1,9 +1,14 @@
 import { driverConstants } from './driverConstants';
 import { API } from '../../API/index';
 import { SubmissionError } from 'redux-form';
-import car from '../../assets/images/car.png';
 import { getCountryNameByISOCode } from '../address/addressActions';
 import axios from 'axios';
+import {getOptions, getDrivingLicenseData, getVehicleData, getDriver} from './driverHelpers';
+
+
+/* 
+    REDUX ACTIONS (PURE)
+*/
 
 export const editProfile = (profile) => ({ type: driverConstants.EDIT_PROFILE, payload: profile })
 
@@ -15,19 +20,135 @@ export const editDriverLicense = (driverLicense) => ({ type: driverConstants.EDI
 
 export const editVehicle = (vehicle) => ({ type: driverConstants.EDIT_VEHICLE, payload: vehicle })
 
-const getDrivingLicenseData = (formData, countries, image) => {
-  const data = new FormData();
-  data.append('licenseType', formData.licenseType);
-  data.append('licenseNo', formData.licenseNo);
-  data.append('licenseIssueDate', formData.licenseIssueDate);
-  data.append('licenseExpiryDate', formData.licenseExpiryDate);
-  data.append('licenseIssuingCountry.countryName', getCountryNameByISOCode(countries, formData.issuingCountry));
-  data.append('licenseIssuingCountry.isoCode', formData.issuingCountry);
-  data.append('licenseIssuingAuthority', formData.licenseIssuingAuthority);
-  data.append('driverLicenceFrontImgFile', image.front);
-  data.append('driverLicenceBackImgFile', image.back);
-  return data;
+export const setDrivingLicense = (drivingLicense) => ({ type: driverConstants.SET_DRIVING_LICENSE, payload: drivingLicense });
+
+export const setVendor = (vendorId) => ({ type: driverConstants.SET_VENDOR, payload: vendorId });
+
+export const setProfileAvatar = (src) => ({ type: driverConstants.SET_PROFILE_AVATAR, payload: src })
+
+export const setDriverData = (driver) => ({ type: driverConstants.SET_DRIVER, payload: driver })
+
+export const setDriver = (driver) => ({ type: driverConstants.SET_DRIVER, payload: driver })
+
+export const setVehicleInfo = (vehicle) => ({ type: driverConstants.SET_VEHICLE_INFO, payload: vehicle });
+
+export const setProfile = (profile) => ({ type: driverConstants.SET_PROFILE, payload: profile });
+
+
+export const setRealNameInformation = realNameInformation => 
+({ type: driverConstants.SET_REAL_NAME_INFORMATION, payload: realNameInformation })
+/* 
+    END REDUX ACTIONS (PURE)
+*/
+
+/* 
+    GET ACTIONS (REDUX THUNK)
+*/
+export const getProfilePicture = fileKey => dispatch => {
+  axios.get(`https://cdn57.androidauthority.net/wp-content/uploads/2017/11/Google-search-curved-840x446.png`, {
+    responseType: 'blob'
+  })
+    .then(res => {
+      const urlCreator = window.URL || window.webkitURL;
+      const imageUrl = urlCreator.createObjectURL(res.data);
+      dispatch(setProfileAvatar(imageUrl));
+      window.blob = res.data;
+    });
 }
+
+export const getVehicleMakes = (setVehicleMakes) => {
+  API.get(`static/vehicle/vehicle-makes`)
+  .then(({data}) => {
+      setVehicleMakes(getOptions(data));
+  });
+}
+
+export const getIssuingAuthorities = async (setIssuingAuthorities) => {
+  API.get(`static/real-name/issuing-authority`)
+  .then(({data}) => {
+    setIssuingAuthorities(getOptions(data));
+  });
+}
+
+export const getDriverData = (id) => (dispatch) => {
+  API.get(`drivers/${id}`)
+    .then(({ data }) => {
+      const driver = data.responseList[0];
+      dispatch(setDriverData(driver));
+      dispatch(getProfilePicture(driver.profile?.attachments[0].fileKey))
+    });
+}
+
+export const getDrivingLicenseTypes = (setDrivingLicenseTypes) => {
+  API.get(`static/driving-license/types`)
+  .then(({data}) => {
+    setDrivingLicenseTypes(getOptions(data));
+  });
+}
+
+export const getDrivingLicenseIssuingAuthority = (setDrivingLicenseIssuingAuthority) => {
+  API.get(`static/driving-license/issuing-authority`)
+  .then(({data}) => {
+    setDrivingLicenseIssuingAuthority(getOptions(data));
+  });
+}
+
+/* 
+    END GET ACTIONS (REDUX THUNK)
+*/
+
+/* 
+  POST ACTIONS (REDUX THUNK)
+*/
+
+export const createDriver = (formData, setPhoneNumber, phoneNumber, image, setImage, countries, setCurrentStep) => (dispatch) => {
+  if (formData.password !== formData.confirmPassword) {
+    throw new SubmissionError({ confirmPassword: 'Please confirm the password.' })
+  }
+
+  if (!image) {
+    setImage({ hasError: true });
+    return false;
+  }
+
+  if (!phoneNumber.mobileNumber || !phoneNumber.isValid) {
+    setPhoneNumber({ ...phoneNumber, isValid: false });
+    return false;
+  }
+
+  const data = getDriver(formData, image, phoneNumber, countries);
+  API.post(`drivers/`, data)
+    .then((result) => {
+      setCurrentStep(currentStep => currentStep + 1);
+      dispatch(setDriver(result.data))
+    });
+}
+
+export const createVehicleInfo = (formData, documents) => (dispatch, getState) => {
+  const id = getState().driver.id;
+  const data = getVehicleData(formData);
+  window.documents = documents;
+  for (let i = 0; i < documents.length; i++) {
+    const att = `attachments[${i}].`;
+    data.append(`${att}attachmentType`, 'VEHICLE_REG');
+    data.append(`${att}fileKey`, documents[i].file.name);
+    data.append(`${att}fileType`, documents[i].file.type);
+    data.append(`${att}name`, documents[i].name);
+  }
+  API.post(`drivers/vehicle/${id}`, data)
+    .then((res) => {
+      console.log(res);
+    })
+}
+
+
+/* 
+  END POST ACTIONS(REDUX THUNK)
+*/
+
+/* 
+  UPDATE ACTIONS (REDUX THUNK)
+*/
 
 export const updateDrivingLicense = (formData, image, setImage, countries, setCurrentStep) => (dispatch, getState) => {
   const id = getState().driver.id;
@@ -47,7 +168,6 @@ export const updateDrivingLicense = (formData, image, setImage, countries, setCu
     });
 };
 
-export const setDrivingLicense = (drivingLicense) => ({ type: driverConstants.SET_DRIVING_LICENSE, payload: drivingLicense });
 
 export const updateDrivingLicenseByID = (formData, id, countries, setImageHasError, handleEditModeChange) => (dispatch) => {
   if (!formData.driverLicenceFrontImgFile) {
@@ -78,7 +198,6 @@ export const updateDrivingLicenseByID = (formData, id, countries, setImageHasErr
     });
 }
 
-export const setVendor = (vendorId) => ({ type: driverConstants.SET_VENDOR, payload: vendorId });
 
 export const updateVendor = (formData, id, setIsEditMode) => (dispatch) => {
   const data = new FormData();
@@ -126,109 +245,6 @@ export const updateRealNameInformation = (formData, image, setImage, setCurrentS
     });
 }
 
-export const setProfileAvatar = (src) => ({ type: driverConstants.SET_PROFILE_AVATAR, payload: src })
-
-export const setDriverData = (driver) => ({ type: driverConstants.SET_DRIVER, payload: driver })
-
-export const getProfilePicture = fileKey => dispatch => {
-  axios.get(`https://cdn57.androidauthority.net/wp-content/uploads/2017/11/Google-search-curved-840x446.png`, {
-    responseType: 'blob'
-  })
-    .then(res => {
-      const urlCreator = window.URL || window.webkitURL;
-      const imageUrl = urlCreator.createObjectURL(res.data);
-      dispatch(setProfileAvatar(imageUrl));
-      window.blob = res.data;
-    });
-}
-
-export const getIssuingAuthorities = async (setIssuingAuthorities) => {
-  API.get(`static/real-name/issuing-authority`)
-  .then(({data}) => {
-    setIssuingAuthorities(data.map(value => ({id: value, value: value})));
-  });
-}
-
-export const getDriverData = (id) => (dispatch) => {
-  API.get(`drivers/${id}`)
-    .then(({ data }) => {
-      const driver = data.responseList[0];
-      dispatch(setDriverData(driver));
-      dispatch(getProfilePicture(driver.profile?.attachments[0].fileKey))
-    });
-}
-
-export const setDriver = (driver) => ({ type: driverConstants.SET_DRIVER, payload: driver })
-
-const getDriver = (formData, image, phoneNumber, countries) => {
-  const data = new FormData();
-  data.append('firstName', formData.firstName);
-  data.append('lastName', formData.lastName);
-  data.append('profilePicture', image.file);
-  data.append('mobileNumber', phoneNumber.mobileNumber);
-  data.append('address.state', formData.state.split("-")[1]);
-  data.append('address.city', formData.city);
-  data.append('address.address', formData.address);
-  data.append('address.country.countryName', getCountryNameByISOCode(countries, formData.country));
-  data.append('address.country.isoCode', formData.country);
-  data.append('password', formData.password);
-  return data;
-}
-
-export const createDriver = (formData, setPhoneNumber, phoneNumber, image, setImage, countries, setCurrentStep) => (dispatch) => {
-  if (formData.password !== formData.confirmPassword) {
-    throw new SubmissionError({ confirmPassword: 'Please confirm the password.' })
-  }
-
-  if (!image) {
-    setImage({ hasError: true });
-    return false;
-  }
-
-  if (!phoneNumber.mobileNumber || !phoneNumber.isValid) {
-    setPhoneNumber({ ...phoneNumber, isValid: false });
-    return false;
-  }
-
-  const data = getDriver(formData, image, phoneNumber, countries);
-  API.post(`drivers/`, data)
-    .then((result) => {
-      setCurrentStep(currentStep => currentStep + 1);
-      dispatch(setDriver(result.data))
-    });
-}
-
-const setVehicleInfo = (vehicle) => ({ type: driverConstants.SET_VEHICLE_INFO, payload: vehicle });
-
-function dataURLtoFile(dataurl, filename) {
-
-  var arr = dataurl.split(','),
-    mime = arr[0].match(/:(.*?);/)[1],
-    bstr = atob(arr[1]),
-    n = bstr.length,
-    u8arr = new Uint8Array(n);
-
-  while (n--) {
-    u8arr[n] = bstr.charCodeAt(n);
-  }
-
-  return new File([u8arr], filename, { type: mime });
-}
-
-const getVehicleData = formData => {
-  const data = new FormData();
-  data.append('mvpiNumber', formData.mvpiNumber);
-  data.append('vehicleInsurance.insuranceEndDate', formData.insuranceEndDate);
-  data.append('vehicleInsurance.insuranceNumber', formData.insuranceNo);
-  data.append('vehicleInsurance.insuranceStartDate', formData.insuranceStartDate);
-  data.append('vehicleMake', formData.vehicleMake);
-  data.append('vehicleModel', formData.vehicleModel);
-  data.append('vehiclePlateNumber', formData.vehiclePlateNumber);
-  data.append('vehicleRegistrationNumber', formData.vehicleRegistrationNumber);
-  data.append('registrationImg', dataURLtoFile(car, 'image.png'));
-  return data;
-}
-
 export const updateVehicleInfo = (formData, setIsEditMode, id) => (dispatch, getState) => {
   const data = getVehicleData(formData);
   API.post(`drivers/vehicle/${id}`, data)
@@ -238,24 +254,6 @@ export const updateVehicleInfo = (formData, setIsEditMode, id) => (dispatch, get
     });
 }
 
-export const createVehicleInfo = (formData, documents) => (dispatch, getState) => {
-  const id = getState().driver.id;
-  const data = getVehicleData(formData);
-  window.documents = documents;
-  for (let i = 0; i < documents.length; i++) {
-    const att = `attachments[${i}].`;
-    data.append(`${att}attachmentType`, 'VEHICLE_REG');
-    data.append(`${att}fileKey`, documents[i].file.name);
-    data.append(`${att}fileType`, documents[i].file.type);
-    data.append(`${att}name`, documents[i].name);
-  }
-  API.post(`drivers/vehicle/${id}`, data)
-    .then((res) => {
-      console.log(res);
-    })
-}
-
-const setProfile = (profile) => ({ type: driverConstants.SET_PROFILE, payload: profile });
 
 export const updateProfile = (formData, id, image, phoneNumber, countries, setImage, isPhoneNumberValid, setIsEditMode) => (dispatch, getState) => {
   if (!isPhoneNumberValid) {
@@ -288,11 +286,6 @@ export const activateDriver = (formData, activated) => (dispatch, getState) => {
     .then(console.log);
 }
 
-const setRealNameInformation = realNameInformation => ({
-  type: driverConstants.SET_REAL_NAME_INFORMATION,
-  payload: realNameInformation
-})
-
 export const updateRealNameInformationByID = (formData, id, countries, imageHasError, setImageHasError, setIsEditMode) => (dispatch) => {
   if (!(formData.idImgBack instanceof File)) {
     setImageHasError(prev => ({ ...prev, back: true }));
@@ -319,3 +312,7 @@ export const updateRealNameInformationByID = (formData, id, countries, imageHasE
       setIsEditMode(false);
     });
 }
+
+/*
+  END UPDATE ACTIONS (REDUX THUNK)
+*/ 

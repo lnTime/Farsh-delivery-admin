@@ -26,7 +26,8 @@ const validateAllForms = (values) => {
   return errors;
 }
 
-export const AddDriverForm = React.memo(({ handleSubmit, onSubmit, Component, activeID, invalid, pristine, submitting, ...all }) => {
+export const AddDriverForm = React.memo(({ handleSubmit, onSubmit, Component, 
+  activeID, invalid, pristine, submitting, ...all }) => {
   return (
         <div className={styles.AddDriver}>
             <HeaderTopContainer />

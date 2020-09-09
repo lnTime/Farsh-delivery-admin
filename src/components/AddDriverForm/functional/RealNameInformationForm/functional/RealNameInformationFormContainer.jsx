@@ -13,7 +13,7 @@ export const RealNameInformationFormContainer = ({ setCurrentOnSubmit, setCurren
     const idTypeOptions = useMemo(() => [{ value: 'PASSPORT', id: 'PASSPORT' }, { value: 'NATIONAL_ID', id: 'NATIONAL_ID' }], []);
     const [image, setImage] = useState({});
     const countries = useSelector(getCountriesSelector);
-    const [issuingAuthorities, setIssuingAuthorities] = useState([]);
+    const [issuingAuthorities, setIssuingAuthorities] = useState(null);
 
     const dispatch = useDispatch();
 

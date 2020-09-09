@@ -7,7 +7,8 @@ import { validators } from '../../../../../utils/validators/validators';
 import styles from './DrivingLicenseForm.module.scss';
 import { DateFieldContainer } from '../../../../common/inputs/DateField/functional/DateFieldContainer';
 
-export const DrivingLicenseFormUI = React.memo(({ licenseTypeOptions, customStateChange, image, countries, setImage }) => {
+export const DrivingLicenseFormUI = React.memo(({ licenseTypeOptions, 
+    issuingAuthority, customStateChange, image, countries, setImage }) => {
     return (<div className={styles['AddDriver-Form']}>
         <div className="EvenInputs">
             <Field name="licenseType"
@@ -56,7 +57,7 @@ export const DrivingLicenseFormUI = React.memo(({ licenseTypeOptions, customStat
                 name="licenseIssuingAuthority"
                 placeholder="Issuing Authority"
                 component={SelectFieldContainer}
-                options={countries}
+                options={issuingAuthority}
                 customOnChange={customStateChange}
                 validate={[validators.required]}
             />
