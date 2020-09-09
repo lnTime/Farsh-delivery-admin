@@ -4,7 +4,7 @@ import { SubmissionError } from 'redux-form';
 import { getCountryNameByISOCode } from '../address/addressActions';
 import axios from 'axios';
 import {getOptions, getDrivingLicenseData, getVehicleData, getDriver} from './driverHelpers';
-
+import {globalErrorHandler} from '../common/helpers/global-error-handler';
 
 /* 
     REDUX ACTIONS (PURE)
@@ -53,21 +53,21 @@ export const getProfilePicture = fileKey => dispatch => {
       const imageUrl = urlCreator.createObjectURL(res.data);
       dispatch(setProfileAvatar(imageUrl));
       window.blob = res.data;
-    });
+    }).catch(err => dispatch(globalErrorHandler(err)));
 }
 
-export const getVehicleMakes = (setVehicleMakes) => {
+export const getVehicleMakes = (setVehicleMakes) => dispatch => {
   API.get(`static/vehicle/vehicle-makes`)
   .then(({data}) => {
       setVehicleMakes(getOptions(data));
-  });
+  }).catch(err => dispatch(globalErrorHandler(err)));;
 }
 
-export const getIssuingAuthorities = async (setIssuingAuthorities) => {
+export const getIssuingAuthorities = (setIssuingAuthorities) => dispatch => {
   API.get(`static/real-name/issuing-authority`)
   .then(({data}) => {
     setIssuingAuthorities(getOptions(data));
-  });
+  }).catch(err => dispatch(globalErrorHandler(err)));;
 }
 
 export const getDriverData = (id) => (dispatch) => {
@@ -76,21 +76,21 @@ export const getDriverData = (id) => (dispatch) => {
       const driver = data.responseList[0];
       dispatch(setDriverData(driver));
       dispatch(getProfilePicture(driver.profile?.attachments[0].fileKey))
-    });
+    }).catch(err => dispatch(globalErrorHandler(err)));
 }
 
-export const getDrivingLicenseTypes = (setDrivingLicenseTypes) => {
+export const getDrivingLicenseTypes = (setDrivingLicenseTypes) => dispatch => {
   API.get(`static/driving-license/types`)
   .then(({data}) => {
     setDrivingLicenseTypes(getOptions(data));
-  });
+  }).catch(err => dispatch(globalErrorHandler(err)));
 }
 
-export const getDrivingLicenseIssuingAuthority = (setDrivingLicenseIssuingAuthority) => {
+export const getDrivingLicenseIssuingAuthority = (setDrivingLicenseIssuingAuthority) => dispatch => {
   API.get(`static/driving-license/issuing-authority`)
   .then(({data}) => {
     setDrivingLicenseIssuingAuthority(getOptions(data));
-  });
+  }).catch(err => dispatch(globalErrorHandler(err)));
 }
 
 /* 
@@ -121,7 +121,7 @@ export const createDriver = (formData, setPhoneNumber, phoneNumber, image, setIm
     .then((result) => {
       setCurrentStep(currentStep => currentStep + 1);
       dispatch(setDriver(result.data))
-    });
+    }).catch(err => dispatch(globalErrorHandler(err)));
 }
 
 export const createVehicleInfo = (formData, documents) => (dispatch, getState) => {
@@ -138,7 +138,7 @@ export const createVehicleInfo = (formData, documents) => (dispatch, getState) =
   API.post(`drivers/vehicle/${id}`, data)
     .then((res) => {
       console.log(res);
-    })
+    }).catch(err => dispatch(globalErrorHandler(err)))
 }
 
 
@@ -165,7 +165,7 @@ export const updateDrivingLicense = (formData, image, setImage, countries, setCu
   API.post(`drivers/driving-license/${id}`, data)
     .then(result => {
       setCurrentStep(currentStep => currentStep + 1);
-    });
+    }).catch(err => dispatch(globalErrorHandler(err)));
 };
 
 
@@ -195,7 +195,7 @@ export const updateDrivingLicenseByID = (formData, id, countries, setImageHasErr
     .then((result) => {
       dispatch(setDrivingLicense(result.data));
       handleEditModeChange();
-    });
+    }).catch(err => dispatch(globalErrorHandler(err)));
 }
 
 
@@ -206,7 +206,7 @@ export const updateVendor = (formData, id, setIsEditMode) => (dispatch) => {
     .then(result => {
       dispatch(setVendor(result.data))
       setIsEditMode(false);
-    });
+    }).catch(err => dispatch(globalErrorHandler(err)));
 }
 
 export const updateVendorCreate = (formData, setCurrentStep) => (dispatch, getState) => {
@@ -216,7 +216,7 @@ export const updateVendorCreate = (formData, setCurrentStep) => (dispatch, getSt
   API.post(`drivers/vendor/${id}`, data)
     .then(() => {
       setCurrentStep(currentStep => currentStep + 1);
-    });
+    }).catch(err => dispatch(globalErrorHandler(err)));
 }
 
 export const updateRealNameInformation = (formData, image, setImage, setCurrentStep, countries) => (dispatch, getState) => {
@@ -242,7 +242,7 @@ export const updateRealNameInformation = (formData, image, setImage, setCurrentS
   API.post(`drivers/real-name/${id}`, data)
     .then(result => {
       setCurrentStep(currentStep => currentStep + 1);
-    });
+    }).catch(err => dispatch(globalErrorHandler(err)));
 }
 
 export const updateVehicleInfo = (formData, setIsEditMode, id) => (dispatch, getState) => {
@@ -251,7 +251,7 @@ export const updateVehicleInfo = (formData, setIsEditMode, id) => (dispatch, get
     .then(result => {
       dispatch(setVehicleInfo(result.data));
       setIsEditMode(false);
-    });
+    }).catch(err => dispatch(globalErrorHandler(err)));
 }
 
 
@@ -273,7 +273,7 @@ export const updateProfile = (formData, id, image, phoneNumber, countries, setIm
     .then(result => {
       dispatch(setProfile(result.data));
       setIsEditMode(false);
-    });
+    }).catch(err => dispatch(globalErrorHandler(err)));
 }
 
 export const activateDriver = (formData, activated) => (dispatch, getState) => {
@@ -283,7 +283,7 @@ export const activateDriver = (formData, activated) => (dispatch, getState) => {
   data.append('activation.activeTo', formData.activationEndDate);
   data.append('activation.active', activated);
   API.post(`drivers/activation/${id}`, data)
-    .then(console.log);
+    .then(console.log).catch(err => dispatch(globalErrorHandler(err)));
 }
 
 export const updateRealNameInformationByID = (formData, id, countries, imageHasError, setImageHasError, setIsEditMode) => (dispatch) => {
@@ -310,9 +310,22 @@ export const updateRealNameInformationByID = (formData, id, countries, imageHasE
     .then(result => {
       dispatch(setRealNameInformation(result.data));
       setIsEditMode(false);
-    });
+    }).catch(err => dispatch(globalErrorHandler(err)));
 }
 
 /*
   END UPDATE ACTIONS (REDUX THUNK)
 */ 
+
+/* 
+dispatch(openNotification({
+            type: 'success',
+            content: {
+                title: 'James Anderson has been added successfully',
+                description: 'Duis pretium gravida enim, vel maximus ligula fermentum a. Sed rhoncus eget ex id egestas. Nam nec nisl placerat, tempus erat a, condimentum metus. Curabitur nulla nisi, lacinia at lobortis at, suscipit at nibh. Proin quis lectus finibus, mollis purus vitae, rutrum neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam sed cursus metus, vel viverra mi. Mauris aliquet egestas eros ac placerat. Proin condimentum ligula at diam euismod fringilla et quis lacus.',
+                additionalComponent: {
+                    handler: () => {}
+                }
+            }
+        }));
+        */

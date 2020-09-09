@@ -1,0 +1,1 @@
+export const getNotificationSelector = state => state.global.notification;

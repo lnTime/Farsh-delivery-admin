@@ -1,0 +1,76 @@
+.Notification {
+    box-shadow: 0px 3px 36px #00000029;
+    border-radius: 5px;
+    background-color: #fff;
+    width: calc(100px + 20.132vw); 
+    display: flex;
+    height: calc(51px + 7.321vw);
+    padding: 16px;  
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 99999;
+    right: 11.054vw;
+    top: 66.667vh;
+
+    & > svg {
+        align-self: start;
+        margin-top: 15px;
+        min-width: 15px;
+    }
+
+    &-Content {
+        padding-left: 10.35px;
+    }
+
+    &_error {
+        box-shadow: 0px 3px 36px red;
+
+    }
+
+    &_warning {
+        box-shadow: 0px 3px 36px orange;
+    }
+}
+
+.Content {
+    display: flex;
+    flex-direction: column;
+
+    &-Title {
+        font: normal normal normal calc(6px + 0.512vw)/calc(7px + 0.732vw) Roboto;
+        letter-spacing: 0px;
+        color: #000;
+    }
+
+    &-Description {
+        font: normal normal normal calc(6px + 0.439vw)/calc(6px + 0.878vw) Roboto;
+        letter-spacing: 0px;
+        color: #7C7C7C;
+        text-overflow: ellipsis;
+        overflow: hidden; 
+        white-space: nowrap;
+        width: calc(99px + 14.641vw);
+        height: 45px;
+    }
+
+    &-Button {
+        font: normal normal bold 13px/39px Roboto;  
+        letter-spacing: 0px;
+        width: calc(22px + 3.660vw);
+        height: 37px;
+        
+        &_view {
+            color: #FFFFFF;
+            border-radius: 3px;
+            background-color: #000;    
+        }
+
+        &_clear {
+            color: #000000;
+            background-color: transparent;
+        }
+    }
+
+    &-Actions {}
+}

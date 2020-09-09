@@ -29,7 +29,7 @@ export const RealNameInformationFormContainer = ({ setCurrentOnSubmit, setCurren
     }, [dispatch]);
 
     useEffect(() => {
-        getIssuingAuthorities(setIssuingAuthorities);
+        dispatch(getIssuingAuthorities(setIssuingAuthorities));
     }, []);
 
     return <RealNameInformationFormUI

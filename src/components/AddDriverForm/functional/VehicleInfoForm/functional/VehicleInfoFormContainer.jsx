@@ -12,7 +12,7 @@ export const VehicleInfoFormContainer = ({ setCurrentStep, setCurrentOnSubmit })
     const [openAtt, setOpenAtt] = useState(false);
     const [documents, setDocuments] = useState([]);
     const [vehicleMakes, setVehicleMakes] = useState(null);
-
+    
     const address = useSelector(getAddressSelector);
     const dispatch = useDispatch();
     
@@ -51,7 +51,7 @@ export const VehicleInfoFormContainer = ({ setCurrentStep, setCurrentOnSubmit })
         setCurrentOnSubmit(() => onSubmit);
     }, [setCurrentOnSubmit, onSubmit]);
     useEffect(() => {
-        getVehicleMakes(setVehicleMakes);
+        dispatch(getVehicleMakes(setVehicleMakes));
     }, []);
 
     return <VehicleInfoFormUI

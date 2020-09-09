@@ -11,6 +11,8 @@ import { SearchDriverContainer } from '../../SearchDriverSection/functional/Sear
 import { SearchPhoneContainer } from '../../SearchPhone/functional/SearchPhoneContainer';
 import { LoginContainer } from '../../Login/functional/LoginContainer';
 import { DriversContainer } from '../../Drivers/functional/DriversContainer';
+import {NotificationContainer} from '../../common/Notification/functional/NotificationContainer';
+
 
 export const AppUI = () => {
   return (
@@ -27,6 +29,7 @@ export const AppUI = () => {
         <Route exact patch = "search-phone" component = {SearchPhoneContainer} />
         <Route exact path="/login" component={LoginContainer}/>
       </Switch>
+      <NotificationContainer />
     </div>
   );
 };

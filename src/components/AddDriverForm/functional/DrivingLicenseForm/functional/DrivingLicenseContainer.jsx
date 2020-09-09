@@ -28,10 +28,10 @@ export const DrivingLicenseContainer = ({setCurrentStep, setCurrentOnSubmit}) =>
         setCurrentOnSubmit(() => onSubmit);
     }, [setCurrentOnSubmit, onSubmit]);
     useEffect(() => {
-        getDrivingLicenseTypes(setDrivingLicenseTypes);
+        dispatch(getDrivingLicenseTypes(setDrivingLicenseTypes));
     }, []);
     useEffect(() => {
-        getDrivingLicenseIssuingAuthority(setIssuingAuthority);
+        dispatch(getDrivingLicenseIssuingAuthority(setIssuingAuthority));
     }, []);
 
     return <DrivingLicenseFormUI

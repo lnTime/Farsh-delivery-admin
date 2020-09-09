@@ -4,12 +4,14 @@ import thunkMiddleware from "redux-thunk";
 import { addressReducer } from './address/addressReducer';
 import { driverReducer } from "./driver/driverReducer";
 import { driversReducer } from './drivers/driversReducer';
+import { globalReducer } from './global/globalReducer';
 
 let reducers = combineReducers({
     form: formReducer,
     address: addressReducer,
     driver: driverReducer,
     drivers: driversReducer,
+    global: globalReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
