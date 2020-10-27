@@ -1,0 +1,29 @@
+.Files {
+    max-height: 250px;
+    overflow-x: auto;
+}
+
+.UploadFile {
+    padding:12px 0;
+    border-top:1px solid #EDEDED;
+    width: 100%;
+&-Title {
+    display: flex;
+    justify-content: space-between;
+}
+&-H3 {
+    font: normal normal medium calc(8px + 0.469vw)/calc(12px + 0.469vw) Roboto;
+}
+&-Remove {
+    font: normal normal normal calc(7px + 0.417vw)/calc(12px + 0.469vw) Roboto;
+    margin-left: 0.365vw;
+}
+&-P {
+    font: normal normal normal calc(7px + 0.469vw)/calc(12px + 0.469vw) Roboto;
+}
+&-Span {
+    font: normal normal normal calc(4px + 0.469vw)/calc(11px + 0.469vw) Roboto;
+    letter-spacing: -0.26px;
+    color: #6E6E6E;
+}
+}

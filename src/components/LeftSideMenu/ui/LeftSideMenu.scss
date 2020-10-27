@@ -2,6 +2,9 @@
     box-shadow: 0 0 42px #00000014;
     background: #FFF;
     position: absolute;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 68px 1fr;
 
     &_animated {
         animation: 1s scaleMenu forwards;
@@ -28,7 +31,7 @@
       width: 59px;
       display: inline-table;
       cursor: pointer;
-      height: 100vh;
+      height: 100%;
     }
 
     &_animated {
@@ -48,7 +51,7 @@
 
 
 .Menu {
-    width: max-content;
+    width: 100%;
     &-Item {
         display: flex;
         justify-content: center;

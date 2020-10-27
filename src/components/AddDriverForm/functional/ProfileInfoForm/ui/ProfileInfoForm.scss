@@ -20,7 +20,9 @@
     background-color: transparent !important;
     width: 60px;
 }
-
+.selected-flag {
+    pointer-events: none;
+}
 .intl-tel-input.allow-dropdown.separate-dial-code
 .selected-flag:focus {
     outline: none;
@@ -43,7 +45,7 @@
 
 .intl-tel-input {
     min-height: 30px;
-    width: 50%;
+    width: 47.5%;
     display: flex !important;
 }
 

@@ -39,7 +39,39 @@ const initialState = null;
                 ...state,
                 vehicle:action.payload
             }
-        default :
+        case driverConstants.SET_REAL_NAME_FRONT_IMAGE:
+            return {
+                ...state,
+                realNameInformation: {
+                    ...state.realNameInformation,
+                    realNameFrontImage: action.payload
+                }
+            }
+        case driverConstants.SET_REAL_NAME_BACK_IMAGE:
+            return {
+                ...state,
+                realNameInformation: {
+                    ...state.realNameInformation,
+                    realNameBackImage: action.payload,
+                }
+            }
+        case driverConstants.SET_DRIVING_LICENSE_FRONT_IMAGE:
+            return {
+                ...state,
+                drivingLicense: {
+                    ...state.drivingLicense,
+                    drivingLicenseFrontImage: action.payload,
+                }
+            }
+        case driverConstants.SET_DRIVING_LICENSE_BACK_IMAGE:
+            return {
+                ...state,
+                drivingLicense: {
+                    ...state.drivingLicense,
+                    drivingLicenseBackImage: action.payload,
+                }
+            }
+        default:
             return state
     }
 }

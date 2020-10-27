@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import DrivingLicenseFormUI from "../ui/DrivingLicenseFormUI";
 import { useEditMode } from "../../../../common/custom-hooks/useEditMode";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,9 +11,8 @@ export const DrivingLicenseFormContainer = ({id}) => {
   const dispatch = useDispatch();
   const drivingLicense = useSelector(getDrivingLicenseSelector);
   const countries = useSelector(getCountriesSelector)
-  const [imageHasError, setImageHasError] = useState({front: false, back: false});
   const onSubmit = (formData) => {
-    dispatch(updateDrivingLicenseByID(formData, id, countries, setImageHasError, handleEditModeChange));
+    dispatch(updateDrivingLicenseByID(formData, id, countries, handleEditModeChange));
   };
 
   return (
@@ -23,8 +22,6 @@ export const DrivingLicenseFormContainer = ({id}) => {
       handleClick={handleEditModeChange}
       drivingLicense={drivingLicense || {}}
       countries={countries}
-      imageHasError={imageHasError}
-      setImageHasError={setImageHasError}
       initialValues={{...drivingLicense}}
     />
   );

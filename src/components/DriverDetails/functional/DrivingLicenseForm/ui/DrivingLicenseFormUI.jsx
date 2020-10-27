@@ -1,8 +1,6 @@
 import React  from "react";
 import "./DrivingLicenseForm.scss";
 import { FormHeaderContainer } from "../../FormHeader/functional/FormHeaderContainer";
-import front from "../../../../../assets/images/driving-license-front.png";
-import back from "../../../../../assets/images/driving-license-back.png";
 import { reduxForm, Field } from "redux-form";
 import { TextFieldContainer } from "../../../../common/inputs/TextField/functional/TextFieldContainer";
 import { ChooseFileFieldContainer } from "../../../../common/inputs/ChooseFileField/functional/ChooseFileFieldContainer";
@@ -16,9 +14,7 @@ const DrivingLicenseFormUI = ({
   isEdit,
   handleClick,
   handleSubmit,
-  imageHasError,
   countries,
-  setImageHasError
 }) => {
   return (
     <form onSubmit={handleSubmit}>
@@ -128,35 +124,33 @@ const DrivingLicenseFormUI = ({
         <div className="ProfileInfoBlock ProfileInfoBlock_oneItem">
           <span className="ProfileInfoBlock-InputName">Driving License</span>
           <div className="ProfileInfoBlock-InputValue" id="idCard">
-            {isEdit ? (
+            {!drivingLicense.drivingLicenseFrontImage || isEdit ? (
               <Field
                 component={ChooseFileFieldContainer}
                 type="file"
                 name="driverLicenceFrontImgFile"
                 title={null}
+                imageOnly
                 actionText={null}
                 buttonText="Choose Front image"
-                hasError={imageHasError.front}
-                setHasError={value => setImageHasError(prev => ({...prev, front: value}))}
                 validate={validators.required}
               />
             ) : (
-                <img alt="Driving License Front" src={front} />
+                <img alt="Driving License Front" src={drivingLicense.drivingLicenseFrontImage} width="154" height="90" />
               )}
-            {isEdit ? (
+            {!drivingLicense.drivingLicenseBackImage || isEdit ? (
               <Field
                 component={ChooseFileFieldContainer}
+                imageOnly
                 type="file"
                 name="driverLicenceBackImgFile"
                 title={null}
                 actionText={null}
                 buttonText="Choose Back image"
                 validate={validators.required}
-                hasError={imageHasError.back}
-                setHasError={value => setImageHasError(prev => ({...prev, back: value}))}
               />
             ) : (
-                <img alt="Driving License Back" src={back} />
+                <img alt="Driving License Back" src={drivingLicense.drivingLicenseBackImage} width="154" height="90" />
               )}
           </div>
           {isEdit ? <BlackButtonContainer text="Save" /> : null}

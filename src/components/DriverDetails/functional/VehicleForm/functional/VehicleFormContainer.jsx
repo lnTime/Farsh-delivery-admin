@@ -1,14 +1,18 @@
-import React, {useCallback} from "react";
+import React, { useCallback, useState } from "react";
 import VehicleFormUI from "../ui/VehicleFormUI";
 import { useEditMode } from "../../../../common/custom-hooks/useEditMode";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getVehicleSelector } from "../../../../../redux/driver/driverSelectors";
-import {getAddressSelector} from "../../../../../redux/address/addressSelectors";
-import {getCities, getStates} from "../../../../../redux/address/addressActions";
-import {updateVehicleInfo} from "../../../../../redux/driver/driverActions";
+import { getAddressSelector } from "../../../../../redux/address/addressSelectors";
+import { getCities, getStates } from "../../../../../redux/address/addressActions";
+import { updateVehicleInfo } from "../../../../../redux/driver/driverActions";
 
-export const VehicleFormContainer = ({id}) => {
+export const VehicleFormContainer = ({ id }) => {
   const [isEdit, setIsEditMode] = useEditMode();
+  const [openAtt, setOpenAtt] = useState(null);
+  const [documents, setDocuments] = useState([]);
+  const [fileInfo, setFileInfo] = useState([]);
+  const [inpValue, setInpValue] = useState('');
   const vehicle = useSelector(getVehicleSelector);
   const address = useSelector(getAddressSelector);
   const dispatch = useDispatch();
@@ -24,6 +28,10 @@ export const VehicleFormContainer = ({id}) => {
     dispatch(getStates(value));
   }, [dispatch]);
 
+  const handleAdd = useCallback(() => {
+    setOpenAtt(true)
+  }, []);
+
   return (
     <VehicleFormUI
       onSubmit={onSubmit}
@@ -32,8 +40,16 @@ export const VehicleFormContainer = ({id}) => {
       handleClick={setIsEditMode}
       address={address}
       customStateChange={customStateChange}
-      initialValues={{...vehicle}}
+      initialValues={{ ...vehicle }}
       customCountryChange={customCountryChange}
+      openAtt={openAtt}
+      inpValue={inpValue}
+      setDocuments={setDocuments}
+      setOpenAtt={setOpenAtt}
+      setInpValue={setInpValue}
+      fileInfo={fileInfo}
+      setFileInfo={setFileInfo}
+      handleAdd={handleAdd}
     />
   );
 };

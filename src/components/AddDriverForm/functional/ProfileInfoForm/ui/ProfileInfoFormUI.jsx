@@ -9,8 +9,8 @@ import IntlTelInput from 'react-intl-tel-input';
 import 'react-intl-tel-input/dist/main.css';
 
 
-export const ProfileInfoFormUI = React.memo(({ phoneNumber, onPhoneNumberBlur, handlePhoneNumberChange,
-    states, countries, cities, customCountryChange, customStateChange, src,
+export const ProfileInfoFormUI = React.memo(({ states, countries, cities, 
+    customCountryChange, customStateChange, src, prefferedCountry,
     hasError, handleImageChange }) => {
     return (<div className='AddDriver-Form'>
         <FileFieldContainer src={src} onChange={handleImageChange} data-haserror={hasError} />
@@ -31,19 +31,6 @@ export const ProfileInfoFormUI = React.memo(({ phoneNumber, onPhoneNumberBlur, h
             />
         </div>
         <div className='EvenInputs'>
-            <IntlTelInput
-                data-halfwidth
-                preferredCountries={["sa"]}
-                separateDialCode={true}
-                format={true}
-                value={phoneNumber.mobileNumber}
-                placeholder=""
-                onPhoneNumberBlur={onPhoneNumberBlur}
-                fieldId="phoneNumber"
-                onPhoneNumberChange={handlePhoneNumberChange}
-                containerClassName={`intl-tel-input intl-tel-input ${phoneNumber.isValid ? '' : 'intl-tel-input-error'}`}
-                inputClassName="form-control"
-            />
             <Field
                 name="country"
                 customOnChange={customCountryChange}
@@ -52,8 +39,6 @@ export const ProfileInfoFormUI = React.memo(({ phoneNumber, onPhoneNumberBlur, h
                 validate={[validators.required]}
                 data-halfwidth
             />
-        </div>
-        <div className='EvenInputs'>
             <Field
                 data-halfwidth
                 name="state"
@@ -63,6 +48,8 @@ export const ProfileInfoFormUI = React.memo(({ phoneNumber, onPhoneNumberBlur, h
                 placeholder="State"
                 validate={[validators.required]}
             />
+        </div>
+        <div className='EvenInputs'>
             <Field
                 data-halfwidth
                 name="city"
@@ -70,6 +57,22 @@ export const ProfileInfoFormUI = React.memo(({ phoneNumber, onPhoneNumberBlur, h
                 options={cities}
                 placeholder="City"
                 validate={[validators.required]}
+            />
+            <Field 
+                name="mobileNumber" 
+                validate={[validators.validatePhoneNumber]}
+                component = {props => <IntlTelInput
+                    data-halfwidth
+                    preferredCountries={[prefferedCountry]}
+                    separateDialCode={true}
+                    format={true}
+                    placeholder=""
+                    onPhoneNumberBlur={(isValid, phoneNumber) => props.input.onBlur({ number: phoneNumber, isValid })}
+                    fieldId="phoneNumber"
+                    onPhoneNumberChange={(isValid, phoneNumber) => {props.input.onChange(phoneNumber)}}
+                    containerClassName={`intl-tel-input intl-tel-input ${(props.meta.error && props.meta.touched)? 'intl-tel-input-error' : ''}`}
+                    inputClassName="form-control"
+                />}
             />
         </div>
         <div className='EvenInputs'>

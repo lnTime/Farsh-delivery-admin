@@ -1,4 +1,4 @@
-import React, {useCallback, useMemo, useState} from "react";
+import React, {useCallback, useMemo} from "react";
 import RealNameInformationFormUI from "../ui/RealNameInformationFormUI";
 import { useEditMode } from "../../../../common/custom-hooks/useEditMode";
 import { useSelector, useDispatch } from "react-redux";
@@ -13,9 +13,8 @@ export const RealNameInformationFormContainer = ({id}) => {
   const countries = useSelector(getCountriesSelector);
   const realNameInformation = useSelector(getRealNameInformationSelector);
   const idTypeOptions = useMemo(() => [{ value: 'PASSPORT', id: 'PASSPORT' }, { value: 'NATIONAL_ID', id: 'NATIONAL_ID' }], []);
-  const [imageHasError, setImageHasError] = useState({back: false, front: false});
   const onSubmit = (formData) => {
-    dispatch(updateRealNameInformationByID(formData, id, countries, imageHasError, setImageHasError, setIsEditMode));
+    dispatch(updateRealNameInformationByID(formData, id, countries, setIsEditMode));
   };
   const initialValues = useMemo(() =>
     (realNameInformation && {...realNameInformation, realNameIssueCountry: realNameInformation.realNameIssueCountry.isoCode}),
@@ -32,10 +31,10 @@ export const RealNameInformationFormContainer = ({id}) => {
       onSubmit={onSubmit}
       countries={countries}
       idTypeOptions={idTypeOptions}
-      imageHasError={imageHasError}
-      setImageHasError={setImageHasError}
       initialValues={initialValues}
       customCountryChange={customCountryChange}
+      frontImage={realNameInformation?.realNameFrontImage}
+      backImage={realNameInformation?.realNameBackImage}
     />
   );
 };

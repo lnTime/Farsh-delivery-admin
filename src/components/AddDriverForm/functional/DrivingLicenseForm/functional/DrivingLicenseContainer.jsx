@@ -10,7 +10,6 @@ import {getCities} from "../../../../../redux/address/addressActions";
 
 
 export const DrivingLicenseContainer = ({setCurrentStep, setCurrentOnSubmit}) => {
-    const [image, setImage] = useState({})
     const [drivingLicenseTypes, setDrivingLicenseTypes] = useState(null);
     const [issuingAuthority, setIssuingAuthority] = useState(null);
     const countries = useSelector(getCountriesSelector);
@@ -18,8 +17,8 @@ export const DrivingLicenseContainer = ({setCurrentStep, setCurrentOnSubmit}) =>
     const dispatch = useDispatch();
 
     const onSubmit = useCallback(formData => {
-        dispatch(updateDrivingLicense(formData, image, setImage, countries, setCurrentStep));
-    }, [image, setImage, countries, setCurrentStep, dispatch]);
+        dispatch(updateDrivingLicense(formData, countries, setCurrentStep));
+    }, [countries, setCurrentStep, dispatch]);
     const customStateChange = useCallback((value) => {
         dispatch(getCities(value));
     }, [dispatch]);
@@ -29,16 +28,14 @@ export const DrivingLicenseContainer = ({setCurrentStep, setCurrentOnSubmit}) =>
     }, [setCurrentOnSubmit, onSubmit]);
     useEffect(() => {
         dispatch(getDrivingLicenseTypes(setDrivingLicenseTypes));
-    }, []);
+    }, [dispatch]);
     useEffect(() => {
         dispatch(getDrivingLicenseIssuingAuthority(setIssuingAuthority));
-    }, []);
+    }, [dispatch]);
 
     return <DrivingLicenseFormUI
             countries={countries}
             licenseTypeOptions={drivingLicenseTypes}
-            image={image}
-            setImage={setImage}
             customStateChange={customStateChange}
             issuingAuthority={issuingAuthority}
         />;

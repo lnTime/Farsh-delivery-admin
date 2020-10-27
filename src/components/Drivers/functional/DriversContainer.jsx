@@ -25,7 +25,7 @@ export const DriversContainer = () => {
             <div className="Table-Td">{index}</div>
             <div className="Table-Td">{data.profile?.firstName} {data.profile.lastName}</div>
             <div className="Table-Td">{data.profile?.mobileNumber}</div>
-            <div className="Table-Td">Armenia</div>
+            <div className="Table-Td">{data?.profile?.address?.country?.countryName}</div>
             <div className="Table-Td">{data.drivingLicense?.licenseType}</div>
             <div className="Table-Td">{data.id}</div>
             <div className="Table-Td">{data.vehicle?.vehiclePlateNumber}</div>

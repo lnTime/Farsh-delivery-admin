@@ -3,7 +3,7 @@ import car from '../../assets/images/car.png';
 
 export const getOptions = (arr) => arr.map(value => ({ id: value, value }));
 
-export const getDrivingLicenseData = (formData, countries, image) => {
+export const getDrivingLicenseData = (formData, countries) => {
   const data = new FormData();
   data.append('licenseType', formData.licenseType);
   data.append('licenseNo', formData.licenseNo);
@@ -12,19 +12,19 @@ export const getDrivingLicenseData = (formData, countries, image) => {
   data.append('licenseIssuingCountry.countryName', getCountryNameByISOCode(countries, formData.issuingCountry));
   data.append('licenseIssuingCountry.isoCode', formData.issuingCountry);
   data.append('licenseIssuingAuthority', formData.licenseIssuingAuthority);
-  data.append('driverLicenceFrontImgFile', image.front);
-  data.append('driverLicenceBackImgFile', image.back);
+  data.append('driverLicenceFrontImgFile', formData.front);
+  data.append('driverLicenceBackImgFile', formData.back);
   return data;
 }
 
 
-export const getDriver = (formData, image, phoneNumber, countries) => {
+export const getDriver = (formData, image, countries) => {
   const data = new FormData();
   data.append('firstName', formData.firstName);
   data.append('lastName', formData.lastName);
   data.append('profilePicture', image.file);
-  data.append('mobileNumber', phoneNumber.mobileNumber);
-  data.append('address.state', formData.state.split("-")[1]);
+  data.append('mobileNumber', formData.mobileNumber.number);
+  data.append('address.state', formData.state);
   data.append('address.city', formData.city);
   data.append('address.address', formData.address);
   data.append('address.country.countryName', getCountryNameByISOCode(countries, formData.country));
@@ -58,5 +58,15 @@ export const getVehicleData = formData => {
   data.append('vehiclePlateNumber', formData.vehiclePlateNumber);
   data.append('vehicleRegistrationNumber', formData.vehicleRegistrationNumber);
   data.append('registrationImg', dataURLtoFile(car, 'image.png'));
+  data.append('address.city', formData.city);
+  data.append('address.country.isoCode', formData.registeredCountry);
+  data.append('address.country.countryName', 'Saudi Arabia');
+  data.append('address.state', formData.state);
   return data;
+}
+
+export const makeImageURL = response => {
+  const urlCreator = window.URL || window.webkitURL;
+  const imageUrl = urlCreator.createObjectURL(response.data);
+  return imageUrl;
 }

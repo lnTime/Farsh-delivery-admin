@@ -12,33 +12,22 @@ export const VehicleInfoFormContainer = ({ setCurrentStep, setCurrentOnSubmit })
     const [openAtt, setOpenAtt] = useState(false);
     const [documents, setDocuments] = useState([]);
     const [vehicleMakes, setVehicleMakes] = useState(null);
-    
+
     const address = useSelector(getAddressSelector);
     const dispatch = useDispatch();
-    
-    const handleClick = () => {
+
+    const handleClick = useCallback(() => {
         setOpenAtt(true)
-    }
-    const handleDelete = (id) => {
-        setFileInfo((data) => {
-            const idx = data.findIndex((item) => item.id === id);
-            const upDateData = [
-                ...data.slice(0, idx),
-                ...data.slice(idx + 1)
-            ]
-            return (upDateData);
-        })
-    }
-    const customCountryChange = (value) => {
+    }, []);
+    const customCountryChange = useCallback((value) => {
         dispatch(getStates(value));
-    }
-    const customStateChange = (value) => {
+    }, [dispatch]);
+    const customStateChange = useCallback((value) => {
         dispatch(getCities(value));
-    }
+    }, [dispatch]);
 
     const onSubmit = useCallback((formData) => {
-        dispatch(createVehicleInfo(formData, documents));
-        setCurrentStep(currentStep => currentStep + 1);
+        dispatch(createVehicleInfo(formData, documents, setCurrentStep));
     }, [setCurrentStep, documents, dispatch]);
 
 
@@ -47,15 +36,16 @@ export const VehicleInfoFormContainer = ({ setCurrentStep, setCurrentOnSubmit })
             dispatch(getCountries())
         }
     }, [address, dispatch]);
+
     useEffect(() => {
         setCurrentOnSubmit(() => onSubmit);
     }, [setCurrentOnSubmit, onSubmit]);
+
     useEffect(() => {
         dispatch(getVehicleMakes(setVehicleMakes));
-    }, []);
+    }, [dispatch]);
 
     return <VehicleInfoFormUI
-        handleDelete={handleDelete}
         handleClick={handleClick}
         openAtt={openAtt}
         setOpenAtt={setOpenAtt}

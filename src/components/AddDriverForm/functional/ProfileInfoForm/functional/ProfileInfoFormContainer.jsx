@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { ProfileInfoFormUI } from "../ui/ProfileInfoFormUI";
-import { useDispatch, useSelector } from "react-redux";
+import { batch, useDispatch, useSelector } from "react-redux";
 import { getCountries, getStates, getCities } from "../../../../../redux/address/addressActions";
 import { getAddressSelector } from '../../../../../redux/address/addressSelectors';
 import { useCallback } from "react";
 import { createDriver } from "../../../../../redux/driver/driverActions";
+import { useMemo } from "react";
 
-export const ProfileInfoFormContainer = ({handleSubmit, error, setCurrentOnSubmit, setData, setCurrentStep}) => {
+export const ProfileInfoFormContainer = ({handleSubmit, error, setCurrentOnSubmit, setCurrentStep}) => {
     const address = useSelector(getAddressSelector);
     const [image, setImage] = useState(null);
-    const [phoneNumber, setPhoneNumber] = useState({ mobileNumber: "", isValid: true, });
-
+    const prefferedCountry = useMemo(() => 'sa', []);
     const dispatch = useDispatch();
 
-    const handleImageChange = (e) => {
+    const handleImageChange = useCallback((e) => {
         e.preventDefault();
         let file = e.target.files[0];
         let reader = new FileReader();
@@ -21,12 +21,12 @@ export const ProfileInfoFormContainer = ({handleSubmit, error, setCurrentOnSubmi
         reader.onloadend = () => {
           setImage({file, src: reader.result, hasError: false});
         };
-    }
+    }, []);
 
 
     const onSubmit = useCallback((formData) => {
-        dispatch(createDriver(formData, setPhoneNumber, phoneNumber, image, setImage, address.countries, setCurrentStep))
-    }, [setPhoneNumber, phoneNumber, image, setImage, setCurrentStep, address.countries, dispatch]);
+        dispatch(createDriver(formData, image, setImage, address.countries, setCurrentStep))
+    }, [image, setImage, setCurrentStep, address.countries, dispatch]);
 
     useEffect(() => {
         setCurrentOnSubmit(() => onSubmit);
@@ -34,38 +34,27 @@ export const ProfileInfoFormContainer = ({handleSubmit, error, setCurrentOnSubmi
 
 
     useEffect(() => {
-        dispatch(getCountries())
+        batch(() => {
+            dispatch(getCountries())
+            dispatch(getStates());
+        })
     }, [dispatch]);
 
-    const onPhoneNumberBlur = (isValid) => {
-        setPhoneNumber({ ...phoneNumber, isValid });
-    };
-
-    const handlePhoneNumberChange = (isValid, newPhoneNumber) => {
-        if (Number.isInteger(+newPhoneNumber[newPhoneNumber.length - 1]) || newPhoneNumber === '') {
-            setPhoneNumber({ isValid: true, mobileNumber: newPhoneNumber });
-        } else {
-            setPhoneNumber({ ...phoneNumber, isValid });
-        }
-    };
-
-    const customCountryChange = (value) => {
+    const customCountryChange = useCallback((value) => {
         dispatch(getStates(value));
-    }
+    }, [dispatch]);
 
-    const customStateChange = (value) => {
+    const customStateChange = useCallback((value) => {
         dispatch(getCities(value));
-    }
+    }, [dispatch]);
 
     return <ProfileInfoFormUI
         customCountryChange={customCountryChange}
-        onPhoneNumberBlur={onPhoneNumberBlur}
-        phoneNumber={phoneNumber}
         customStateChange={customStateChange}
-        handlePhoneNumberChange={handlePhoneNumberChange}
         countries={address.countries}
         states={address.states}
         cities={address.cities}
+        prefferedCountry={prefferedCountry}
         handleSubmit={handleSubmit}
         error={error}
         handleImageChange={handleImageChange}

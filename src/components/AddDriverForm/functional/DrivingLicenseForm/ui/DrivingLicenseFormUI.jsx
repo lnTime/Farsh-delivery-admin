@@ -63,6 +63,7 @@ export const DrivingLicenseFormUI = React.memo(({ licenseTypeOptions,
             />
         </div>
         <span className={styles['AddDriverForm-FileUpload']}>Upload your Driving License</span>
-        <ChooseFrontAndBackContainer image={image} setImage={setImage} />
+        <ChooseFrontAndBackContainer 
+                imageOnly  />
     </div>);
 });

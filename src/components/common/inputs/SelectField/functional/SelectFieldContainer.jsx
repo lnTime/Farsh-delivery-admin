@@ -8,6 +8,5 @@ export const SelectFieldContainer = (props) => {
     <div className = {`Select-Div ${props['data-fullWidth'] ? "Select-Div_fullWidth" : ''}`}>
       <SelectFieldUI {...props} />
     </div>
-  )
-
+  );
 };

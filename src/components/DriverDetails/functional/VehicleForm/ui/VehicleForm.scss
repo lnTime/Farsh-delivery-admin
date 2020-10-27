@@ -2,3 +2,21 @@
     width: 100%;
     margin-top: 18px;
 }
+
+.AddSpan {
+    font-size: calc(6px + 0.439vw);
+    line-height: calc(10px + 0.512vw);
+    color: #bababa;
+}
+.AddDoc {
+    min-width: 50px;
+    width: 78px;
+    height: 31px;
+    background: #ededed 0% 0% no-repeat padding-box;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    cursor: pointer;
+}

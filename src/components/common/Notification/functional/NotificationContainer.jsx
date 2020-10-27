@@ -18,8 +18,11 @@ export const NotificationContainer = () => {
                 return styles['Notification_error'];
             case 'warning':
                 return styles['Notification_warning'];
+            default:
+                return '';
         }
     }, [type]);
+    
     useEffect(() => {
         if (open) {
             let interval = setTimeout(() => {
@@ -31,16 +34,16 @@ export const NotificationContainer = () => {
 
     const closeNotificationHandler = useCallback(() => {
         dispatch(closeNotification());
-    }, []);
+    }, [dispatch]);
 
     if (!open) {
         return null;
     }
 
     return <NotificationUI 
-    closeNotificationHandler={closeNotificationHandler}
-    notification={content}
-    styles={styles}
-    className={className}
-    />;
+            closeNotificationHandler={closeNotificationHandler}
+            notification={content}
+            styles={styles}
+            className={className}
+        />;
 }

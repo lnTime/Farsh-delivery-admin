@@ -5,10 +5,10 @@ import { SelectFieldContainer } from '../../../../common/inputs/SelectField/func
 import { TextFieldContainer } from '../../../../common/inputs/TextField/functional/TextFieldContainer';
 import { validators } from '../../../../../utils/validators/validators';
 import { AddAttachmentContainer } from '../../VehicleInfoForm/functional/AddAttachment/functional/AddAttachmentContainer';
-import { TypeIconContainer } from '../../../../common/icons/TypeIcon/functional/TypeIconContainer';
 import { DateFieldContainer } from '../../../../common/inputs/DateField/functional/DateFieldContainer';
+import { AttachmentListContainer } from '../functional/AttachmentList/functional/AttachmentListContainer';
 
-export const VehicleInfoFormUI = ({ setFileInfo, setDocuments, fileInfo, setOpenAtt, handleClick, openAtt, vehicleMakeOptions, address, customCountryChange, customStateChange, setInpValue, inpValue, handleDelete }) => {
+export const VehicleInfoFormUI = ({ setFileInfo, setDocuments, fileInfo, setOpenAtt, handleClick, openAtt, vehicleMakeOptions, address, customCountryChange, customStateChange, setInpValue, inpValue }) => {
     return (<div className={styles["AddDriver-Form"]}>
         <div className='EvenInputs'>
             <Field
@@ -105,30 +105,9 @@ export const VehicleInfoFormUI = ({ setFileInfo, setDocuments, fileInfo, setOpen
         <div className="EvenInputs AddDriver-Form_flex_less_width">
             <span className={styles.AddSpan}>Upload new document</span>
             <div onClick={handleClick} className={styles.AddDoc}>+Add</div>
-
         </div>
 
-        <div className={styles.Files}>
-            {fileInfo.map((data) => {
-                return (
-                    <div className={styles.UploadFile} key={data.id}>
-                        <div className={styles["UploadFile-Title"]}>
-                            <h3 className={styles["UploadFile-H3"]}>{data.id}. {data.inpValue}</h3>
-                            <div onClick={() => handleDelete(data.id)} className={styles.Flex}>
-                                <span>&#10006;</span>
-                                <span className={styles["UploadFile-Remove"]}>Remove</span>
-                            </div>
-                        </div>
-                        <div className={styles.FileData}>
-                            <TypeIconContainer className={styles['FileData-Icon']} type={data.type}/>
-                            <p className={styles["UploadFile-P"]}>{data.name}</p>
-                            <span className={styles["UploadFile-Span"]}>{data.size + 'KB'}</span>
-                        </div>
-                    </div>
-                )
-            })
-            }
-        </div>
+        <AttachmentListContainer fileInfo={fileInfo} setFileInfo={setFileInfo}/>;
         {openAtt ? <AddAttachmentContainer
             setInpValue={setInpValue}
             inpValue={inpValue}

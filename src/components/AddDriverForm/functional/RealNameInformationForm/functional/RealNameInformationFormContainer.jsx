@@ -11,15 +11,14 @@ import {getCities} from "../../../../../redux/address/addressActions";
 
 export const RealNameInformationFormContainer = ({ setCurrentOnSubmit, setCurrentStep }) => {
     const idTypeOptions = useMemo(() => [{ value: 'PASSPORT', id: 'PASSPORT' }, { value: 'NATIONAL_ID', id: 'NATIONAL_ID' }], []);
-    const [image, setImage] = useState({});
     const countries = useSelector(getCountriesSelector);
     const [issuingAuthorities, setIssuingAuthorities] = useState(null);
 
     const dispatch = useDispatch();
 
     const onSubmit = useCallback(formData => {
-        dispatch(updateRealNameInformation(formData, image, setImage, setCurrentStep, countries));
-    }, [image, setImage, setCurrentStep, countries, dispatch]);
+        dispatch(updateRealNameInformation(formData, setCurrentStep, countries));
+    }, [setCurrentStep, countries, dispatch]);
 
     useEffect(() => {
         setCurrentOnSubmit(() => onSubmit);
@@ -30,12 +29,10 @@ export const RealNameInformationFormContainer = ({ setCurrentOnSubmit, setCurren
 
     useEffect(() => {
         dispatch(getIssuingAuthorities(setIssuingAuthorities));
-    }, []);
+    }, [dispatch]);
 
     return <RealNameInformationFormUI
         idTypeOptions={idTypeOptions}
-        image={image}
-        setImage={setImage}
         countries={countries}
         customStateChange={customStateChange}
         issuingAuthorities={issuingAuthorities}

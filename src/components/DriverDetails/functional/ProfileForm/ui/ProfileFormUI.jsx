@@ -16,9 +16,6 @@ export const ProfileFormUI = ({
   handleClick,
   isEdit,
   handleSubmit,
-  phoneNumber,
-  handlePhoneNumberChange,
-  onPhoneNumberBlur,
   invalid,
   submitting,
   pristine,
@@ -41,9 +38,9 @@ export const ProfileFormUI = ({
           {
             isEdit ? <div className={`UploadImage ProfileFormAvatar-UploadImage ${hasError ? 'ProfileFormAvatar-UploadImage_error' : ''}`}>
               <ImageComponent />
-              <input type="file" onChange={handleImageChange}  accept="image/*" className="UploadImage-UploadInput"/>
+              <input type="file" onChange={handleImageChange} accept="image/*" className="UploadImage-UploadInput" />
             </div>
-            : <ImageComponent />
+              : <ImageComponent />
           }
           <div className="ProfileFormInfo">
             <span className="ProfileFormAvatar-name_name">Name</span>
@@ -56,30 +53,11 @@ export const ProfileFormUI = ({
                 className="InputBlock_withoutMargin"
               />
             ) : (
-            <span className="ProfileFormAvatar-Name">{profile.firstName} {profile.lastName}</span>
-            )}
+                <span className="ProfileFormAvatar-Name">{profile.firstName} {profile.lastName}</span>
+              )}
           </div>
         </div>
         <div className="ProfileInfoBlock">
-          <div>
-            <span className="ProfileInfoBlock-InputName">Mobile</span>
-            {isEdit ? (
-                <IntlTelInput
-                  preferredCountries={["am"]}
-                  separateDialCode={true}
-                  format={true}
-                  value={phoneNumber.mobileNumber}
-                  placeholder=""
-                  onPhoneNumberBlur={onPhoneNumberBlur}
-                  fieldId="phoneNumber"
-                  onPhoneNumberChange={handlePhoneNumberChange}
-                  containerClassName={`intl-tel-input ${phoneNumber.isValid ? '' : 'intl-tel-input-error'}`}
-                  inputClassName="form-control"
-            />
-            ) : (
-              <span className="ProfileInfoBlock-InputValue">{profile.mobileNumber}</span>
-            )}
-          </div>
           <div>
             <span className="ProfileInfoBlock-InputName">Country</span>
             {isEdit ? (
@@ -89,13 +67,11 @@ export const ProfileFormUI = ({
                 component={SelectFieldContainer}
                 options={address.countries}
                 validate={[validators.required]}
-            />
+              />
             ) : (
-              <span className="ProfileInfoBlock-InputValue">{profile.address?.country?.countryName}</span>
-            )}
+                <span className="ProfileInfoBlock-InputValue">{profile.address?.country?.countryName}</span>
+              )}
           </div>
-        </div>
-        <div className="ProfileInfoBlock">
           <div>
             <span className="ProfileInfoBlock-InputName">State</span>
             {isEdit ? (
@@ -107,9 +83,11 @@ export const ProfileFormUI = ({
                 validate={[validators.required]}
               />
             ) : (
-              <span className="ProfileInfoBlock-InputValue">{profile.address?.state}</span>
-            )}
+                <span className="ProfileInfoBlock-InputValue">{profile.address?.state}</span>
+              )}
           </div>
+        </div>
+        <div className="ProfileInfoBlock">
           <div>
             <span className="ProfileInfoBlock-InputName">City</span>
             {isEdit ? (
@@ -119,8 +97,31 @@ export const ProfileFormUI = ({
                 validate={[validators.required]}
               />
             ) : (
-              <span className="ProfileInfoBlock-InputValue">{profile.address?.city}</span>
-            )}
+                <span className="ProfileInfoBlock-InputValue">{profile.address?.city}</span>
+              )}
+          </div>
+          <div>
+            <span className="ProfileInfoBlock-InputName">Mobile</span>
+            {isEdit ? (
+              <Field name="mobileNumber"
+                validate={[validators.validatePhoneNumber]}
+                component={props => <IntlTelInput
+                  data-halfwidth
+                  preferredCountries={['sa']}
+                  separateDialCode={true}
+                  format={true}
+                  placeholder=""
+                  onPhoneNumberBlur={props.input.onBlur}
+                  fieldId="phoneNumber"
+                  onPhoneNumberChange={(isValid, phoneNumber) => props.input.onChange(phoneNumber)}
+                  containerClassName={`intl-tel-input intl-tel-input ${(props.meta.error && props.meta.touched) ? 'intl-tel-input-error' : ''}`}
+                  inputClassName="form-control"
+                  {...props}
+                />}
+              />
+            ) : (
+                <span className="ProfileInfoBlock-InputValue">{profile.mobileNumber}</span>
+              )}
           </div>
         </div>
         <div className="ProfileInfoBlock ProfileInfoBlock_oneItem">
@@ -132,8 +133,8 @@ export const ProfileFormUI = ({
               type="text"
               component={TextFieldContainer} />
           ) : (
-            <span className="ProfileInfoBlock-InputValue">{profile.address?.address}</span>
-          )}
+              <span className="ProfileInfoBlock-InputValue">{profile.address?.address}</span>
+            )}
         </div>
         <div className="ProfileInfoBlock ProfileInfoBlock_oneItem">
           <span className="ProfileInfoBlock-InputName">Password</span>
@@ -145,15 +146,15 @@ export const ProfileFormUI = ({
               component={TextFieldContainer}
             />
           ) : (
-            <div className="Password">
-              {"aaaaaaaaa".split("").map((v, index) => (
-                <div
-  className="ProfileInfoBlock-InputValue_cycle"
-  key={index}
-  />
-              ))}
-            </div>
-          )}
+              <div className="Password">
+                {"aaaaaaaaa".split("").map((v, index) => (
+                  <div
+                    className="ProfileInfoBlock-InputValue_cycle"
+                    key={index}
+                  />
+                ))}
+              </div>
+            )}
         </div>
         {isEdit ?
           <BlackButtonContainer

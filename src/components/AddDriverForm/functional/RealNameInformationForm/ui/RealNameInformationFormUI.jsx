@@ -9,7 +9,7 @@ import { DateFieldContainer } from '../../../../common/inputs/DateField/function
 
 
 export const RealNameInformationFormUI = React.memo(({
-    customStateChange, idTypeOptions, image, countries, issuingAuthorities, setImage }) => {
+    customStateChange, idTypeOptions, countries, issuingAuthorities }) => {
     return (<div className={styles["AddDriver-Form"]}>
         <div className='EvenInputs'>
             <Field name="realNameIdType"
@@ -65,8 +65,7 @@ export const RealNameInformationFormUI = React.memo(({
         </div>
         <span className={styles["AddDriverForm-FileUpload"]}>Upload your National ID Card</span>
         <ChooseFrontAndBackContainer
-            image={image}
-            setImage={setImage}
+            imageOnly
         />
     </div>);
 });

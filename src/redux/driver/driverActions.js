@@ -2,9 +2,10 @@ import { driverConstants } from './driverConstants';
 import { API } from '../../API/index';
 import { SubmissionError } from 'redux-form';
 import { getCountryNameByISOCode } from '../address/addressActions';
-import axios from 'axios';
-import {getOptions, getDrivingLicenseData, getVehicleData, getDriver} from './driverHelpers';
-import {globalErrorHandler} from '../common/helpers/global-error-handler';
+import { getOptions, getDrivingLicenseData, getVehicleData, getDriver, makeImageURL } from './driverHelpers';
+import { globalErrorHandler } from '../common/helpers/global-error-handler';
+import { batch } from 'react-redux';
+import { openNotification } from '../notification/notificationActions';
 
 /* 
     REDUX ACTIONS (PURE)
@@ -34,9 +35,17 @@ export const setVehicleInfo = (vehicle) => ({ type: driverConstants.SET_VEHICLE_
 
 export const setProfile = (profile) => ({ type: driverConstants.SET_PROFILE, payload: profile });
 
+export const setRealNameInformation = realNameInformation =>
+  ({ type: driverConstants.SET_REAL_NAME_INFORMATION, payload: realNameInformation })
 
-export const setRealNameInformation = realNameInformation => 
-({ type: driverConstants.SET_REAL_NAME_INFORMATION, payload: realNameInformation })
+
+export const setRealNameFrontImage = (src) => ({ type: driverConstants.SET_REAL_NAME_FRONT_IMAGE, payload: src })
+
+export const setRealNameBackImage = (src) => ({ type: driverConstants.SET_REAL_NAME_BACK_IMAGE, payload: src })
+
+export const setDrivingLicenseFrontImage = (src) => ({ type: driverConstants.SET_DRIVING_LICENSE_FRONT_IMAGE, payload: src })
+
+export const setDrivingLicenseBackImage = (src) => ({ type: driverConstants.SET_DRIVING_LICENSE_BACK_IMAGE, payload: src });
 /* 
     END REDUX ACTIONS (PURE)
 */
@@ -44,53 +53,91 @@ export const setRealNameInformation = realNameInformation =>
 /* 
     GET ACTIONS (REDUX THUNK)
 */
-export const getProfilePicture = fileKey => dispatch => {
-  axios.get(`https://cdn57.androidauthority.net/wp-content/uploads/2017/11/Google-search-curved-840x446.png`, {
+export const getAndDispatchPicture = (fileKey, fn) => dispatch => {
+  API.get(`storage/resource/${fileKey}`, {
     responseType: 'blob'
   })
-    .then(res => {
-      const urlCreator = window.URL || window.webkitURL;
-      const imageUrl = urlCreator.createObjectURL(res.data);
-      dispatch(setProfileAvatar(imageUrl));
-      window.blob = res.data;
-    }).catch(err => dispatch(globalErrorHandler(err)));
+    .then(makeImageURL)
+    .then(imageURL => dispatch(fn(imageURL)))
+    .catch(err => dispatch(globalErrorHandler(err)));
+}
+
+export const getAndDispatchDocuments = (documents, fn) => dispatch => {
+  const promiseList = documents.map(document => API.get(`storage/resource/${document.fileKey}`, {
+    responseType: 'blob'
+  }));
+  console.log('started');
+  Promise.all(promiseList).then(console.log);
+
 }
 
 export const getVehicleMakes = (setVehicleMakes) => dispatch => {
   API.get(`static/vehicle/vehicle-makes`)
-  .then(({data}) => {
+    .then(({ data }) => {
       setVehicleMakes(getOptions(data));
-  }).catch(err => dispatch(globalErrorHandler(err)));;
+    }).catch(err => dispatch(globalErrorHandler(err)));;
 }
 
 export const getIssuingAuthorities = (setIssuingAuthorities) => dispatch => {
   API.get(`static/real-name/issuing-authority`)
-  .then(({data}) => {
-    setIssuingAuthorities(getOptions(data));
-  }).catch(err => dispatch(globalErrorHandler(err)));;
+    .then(({ data }) => {
+      setIssuingAuthorities(getOptions(data));
+    }).catch(err => dispatch(globalErrorHandler(err)));;
 }
 
 export const getDriverData = (id) => (dispatch) => {
   API.get(`drivers/${id}`)
     .then(({ data }) => {
       const driver = data.responseList[0];
-      dispatch(setDriverData(driver));
-      dispatch(getProfilePicture(driver.profile?.attachments[0].fileKey))
+      batch(() => {
+        dispatch(setDriverData(driver));
+        dispatch(getAndDispatchPicture(driver.profile?.attachments[0].fileKey, setProfileAvatar))
+      })
+
+
+      const realNameAttachments = driver.realNameInformation?.attachments;
+      if (realNameAttachments) {
+        for (let i = 0; i < realNameAttachments.length; i++) {
+          if (realNameAttachments[i].attachmentType === 'REAL_NAME_FRONT') {
+              dispatch(getAndDispatchPicture(realNameAttachments[i].fileKey, setRealNameFrontImage))
+          } else if (realNameAttachments[i].attachmentType === 'REAL_NAME_BACK') {
+              dispatch(getAndDispatchPicture(realNameAttachments[i].fileKey, setRealNameBackImage));
+          }
+        }
+      }
+
+      const drivingLicenseAttachments = driver.drivingLicense?.attachments;
+      if(drivingLicenseAttachments) {
+        for (let i = 0; i < drivingLicenseAttachments.length; i++) {
+          if (drivingLicenseAttachments[i].attachmentType === 'DRIVING_LICENSE_FRONT') {
+              dispatch(getAndDispatchPicture(drivingLicenseAttachments[i].fileKey, setDrivingLicenseFrontImage))
+          } else if (drivingLicenseAttachments[i].attachmentType === 'DRIVING_LICENSE_BACK') {
+              dispatch(getAndDispatchPicture(drivingLicenseAttachments[i].fileKey, setDrivingLicenseBackImage));
+          }
+        }
+      }
+
+      const vehicleAttachments = driver.vehicle?.attachments;
+      if(vehicleAttachments) {
+        dispatch(getAndDispatchDocuments(vehicleAttachments))
+      }
+
+
     }).catch(err => dispatch(globalErrorHandler(err)));
 }
 
 export const getDrivingLicenseTypes = (setDrivingLicenseTypes) => dispatch => {
   API.get(`static/driving-license/types`)
-  .then(({data}) => {
-    setDrivingLicenseTypes(getOptions(data));
-  }).catch(err => dispatch(globalErrorHandler(err)));
+    .then(({ data }) => {
+      setDrivingLicenseTypes(getOptions(data));
+    }).catch(err => dispatch(globalErrorHandler(err)));
 }
 
 export const getDrivingLicenseIssuingAuthority = (setDrivingLicenseIssuingAuthority) => dispatch => {
   API.get(`static/driving-license/issuing-authority`)
-  .then(({data}) => {
-    setDrivingLicenseIssuingAuthority(getOptions(data));
-  }).catch(err => dispatch(globalErrorHandler(err)));
+    .then(({ data }) => {
+      setDrivingLicenseIssuingAuthority(getOptions(data));
+    }).catch(err => dispatch(globalErrorHandler(err)));
 }
 
 /* 
@@ -101,7 +148,7 @@ export const getDrivingLicenseIssuingAuthority = (setDrivingLicenseIssuingAuthor
   POST ACTIONS (REDUX THUNK)
 */
 
-export const createDriver = (formData, setPhoneNumber, phoneNumber, image, setImage, countries, setCurrentStep) => (dispatch) => {
+export const createDriver = (formData, image, setImage, countries, setCurrentStep) => (dispatch) => {
   if (formData.password !== formData.confirmPassword) {
     throw new SubmissionError({ confirmPassword: 'Please confirm the password.' })
   }
@@ -111,12 +158,7 @@ export const createDriver = (formData, setPhoneNumber, phoneNumber, image, setIm
     return false;
   }
 
-  if (!phoneNumber.mobileNumber || !phoneNumber.isValid) {
-    setPhoneNumber({ ...phoneNumber, isValid: false });
-    return false;
-  }
-
-  const data = getDriver(formData, image, phoneNumber, countries);
+  const data = getDriver(formData, image, countries);
   API.post(`drivers/`, data)
     .then((result) => {
       setCurrentStep(currentStep => currentStep + 1);
@@ -124,7 +166,7 @@ export const createDriver = (formData, setPhoneNumber, phoneNumber, image, setIm
     }).catch(err => dispatch(globalErrorHandler(err)));
 }
 
-export const createVehicleInfo = (formData, documents) => (dispatch, getState) => {
+export const createVehicleInfo = (formData, documents, setCurrentStep) => (dispatch, getState) => {
   const id = getState().driver.id;
   const data = getVehicleData(formData);
   window.documents = documents;
@@ -137,7 +179,7 @@ export const createVehicleInfo = (formData, documents) => (dispatch, getState) =
   }
   API.post(`drivers/vehicle/${id}`, data)
     .then((res) => {
-      console.log(res);
+      setCurrentStep(currentStep => currentStep + 1);
     }).catch(err => dispatch(globalErrorHandler(err)))
 }
 
@@ -150,17 +192,9 @@ export const createVehicleInfo = (formData, documents) => (dispatch, getState) =
   UPDATE ACTIONS (REDUX THUNK)
 */
 
-export const updateDrivingLicense = (formData, image, setImage, countries, setCurrentStep) => (dispatch, getState) => {
+export const updateDrivingLicense = (formData, countries, setCurrentStep) => (dispatch, getState) => {
   const id = getState().driver.id;
-  if (!image.isFrontChoosed) {
-    setImage({ ...image, hasFrontError: true })
-    return false;
-  } else if (!image.isBackChoosed) {
-    setImage({ ...image, hasBackError: true })
-    return false;
-  }
-
-  const data = getDrivingLicenseData(formData, countries, image);
+  const data = getDrivingLicenseData(formData, countries);
 
   API.post(`drivers/driving-license/${id}`, data)
     .then(result => {
@@ -169,16 +203,7 @@ export const updateDrivingLicense = (formData, image, setImage, countries, setCu
 };
 
 
-export const updateDrivingLicenseByID = (formData, id, countries, setImageHasError, handleEditModeChange) => (dispatch) => {
-  if (!formData.driverLicenceFrontImgFile) {
-    setImageHasError(prev => ({ ...prev, front: true }));
-    return false;
-  } else if (!formData.driverLicenceBackImgFile) {
-    setImageHasError(prev => ({ ...prev, back: true }));
-    return false;
-  } else {
-    setImageHasError({ back: false, front: false });
-  }
+export const updateDrivingLicenseByID = (formData, id, countries, handleEditModeChange) => (dispatch) => {
 
   formData.licenseIssuingCountry.countryName = getCountryNameByISOCode(countries, formData.licenseIssuingCountry.isoCode);
   const data = new FormData();
@@ -219,14 +244,7 @@ export const updateVendorCreate = (formData, setCurrentStep) => (dispatch, getSt
     }).catch(err => dispatch(globalErrorHandler(err)));
 }
 
-export const updateRealNameInformation = (formData, image, setImage, setCurrentStep, countries) => (dispatch, getState) => {
-  if (!image.isFrontChoosed) {
-    setImage({ ...image, hasFrontError: true })
-    return false;
-  } else if (!image.isBackChoosed) {
-    setImage({ ...image, hasBackError: true })
-    return false;
-  }
+export const updateRealNameInformation = (formData, setCurrentStep, countries) => (dispatch, getState) => {
   const id = getState().driver.id;
   const data = new FormData();
   data.append('realNameIdType', formData.realNameIdType);
@@ -236,8 +254,8 @@ export const updateRealNameInformation = (formData, image, setImage, setCurrentS
   data.append('realNameIssueCountry.countryName', getCountryNameByISOCode(countries, formData.issuingCountry));
   data.append('realNameIssueCountry.isoCode', formData.issuingCountry);
   data.append('realNameIssueAuthority', formData.issuingAuthority);
-  data.append('idImgFront', image.front);
-  data.append('idImgBack', image.back);
+  data.append('idImgFront', formData.front);
+  data.append('idImgBack', formData.back);
 
   API.post(`drivers/real-name/${id}`, data)
     .then(result => {
@@ -255,15 +273,12 @@ export const updateVehicleInfo = (formData, setIsEditMode, id) => (dispatch, get
 }
 
 
-export const updateProfile = (formData, id, image, phoneNumber, countries, setImage, isPhoneNumberValid, setIsEditMode) => (dispatch, getState) => {
-  if (!isPhoneNumberValid) {
-    return false;
-  }
+export const updateProfile = (formData, id, image, countries, setImage, setIsEditMode) => (dispatch, getState) => {
   if (!image || !image.file) {
     setImage({ hasError: true });
     return false;
   }
-  const data = getDriver(formData, image, phoneNumber, countries);
+  const data = getDriver(formData, image, countries);
   data.delete('firstName');
   data.delete('lastName');
   const name = formData.name.split(' ');
@@ -276,26 +291,31 @@ export const updateProfile = (formData, id, image, phoneNumber, countries, setIm
     }).catch(err => dispatch(globalErrorHandler(err)));
 }
 
-export const activateDriver = (formData, activated) => (dispatch, getState) => {
-  const id = getState().driver.id;
+export const activateDriver = (formData, activated, updateHistory, goToDriver) => (dispatch, getState) => {
+  const driver = getState().driver;
+  const id = driver.id;
+  const name = `${driver.profile.firstName} ${driver.profile.lastName}`;
   const data = new FormData();
-  data.append('activation.activeFrom', formData.activationStartDate);
-  data.append('activation.activeTo', formData.activationEndDate);
+  data.append('activeFrom', formData.activationStartDate);
+  data.append('activeTo', formData.activationEndDate);
   data.append('activation.active', activated);
   API.post(`drivers/activation/${id}`, data)
-    .then(console.log).catch(err => dispatch(globalErrorHandler(err)));
+    .then(() => {
+      dispatch(openNotification({
+        type: 'success',
+        content: {
+            title: `${name} has been added successfully`,
+            description: 'Duis pretium gravida enim, vel maximus ligula fermentum a. Sed rhoncus eget ex id egestas.',
+            additionalComponent: {
+              handler: () => goToDriver(id)
+            }
+        }
+      }))
+      updateHistory();
+    }).catch(err => dispatch(globalErrorHandler(err)));
 }
 
-export const updateRealNameInformationByID = (formData, id, countries, imageHasError, setImageHasError, setIsEditMode) => (dispatch) => {
-  if (!(formData.idImgBack instanceof File)) {
-    setImageHasError(prev => ({ ...prev, back: true }));
-    return false;
-  } else if (!(formData.idImgFront instanceof File)) {
-    setImageHasError(prev => ({ ...prev, front: true }));
-    return false;
-  } else {
-    setImageHasError({ back: false, front: false });
-  }
+export const updateRealNameInformationByID = (formData, id, countries, setIsEditMode) => (dispatch) => {
   const data = new FormData();
   data.append('realNameExpiryDate', formData.realNameExpiryDate);
   data.append('realNameIdNo', formData.realNameIdNo);
@@ -315,9 +335,9 @@ export const updateRealNameInformationByID = (formData, id, countries, imageHasE
 
 /*
   END UPDATE ACTIONS (REDUX THUNK)
-*/ 
+*/
 
-/* 
+/*
 dispatch(openNotification({
             type: 'success',
             content: {

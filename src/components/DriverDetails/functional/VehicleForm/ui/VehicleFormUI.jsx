@@ -6,14 +6,25 @@ import { TextFieldContainer } from "../../../../common/inputs/TextField/function
 import { BlackButtonContainer } from "../../../../common/buttons/BlackButton/functional/BlackButtonContainer";
 import {SelectFieldContainer} from "../../../../common/inputs/SelectField/functional/SelectFieldContainer";
 import {validators} from "../../../../../utils/validators/validators";
+import { AddAttachmentContainer } from "../../../../AddDriverForm/functional/VehicleInfoForm/functional/AddAttachment/functional/AddAttachmentContainer";
+import { AttachmentListContainer } from "../../../../AddDriverForm/functional/VehicleInfoForm/functional/AttachmentList/functional/AttachmentListContainer";
 
-export const VehicleFormUI = ({isEdit,
+export const VehicleFormUI = ({
+  isEdit,
   handleClick,
   handleSubmit,
   vehicle = {},
   address,
   customStateChange,
-  customCountryChange
+  customCountryChange,
+  openAtt,
+  inpValue,
+  setInpValue, 
+  setDocuments,
+  setOpenAtt,
+  fileInfo,
+  setFileInfo,
+  handleAdd
 }) => {
   return (
     <form onSubmit={handleSubmit}>
@@ -144,6 +155,18 @@ export const VehicleFormUI = ({isEdit,
               )}
           </div>
         </div>
+        {isEdit && <div className="EvenInputs AddDriver-Form_flex_less_width ProfileInfoBlock">
+            <span className="AddSpan">Upload new document</span>
+            <div onClick={handleAdd} className="AddDoc">+Add</div>
+          </div>}
+          <AttachmentListContainer fileInfo={fileInfo} className="ProfileInfoBlock" setFileInfo={setFileInfo}/>
+          {openAtt && <AddAttachmentContainer
+            setInpValue={setInpValue}
+            inpValue={inpValue}
+            setDocuments={setDocuments}
+            setFileInfo={setFileInfo}
+            fileInfo={fileInfo}
+            setOpenAtt={setOpenAtt} />}
         {isEdit ? <BlackButtonContainer text="Save" /> : null}
       </div>
     </form>

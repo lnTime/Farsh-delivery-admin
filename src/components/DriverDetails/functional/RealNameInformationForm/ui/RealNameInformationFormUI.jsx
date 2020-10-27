@@ -1,4 +1,4 @@
-import React  from "react";
+import React from "react";
 import "./RealNameInformationForm.scss";
 import { FormHeaderContainer } from "../../FormHeader/functional/FormHeaderContainer";
 import { IdCardContainer } from "../../../../common/icons/IdCard/functional/IdCardContainer";
@@ -18,8 +18,8 @@ const RealNameInformationFormUI = ({
   handleSubmit,
   countries,
   idTypeOptions,
-  imageHasError,
-  setImageHasError
+  frontImage,
+  backImage,
 }) => {
   return (
     <form onSubmit={handleSubmit}>
@@ -130,32 +130,32 @@ const RealNameInformationFormUI = ({
               <Field
                 component={ChooseFileFieldContainer}
                 type="file"
+                imageOnly
                 name="idImgBack"
+                initialImageSrc={backImage}
                 title={null}
                 actionText={null}
                 buttonText="Choose Back image"
-                validate={validators.required}
-                hasError={imageHasError.back}
-                setHasError={value => setImageHasError(prev => ({ ...prev, back: value }))}
+                validate={[validators.required]}
               />
             ) : (
-                <IdCardContainer />
+              backImage ? <img src={backImage} alt="Back" width="154" height="90" /> : <IdCardContainer />
               )}
             {isEdit ? (
               <Field
                 component={ChooseFileFieldContainer}
                 type="file"
+                imageOnly
+                initialImageSrc={frontImage}
                 name="idImgFront"
                 title={null}
                 actionText={null}
                 buttonText="Choose Front image"
-                hasError={imageHasError.front}
-                setHasError={value => setImageHasError(prev => ({ ...prev, front: value }))}
-                validate={validators.required}
+                validate={[validators.required]}
               />
-            ) : (
-                <IdCardContainer />
-              )}
+            ) :
+              frontImage ? <img src={frontImage} alt="Front" width="154" height="90" /> : <IdCardContainer />
+            }
           </div>
           {isEdit ? <BlackButtonContainer text="Save" /> : null}
         </div>

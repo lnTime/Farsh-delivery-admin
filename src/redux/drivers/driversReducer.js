@@ -1,7 +1,7 @@
 import { driversConstants } from "./driversConstants";
 
 const initialState = {
-    pageNo: 0,
+    pageNo: 2,
     pageSize: 10,
     view: [],
     driverList: []
