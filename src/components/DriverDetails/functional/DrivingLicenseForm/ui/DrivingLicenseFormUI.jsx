@@ -1,21 +1,23 @@
-import React  from "react";
+import React from "react";
 import "./DrivingLicenseForm.scss";
-import { FormHeaderContainer } from "../../FormHeader/functional/FormHeaderContainer";
-import { reduxForm, Field } from "redux-form";
-import { TextFieldContainer } from "../../../../common/inputs/TextField/functional/TextFieldContainer";
-import { ChooseFileFieldContainer } from "../../../../common/inputs/ChooseFileField/functional/ChooseFileFieldContainer";
-import { BlackButtonContainer } from "../../../../common/buttons/BlackButton/functional/BlackButtonContainer";
-import { SelectFieldContainer } from '../../../../common/inputs/SelectField/functional/SelectFieldContainer';
-import { validators } from '../../../../../utils/validators/validators';
-import { DateFieldContainer } from "../../../../common/inputs/DateField/functional/DateFieldContainer";
+import {FormHeaderContainer} from "../../FormHeader/functional/FormHeaderContainer";
+import {reduxForm, Field} from "redux-form";
+import {TextFieldContainer} from "../../../../common/inputs/TextField/functional/TextFieldContainer";
+import {ChooseFileFieldContainer} from "../../../../common/inputs/ChooseFileField/functional/ChooseFileFieldContainer";
+import {BlackButtonContainer} from "../../../../common/buttons/BlackButton/functional/BlackButtonContainer";
+import {SelectFieldContainer} from '../../../../common/inputs/SelectField/functional/SelectFieldContainer';
+import {validators} from '../../../../../utils/validators/validators';
+import {DateFieldContainer} from "../../../../common/inputs/DateField/functional/DateFieldContainer";
 
 const DrivingLicenseFormUI = ({
-  drivingLicense = {},
-  isEdit,
-  handleClick,
-  handleSubmit,
-  countries,
-}) => {
+                                drivingLicense = {},
+                                isEdit,
+                                handleClick,
+                                handleSubmit,
+                                countries,
+                                drivingLicenseTypes,
+                                drivingLicenseIssuingAuthority,
+                              }) => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="ProfileForm DrivingLicenseForm">
@@ -33,12 +35,12 @@ const DrivingLicenseFormUI = ({
                 name="licenseType"
                 placeholder="Issuing Authority"
                 component={SelectFieldContainer}
-                options={[{ value: 'LTE', id: 'LTE' }]}
+                options={drivingLicenseTypes}
                 validate={[validators.required]}
               />
             ) : (
-                <span className="ProfileInfoBlock-InputValue">{drivingLicense.licenseType}</span>
-              )}
+              <span className="ProfileInfoBlock-InputValue">{drivingLicense.licenseType}</span>
+            )}
           </div>
           <div>
             <span className="ProfileInfoBlock-InputName">License number</span>
@@ -49,10 +51,10 @@ const DrivingLicenseFormUI = ({
                 name="licenseNo"
               />
             ) : (
-                <span className="ProfileInfoBlock-InputValue">
+              <span className="ProfileInfoBlock-InputValue">
                   {drivingLicense.licenseNo}
                 </span>
-              )}
+            )}
           </div>
         </div>
         <div className="ProfileInfoBlock">
@@ -66,8 +68,8 @@ const DrivingLicenseFormUI = ({
                 data-fullWidth
               />
             ) : (
-                <span className="ProfileInfoBlock-InputValue">{drivingLicense.licenseIssueDate}</span>
-              )}
+              <span className="ProfileInfoBlock-InputValue">{drivingLicense.licenseIssueDate}</span>
+            )}
           </div>
           <div>
             <span className="ProfileInfoBlock-InputName">Expiry date</span>
@@ -79,8 +81,8 @@ const DrivingLicenseFormUI = ({
                 name="licenseExpiryDate"
               />
             ) : (
-                <span className="ProfileInfoBlock-InputValue">{drivingLicense.licenseExpiryDate}</span>
-              )}
+              <span className="ProfileInfoBlock-InputValue">{drivingLicense.licenseExpiryDate}</span>
+            )}
           </div>
         </div>
         <div className="ProfileInfoBlock">
@@ -96,10 +98,10 @@ const DrivingLicenseFormUI = ({
                 validate={[validators.required]}
               />
             ) : (
-                <span className="ProfileInfoBlock-InputValue">
+              <span className="ProfileInfoBlock-InputValue">
                   {drivingLicense.licenseIssuingCountry?.countryName || 'SA'}
                 </span>
-              )}
+            )}
           </div>
           <div>
             <span className="ProfileInfoBlock-InputName">
@@ -111,14 +113,14 @@ const DrivingLicenseFormUI = ({
                 name="licenseIssuingAuthority"
                 placeholder="Issuing Authority"
                 component={SelectFieldContainer}
-                options={countries}
+                options={drivingLicenseIssuingAuthority}
                 validate={[validators.required]}
               />
             ) : (
-                <span className="ProfileInfoBlock-InputValue">
+              <span className="ProfileInfoBlock-InputValue">
                   {drivingLicense.licenseIssuingAuthority}
                 </span>
-              )}
+            )}
           </div>
         </div>
         <div className="ProfileInfoBlock ProfileInfoBlock_oneItem">
@@ -136,8 +138,8 @@ const DrivingLicenseFormUI = ({
                 validate={validators.required}
               />
             ) : (
-                <img alt="Driving License Front" src={drivingLicense.drivingLicenseFrontImage} width="154" height="90" />
-              )}
+              <img alt="Driving License Front" src={drivingLicense.drivingLicenseFrontImage} width="154" height="90"/>
+            )}
             {!drivingLicense.drivingLicenseBackImage || isEdit ? (
               <Field
                 component={ChooseFileFieldContainer}
@@ -150,10 +152,10 @@ const DrivingLicenseFormUI = ({
                 validate={validators.required}
               />
             ) : (
-                <img alt="Driving License Back" src={drivingLicense.drivingLicenseBackImage} width="154" height="90" />
-              )}
+              <img alt="Driving License Back" src={drivingLicense.drivingLicenseBackImage} width="154" height="90"/>
+            )}
           </div>
-          {isEdit ? <BlackButtonContainer text="Save" /> : null}
+          {isEdit ? <BlackButtonContainer text="Save"/> : null}
         </div>
       </div>
     </form>

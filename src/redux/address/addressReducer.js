@@ -1,7 +1,7 @@
 import { addressConstants } from "./addressConstants";
 
 const initialState = {
-    countries: [],
+    countries: [ { value: 'Saudi Arabia', id: 'SA', } ],
     cities: [ {value: 'Please select the state', id: 0} ],
     states: [ {value: 'Please select the country', id: 0} ],
 };

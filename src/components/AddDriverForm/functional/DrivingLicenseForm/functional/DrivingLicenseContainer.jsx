@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { DrivingLicenseFormUI } from '../ui/DrivingLicenseFormUI';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getCountriesSelector } from '../../../../../redux/address/addressSelectors';
-import { updateDrivingLicense, getDrivingLicenseTypes, getDrivingLicenseIssuingAuthority } from '../../../../../redux/driver/driverActions';
+import { updateDrivingLicense } from '../../../../../redux/driver/driverActions';
 import {getCities} from "../../../../../redux/address/addressActions";
+import {getDrivingLicenseIssuingAuthority, getDrivingLicenseTypes} from "../../../../../redux/static/staticActions";
+import {
+    getDrivingLicenseIssuingAuthoritySelector,
+    getDrivingLicenseTypesSelector
+} from "../../../../../redux/static/staticSelectors";
 
 
 export const DrivingLicenseContainer = ({setCurrentStep, setCurrentOnSubmit}) => {
-    const [drivingLicenseTypes, setDrivingLicenseTypes] = useState(null);
-    const [issuingAuthority, setIssuingAuthority] = useState(null);
+    const drivingLicenseTypes = useSelector(getDrivingLicenseTypesSelector);
+    const issuingAuthority = useSelector(getDrivingLicenseIssuingAuthoritySelector);
     const countries = useSelector(getCountriesSelector);
 
     const dispatch = useDispatch();
@@ -27,10 +29,10 @@ export const DrivingLicenseContainer = ({setCurrentStep, setCurrentOnSubmit}) =>
         setCurrentOnSubmit(() => onSubmit);
     }, [setCurrentOnSubmit, onSubmit]);
     useEffect(() => {
-        dispatch(getDrivingLicenseTypes(setDrivingLicenseTypes));
+        dispatch(getDrivingLicenseTypes());
     }, [dispatch]);
     useEffect(() => {
-        dispatch(getDrivingLicenseIssuingAuthority(setIssuingAuthority));
+        dispatch(getDrivingLicenseIssuingAuthority());
     }, [dispatch]);
 
     return <DrivingLicenseFormUI

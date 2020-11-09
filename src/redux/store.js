@@ -5,6 +5,7 @@ import { addressReducer } from './address/addressReducer';
 import { driverReducer } from "./driver/driverReducer";
 import { driversReducer } from './drivers/driversReducer';
 import { globalReducer } from './global/globalReducer';
+import staticReducer from "./static/staticReducer";
 
 let reducers = combineReducers({
     form: formReducer,
@@ -12,6 +13,7 @@ let reducers = combineReducers({
     driver: driverReducer,
     drivers: driversReducer,
     global: globalReducer,
+    staticReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

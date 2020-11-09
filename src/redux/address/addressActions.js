@@ -19,7 +19,6 @@ export const getStates = (countryName) => async (dispatch) => {
     const regions = await localStorage.getItem('regions');
     if (regions) {
         const parsed = JSON.parse(regions);
-        console.log('Regions are: ', parsed);
         dispatch(setStates(parsed));
         dispatch(getCities(+parsed[0].Id));
     } else {
@@ -45,7 +44,7 @@ export const getStateById = (stateId) => {
         const parsed = JSON.parse(regions);
         const option = parsed.find(i => i.id === stateId);
         return option;
-    } else 
+    } else
         return {};
 }
 
@@ -69,7 +68,7 @@ export const getCities = (stateId) => async (dispatch) => {
             const transformed = cities.map(item => ({ value: item.Name, id: item.Id}));
             localStorage.setItem('cities', JSON.stringify(transformed));
             dispatch(setCities(transformed))
-        })    
+        })
     }
 }
 

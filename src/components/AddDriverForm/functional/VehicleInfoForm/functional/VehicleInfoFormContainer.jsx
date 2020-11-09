@@ -4,14 +4,16 @@ import { getAddressSelector } from '../../../../../redux/address/addressSelector
 import { getStates, getCities, getCountries } from '../../../../../redux/address/addressActions';
 import { useSelector, useDispatch } from 'react-redux';
 import { useCallback } from 'react';
-import { createVehicleInfo, getVehicleMakes } from '../../../../../redux/driver/driverActions';
+import { createVehicleInfo } from '../../../../../redux/driver/driverActions';
+import {getVehicleMakes} from "../../../../../redux/static/staticActions";
+import {getVehicleMakesSelector} from "../../../../../redux/static/staticSelectors";
 
 export const VehicleInfoFormContainer = ({ setCurrentStep, setCurrentOnSubmit }) => {
     const [fileInfo, setFileInfo] = useState([]);
     const [inpValue, setInpValue] = useState('');
     const [openAtt, setOpenAtt] = useState(false);
     const [documents, setDocuments] = useState([]);
-    const [vehicleMakes, setVehicleMakes] = useState(null);
+    const vehicleMakes = useSelector(getVehicleMakesSelector);
 
     const address = useSelector(getAddressSelector);
     const dispatch = useDispatch();
@@ -42,7 +44,7 @@ export const VehicleInfoFormContainer = ({ setCurrentStep, setCurrentOnSubmit })
     }, [setCurrentOnSubmit, onSubmit]);
 
     useEffect(() => {
-        dispatch(getVehicleMakes(setVehicleMakes));
+        dispatch(getVehicleMakes());
     }, [dispatch]);
 
     return <VehicleInfoFormUI

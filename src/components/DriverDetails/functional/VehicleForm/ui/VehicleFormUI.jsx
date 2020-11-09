@@ -1,31 +1,32 @@
-import React  from "react";
+import React from "react";
 import "./VehicleForm.scss";
-import { FormHeaderContainer } from "../../FormHeader/functional/FormHeaderContainer";
-import { Field, reduxForm } from "redux-form";
-import { TextFieldContainer } from "../../../../common/inputs/TextField/functional/TextFieldContainer";
-import { BlackButtonContainer } from "../../../../common/buttons/BlackButton/functional/BlackButtonContainer";
+import {FormHeaderContainer} from "../../FormHeader/functional/FormHeaderContainer";
+import {Field, reduxForm} from "redux-form";
+import {TextFieldContainer} from "../../../../common/inputs/TextField/functional/TextFieldContainer";
+import {BlackButtonContainer} from "../../../../common/buttons/BlackButton/functional/BlackButtonContainer";
 import {SelectFieldContainer} from "../../../../common/inputs/SelectField/functional/SelectFieldContainer";
 import {validators} from "../../../../../utils/validators/validators";
-import { AddAttachmentContainer } from "../../../../AddDriverForm/functional/VehicleInfoForm/functional/AddAttachment/functional/AddAttachmentContainer";
-import { AttachmentListContainer } from "../../../../AddDriverForm/functional/VehicleInfoForm/functional/AttachmentList/functional/AttachmentListContainer";
+import {AddAttachmentContainer} from "../../../../AddDriverForm/functional/VehicleInfoForm/functional/AddAttachment/functional/AddAttachmentContainer";
+import {AttachmentListContainer} from "../../../../AddDriverForm/functional/VehicleInfoForm/functional/AttachmentList/functional/AttachmentListContainer";
 
 export const VehicleFormUI = ({
-  isEdit,
-  handleClick,
-  handleSubmit,
-  vehicle = {},
-  address,
-  customStateChange,
-  customCountryChange,
-  openAtt,
-  inpValue,
-  setInpValue, 
-  setDocuments,
-  setOpenAtt,
-  fileInfo,
-  setFileInfo,
-  handleAdd
-}) => {
+                                isEdit,
+                                handleClick,
+                                handleSubmit,
+                                vehicle = {},
+                                address,
+                                customStateChange,
+                                customCountryChange,
+                                openAtt,
+                                inpValue,
+                                setInpValue,
+                                setDocuments,
+                                setOpenAtt,
+                                fileInfo,
+                                setFileInfo,
+                                handleAdd,
+                                vehicleModels
+                              }) => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="ProfileForm VehicleForm">
@@ -44,20 +45,23 @@ export const VehicleFormUI = ({
                 type="text"
               />
             ) : (
-                <span className="ProfileInfoBlock-InputValue">{vehicle?.vehiclePlateNumber}</span>
-              )}
+              <span className="ProfileInfoBlock-InputValue">{vehicle?.vehiclePlateNumber}</span>
+            )}
           </div>
           <div>
             <span className="ProfileInfoBlock-InputName">Model</span>
             {isEdit ? (
               <Field
-                component={TextFieldContainer}
+                component={SelectFieldContainer}
+                options={vehicleModels}
                 name="vehicleModel"
-                type="text"
+                data-halfwidth
+                customOnChange={customCountryChange}
+                validate={[validators.required]}
               />
             ) : (
-                <span className="ProfileInfoBlock-InputValue">{vehicle?.vehicleModel}</span>
-              )}
+              <span className="ProfileInfoBlock-InputValue">{vehicle?.vehicleModel}</span>
+            )}
           </div>
         </div>
         <div className="ProfileInfoBlock">
@@ -70,8 +74,8 @@ export const VehicleFormUI = ({
                 type="text"
               />
             ) : (
-                <span className="ProfileInfoBlock-InputValue">{vehicle?.vehicleMake}</span>
-              )}
+              <span className="ProfileInfoBlock-InputValue">{vehicle?.vehicleMake}</span>
+            )}
           </div>
           <div>
             <span className="ProfileInfoBlock-InputName">
@@ -84,14 +88,14 @@ export const VehicleFormUI = ({
                 placeholder="Registered country"
                 component={SelectFieldContainer}
                 customOnChange={customCountryChange}
-                options={address.countries}
                 validate={[validators.required]}
+                options={address.countries}
               />
             ) : (
-                <span className="ProfileInfoBlock-InputValue">
+              <span className="ProfileInfoBlock-InputValue">
                   SA
                 </span>
-              )}
+            )}
           </div>
         </div>
         <div className="ProfileInfoBlock">
@@ -108,8 +112,8 @@ export const VehicleFormUI = ({
                 validate={[validators.required]}
               />
             ) : (
-                <span className="ProfileInfoBlock-InputValue">State</span>
-              )}
+              <span className="ProfileInfoBlock-InputValue">State</span>
+            )}
           </div>
           <div>
             <span className="ProfileInfoBlock-InputName">City</span>
@@ -123,8 +127,8 @@ export const VehicleFormUI = ({
                 validate={[validators.required]}
               />
             ) : (
-                <span className="ProfileInfoBlock-InputValue">City</span>
-              )}
+              <span className="ProfileInfoBlock-InputValue">City</span>
+            )}
           </div>
         </div>
         <div className="ProfileInfoBlock">
@@ -137,10 +141,10 @@ export const VehicleFormUI = ({
                 type="text"
               />
             ) : (
-                <span className="ProfileInfoBlock-InputValue">
+              <span className="ProfileInfoBlock-InputValue">
                   {vehicle?.vehicleRegistrationNumber}
                 </span>
-              )}
+            )}
           </div>
           <div>
             <span className="ProfileInfoBlock-InputName">MVPI No.</span>
@@ -151,23 +155,23 @@ export const VehicleFormUI = ({
                 type="text"
               />
             ) : (
-                <span className="ProfileInfoBlock-InputValue">{vehicle?.mvpiNumber}</span>
-              )}
+              <span className="ProfileInfoBlock-InputValue">{vehicle?.mvpiNumber}</span>
+            )}
           </div>
         </div>
         {isEdit && <div className="EvenInputs AddDriver-Form_flex_less_width ProfileInfoBlock">
-            <span className="AddSpan">Upload new document</span>
-            <div onClick={handleAdd} className="AddDoc">+Add</div>
-          </div>}
-          <AttachmentListContainer fileInfo={fileInfo} className="ProfileInfoBlock" setFileInfo={setFileInfo}/>
-          {openAtt && <AddAttachmentContainer
-            setInpValue={setInpValue}
-            inpValue={inpValue}
-            setDocuments={setDocuments}
-            setFileInfo={setFileInfo}
-            fileInfo={fileInfo}
-            setOpenAtt={setOpenAtt} />}
-        {isEdit ? <BlackButtonContainer text="Save" /> : null}
+          <span className="AddSpan">Upload new document</span>
+          <div onClick={handleAdd} className="AddDoc">+Add</div>
+        </div>}
+        <AttachmentListContainer fileInfo={fileInfo} className="ProfileInfoBlock" setFileInfo={setFileInfo}/>
+        {openAtt && <AddAttachmentContainer
+          setInpValue={setInpValue}
+          inpValue={inpValue}
+          setDocuments={setDocuments}
+          setFileInfo={setFileInfo}
+          fileInfo={fileInfo}
+          setOpenAtt={setOpenAtt}/>}
+        {isEdit ? <BlackButtonContainer text="Save"/> : null}
       </div>
     </form>
   );

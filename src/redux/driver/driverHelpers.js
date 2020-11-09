@@ -1,4 +1,4 @@
-import { getCountryNameByISOCode } from '../address/addressActions';
+import {getCountryNameByISOCode} from '../address/addressActions';
 import car from '../../assets/images/car.png';
 
 export const getOptions = (arr) => arr.map(value => ({ id: value, value }));
@@ -66,7 +66,9 @@ export const getVehicleData = formData => {
 }
 
 export const makeImageURL = response => {
+  if(response.config.url.endsWith('.svg')) {
+    return response.data;
+  }
   const urlCreator = window.URL || window.webkitURL;
-  const imageUrl = urlCreator.createObjectURL(response.data);
-  return imageUrl;
+  return urlCreator.createObjectURL(response.data);
 }

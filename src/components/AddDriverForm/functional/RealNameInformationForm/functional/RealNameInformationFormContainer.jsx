@@ -1,18 +1,20 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { RealNameInformationFormUI } from '../ui/RealNameInformationFormUI';
 import { useEffect } from 'react';
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { getCountriesSelector } from '../../../../../redux/address/addressSelectors';
-import { updateRealNameInformation, getIssuingAuthorities } from '../../../../../redux/driver/driverActions';
+import { updateRealNameInformation } from '../../../../../redux/driver/driverActions';
 import { useDispatch } from 'react-redux';
 import {getCities} from "../../../../../redux/address/addressActions";
+import {getIssuingAuthorities} from "../../../../../redux/static/staticActions";
+import {getRealNameIssuingAuthoritiesSelector} from "../../../../../redux/static/staticSelectors";
 
 
 export const RealNameInformationFormContainer = ({ setCurrentOnSubmit, setCurrentStep }) => {
     const idTypeOptions = useMemo(() => [{ value: 'PASSPORT', id: 'PASSPORT' }, { value: 'NATIONAL_ID', id: 'NATIONAL_ID' }], []);
     const countries = useSelector(getCountriesSelector);
-    const [issuingAuthorities, setIssuingAuthorities] = useState(null);
+    const issuingAuthorities = useSelector(getRealNameIssuingAuthoritiesSelector);
 
     const dispatch = useDispatch();
 
@@ -28,7 +30,7 @@ export const RealNameInformationFormContainer = ({ setCurrentOnSubmit, setCurren
     }, [dispatch]);
 
     useEffect(() => {
-        dispatch(getIssuingAuthorities(setIssuingAuthorities));
+        dispatch(getIssuingAuthorities());
     }, [dispatch]);
 
     return <RealNameInformationFormUI

@@ -2,12 +2,12 @@ import { driverConstants } from './driverConstants';
 import { API } from '../../API/index';
 import { SubmissionError } from 'redux-form';
 import { getCountryNameByISOCode } from '../address/addressActions';
-import { getOptions, getDrivingLicenseData, getVehicleData, getDriver, makeImageURL } from './driverHelpers';
+import { getDrivingLicenseData, getVehicleData, getDriver, makeImageURL } from './driverHelpers';
 import { globalErrorHandler } from '../common/helpers/global-error-handler';
 import { batch } from 'react-redux';
 import { openNotification } from '../notification/notificationActions';
 
-/* 
+/*
     REDUX ACTIONS (PURE)
 */
 
@@ -46,16 +46,16 @@ export const setRealNameBackImage = (src) => ({ type: driverConstants.SET_REAL_N
 export const setDrivingLicenseFrontImage = (src) => ({ type: driverConstants.SET_DRIVING_LICENSE_FRONT_IMAGE, payload: src })
 
 export const setDrivingLicenseBackImage = (src) => ({ type: driverConstants.SET_DRIVING_LICENSE_BACK_IMAGE, payload: src });
-/* 
+/*
     END REDUX ACTIONS (PURE)
 */
 
-/* 
+/*
     GET ACTIONS (REDUX THUNK)
 */
 export const getAndDispatchPicture = (fileKey, fn) => dispatch => {
   API.get(`storage/resource/${fileKey}`, {
-    responseType: 'blob'
+    responseType: fileKey.endsWith('.svg') ? 'text' : 'blob'
   })
     .then(makeImageURL)
     .then(imageURL => dispatch(fn(imageURL)))
@@ -66,24 +66,10 @@ export const getAndDispatchDocuments = (documents, fn) => dispatch => {
   const promiseList = documents.map(document => API.get(`storage/resource/${document.fileKey}`, {
     responseType: 'blob'
   }));
-  console.log('started');
   Promise.all(promiseList).then(console.log);
 
 }
 
-export const getVehicleMakes = (setVehicleMakes) => dispatch => {
-  API.get(`static/vehicle/vehicle-makes`)
-    .then(({ data }) => {
-      setVehicleMakes(getOptions(data));
-    }).catch(err => dispatch(globalErrorHandler(err)));;
-}
-
-export const getIssuingAuthorities = (setIssuingAuthorities) => dispatch => {
-  API.get(`static/real-name/issuing-authority`)
-    .then(({ data }) => {
-      setIssuingAuthorities(getOptions(data));
-    }).catch(err => dispatch(globalErrorHandler(err)));;
-}
 
 export const getDriverData = (id) => (dispatch) => {
   API.get(`drivers/${id}`)
@@ -126,25 +112,12 @@ export const getDriverData = (id) => (dispatch) => {
     }).catch(err => dispatch(globalErrorHandler(err)));
 }
 
-export const getDrivingLicenseTypes = (setDrivingLicenseTypes) => dispatch => {
-  API.get(`static/driving-license/types`)
-    .then(({ data }) => {
-      setDrivingLicenseTypes(getOptions(data));
-    }).catch(err => dispatch(globalErrorHandler(err)));
-}
 
-export const getDrivingLicenseIssuingAuthority = (setDrivingLicenseIssuingAuthority) => dispatch => {
-  API.get(`static/driving-license/issuing-authority`)
-    .then(({ data }) => {
-      setDrivingLicenseIssuingAuthority(getOptions(data));
-    }).catch(err => dispatch(globalErrorHandler(err)));
-}
-
-/* 
+/*
     END GET ACTIONS (REDUX THUNK)
 */
 
-/* 
+/*
   POST ACTIONS (REDUX THUNK)
 */
 
@@ -184,11 +157,11 @@ export const createVehicleInfo = (formData, documents, setCurrentStep) => (dispa
 }
 
 
-/* 
+/*
   END POST ACTIONS(REDUX THUNK)
 */
 
-/* 
+/*
   UPDATE ACTIONS (REDUX THUNK)
 */
 
@@ -274,7 +247,7 @@ export const updateVehicleInfo = (formData, setIsEditMode, id) => (dispatch, get
 
 
 export const updateProfile = (formData, id, image, countries, setImage, setIsEditMode) => (dispatch, getState) => {
-  if (!image || !image.file) {
+  if ((!image || !image.file) && !getState().driver.profile.profileAvatar) {
     setImage({ hasError: true });
     return false;
   }

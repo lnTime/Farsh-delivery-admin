@@ -83,7 +83,7 @@ export const ProfileFormUI = ({
                 validate={[validators.required]}
               />
             ) : (
-                <span className="ProfileInfoBlock-InputValue">{profile.address?.state}</span>
+                <span className="ProfileInfoBlock-InputValue">{address.states.find(state => state.id === profile.address?.state)?.value}</span>
               )}
           </div>
         </div>
@@ -97,7 +97,7 @@ export const ProfileFormUI = ({
                 validate={[validators.required]}
               />
             ) : (
-                <span className="ProfileInfoBlock-InputValue">{profile.address?.city}</span>
+                <span className="ProfileInfoBlock-InputValue">{address.cities.find(city => city.id === profile.address?.city)?.value}</span>
               )}
           </div>
           <div>

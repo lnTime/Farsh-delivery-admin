@@ -2,13 +2,13 @@ import React from 'react';
 import { Field } from 'redux-form';
 import { SelectFieldContainer } from '../../../../common/inputs/SelectField/functional/SelectFieldContainer';
 import { TextFieldContainer } from '../../../../common/inputs/TextField/functional/TextFieldContainer';
-import { ChooseFrontAndBackContainer } from '../../../functional/ChooseFrontAndBack/functional/ChooseFrontAndBackContainer';
 import { validators } from '../../../../../utils/validators/validators';
 import styles from './DrivingLicenseForm.module.scss';
 import { DateFieldContainer } from '../../../../common/inputs/DateField/functional/DateFieldContainer';
+import {ChooseFrontAndBackContainer} from "../../ChooseFrontAndBack/functional/ChooseFrontAndBackContainer";
 
-export const DrivingLicenseFormUI = React.memo(({ licenseTypeOptions, 
-    issuingAuthority, customStateChange, image, countries, setImage }) => {
+export const DrivingLicenseFormUI = React.memo(({ licenseTypeOptions,
+    issuingAuthority, customStateChange, countries }) => {
     return (<div className={styles['AddDriver-Form']}>
         <div className="EvenInputs">
             <Field name="licenseType"
@@ -63,7 +63,7 @@ export const DrivingLicenseFormUI = React.memo(({ licenseTypeOptions,
             />
         </div>
         <span className={styles['AddDriverForm-FileUpload']}>Upload your Driving License</span>
-        <ChooseFrontAndBackContainer 
+        <ChooseFrontAndBackContainer
                 imageOnly  />
     </div>);
 });

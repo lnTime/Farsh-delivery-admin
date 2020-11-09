@@ -1,26 +1,27 @@
 import React from "react";
 import "./RealNameInformationForm.scss";
-import { FormHeaderContainer } from "../../FormHeader/functional/FormHeaderContainer";
-import { IdCardContainer } from "../../../../common/icons/IdCard/functional/IdCardContainer";
-import { Field, reduxForm } from "redux-form";
-import { TextFieldContainer } from "../../../../common/inputs/TextField/functional/TextFieldContainer";
-import { BlackButtonContainer } from "../../../../common/buttons/BlackButton/functional/BlackButtonContainer";
-import { SelectFieldContainer } from '../../../../common/inputs/SelectField/functional/SelectFieldContainer'
-import { validators } from '../../../../../utils/validators/validators';
-import { ChooseFileFieldContainer } from '../../../../common/inputs/ChooseFileField/functional/ChooseFileFieldContainer';
-import { DateFieldContainer } from "../../../../common/inputs/DateField/functional/DateFieldContainer";
+import {FormHeaderContainer} from "../../FormHeader/functional/FormHeaderContainer";
+import {IdCardContainer} from "../../../../common/icons/IdCard/functional/IdCardContainer";
+import {Field, reduxForm} from "redux-form";
+import {TextFieldContainer} from "../../../../common/inputs/TextField/functional/TextFieldContainer";
+import {BlackButtonContainer} from "../../../../common/buttons/BlackButton/functional/BlackButtonContainer";
+import {SelectFieldContainer} from '../../../../common/inputs/SelectField/functional/SelectFieldContainer'
+import {validators} from '../../../../../utils/validators/validators';
+import {ChooseFileFieldContainer} from '../../../../common/inputs/ChooseFileField/functional/ChooseFileFieldContainer';
+import {DateFieldContainer} from "../../../../common/inputs/DateField/functional/DateFieldContainer";
 
 const RealNameInformationFormUI = ({
-  realNameInformation = {},
-  isEdit,
-  handleClick,
-  customCountryChange,
-  handleSubmit,
-  countries,
-  idTypeOptions,
-  frontImage,
-  backImage,
-}) => {
+                                     realNameInformation = {},
+                                     isEdit,
+                                     handleClick,
+                                     customCountryChange,
+                                     handleSubmit,
+                                     countries,
+                                     idTypeOptions,
+                                     frontImage,
+                                     backImage,
+                                     issuingAuthority,
+                                   }) => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="RealNameInformationForm ProfileForm">
@@ -40,8 +41,8 @@ const RealNameInformationFormUI = ({
                 required={[validators.required]}
               />
             ) : (
-                <span className="ProfileInfoBlock-InputValue">{realNameInformation.realNameIdType}</span>
-              )}
+              <span className="ProfileInfoBlock-InputValue">{realNameInformation.realNameIdType}</span>
+            )}
           </div>
           <div>
             <span className="ProfileInfoBlock-InputName">ID No.</span>
@@ -52,8 +53,8 @@ const RealNameInformationFormUI = ({
                 name="realNameIdNo"
               />
             ) : (
-                <span className="ProfileInfoBlock-InputValue">{realNameInformation.realNameIdNo}</span>
-              )}
+              <span className="ProfileInfoBlock-InputValue">{realNameInformation.realNameIdNo}</span>
+            )}
           </div>
         </div>
         <div className="ProfileInfoBlock">
@@ -67,8 +68,8 @@ const RealNameInformationFormUI = ({
                 name="realNameIssueDate"
               />
             ) : (
-                <span className="ProfileInfoBlock-InputValue">{realNameInformation.realNameIssueDate}</span>
-              )}
+              <span className="ProfileInfoBlock-InputValue">{realNameInformation.realNameIssueDate}</span>
+            )}
           </div>
           <div>
             <span className="ProfileInfoBlock-InputName">Expiry date</span>
@@ -80,8 +81,8 @@ const RealNameInformationFormUI = ({
                 name="realNameExpiryDate"
               />
             ) : (
-                <span className="ProfileInfoBlock-InputValue">{realNameInformation.realNameExpiryDate}</span>
-              )}
+              <span className="ProfileInfoBlock-InputValue">{realNameInformation.realNameExpiryDate}</span>
+            )}
           </div>
         </div>
         <div className="ProfileInfoBlock">
@@ -98,10 +99,10 @@ const RealNameInformationFormUI = ({
                 validate={[validators.required]}
               />
             ) : (
-                <span className="ProfileInfoBlock-InputValue">
+              <span className="ProfileInfoBlock-InputValue">
                   {realNameInformation.realNameIssueCountry?.isoCode}
                 </span>
-              )}
+            )}
           </div>
           <div>
             <span className="ProfileInfoBlock-InputName">
@@ -113,14 +114,14 @@ const RealNameInformationFormUI = ({
                 name="realNameIssueAuthority"
                 placeholder="Issue authority"
                 component={SelectFieldContainer}
-                options={countries}
+                options={issuingAuthority}
                 validate={[validators.required]}
               />
             ) : (
-                <span className="ProfileInfoBlock-InputValue">
+              <span className="ProfileInfoBlock-InputValue">
                   {realNameInformation.realNameIssueAuthority}
                 </span>
-              )}
+            )}
           </div>
         </div>
         <div className="ProfileInfoBlock ProfileInfoBlock_oneItem">
@@ -139,25 +140,25 @@ const RealNameInformationFormUI = ({
                 validate={[validators.required]}
               />
             ) : (
-              backImage ? <img src={backImage} alt="Back" width="154" height="90" /> : <IdCardContainer />
-              )}
+              backImage ? <img src={backImage} alt="Back" width="154" height="90"/> : <IdCardContainer/>
+            )}
             {isEdit ? (
-              <Field
-                component={ChooseFileFieldContainer}
-                type="file"
-                imageOnly
-                initialImageSrc={frontImage}
-                name="idImgFront"
-                title={null}
-                actionText={null}
-                buttonText="Choose Front image"
-                validate={[validators.required]}
-              />
-            ) :
-              frontImage ? <img src={frontImage} alt="Front" width="154" height="90" /> : <IdCardContainer />
+                <Field
+                  component={ChooseFileFieldContainer}
+                  type="file"
+                  imageOnly
+                  initialImageSrc={frontImage}
+                  name="idImgFront"
+                  title={null}
+                  actionText={null}
+                  buttonText="Choose Front image"
+                  validate={[validators.required]}
+                />
+              ) :
+              frontImage ? <img src={frontImage} alt="Front" width="154" height="90"/> : <IdCardContainer/>
             }
           </div>
-          {isEdit ? <BlackButtonContainer text="Save" /> : null}
+          {isEdit ? <BlackButtonContainer text="Save"/> : null}
         </div>
       </div>
     </form>

@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, {useState, useEffect, useMemo, useCallback} from "react";
 import ProfileFormUI from "../ui/ProfileFormUI";
-import { useEditMode } from "../../../../common/custom-hooks/useEditMode";
-import { useDispatch, useSelector } from "react-redux";
-import { updateProfile } from "../../../../../redux/driver/driverActions";
-import { getProfileSelector } from "../../../../../redux/driver/driverSelectors";
-import { getStates, getCities, getCountries, getStateById } from '../../../../../redux/address/addressActions';
-import { getAddressSelector } from "../../../../../redux/address/addressSelectors";
-import { BigAvatarContainer } from '../../../../common/icons/BigAvatar/functional/BigAvatarContainer'
+import {useEditMode} from "../../../../common/custom-hooks/useEditMode";
+import {useDispatch, useSelector} from "react-redux";
+import {updateProfile} from "../../../../../redux/driver/driverActions";
+import {getProfileSelector} from "../../../../../redux/driver/driverSelectors";
+import {getStates, getCities, getCountries, getStateById} from '../../../../../redux/address/addressActions';
+import {getAddressSelector} from "../../../../../redux/address/addressSelectors";
+import {BigAvatarContainer} from '../../../../common/icons/BigAvatar/functional/BigAvatarContainer'
 
-export const ProfileFormContainer = ({ id }) => {
+export const ProfileFormContainer = ({id}) => {
   const [isEdit, setIsEditMode] = useEditMode();
   const dispatch = useDispatch();
   const profile = useSelector(getProfileSelector);
@@ -39,15 +39,34 @@ export const ProfileFormContainer = ({ id }) => {
     }
   }, [address.countries, dispatch]);
 
+  useEffect(() => {
+    if (profile.address?.state) {
+      dispatch(getCities(profile.address.state));
+    }
+  }, [dispatch, profile.address.state]);
+
+
+  const divStyle = useMemo(() => ({
+    width: 120,
+    height: 92,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  }), []);
 
   const ImageComponent = useMemo(() => {
     if (profile.profileAvatar) {
-      return () => <img src={profile.profileAvatar} alt="Avatar" width="120" height="92" />;
+      if (profile.profileAvatar.startsWith('<svg')) {
+        return () => <div style={divStyle}
+                          dangerouslySetInnerHTML={{__html: profile.profileAvatar}}/>
+      }
+
+      return () => <img src={profile.profileAvatar} alt="Avatar" width="120" height="92"/>;
     }
 
-    return image && image.file ? () => <img alt="Avatar" width="120" height="92" src={image.src} /> :
-    () => <BigAvatarContainer className="Upload-SVG" />
-  }, [image, profile.profileAvatar]);
+    return image && image.file ? () => <img alt="Avatar" width="120" height="92" src={image.src}/> :
+      () => <BigAvatarContainer className="Upload-SVG"/>
+  }, [image, profile.profileAvatar, divStyle]);
 
   const handleImageChange = (e) => {
     e.preventDefault();
@@ -59,11 +78,12 @@ export const ProfileFormContainer = ({ id }) => {
     };
   }
 
-  const initialValues = useMemo(() => ({ name: `${profile.firstName} ${profile.lastName}`,
+  const initialValues = useMemo(() => ({
+    name: `${profile.firstName} ${profile.lastName}`,
     address: profile?.address?.address, country: profile.address?.country.isoCode,
-    city: profile.address?.city, state: getStateById(+profile.address?.state)  }), [profile]);
-console.log(getStateById(+profile.address?.state));
-  if(!profile) {
+    city: profile.address?.city, state: getStateById(+profile.address?.state)
+  }), [profile]);
+  if (!profile) {
     return null;
   }
 
@@ -80,7 +100,7 @@ console.log(getStateById(+profile.address?.state));
       ImageComponent={ImageComponent}
       handleImageChange={handleImageChange}
       hasError={image && image.hasError}
-      initialValues = {initialValues}
+      initialValues={initialValues}
     />
   );
 };
